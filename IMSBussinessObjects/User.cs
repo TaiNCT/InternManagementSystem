@@ -1,48 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace IMSBussinessObjects;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-
-    
-    [Table("Users")]
+namespace IMSBussinessObjects
+{
     public class User
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
-
         [Required]
-        [StringLength(255)]
-        public string Name { get; set; }
-
+        public string UserName { get; set; }
         [Required]
-        [StringLength(255)]
         public string Password { get; set; }
-
         [Required]
-        [StringLength(255)]
         public string Email { get; set; }
-
-        public int RoleId { get; set; }
-
-        [StringLength(255)]
         public string Avatar { get; set; }
-
-        [StringLength(50)]
-        public string Status { get; set; }
-
-        [StringLength(50)]
+        [Required]
+        public bool Status { get; set; }
+        [Required]
         public string Phone { get; set; }
-
-        public DateTime? DoB { get; set; }
-
-        [StringLength(255)]
+        [Required]
+        public DateTime DoB {  get; set; }
         public string Address { get; set; }
-
-        [StringLength(50)]
+        [Required]
         public string Level { get; set; }
-
-        [ForeignKey("RoleId")]
+        public int RoleID { get; set; }
+        [ForeignKey("RoleID")]
         public Role Role { get; set; }
     }
-    
+}

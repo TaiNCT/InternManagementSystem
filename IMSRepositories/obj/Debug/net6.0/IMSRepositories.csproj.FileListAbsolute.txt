@@ -15,3 +15,21 @@ D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net
 D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\refint\IMSRepositories.dll
 D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.pdb
 D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\ref\IMSRepositories.dll
+D:\PRN221\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSRepositories.deps.json
+D:\PRN221\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSRepositories.dll
+D:\PRN221\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSRepositories.pdb
+D:\PRN221\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSBussinessObjects.dll
+D:\PRN221\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSDaos.dll
+D:\PRN221\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSDaos.pdb
+D:\PRN221\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSBussinessObjects.pdb
+D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.csproj.AssemblyReference.cache
+D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.GeneratedMSBuildEditorConfig.editorconfig
+D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.AssemblyInfoInputs.cache
+D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.AssemblyInfo.cs
+D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.csproj.CoreCompileInputs.cache
+D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.sourcelink.json
+D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.csproj.CopyComplete
+D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.dll
+D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\refint\IMSRepositories.dll
+D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.pdb
+D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\ref\IMSRepositories.dll

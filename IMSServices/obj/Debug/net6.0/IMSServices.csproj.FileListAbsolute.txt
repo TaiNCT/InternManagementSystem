@@ -17,3 +17,23 @@ D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\
 D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\refint\IMSServices.dll
 D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.pdb
 D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\ref\IMSServices.dll
+D:\PRN221\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSServices.deps.json
+D:\PRN221\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSServices.dll
+D:\PRN221\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSServices.pdb
+D:\PRN221\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSBussinessObjects.dll
+D:\PRN221\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSDaos.dll
+D:\PRN221\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSRepositories.dll
+D:\PRN221\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSRepositories.pdb
+D:\PRN221\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSBussinessObjects.pdb
+D:\PRN221\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSDaos.pdb
+D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.csproj.AssemblyReference.cache
+D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.GeneratedMSBuildEditorConfig.editorconfig
+D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.AssemblyInfoInputs.cache
+D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.AssemblyInfo.cs
+D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.csproj.CoreCompileInputs.cache
+D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.sourcelink.json
+D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.csproj.CopyComplete
+D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.dll
+D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\refint\IMSServices.dll
+D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.pdb
+D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\ref\IMSServices.dll

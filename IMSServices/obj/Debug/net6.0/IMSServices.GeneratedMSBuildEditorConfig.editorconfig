@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = IMSServices
-build_property.ProjectDir = D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSServices\
+build_property.ProjectDir = D:\PRN221\InternManagementSystem\IMSServices\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

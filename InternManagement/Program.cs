@@ -1,6 +1,7 @@
 using IMSBussinessObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 var connectionString = builder.Configuration.GetConnectionString("SqlDbConnection");
-builder.Services.AddDbContext<ISMDbContext>(options =>
+builder.Services.AddDbContext<IMSDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 var app = builder.Build();  
@@ -29,5 +30,16 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
+ApplyMigration();
 app.Run();
+void ApplyMigration()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var _db = scope.ServiceProvider.GetRequiredService<IMSDbContext>();
+        if (_db.Database.GetPendingMigrations().Count() > 0)
+        {
+            _db.Database.Migrate();
+        }
+    }
+}

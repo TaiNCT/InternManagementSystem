@@ -2014,19 +2014,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LENOVO\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj",
+      "projectUniqueName": "D:\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj",
       "projectName": "IMSBussinessObjects",
-      "projectPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj",
-      "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-      "outputPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\obj\\",
+      "projectPath": "D:\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "D:\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2089,7 +2089,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

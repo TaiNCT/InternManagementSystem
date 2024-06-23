@@ -13,3 +13,19 @@ D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\IMSD
 D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\refint\IMSDaos.dll
 D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\IMSDaos.pdb
 D:\Study\Summer 2024\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\ref\IMSDaos.dll
+D:\PRN221\InternManagementSystem\IMSDaos\bin\Debug\net6.0\IMSDaos.deps.json
+D:\PRN221\InternManagementSystem\IMSDaos\bin\Debug\net6.0\IMSDaos.dll
+D:\PRN221\InternManagementSystem\IMSDaos\bin\Debug\net6.0\IMSDaos.pdb
+D:\PRN221\InternManagementSystem\IMSDaos\bin\Debug\net6.0\IMSBussinessObjects.dll
+D:\PRN221\InternManagementSystem\IMSDaos\bin\Debug\net6.0\IMSBussinessObjects.pdb
+D:\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\IMSDaos.csproj.AssemblyReference.cache
+D:\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\IMSDaos.GeneratedMSBuildEditorConfig.editorconfig
+D:\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\IMSDaos.AssemblyInfoInputs.cache
+D:\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\IMSDaos.AssemblyInfo.cs
+D:\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\IMSDaos.csproj.CoreCompileInputs.cache
+D:\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\IMSDaos.sourcelink.json
+D:\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\IMSDaos.csproj.CopyComplete
+D:\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\IMSDaos.dll
+D:\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\refint\IMSDaos.dll
+D:\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\IMSDaos.pdb
+D:\PRN221\InternManagementSystem\IMSDaos\obj\Debug\net6.0\ref\IMSDaos.dll
