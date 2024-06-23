@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IMSBussinessObjects
 {
@@ -24,12 +19,12 @@ namespace IMSBussinessObjects
         [Required]
         public string Phone { get; set; }
         [Required]
-        public DateTime DoB {  get; set; }
+        public DateTime DoB { get; set; }
         public string Address { get; set; }
         [Required]
         public string Level { get; set; }
         public int RoleID { get; set; }
         [ForeignKey("RoleID")]
-        public Role Role { get; set; }
+        public Role? Role { get; set; }
     }
 }

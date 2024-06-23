@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IMSBussinessObjects")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+945494f8e61d692efa42bcdc7faa6abedf4f6289")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+874a97fa53f54b4aa1548e4ede4022e541c14261")]
 [assembly: System.Reflection.AssemblyProductAttribute("IMSBussinessObjects")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IMSBussinessObjects")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

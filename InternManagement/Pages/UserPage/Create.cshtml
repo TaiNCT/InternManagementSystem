@@ -2,69 +2,69 @@
 @model InternManagement.Pages.UserPage.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create User";
 }
 
-<h1>Create</h1>
+<h1>Create User</h1>
 
-<h4>User</h4>
+<h4>User Details</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="User.UserName" class="control-label"></label>
+                <label asp-for="User.UserName"></label>
                 <input asp-for="User.UserName" class="form-control" />
                 <span asp-validation-for="User.UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.Password" class="control-label"></label>
-                <input asp-for="User.Password" class="form-control" />
+                <label asp-for="User.Password"></label>
+                <input asp-for="User.Password" type="password" class="form-control" />
                 <span asp-validation-for="User.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.Email" class="control-label"></label>
+                <label asp-for="User.Email"></label>
                 <input asp-for="User.Email" class="form-control" />
                 <span asp-validation-for="User.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.Avatar" class="control-label"></label>
+                <label asp-for="User.Avatar"></label>
                 <input asp-for="User.Avatar" class="form-control" />
                 <span asp-validation-for="User.Avatar" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="User.Status" /> @Html.DisplayNameFor(model => model.User.Status)
-                </label>
+            <div class="form-group">
+                <label asp-for="User.Status"></label>
+                <input asp-for="User.Status" type="checkbox" class="form-control" />
+                <span asp-validation-for="User.Status" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.Phone" class="control-label"></label>
+                <label asp-for="User.Phone"></label>
                 <input asp-for="User.Phone" class="form-control" />
                 <span asp-validation-for="User.Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.DoB" class="control-label"></label>
-                <input asp-for="User.DoB" class="form-control" />
+                <label asp-for="User.DoB"></label>
+                <input asp-for="User.DoB" type="date" class="form-control" />
                 <span asp-validation-for="User.DoB" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.Address" class="control-label"></label>
+                <label asp-for="User.Address"></label>
                 <input asp-for="User.Address" class="form-control" />
                 <span asp-validation-for="User.Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.Level" class="control-label"></label>
+                <label asp-for="User.Level"></label>
                 <input asp-for="User.Level" class="form-control" />
                 <span asp-validation-for="User.Level" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.RoleID" class="control-label"></label>
-                <select asp-for="User.RoleID" class ="form-control" asp-items="ViewBag.RoleID"></select>
+                <label asp-for="User.RoleID"></label>
+                <select asp-for="User.RoleID" class="form-control" asp-items="Model.Roles">
+                    <option value="">Select Role</option>
+                </select>
+                <span asp-validation-for="User.RoleID" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>
 </div>
@@ -74,5 +74,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

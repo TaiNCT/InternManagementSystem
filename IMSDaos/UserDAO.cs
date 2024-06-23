@@ -1,5 +1,4 @@
 ﻿using IMSBussinessObjects;
-using Microsoft.EntityFrameworkCore;
 
 namespace IMSDaos
 {
@@ -61,8 +60,7 @@ namespace IMSDaos
                 existingUser.Level = newUser.Level;
                 existingUser.RoleID = newUser.RoleID;
 
-                db.Users.Attach(existingUser);
-                db.Entry(existingUser).State = EntityState.Modified;
+                db.Users.Update(existingUser);
                 db.SaveChanges();
             }
         }

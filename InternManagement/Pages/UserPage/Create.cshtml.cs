@@ -2,26 +2,37 @@
 using IMSServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace InternManagement.Pages.UserPage
 {
     public class CreateModel : PageModel
     {
         private readonly IUserService userService;
+        private readonly IRoleService roleService;
 
-        public CreateModel(IUserService userServ)
+        public CreateModel(IUserService userServ, IRoleService roleServ)
         {
             userService = userServ;
+            roleService = roleServ;
         }
 
         [BindProperty]
-        public User User { get; set; } = default!;
+        public User User { get; set; } = new User();
 
+        public SelectList Roles { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        public async Task<IActionResult> OnGetAsync()
+        {
+            var roles = roleService.GetRoles();
+            Roles = new SelectList(roles, "RoleId", "RoleName");
+
+            return Page();
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || userService.GetUsers() == null || User == null)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
