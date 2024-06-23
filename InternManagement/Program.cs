@@ -1,9 +1,17 @@
+using IMSBussinessObjects;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-var app = builder.Build();
+var connectionString = builder.Configuration.GetConnectionString("SqlDbConnection");
+builder.Services.AddDbContext<ISMDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+var app = builder.Build();  
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

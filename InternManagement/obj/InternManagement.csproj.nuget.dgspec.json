@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PRN221\\InternManagementSystem\\InternManagement\\InternManagement.csproj": {}
+    "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\InternManagement\\InternManagement.csproj": {}
   },
   "projects": {
-    "D:\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj": {
+    "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj",
+        "projectUniqueName": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj",
         "projectName": "IMSBussinessObjects",
-        "projectPath": "D:\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\obj\\",
+        "projectPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +39,28 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.24, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.24, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.24, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.24, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,21 +77,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\PRN221\\InternManagementSystem\\IMSDaos\\IMSDaos.csproj": {
+    "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSDaos\\IMSDaos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PRN221\\InternManagementSystem\\IMSDaos\\IMSDaos.csproj",
+        "projectUniqueName": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSDaos\\IMSDaos.csproj",
         "projectName": "IMSDaos",
-        "projectPath": "D:\\PRN221\\InternManagementSystem\\IMSDaos\\IMSDaos.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\PRN221\\InternManagementSystem\\IMSDaos\\obj\\",
+        "projectPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSDaos\\IMSDaos.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSDaos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,8 +105,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj": {
-                "projectPath": "D:\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj"
+              "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj": {
+                "projectPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSBussinessObjects\\IMSBussinessObjects.csproj"
               }
             }
           }
@@ -114,21 +136,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\PRN221\\InternManagementSystem\\IMSRepositories\\IMSRepositories.csproj": {
+    "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSRepositories\\IMSRepositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PRN221\\InternManagementSystem\\IMSRepositories\\IMSRepositories.csproj",
+        "projectUniqueName": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSRepositories\\IMSRepositories.csproj",
         "projectName": "IMSRepositories",
-        "projectPath": "D:\\PRN221\\InternManagementSystem\\IMSRepositories\\IMSRepositories.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\PRN221\\InternManagementSystem\\IMSRepositories\\obj\\",
+        "projectPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSRepositories\\IMSRepositories.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSRepositories\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -142,8 +164,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\PRN221\\InternManagementSystem\\IMSDaos\\IMSDaos.csproj": {
-                "projectPath": "D:\\PRN221\\InternManagementSystem\\IMSDaos\\IMSDaos.csproj"
+              "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSDaos\\IMSDaos.csproj": {
+                "projectPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSDaos\\IMSDaos.csproj"
               }
             }
           }
@@ -173,21 +195,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\PRN221\\InternManagementSystem\\IMSServices\\IMSServices.csproj": {
+    "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSServices\\IMSServices.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PRN221\\InternManagementSystem\\IMSServices\\IMSServices.csproj",
+        "projectUniqueName": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSServices\\IMSServices.csproj",
         "projectName": "IMSServices",
-        "projectPath": "D:\\PRN221\\InternManagementSystem\\IMSServices\\IMSServices.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\PRN221\\InternManagementSystem\\IMSServices\\obj\\",
+        "projectPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSServices\\IMSServices.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSServices\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -201,8 +223,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\PRN221\\InternManagementSystem\\IMSRepositories\\IMSRepositories.csproj": {
-                "projectPath": "D:\\PRN221\\InternManagementSystem\\IMSRepositories\\IMSRepositories.csproj"
+              "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSRepositories\\IMSRepositories.csproj": {
+                "projectPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSRepositories\\IMSRepositories.csproj"
               }
             }
           }
@@ -232,21 +254,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\PRN221\\InternManagementSystem\\InternManagement\\InternManagement.csproj": {
+    "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\InternManagement\\InternManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PRN221\\InternManagementSystem\\InternManagement\\InternManagement.csproj",
+        "projectUniqueName": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\InternManagement\\InternManagement.csproj",
         "projectName": "InternManagement",
-        "projectPath": "D:\\PRN221\\InternManagementSystem\\InternManagement\\InternManagement.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\PRN221\\InternManagementSystem\\InternManagement\\obj\\",
+        "projectPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\InternManagement\\InternManagement.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\InternManagement\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -260,8 +282,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\PRN221\\InternManagementSystem\\IMSServices\\IMSServices.csproj": {
-                "projectPath": "D:\\PRN221\\InternManagementSystem\\IMSServices\\IMSServices.csproj"
+              "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSServices\\IMSServices.csproj": {
+                "projectPath": "D:\\Study\\Summer 2024\\PRN221\\InternManagementSystem\\IMSServices\\IMSServices.csproj"
               }
             }
           }
@@ -294,7 +316,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
