@@ -27,3 +27,18 @@ D:\PRN221\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\refint\IMS
 D:\PRN221\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\IMSBussinessObjects.pdb
 D:\PRN221\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\IMSBussinessObjects.genruntimeconfig.cache
 D:\PRN221\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\ref\IMSBussinessObjects.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\bin\Debug\net6.0\IMSBussinessObjects.deps.json
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\bin\Debug\net6.0\IMSBussinessObjects.runtimeconfig.json
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\bin\Debug\net6.0\IMSBussinessObjects.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\bin\Debug\net6.0\IMSBussinessObjects.pdb
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\IMSBussinessObjects.csproj.AssemblyReference.cache
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\IMSBussinessObjects.GeneratedMSBuildEditorConfig.editorconfig
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\IMSBussinessObjects.AssemblyInfoInputs.cache
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\IMSBussinessObjects.AssemblyInfo.cs
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\IMSBussinessObjects.csproj.CoreCompileInputs.cache
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\IMSBussinessObjects.sourcelink.json
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\IMSBussinessObjects.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\refint\IMSBussinessObjects.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\IMSBussinessObjects.pdb
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\IMSBussinessObjects.genruntimeconfig.cache
+D:\Study\Summer 2024\InternManagementSystem\IMSBussinessObjects\obj\Debug\net6.0\ref\IMSBussinessObjects.dll

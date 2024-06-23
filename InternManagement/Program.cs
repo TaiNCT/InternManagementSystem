@@ -1,9 +1,10 @@
 using IMSBussinessObjects;
+using IMSServices;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddSession();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -12,7 +13,7 @@ var connectionString = builder.Configuration.GetConnectionString("SqlDbConnectio
 builder.Services.AddDbContext<IMSDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-var app = builder.Build();  
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -24,6 +25,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 

@@ -1,9 +1,5 @@
 ﻿using IMSBussinessObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace IMSDaos
 {
@@ -11,7 +7,7 @@ namespace IMSDaos
     {
         private readonly IMSDbContext db = null;
         private static UserDAO instance = null;
-        public UserDAO() 
+        public UserDAO()
         {
             db = new IMSDbContext();
         }
@@ -26,6 +22,10 @@ namespace IMSDaos
                 return instance;
             }
         }
+        public User GetAccount(string username, string password)
+        {
+            return db.Users.FirstOrDefault(x => x.UserName.Equals(username) && x.Password.Equals(password));
+        }
         public User GetUser(int UserId)
         {
             return db.Users.FirstOrDefault(x => x.UserId.Equals(UserId));
@@ -34,7 +34,7 @@ namespace IMSDaos
         {
             return db.Users.ToList();
         }
-        public void DeleteSeaArea(int userId)
+        public void DeleteUser(int userId)
         {
             User user = GetUser(userId);
             if (user != null)
@@ -45,22 +45,24 @@ namespace IMSDaos
         }
         public void UpdateUser(int userId, User newUser)
         {
-            User user = GetUser(userId);
-            if (user != null)
-            {
-                user.UserId = newUser.UserId;
-                user.UserName = newUser.UserName; 
-                user.Password = newUser.Password;
-                user.Email = newUser.Email;
-                user.Address = newUser.Address;
-                user.Avatar = newUser.Avatar;
-                user.Status = newUser.Status;
-                user.Phone = newUser.Phone;
-                user.DoB = newUser.DoB;
-                user.Level = newUser.Level;
-                user.RoleID = newUser.RoleID;
 
-                db.Users.Update(user);
+            var existingUser = GetUser(userId);
+            if (existingUser != null)
+            {
+                existingUser.UserId = newUser.UserId;
+                existingUser.UserName = newUser.UserName;
+                existingUser.Password = newUser.Password;
+                existingUser.Email = newUser.Email;
+                existingUser.Address = newUser.Address;
+                existingUser.Avatar = newUser.Avatar;
+                existingUser.Status = newUser.Status;
+                existingUser.Phone = newUser.Phone;
+                existingUser.DoB = newUser.DoB;
+                existingUser.Level = newUser.Level;
+                existingUser.RoleID = newUser.RoleID;
+
+                db.Users.Attach(existingUser);
+                db.Entry(existingUser).State = EntityState.Modified;
                 db.SaveChanges();
             }
         }

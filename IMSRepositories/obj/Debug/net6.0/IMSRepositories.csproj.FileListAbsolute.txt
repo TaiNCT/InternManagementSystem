@@ -33,3 +33,21 @@ D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositorie
 D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\refint\IMSRepositories.dll
 D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.pdb
 D:\PRN221\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\ref\IMSRepositories.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSRepositories.deps.json
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSRepositories.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSRepositories.pdb
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSBussinessObjects.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSDaos.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSDaos.pdb
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\bin\Debug\net6.0\IMSBussinessObjects.pdb
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.csproj.AssemblyReference.cache
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.GeneratedMSBuildEditorConfig.editorconfig
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.AssemblyInfoInputs.cache
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.AssemblyInfo.cs
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.csproj.CoreCompileInputs.cache
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.sourcelink.json
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepos.9BE508BA.Up2Date
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\refint\IMSRepositories.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\IMSRepositories.pdb
+D:\Study\Summer 2024\InternManagementSystem\IMSRepositories\obj\Debug\net6.0\ref\IMSRepositories.dll

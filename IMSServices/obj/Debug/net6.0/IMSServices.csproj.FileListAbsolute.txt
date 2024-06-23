@@ -37,3 +37,23 @@ D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.dll
 D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\refint\IMSServices.dll
 D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.pdb
 D:\PRN221\InternManagementSystem\IMSServices\obj\Debug\net6.0\ref\IMSServices.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSServices.deps.json
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSServices.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSServices.pdb
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSBussinessObjects.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSDaos.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSRepositories.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSRepositories.pdb
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSBussinessObjects.pdb
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\bin\Debug\net6.0\IMSDaos.pdb
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.csproj.AssemblyReference.cache
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.GeneratedMSBuildEditorConfig.editorconfig
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.AssemblyInfoInputs.cache
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.AssemblyInfo.cs
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.csproj.CoreCompileInputs.cache
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.sourcelink.json
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServi.189B3360.Up2Date
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\obj\Debug\net6.0\refint\IMSServices.dll
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\obj\Debug\net6.0\IMSServices.pdb
+D:\Study\Summer 2024\InternManagementSystem\IMSServices\obj\Debug\net6.0\ref\IMSServices.dll

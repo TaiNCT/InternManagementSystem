@@ -16,9 +16,14 @@ namespace IMSServices
             iUserRepository.AddUser(user);
         }
 
-        public void DeleteSeaArea(int userId)
+        public void DeleteUser(int userId)
         {
-            iUserRepository.DeleteSeaArea(userId);
+            iUserRepository.DeleteUser(userId);
+        }
+
+        public User GetAccount(string username, string password)
+        {
+            return iUserRepository.GetAccount(username, password);
         }
 
         public User GetUser(int UserId)
