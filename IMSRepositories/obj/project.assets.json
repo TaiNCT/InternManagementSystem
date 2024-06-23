@@ -24,32 +24,6 @@
         "runtime": {
           "bin/placeholder/IMSDaos.dll": {}
         }
-      },
-      "IMSRepositories/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "IMSDaos": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/IMSRepositories.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/IMSRepositories.dll": {}
-        }
-      },
-      "IMSServices/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "IMSRepositories": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/IMSServices.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/IMSServices.dll": {}
-        }
       }
     }
   },
@@ -63,21 +37,11 @@
       "type": "project",
       "path": "../IMSDaos/IMSDaos.csproj",
       "msbuildProject": "../IMSDaos/IMSDaos.csproj"
-    },
-    "IMSRepositories/1.0.0": {
-      "type": "project",
-      "path": "../IMSRepositories/IMSRepositories.csproj",
-      "msbuildProject": "../IMSRepositories/IMSRepositories.csproj"
-    },
-    "IMSServices/1.0.0": {
-      "type": "project",
-      "path": "../IMSServices/IMSServices.csproj",
-      "msbuildProject": "../IMSServices/IMSServices.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "IMSServices >= 1.0.0"
+      "IMSDaos >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -86,11 +50,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\PRN221\\InternManagementSystem\\InternManagement\\InternManagement.csproj",
-      "projectName": "InternManagement",
-      "projectPath": "D:\\PRN221\\InternManagementSystem\\InternManagement\\InternManagement.csproj",
+      "projectUniqueName": "D:\\PRN221\\InternManagementSystem\\IMSRepositories\\IMSRepositories.csproj",
+      "projectName": "IMSRepositories",
+      "projectPath": "D:\\PRN221\\InternManagementSystem\\IMSRepositories\\IMSRepositories.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\PRN221\\InternManagementSystem\\InternManagement\\obj\\",
+      "outputPath": "D:\\PRN221\\InternManagementSystem\\IMSRepositories\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -107,8 +71,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\PRN221\\InternManagementSystem\\IMSServices\\IMSServices.csproj": {
-              "projectPath": "D:\\PRN221\\InternManagementSystem\\IMSServices\\IMSServices.csproj"
+            "D:\\PRN221\\InternManagementSystem\\IMSDaos\\IMSDaos.csproj": {
+              "projectPath": "D:\\PRN221\\InternManagementSystem\\IMSDaos\\IMSDaos.csproj"
             }
           }
         }
@@ -134,9 +98,6 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
-          "Microsoft.AspNetCore.App": {
-            "privateAssets": "none"
-          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
