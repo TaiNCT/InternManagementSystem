@@ -34,7 +34,7 @@ namespace IMSDaos
 
         public async Task<List<User>> GetUsersAsync()
         {
-            return await db.Users.ToListAsync();
+            return await db.Users.Include(u => u.Role).ToListAsync();
         }
 
         public async Task DeleteUserAsync(int userId)
@@ -49,10 +49,9 @@ namespace IMSDaos
 
         public async Task UpdateUserAsync(int userId, User newUser)
         {
-            var existingUser = await GetUserAsync(userId);
+            User existingUser = await GetUserAsync(userId);
             if (existingUser != null)
             {
-                existingUser.UserId = newUser.UserId;
                 existingUser.UserName = newUser.UserName;
                 existingUser.Password = newUser.Password;
                 existingUser.Email = newUser.Email;
@@ -64,7 +63,8 @@ namespace IMSDaos
                 existingUser.Level = newUser.Level;
                 existingUser.RoleID = newUser.RoleID;
 
-                db.Users.Update(existingUser);
+                db.Users.Attach(existingUser);
+                db.Entry(existingUser).State = EntityState.Modified;
                 await db.SaveChangesAsync();
             }
         }

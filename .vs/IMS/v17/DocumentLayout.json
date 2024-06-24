@@ -7,40 +7,16 @@
       "RelativeMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|solutionrelative:internmanagement\\pages\\userpage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|d:\\study\\summer 2024\\internmanagementsystem\\internmanagement\\pages\\userpage\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|solutionrelative:internmanagement\\pages\\userpage\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|d:\\study\\summer 2024\\internmanagementsystem\\internmanagement\\pages\\userpage\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|solutionrelative:internmanagement\\pages\\userpage\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|d:\\study\\summer 2024\\internmanagementsystem\\internmanagement\\pages\\userpage\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|solutionrelative:internmanagement\\pages\\userpage\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|d:\\study\\summer 2024\\internmanagementsystem\\internmanagement\\pages\\userpage\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|solutionrelative:internmanagement\\pages\\userpage\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2FC67248-3712-4D25-B147-D5B7201D05DA}|IMSDaos\\IMSDaos.csproj|d:\\study\\summer 2024\\internmanagementsystem\\imsdaos\\userdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2FC67248-3712-4D25-B147-D5B7201D05DA}|IMSDaos\\IMSDaos.csproj|solutionrelative:imsdaos\\userdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{322DA3C2-A1AB-4041-8B12-719526D8EDC9}|IMSBussinessObjects\\IMSBussinessObjects.csproj|d:\\study\\summer 2024\\internmanagementsystem\\imsbussinessobjects\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{322DA3C2-A1AB-4041-8B12-719526D8EDC9}|IMSBussinessObjects\\IMSBussinessObjects.csproj|solutionrelative:imsbussinessobjects\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|d:\\study\\summer 2024\\internmanagementsystem\\internmanagement\\pages\\userpage\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|solutionrelative:internmanagement\\pages\\userpage\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2FC67248-3712-4D25-B147-D5B7201D05DA}|IMSDaos\\IMSDaos.csproj|d:\\study\\summer 2024\\internmanagementsystem\\imsdaos\\roledao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2FC67248-3712-4D25-B147-D5B7201D05DA}|IMSDaos\\IMSDaos.csproj|solutionrelative:imsdaos\\roledao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|d:\\study\\summer 2024\\internmanagementsystem\\internmanagement\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|solutionrelative:internmanagement\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|d:\\study\\summer 2024\\internmanagementsystem\\internmanagement\\pages\\userpage\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|solutionrelative:internmanagement\\pages\\userpage\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|d:\\study\\summer 2024\\internmanagementsystem\\internmanagement\\pages\\userpage\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C565D259-DBED-4437-8992-C3E10C4F0DA5}|InternManagement\\InternManagement.csproj|solutionrelative:internmanagement\\pages\\userpage\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{813CE4CD-1662-405B-97C0-A711B8CA5810}|IMSServices\\IMSServices.csproj|d:\\study\\summer 2024\\internmanagementsystem\\imsservices\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -90,7 +66,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 1,
+              "Title": "UserDAO.cs",
+              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\IMSDaos\\UserDAO.cs",
+              "RelativeDocumentMoniker": "IMSDaos\\UserDAO.cs",
+              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\IMSDaos\\UserDAO.cs",
+              "RelativeToolTip": "IMSDaos\\UserDAO.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAzwCMAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T01:41:26.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Index.cshtml",
+              "RelativeDocumentMoniker": "InternManagement\\Pages\\UserPage\\Index.cshtml",
+              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Index.cshtml",
+              "RelativeToolTip": "InternManagement\\Pages\\UserPage\\Index.cshtml",
+              "ViewState": "AQIAADkAAAAAAAAAAAAAAFMAAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-24T01:36:49.817Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Edit.cshtml",
+              "RelativeDocumentMoniker": "InternManagement\\Pages\\UserPage\\Edit.cshtml",
+              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Edit.cshtml",
+              "RelativeToolTip": "InternManagement\\Pages\\UserPage\\Edit.cshtml",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACAAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-24T01:33:27.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Edit.cshtml.cs",
+              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Edit.cshtml.cs",
+              "RelativeDocumentMoniker": "InternManagement\\Pages\\UserPage\\Edit.cshtml.cs",
+              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Edit.cshtml.cs",
+              "RelativeToolTip": "InternManagement\\Pages\\UserPage\\Edit.cshtml.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABQAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T01:32:50.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "RoleService.cs",
               "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\IMSServices\\RoleService.cs",
               "RelativeDocumentMoniker": "IMSServices\\RoleService.cs",
@@ -98,27 +126,13 @@
               "RelativeToolTip": "IMSServices\\RoleService.cs",
               "ViewState": "AQIAAAEAAAAAAAAAAAArwA4AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T01:08:07.245Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "RoleDAO.cs",
-              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\IMSDaos\\RoleDAO.cs",
-              "RelativeDocumentMoniker": "IMSDaos\\RoleDAO.cs",
-              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\IMSDaos\\RoleDAO.cs",
-              "RelativeToolTip": "IMSDaos\\RoleDAO.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA0AAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T01:04:17.267Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-24T01:08:07.245Z"
             }
           ]
         },
         {
           "DockedWidth": 594,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -131,123 +145,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Index.cshtml",
-              "RelativeDocumentMoniker": "InternManagement\\Pages\\UserPage\\Index.cshtml",
-              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Index.cshtml",
-              "RelativeToolTip": "InternManagement\\Pages\\UserPage\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAA6AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-24T01:22:02.927Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserDAO.cs",
-              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\IMSDaos\\UserDAO.cs",
-              "RelativeDocumentMoniker": "IMSDaos\\UserDAO.cs",
-              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\IMSDaos\\UserDAO.cs",
-              "RelativeToolTip": "IMSDaos\\UserDAO.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAowDMAAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T01:13:53.467Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Details.cshtml.cs",
-              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Details.cshtml.cs",
-              "RelativeDocumentMoniker": "InternManagement\\Pages\\UserPage\\Details.cshtml.cs",
-              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Details.cshtml.cs",
-              "RelativeToolTip": "InternManagement\\Pages\\UserPage\\Details.cshtml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T01:12:26.564Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Delete.cshtml.cs",
-              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Delete.cshtml.cs",
-              "RelativeDocumentMoniker": "InternManagement\\Pages\\UserPage\\Delete.cshtml.cs",
-              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Delete.cshtml.cs",
-              "RelativeToolTip": "InternManagement\\Pages\\UserPage\\Delete.cshtml.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T01:12:22.928Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Edit.cshtml.cs",
-              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Edit.cshtml.cs",
-              "RelativeDocumentMoniker": "InternManagement\\Pages\\UserPage\\Edit.cshtml.cs",
-              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Edit.cshtml.cs",
-              "RelativeToolTip": "InternManagement\\Pages\\UserPage\\Edit.cshtml.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAmwDYAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T01:11:40.931Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml.cs",
-              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Index.cshtml.cs",
-              "RelativeDocumentMoniker": "InternManagement\\Pages\\UserPage\\Index.cshtml.cs",
-              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Index.cshtml.cs",
-              "RelativeToolTip": "InternManagement\\Pages\\UserPage\\Index.cshtml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T01:11:41.587Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\IMSBussinessObjects\\User.cs",
-              "RelativeDocumentMoniker": "IMSBussinessObjects\\User.cs",
-              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\IMSBussinessObjects\\User.cs",
-              "RelativeToolTip": "IMSBussinessObjects\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T01:19:42.386Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Index.cshtml.cs",
-              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\Index.cshtml.cs",
-              "RelativeDocumentMoniker": "InternManagement\\Pages\\Index.cshtml.cs",
-              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\Index.cshtml.cs",
-              "RelativeToolTip": "InternManagement\\Pages\\Index.cshtml.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAkwBsAAAA/AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T01:12:41.685Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Create.cshtml.cs",
-              "DocumentMoniker": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Create.cshtml.cs",
-              "RelativeDocumentMoniker": "InternManagement\\Pages\\UserPage\\Create.cshtml.cs",
-              "ToolTip": "D:\\Study\\Summer 2024\\InternManagementSystem\\InternManagement\\Pages\\UserPage\\Create.cshtml.cs",
-              "RelativeToolTip": "InternManagement\\Pages\\UserPage\\Create.cshtml.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwCQAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T01:11:36.806Z",
-              "EditorCaption": ""
             }
           ]
         },
