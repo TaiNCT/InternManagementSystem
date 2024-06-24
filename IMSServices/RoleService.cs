@@ -1,5 +1,4 @@
 ﻿using IMSBussinessObjects;
-using IMSDaos;
 using IMSRepositories;
 
 namespace IMSServices
@@ -14,10 +13,10 @@ namespace IMSServices
                 iRoleRepository = new RoleRepository();
             }
         }
-        public Role GetRole(int roleID)
-       => RoleDAO.Instance.GetRole(roleID);
+        public Task<Role> GetRoleAsync(int roleID)
+               => iRoleRepository.GetRoleAsync(roleID);
 
-        public List<Role> GetRoles()
-        => RoleDAO.Instance.GetRoles();
+        public async Task<List<Role>> GetRolesAsync()
+        => await iRoleRepository.GetRolesAsync();
     }
 }

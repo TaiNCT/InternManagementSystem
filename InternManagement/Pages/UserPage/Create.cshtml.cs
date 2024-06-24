@@ -24,7 +24,7 @@ namespace InternManagement.Pages.UserPage
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var roles = roleService.GetRoles();
+            var roles = await roleService.GetRolesAsync();
             Roles = new SelectList(roles, "RoleId", "RoleName");
 
             return Page();
@@ -37,7 +37,7 @@ namespace InternManagement.Pages.UserPage
                 return Page();
             }
 
-            userService.AddUser(User);
+            await userService.AddUserAsync(User);
 
             return RedirectToPage("./Index");
         }

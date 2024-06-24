@@ -22,42 +22,42 @@ namespace InternManagement.Pages.UserPage
 
         public SelectList Roles { get; set; } = default!;
 
-        public IActionResult OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == 0 || userService.GetUsers() == null)
+            if (id == 0 || await userService.GetUsersAsync() == null)
             {
                 return NotFound();
             }
 
-            var user = userService.GetUser(id);
+            var user = await userService.GetUserAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
             User = user;
-            Roles = new SelectList(roleService.GetRoles(), "RoleId", "RoleName");
+            Roles = new SelectList(await roleService.GetRolesAsync(), "RoleId", "RoleName");
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-                Roles = new SelectList(roleService.GetRoles(), "RoleId", "RoleName");
+                Roles = new SelectList(await roleService.GetRolesAsync(), "RoleId", "RoleName");
                 return Page();
             }
 
             try
             {
-                userService.UpdateUser(User.UserId, User);
+                await userService.UpdateUserAsync(User.UserId, User);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, $"An error occurred: {ex.Message}");
-                Roles = new SelectList(roleService.GetRoles(), "RoleId", "RoleName");
+                Roles = new SelectList(await roleService.GetRolesAsync(), "RoleId", "RoleName");
                 return Page();
             }
 

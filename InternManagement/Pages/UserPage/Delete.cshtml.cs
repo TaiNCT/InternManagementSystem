@@ -20,12 +20,12 @@ namespace InternManagement.Pages.UserPage
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null || userService.GetUsers() == null)
+            if (id == null || await userService.GetUsersAsync() == null)
             {
                 return NotFound();
             }
 
-            var user = userService.GetUser(id);
+            var user = await userService.GetUserAsync(id);
 
             if (user == null)
             {
@@ -40,11 +40,11 @@ namespace InternManagement.Pages.UserPage
 
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (id == null || userService.GetUsers() == null)
+            if (id == null || await userService.GetUsersAsync() == null)
             {
                 return NotFound();
             }
-            userService.DeleteUser(id);
+            await userService.DeleteUserAsync(id);
 
             return RedirectToPage("./Index");
         }

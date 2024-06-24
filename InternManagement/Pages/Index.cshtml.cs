@@ -25,7 +25,7 @@ namespace InternManagement.Pages
         public async Task<IActionResult> OnPost()
         {
             // Attempt to retrieve the user from the database
-            User user = userService.GetAccount(UserName, Password);
+            User user = await userService.GetAccountAsync(UserName, Password);
             if (user != null)
             {
                 HttpContext.Session.SetString("UserName", UserName);

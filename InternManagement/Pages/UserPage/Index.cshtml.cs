@@ -17,9 +17,9 @@ namespace InternManagement.Pages.UserPage
 
         public async Task OnGetAsync()
         {
-            if (userService.GetUsers() != null)
+            if (await userService.GetUsersAsync() != null)
             {
-                User = userService.GetUsers();
+                User = await userService.GetUsersAsync();
             }
         }
     }

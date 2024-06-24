@@ -1,4 +1,5 @@
 ﻿using IMSBussinessObjects;
+using Microsoft.EntityFrameworkCore;
 
 namespace IMSDaos
 {
@@ -6,46 +7,49 @@ namespace IMSDaos
     {
         private readonly IMSDbContext db = null;
         private static UserDAO instance = null;
+
         public UserDAO()
         {
             db = new IMSDbContext();
         }
-        public static UserDAO Instance
+
+        public static async Task<UserDAO> InstanceAsync()
         {
-            get
+            if (instance == null)
             {
-                if (instance == null)
-                {
-                    instance = new UserDAO();
-                }
-                return instance;
+                instance = new UserDAO();
             }
+            return instance;
         }
-        public User GetAccount(string username, string password)
+
+        public async Task<User> GetAccountAsync(string username, string password)
         {
-            return db.Users.FirstOrDefault(x => x.UserName.Equals(username) && x.Password.Equals(password));
+            return await db.Users.FirstOrDefaultAsync(x => x.UserName.Equals(username) && x.Password.Equals(password));
         }
-        public User GetUser(int UserId)
+
+        public async Task<User> GetUserAsync(int userId)
         {
-            return db.Users.FirstOrDefault(x => x.UserId.Equals(UserId));
+            return await db.Users.FirstOrDefaultAsync(x => x.UserId.Equals(userId));
         }
-        public List<User> GetUsers()
+
+        public async Task<List<User>> GetUsersAsync()
         {
-            return db.Users.ToList();
+            return await db.Users.ToListAsync();
         }
-        public void DeleteUser(int userId)
+
+        public async Task DeleteUserAsync(int userId)
         {
-            User user = GetUser(userId);
+            var user = await GetUserAsync(userId);
             if (user != null)
             {
                 db.Users.Remove(user);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
         }
-        public void UpdateUser(int userId, User newUser)
-        {
 
-            var existingUser = GetUser(userId);
+        public async Task UpdateUserAsync(int userId, User newUser)
+        {
+            var existingUser = await GetUserAsync(userId);
             if (existingUser != null)
             {
                 existingUser.UserId = newUser.UserId;
@@ -61,16 +65,17 @@ namespace IMSDaos
                 existingUser.RoleID = newUser.RoleID;
 
                 db.Users.Update(existingUser);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
         }
-        public void AddUser(User user)
+
+        public async Task AddUserAsync(User user)
         {
-            User newUser = GetUser(user.UserId);
+            var newUser = await GetUserAsync(user.UserId);
             if (newUser == null)
             {
                 db.Users.Add(user);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
         }
     }

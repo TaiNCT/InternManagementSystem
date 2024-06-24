@@ -13,10 +13,10 @@ namespace IMSRepositories
                 roleDAO = new RoleDAO();
             }
         }
-        public Role GetRole(int roleID)
-        => RoleDAO.Instance.GetRole(roleID);
+        public async Task<List<Role>> GetRolesAsync()
+        => await RoleDAO.Instance.GetRolesAsync();
 
-        public List<Role> GetRoles()
-        => RoleDAO.Instance.GetRoles();
+        Task<Role> IRoleRepository.GetRoleAsync(int roleID)
+        => RoleDAO.Instance.GetRoleAsync(roleID);
     }
 }

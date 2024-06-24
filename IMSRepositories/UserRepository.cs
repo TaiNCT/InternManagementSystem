@@ -13,19 +13,23 @@ namespace IMSRepositories
                 userDAO = new UserDAO();
             }
         }
-        public void AddUser(User user) => UserDAO.Instance.AddUser(user);
 
-        public void DeleteUser(int userId)
-            => UserDAO.Instance.DeleteUser(userId);
+        public async Task AddUserAsync(User user)
+        => await userDAO.AddUserAsync(user);
 
-        public User GetAccount(string username, string password)
-        {
-            return userDAO.GetAccount(username, password);
-        }
+        public async Task DeleteUserAsync(int userId)
+        => await userDAO.DeleteUserAsync(userId);
 
-        public User GetUser(int UserId) => UserDAO.Instance.GetUser(UserId);
+        public async Task<User> GetAccountAsync(string username, string password)
+        => await userDAO.GetAccountAsync(username, password);
 
-        public List<User> GetUsers() => UserDAO.Instance.GetUsers();
-        public void UpdateUser(int userId, User newUser) => UserDAO.Instance.UpdateUser(userId, newUser);
+        public async Task<User> GetUserAsync(int userId)
+        => await userDAO.GetUserAsync(userId);
+
+        public async Task<List<User>> GetUsersAsync()
+        => await userDAO.GetUsersAsync();
+
+        public async Task UpdateUserAsync(int userId, User newUser)
+        => await userDAO.UpdateUserAsync(userId, newUser);
     }
 }

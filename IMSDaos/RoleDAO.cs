@@ -1,4 +1,5 @@
 ﻿using IMSBussinessObjects;
+using Microsoft.EntityFrameworkCore;
 
 namespace IMSDaos
 {
@@ -24,14 +25,15 @@ namespace IMSDaos
             }
         }
 
-        public Role GetRole(int roleID)
+        public async Task<Role> GetRoleAsync(int roleID)
         {
-            return db.Roles.FirstOrDefault(x => x.RoleId == roleID);
+            return await db.Roles.FirstOrDefaultAsync(x => x.RoleId == roleID);
         }
-        public List<Role> GetRoles()
+        public async Task<List<Role>> GetRolesAsync()
         {
-            return db.Roles.ToList();
+            return await db.Roles.ToListAsync();
         }
+
 
     }
 }

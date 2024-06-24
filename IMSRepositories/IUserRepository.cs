@@ -4,15 +4,13 @@ namespace IMSRepositories
 {
     public interface IUserRepository
     {
-        public User GetUser(int UserId);
-        public List<User> GetUsers();
+        Task<User> GetUserAsync(int userId);
+        Task<List<User>> GetUsersAsync();
 
-        public void DeleteUser(int userId);
-
-        public void UpdateUser(int userId, User newUser);
-
-        public void AddUser(User user);
-        public User GetAccount(string username, string password);
+        Task DeleteUserAsync(int userId);
+        Task UpdateUserAsync(int userId, User newUser);
+        Task AddUserAsync(User user);
+        Task<User> GetAccountAsync(string username, string password);
 
 
     }

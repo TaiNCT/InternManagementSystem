@@ -11,34 +11,26 @@ namespace IMSServices
             iUserRepository ??= new UserRepository();
         }
 
-        public void AddUser(User user)
-        {
-            iUserRepository.AddUser(user);
-        }
+        public async Task AddUserAsync(User user)
+        => await iUserRepository.AddUserAsync(user);
 
-        public void DeleteUser(int userId)
-        {
-            iUserRepository.DeleteUser(userId);
-        }
+        public async Task DeleteUserAsync(int userId)
+                => await iUserRepository.DeleteUserAsync(userId);
 
-        public User GetAccount(string username, string password)
-        {
-            return iUserRepository.GetAccount(username, password);
-        }
 
-        public User GetUser(int UserId)
-        {
-            return iUserRepository.GetUser(UserId);
-        }
+        public async Task<User> GetAccountAsync(string username, string password)
+                => await iUserRepository.GetAccountAsync(username, password);
 
-        public List<User> GetUsers()
-        {
-            return iUserRepository.GetUsers();
-        }
 
-        public void UpdateUser(int userId, User newUser)
-        {
-            iUserRepository.UpdateUser(userId, newUser);
-        }
+        public async Task<User> GetUserAsync(int userId)
+                => await iUserRepository.GetUserAsync(userId);
+
+
+        public async Task<List<User>> GetUsersAsync()
+                => await iUserRepository.GetUsersAsync();
+
+        public async Task UpdateUserAsync(int userId, User newUser)
+               => await iUserRepository.UpdateUserAsync(userId, newUser);
+
     }
 }
