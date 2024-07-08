@@ -56,10 +56,12 @@ namespace IMSBussinessObjects
             modelBuilder.Entity<Permission>().HasKey(p => new { p.PermissionId, p.RoleID });
             modelBuilder.Entity<UserRole>().HasKey(u => new { u.RoleId });
             modelBuilder.Entity<Quiz>().HasKey(q => q.QuizId);
-            modelBuilder.Entity<Class>().HasKey(c => new { c.ClassId, c.CourseId, c.InstructorId });
-            modelBuilder.Entity<Course>().HasKey(c => new { c.CourseId, c.InstructorId });
-            modelBuilder.Entity<TrainingUnit>().HasKey(t => new { t.UnitId, t.QuizId });
+            modelBuilder.Entity<Class>().HasKey(c => new { c.ClassId });
+            modelBuilder.Entity<Course>().HasKey(c => new { c.CourseId });
+            modelBuilder.Entity<TrainingUnit>().HasKey(t => new { t.UnitId });
             modelBuilder.Entity<User>().HasKey(u => new { u.UserId });
+
+
 
             // Configure foreign key relationships with OnDelete behavior
             modelBuilder.Entity<TrainingUnit>()
