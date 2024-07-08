@@ -17,7 +17,7 @@ namespace IMSBussinessObjects
         public DbSet<TrainingUnit> TrainingUnits { get; set; }
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<Question> Questions { get; set; }
-        public DbSet<InternSolution> InternSolutions { get; set; }
+        public DbSet<InternScore> InternScores { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Class> Classes { get; set; }
@@ -49,7 +49,7 @@ namespace IMSBussinessObjects
 
             // Configure composite keys
             modelBuilder.Entity<Question>().HasKey(q => new { q.QuizId, q.QuestionId });
-            modelBuilder.Entity<InternSolution>().HasKey(i => new { i.QuizId, i.QuestionId });
+            modelBuilder.Entity<InternScore>().HasKey(i => new { i.QuizId });
             modelBuilder.Entity<Feedback>().HasKey(f => new { f.TrainingUnitId, f.UserId, f.MentorId, f.QuizId });
             modelBuilder.Entity<Attendance>().HasKey(a => new { a.ClassId, a.TraineeId, a.Date });
             modelBuilder.Entity<Enrollment>().HasKey(e => new { e.ClassId, e.TraineeId });
@@ -75,13 +75,6 @@ namespace IMSBussinessObjects
                 .HasOne(q => q.Quiz)
                 .WithMany()
                 .HasForeignKey(q => q.QuizId)
-                .OnDelete(DeleteBehavior.Restrict); // Adjust as necessary
-
-            // Configure foreign key relationships with OnDelete behavior
-            modelBuilder.Entity<InternSolution>()
-                .HasOne(i => i.Question)
-                .WithMany()
-                .HasForeignKey(i => new { i.QuizId, i.QuestionId })
                 .OnDelete(DeleteBehavior.Restrict); // Adjust as necessary
 
             // Configure foreign key relationships with OnDelete behavior

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(IMSDbContext))]
-    [Migration("20240708021100_InitialCreate")]
+    [Migration("20240708060009_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -202,17 +202,13 @@ namespace IMSBussinessObjects.Migrations
                     b.ToTable("Feedback");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.InternSolution", b =>
+            modelBuilder.Entity("IMSBussinessObjects.InternScore", b =>
                 {
                     b.Property<int>("QuizId")
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.Property<string>("Answer")
+                    b.Property<string>("Score")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -220,11 +216,11 @@ namespace IMSBussinessObjects.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("QuizId", "QuestionId");
+                    b.HasKey("QuizId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("InternSolution");
+                    b.ToTable("InternScore");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Permission", b =>
@@ -234,6 +230,9 @@ namespace IMSBussinessObjects.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PermissionId"), 1L, 1);
+
+                    b.Property<int>("RoleID")
+                        .HasColumnType("int");
 
                     b.Property<string>("ClassAccess")
                         .IsRequired()
@@ -245,15 +244,12 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("RoleID")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserAccess")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.HasKey("PermissionId");
+                    b.HasKey("PermissionId", "RoleID");
 
                     b.HasIndex("RoleID");
 
@@ -348,6 +344,8 @@ namespace IMSBussinessObjects.Migrations
 
                     b.HasKey("UnitId");
 
+                    b.HasIndex("ClassId");
+
                     b.HasIndex("QuizId");
 
                     b.ToTable("TrainingUnit");
@@ -411,6 +409,8 @@ namespace IMSBussinessObjects.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("User");
                 });
@@ -536,21 +536,21 @@ namespace IMSBussinessObjects.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.InternSolution", b =>
+            modelBuilder.Entity("IMSBussinessObjects.InternScore", b =>
                 {
+                    b.HasOne("IMSBussinessObjects.Quiz", "Quiz")
+                        .WithMany()
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("IMSBussinessObjects.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IMSBussinessObjects.Question", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuizId", "QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
+                    b.Navigation("Quiz");
 
                     b.Navigation("User");
                 });
@@ -571,7 +571,7 @@ namespace IMSBussinessObjects.Migrations
                     b.HasOne("IMSBussinessObjects.Quiz", "Quiz")
                         .WithMany()
                         .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Quiz");
@@ -579,13 +579,32 @@ namespace IMSBussinessObjects.Migrations
 
             modelBuilder.Entity("IMSBussinessObjects.TrainingUnit", b =>
                 {
-                    b.HasOne("IMSBussinessObjects.Quiz", "Quiz")
+                    b.HasOne("IMSBussinessObjects.Class", "Class")
                         .WithMany()
-                        .HasForeignKey("QuizId")
+                        .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("IMSBussinessObjects.Quiz", "Quiz")
+                        .WithMany()
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+
                     b.Navigation("Quiz");
+                });
+
+            modelBuilder.Entity("IMSBussinessObjects.User", b =>
+                {
+                    b.HasOne("IMSBussinessObjects.UserRole", "UserRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserRole");
                 });
 #pragma warning restore 612, 618
         }

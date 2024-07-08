@@ -47,7 +47,7 @@ namespace IMSBussinessObjects
         public bool Status { get; set; }
 
 
-        [ForeignKey("UserRole")]
-        public int RoleId { get; set; }
+        [ForeignKey("RoleId")]
+        public UserRole UserRole { get; set; }
     }
 }
