@@ -3,28 +3,51 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IMSBussinessObjects
 {
+    [Table("User")]
     public class User
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
+
         [Required]
+        [MaxLength(255)]
         public string UserName { get; set; }
+
         [Required]
+        [MaxLength(100)]
         public string Password { get; set; }
+
         [Required]
+        [MaxLength(50)]
+        public string FullName { get; set; }
+
+        [Required]
+        [MaxLength(255)]
+        [EmailAddress]
         public string Email { get; set; }
-        public string Avatar { get; set; }
+
+        [MaxLength(100)]
+        public string Gender { get; set; }
+
         [Required]
-        public bool Status { get; set; }
-        [Required]
-        public string Phone { get; set; }
-        [Required]
-        public DateTime DoB { get; set; }
-        public string Address { get; set; }
-        [Required]
+        [MaxLength(100)]
         public string Level { get; set; }
-        public int RoleID { get; set; }
-        [ForeignKey("RoleID")]
-        public Role? Role { get; set; }
+
+        [Required]
+        [MaxLength(255)]
+        public string Address { get; set; }
+
+        public DateTime? BirthDate { get; set; }
+
+        [Required]
+        [MaxLength(15)]
+        public string PhoneNumber { get; set; }
+
+        public bool Status { get; set; }
+
+
+        [ForeignKey("UserRole")]
+        public int RoleId { get; set; }
     }
 }

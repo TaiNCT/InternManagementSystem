@@ -1,10 +1,8 @@
 using IMSBussinessObjects;
-using IMSServices;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IRoleService, RoleService>();
+
 builder.Services.AddSession();
 
 // Add services to the container.
