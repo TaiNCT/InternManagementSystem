@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IMSBussinessObjects
 {
@@ -58,6 +53,34 @@ namespace IMSBussinessObjects
             modelBuilder.Entity<Feedback>().HasKey(f => new { f.TrainingUnitId, f.UserId, f.MentorId, f.QuizId });
             modelBuilder.Entity<Attendance>().HasKey(a => new { a.ClassId, a.TraineeId, a.Date });
             modelBuilder.Entity<Enrollment>().HasKey(e => new { e.ClassId, e.TraineeId });
+            modelBuilder.Entity<Permission>().HasKey(p => new { p.PermissionId, p.RoleID });
+            modelBuilder.Entity<UserRole>().HasKey(u => new { u.RoleId });
+            modelBuilder.Entity<Quiz>().HasKey(q => q.QuizId);
+            modelBuilder.Entity<Class>().HasKey(c => new { c.ClassId, c.CourseId, c.InstructorId });
+            modelBuilder.Entity<Course>().HasKey(c => new { c.CourseId, c.InstructorId });
+            modelBuilder.Entity<TrainingUnit>().HasKey(t => new { t.UnitId, t.QuizId });
+            modelBuilder.Entity<User>().HasKey(u => new { u.UserId });
+
+            // Configure foreign key relationships with OnDelete behavior
+            modelBuilder.Entity<TrainingUnit>()
+                .HasOne(t => t.Quiz)
+                .WithMany()
+                .HasForeignKey(t => t.QuizId)
+                .OnDelete(DeleteBehavior.Restrict); // Adjust as necessary
+
+            // Configure foreign key relationships with OnDelete behavior
+            modelBuilder.Entity<Question>()
+                .HasOne(q => q.Quiz)
+                .WithMany()
+                .HasForeignKey(q => q.QuizId)
+                .OnDelete(DeleteBehavior.Restrict); // Adjust as necessary
+
+            // Configure foreign key relationships with OnDelete behavior
+            modelBuilder.Entity<InternSolution>()
+                .HasOne(i => i.Question)
+                .WithMany()
+                .HasForeignKey(i => new { i.QuizId, i.QuestionId })
+                .OnDelete(DeleteBehavior.Restrict); // Adjust as necessary
 
             // Configure foreign key relationships with OnDelete behavior
             modelBuilder.Entity<Feedback>()
