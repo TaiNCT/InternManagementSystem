@@ -3,48 +3,58 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IMSBussinessObjects
 {
-    [Table("Intern")]
-    public class Interns
+    [Table("Interns")]
+    public class Intern
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int InternId { get; set; }
+        public long InternId { get; set; }
 
         [MaxLength(50)]
-        public string? FullName { get; set; }
-        
-        [MaxLength(50)]
-        public string? Name { get; set; }
+        public string FullName { get; set; }
 
-        [MaxLength(255)]
-        [EmailAddress]
-        public string Email { get; set; }
-        
+        [MaxLength(50)]
+        public string Name { get; set; }
+
+        [MaxLength(20)]
         public string PersonalId { get; set; }
-        
-        [MaxLength(15)]
-        public string? PhoneNumber { get; set; }
 
-        [MaxLength(100)]
+        [MaxLength(20)]
+        public string PhoneNumber { get; set; }
+
+        [MaxLength(150)]
+        public string Email { get; set; }
+
+        [MaxLength(150)]
         public string Uni { get; set; }
 
-        [MaxLength(100)]
-        public string Grade { get; set; }
+        [MaxLength(150)]
+        public string Major { get; set; }
 
-        [MaxLength(255)]
-        public string Gpa { get; set; }
+        public int? Grade { get; set; }
+        public decimal? Gpa { get; set; }
+        public int? TeamId { get; set; }
+        public int? Birthday { get; set; }
+        public int InternshipStartingDate { get; set; }
+        public int InternshipEndingDate { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        [MaxLength(500)]
+        public string CvUrl { get; set; }
 
-        public DateTimeOffset? InternshipStartingDate { get; set; }
-        public DateTimeOffset? InternshipEndingDate { get; set; }
-        
+        [MaxLength(500)]
         public string PhotoUrl { get; set; }
 
-        public string CvUrl { get; set; }
-        
-        public string OverallSuccess { get; set; }
+        public int? OverallSuccess { get; set; }
+        public long? UserId { get; set; }
 
-       
+        [ForeignKey("UserId")]
+        public User User { get; set; }
+
+        [ForeignKey("TeamId")]
+        public Team Team { get; set; }
+        public ICollection<Document> Documents { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
+        public ICollection<Assignment> Assignments { get; set; }
     }
+       
 }

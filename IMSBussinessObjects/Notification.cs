@@ -3,26 +3,28 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IMSBussinessObjects
 {
-    [Table("Assignment")]
-    public class Assignment
+    [Table("Notifications")]
+    public class Notification
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int AssignmentId { get; set; }
+        public long NotificationId { get; set; }
 
-        [MaxLength(255)]
-        public string? Description { get; set; }
+        public int UserId { get; set; }
+        public int? InternId { get; set; }
+        public int NotificationDate { get; set; }
+        public int TypeCode { get; set; }
 
-        public DateTime Deadline { get; set; }
-        
-        public int Weight { get; set; }
+        [MaxLength(250)]
+        public string Content { get; set; }
 
-        public int Complete { get; set; }
+        public int? Timestamp { get; set; }
+        public bool IsSeen { get; set; }
 
-        [ForeignKey("UserRole")]
-        public int TeamId { get; set; }
-      
+        [ForeignKey("UserId")]
+        public User User { get; set; }
 
-       
+        [ForeignKey("InternId")]
+        public Intern Intern { get; set; }
     }
 }

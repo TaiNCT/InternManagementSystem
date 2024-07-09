@@ -42,52 +42,60 @@ namespace IMSBussinessObjects
         {
             base.OnModelCreating(modelBuilder);
 
-            // Additional configuration if necessary
-
             modelBuilder.Entity<Document>()
                 .HasOne(d => d.Intern)
                 .WithMany(i => i.Documents)
-                .HasForeignKey(d => d.InternId);
+                .HasForeignKey(d => d.InternId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Notification>()
                 .HasOne(n => n.User)
                 .WithMany(u => u.Notifications)
-                .HasForeignKey(n => n.UserId);
+                .HasForeignKey(n => n.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Notification>()
                 .HasOne(n => n.Intern)
                 .WithMany(i => i.Notifications)
-                .HasForeignKey(n => n.InternId);
+                .HasForeignKey(n => n.InternId)
+                .OnDelete(DeleteBehavior.Restrict); // Use Restrict or NoAction
 
             modelBuilder.Entity<Assignment>()
                 .HasOne(a => a.Team)
                 .WithMany(t => t.Assignments)
-                .HasForeignKey(a => a.TeamId);
+                .HasForeignKey(a => a.TeamId)
+                .OnDelete(DeleteBehavior.Restrict); // Use Restrict or NoAction
 
             modelBuilder.Entity<Assignment>()
                 .HasOne(a => a.Intern)
                 .WithMany(i => i.Assignments)
-                .HasForeignKey(a => a.InternId);
+                .HasForeignKey(a => a.InternId)
+                .OnDelete(DeleteBehavior.Restrict); // Use Restrict or NoAction
 
             modelBuilder.Entity<Supervisor>()
                 .HasOne(s => s.User)
                 .WithMany(u => u.Supervisors)
-                .HasForeignKey(s => s.UserId);
+                .HasForeignKey(s => s.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Supervisor>()
                 .HasOne(s => s.Team)
                 .WithMany(t => t.Supervisors)
-                .HasForeignKey(s => s.TeamId);
+                .HasForeignKey(s => s.TeamId)
+                .OnDelete(DeleteBehavior.Restrict); // Use Restrict or NoAction
 
             modelBuilder.Entity<Intern>()
                 .HasOne(i => i.User)
                 .WithOne(u => u.Intern)
-                .HasForeignKey<Intern>(i => i.UserId);
+                .HasForeignKey<Intern>(i => i.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Intern>()
                 .HasOne(i => i.Team)
                 .WithMany(t => t.Interns)
-                .HasForeignKey(i => i.TeamId);
+                .HasForeignKey(i => i.TeamId)
+                .OnDelete(DeleteBehavior.Restrict); // Use Restrict or NoAction
         }
+
     }
 }

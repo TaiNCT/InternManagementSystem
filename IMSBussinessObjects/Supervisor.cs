@@ -3,27 +3,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IMSBussinessObjects
 {
-    [Table("Supervisor")]
+    [Table("Supervisors")]
     public class Supervisor
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }
+        public long SupervisorId { get; set; }
 
-        [MaxLength(255)]
-        public string? UserName { get; set; }
+        public long UserId { get; set; }
+        public int TeamId { get; set; }
 
-        [MaxLength(100)]
-        public string? Password { get; set; }
-        
-        [MaxLength(255)]
-        [EmailAddress]
-        public string Email { get; set; }
-        
-        [ForeignKey("UserRole")]
-        public int RoleID { get; set; }
-      
+        [ForeignKey("UserId")]
+        public User User { get; set; }
 
-       
+        [ForeignKey("TeamId")]
+        public Team Team { get; set; }
     }
 }
