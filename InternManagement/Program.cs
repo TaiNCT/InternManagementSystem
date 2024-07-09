@@ -1,9 +1,14 @@
 using IMSBussinessObjects;
 using IMSBussinessObjects.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSession();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
+builder.Services.AddAuthorization();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -39,8 +44,10 @@ app.UseStaticFiles();
 app.UseSession();
 
 app.UseRouting();
+app.UseAuthentication();
+
 app.UseAuthorization();
 
-app.MapRazorPages();
+app.MapRazorPages().RequireAuthorization();
 
 app.Run();
