@@ -8,7 +8,7 @@ namespace IMSBussinessObjects
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long NotificationId { get; set; }
+        public int NotificationId { get; set; }
 
         public int UserId { get; set; }
         public int? InternId { get; set; }

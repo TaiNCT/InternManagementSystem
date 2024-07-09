@@ -10,7 +10,9 @@ namespace IMSBussinessObjects
         {
         }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
 
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<DocumentRequest> DocumentRequests { get; set; }
@@ -29,19 +31,11 @@ namespace IMSBussinessObjects
             }
         }
 
-        private string GetConnectionString()
-        {
-            IConfiguration config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", true, true)
-                .Build();
-            return config.GetConnectionString("SqlDbConnection");
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            // Configure entity relationships
             modelBuilder.Entity<Document>()
                 .HasOne(d => d.Intern)
                 .WithMany(i => i.Documents)
@@ -97,5 +91,14 @@ namespace IMSBussinessObjects
                 .OnDelete(DeleteBehavior.Restrict); // Use Restrict or NoAction
         }
 
+        private string GetConnectionString()
+        {
+            IConfiguration config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
+
+            return config.GetConnectionString("SqlDbConnection");
+        }
     }
 }

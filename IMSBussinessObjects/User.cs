@@ -8,7 +8,7 @@ namespace IMSBussinessObjects
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long UserId { get; set; }
+        public int  UserId { get; set; }
 
         [MaxLength(50)]
         public string Username { get; set; }

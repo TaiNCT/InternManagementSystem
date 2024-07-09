@@ -8,9 +8,9 @@ namespace IMSBussinessObjects
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long SupervisorId { get; set; }
+        public int SupervisorId { get; set; }
 
-        public long UserId { get; set; }
+        public int UserId { get; set; }
         public int TeamId { get; set; }
 
         [ForeignKey("UserId")]

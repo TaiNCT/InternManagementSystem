@@ -8,7 +8,7 @@ namespace IMSBussinessObjects
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long InternId { get; set; }
+        public int InternId { get; set; }
 
         [MaxLength(50)]
         public string FullName { get; set; }
@@ -32,7 +32,7 @@ namespace IMSBussinessObjects
         public string Major { get; set; }
 
         public int? Grade { get; set; }
-        public decimal? Gpa { get; set; }
+        public int? Gpa { get; set; }
         public int? TeamId { get; set; }
         public int? Birthday { get; set; }
         public int InternshipStartingDate { get; set; }
@@ -45,7 +45,7 @@ namespace IMSBussinessObjects
         public string PhotoUrl { get; set; }
 
         public int? OverallSuccess { get; set; }
-        public long? UserId { get; set; }
+        public int? UserId { get; set; }
 
         [ForeignKey("UserId")]
         public User User { get; set; }

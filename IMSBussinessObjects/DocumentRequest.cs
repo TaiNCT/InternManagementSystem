@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace IMSBussinessObjects
 {
     [Table("Document")]
-    public class Document
+    public class DocumentRequest
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

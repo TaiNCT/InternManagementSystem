@@ -8,7 +8,7 @@ namespace IMSBussinessObjects
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long DocumentId { get; set; }
+        public int DocumentId { get; set; }
 
         [MaxLength(50)]
         public string DocumentName { get; set; }

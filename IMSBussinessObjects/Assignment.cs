@@ -8,7 +8,7 @@ namespace IMSBussinessObjects
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long AssignmentId { get; set; }
+        public int AssignmentId { get; set; }
 
         public int? TeamId { get; set; }
         public int? InternId { get; set; }
