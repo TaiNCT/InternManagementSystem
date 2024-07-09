@@ -7,20 +7,16 @@ namespace IMSServices
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository userRepository;
+        private readonly IUserRepository _userRepository;
 
         public UserService(IUserRepository userRepository)
         {
-            userRepository = userRepository;
-        }
-        public void AddUser(User user)
-        {
-            userRepository.AddUser(user);
+            _userRepository = userRepository;
         }
 
         public User Authenticate(string email, string password)
         {
-            var user = userRepository.GetAccount(email);
+            var user = _userRepository.GetAccount(email);
             if (user == null)
             {
                 return null;
@@ -31,21 +27,28 @@ namespace IMSServices
 
         public User GetUserById(int userID)
         {
-            return userRepository.GetUserById(userID);
+            return _userRepository.GetUserById(userID);
         }
 
         public List<User> GetUsers()
         {
-            return userRepository.GetUsers();
+            return _userRepository.GetUsers();
+        }
+
+        public void AddUser(User user)
+        {
+            _userRepository.AddUser(user);
         }
 
         public void RemoveUser(int userID)
-        => userRepository.RemoveUser(userID);
-
+        {
+            _userRepository.RemoveUser(userID);
+        }
 
         public void UpdateUser(int userID, User newUser)
-        => userRepository.UpdateUser(userID, newUser);
-
+        {
+            _userRepository.UpdateUser(userID, newUser);
+        }
 
         private bool VerifyPassword(string password, string hash, string salt)
         {
@@ -63,7 +66,4 @@ namespace IMSServices
             return CryptographicOperations.FixedTimeEquals(hashToVerify, Convert.FromHexString(hash));
         }
     }
-
-
 }
-
