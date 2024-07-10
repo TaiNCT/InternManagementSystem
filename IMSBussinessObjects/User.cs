@@ -23,7 +23,7 @@ namespace IMSBussinessObjects
         [MaxLength(100)]
         public string Password { get; set; }
 
-        public int Role { get; set; }
+        public int Role { get; set; } // 1. Admin, 2. Supervisor, 3. Intern
         public ICollection<Notification> Notifications { get; set; }
         public ICollection<Supervisor> Supervisors { get; set; }
         public Intern Intern { get; set; }
