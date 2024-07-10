@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IMSBussinessObjects;
+using IMSServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using IMSBussinessObjects;
 
 namespace InternManagement.Pages.Users
 {
     public class CreateModel : PageModel
     {
-        private readonly IMSBussinessObjects.AppDbContext _context;
+        private readonly IUserService userService;
 
-        public CreateModel(IMSBussinessObjects.AppDbContext context)
+        public CreateModel(IUserService userServ)
         {
-            _context = context;
+            userService = userServ;
         }
 
         public IActionResult OnGet()
@@ -30,15 +26,46 @@ namespace InternManagement.Pages.Users
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _context.Users == null || User == null)
+            if (User == null)
             {
+                ModelState.AddModelError(string.Empty, "Invalid user data.");
                 return Page();
             }
 
-            _context.Users.Add(User);
-            await _context.SaveChangesAsync();
+            // You may need to call a method that sets the RefreshToken for User
+            EnsureUserHasRefreshToken(User);
+
+            if (!ModelState.IsValid || userService.GetUsers() == null)
+            {
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        Console.WriteLine($"Validation Error: {error.ErrorMessage}");
+                    }
+                }
+                return Page();
+            }
+
+            userService.AddUser(User);
 
             return RedirectToPage("./Index");
+        }
+
+        // Example method to ensure RefreshToken is set
+        private void EnsureUserHasRefreshToken(User user)
+        {
+            if (string.IsNullOrEmpty(user.RefreshToken))
+            {
+                // Generate and set a new RefreshToken
+                user.RefreshToken = GenerateNewRefreshToken();
+            }
+        }
+
+        private string GenerateNewRefreshToken()
+        {
+            // Logic to generate a new refresh token
+            return "generated_refresh_token";
         }
     }
 }

@@ -1,35 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IMSBussinessObjects;
+using IMSServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using IMSBussinessObjects;
 
 namespace InternManagement.Pages.Users
 {
     public class EditModel : PageModel
     {
-        private readonly IMSBussinessObjects.AppDbContext _context;
+        private readonly IUserService userService;
 
-        public EditModel(IMSBussinessObjects.AppDbContext context)
+        public EditModel(IUserService userServ)
         {
-            _context = context;
+            userService = userServ;
         }
 
         [BindProperty]
         public User User { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || userService.GetUsers() == null)
             {
                 return NotFound();
             }
 
-            var user =  await _context.Users.FirstOrDefaultAsync(m => m.UserId == id);
+            var user = userService.GetUserById(id);
             if (user == null)
             {
                 return NotFound();
@@ -46,31 +41,11 @@ namespace InternManagement.Pages.Users
             {
                 return Page();
             }
-
-            _context.Attach(User).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(User.UserId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            userService.UpdateUser(User.UserId, User);
 
             return RedirectToPage("./Index");
         }
 
-        private bool UserExists(int id)
-        {
-          return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
-        }
+
     }
 }

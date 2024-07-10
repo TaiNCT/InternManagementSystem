@@ -47,7 +47,7 @@ namespace IMSDaos
             {
                 HashPassword(user.Password, out string hashedPassword, out string salt);
                 user.Password = hashedPassword;
-                user.RefreshToken = salt;
+                user.RefreshToken = salt;  // Set the RefreshToken here
 
                 db.Users.Add(user);
                 db.SaveChanges();
@@ -65,27 +65,32 @@ namespace IMSDaos
         }
         public void UpdateUser(int userID, User newUser)
         {
-            var existUser = GetUserById(userID);
-            if (existUser != null)
+            var existingUser = GetUserById(userID);
+            if (existingUser != null)
             {
-                HashPassword(newUser.Password, out string hashedPassword, out string salt);
-                existUser.Password = hashedPassword;
-                existUser.RefreshToken = salt;
+                if (!string.IsNullOrEmpty(newUser.Password))
+                {
+                    // Only update the password if a new password is provided
+                    HashPassword(newUser.Password, out string hashedPassword, out string salt);
+                    existingUser.Password = hashedPassword;
+                    existingUser.RefreshToken = salt;
+                }
 
-                existUser.Username = newUser.Username;
-                existUser.Role = newUser.Role;
+                existingUser.Username = newUser.Username;
+                existingUser.Email = newUser.Email;
+                existingUser.Role = newUser.Role;
 
-                db.Users.Attach(existUser);
-                db.Entry(existUser).State = EntityState.Modified;
+                db.Users.Attach(existingUser);
+                db.Entry(existingUser).State = EntityState.Modified;
                 db.SaveChanges();
             }
         }
 
-        private void HashPassword(string password, out string hashedPassword, out string salt)
+        private void HashPassword(string password, out string hashedPassword, out string refreshToken)
         {
-            const int keySize = 64;
+            const int keySize = 32;
             const int iterations = 350_000;
-            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
+            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA256;
 
             var saltInBytes = RandomNumberGenerator.GetBytes(keySize);
             var hashInBytes = Rfc2898DeriveBytes.Pbkdf2(
@@ -95,7 +100,7 @@ namespace IMSDaos
                 hashAlgorithm,
                 keySize);
 
-            salt = Convert.ToHexString(saltInBytes);
+            refreshToken = Convert.ToHexString(saltInBytes);
             hashedPassword = Convert.ToHexString(hashInBytes);
         }
 

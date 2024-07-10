@@ -2,8 +2,6 @@
 using IMSServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using IMSBussinessObjects;
 
 namespace InternManagement.Pages.Users
 {

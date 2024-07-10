@@ -20,10 +20,13 @@ namespace InternManagement.Pages.Account
 
         [TempData]
         public string ErrorMessage { get; set; }
+
         public string ReturnUrl { get; set; }
+
         [BindProperty, Required]
         public string Email { get; set; }
-        [BindProperty, DataType(DataType.Password)]
+
+        [BindProperty, Required, DataType(DataType.Password)]
         public string Password { get; set; }
 
         public LoginModel(IUserService userService, IConfiguration configuration)
@@ -38,9 +41,7 @@ namespace InternManagement.Pages.Account
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
-
             returnUrl = returnUrl ?? Url.Content("~/");
-
             ReturnUrl = returnUrl;
         }
 
@@ -50,23 +51,31 @@ namespace InternManagement.Pages.Account
 
             if (ModelState.IsValid)
             {
-
                 var defaultUser = _configuration.GetSection("DefaultUser").Get<User>();
-                var verificationResult = Email == defaultUser.Email && VerifyPassword(Password, defaultUser.Password, defaultUser.RefreshToken);
+                var user = _userService.GetAccount(Email);
 
-                var user = _userService.Authenticate(Email, Password);
+                bool isAuthenticated = false;
 
-                if (user != null || verificationResult)
+                if (user != null)
+                {
+                    // Verify password for database user
+                    isAuthenticated = VerifyPassword(Password, user.Password, user.RefreshToken);
+                }
+                else if (Email == defaultUser.Email)
+                {
+                    // Verify password for default user
+                    isAuthenticated = VerifyPassword(Password, defaultUser.Password, defaultUser.RefreshToken);
+                }
+
+                if (isAuthenticated)
                 {
                     var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Email, Email)
-                };
+                    {
+                        new Claim(ClaimTypes.Email, Email)
+                    };
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
-
-                    return Redirect(returnUrl);
-
+                    return LocalRedirect(returnUrl);
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
@@ -78,9 +87,9 @@ namespace InternManagement.Pages.Account
 
         private bool VerifyPassword(string password, string hash, string salt)
         {
-            const int keySize = 64;
+            const int keySize = 32;
             const int iterations = 350000;
-            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
+            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA256;
 
             var hashToVerify = Rfc2898DeriveBytes.Pbkdf2(
                 Encoding.UTF8.GetBytes(password),
