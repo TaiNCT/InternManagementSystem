@@ -8,7 +8,7 @@ namespace IMSBussinessObjects
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int  UserId { get; set; }
+        public int UserId { get; set; }
 
         [MaxLength(50)]
         public string Username { get; set; }
@@ -17,12 +17,13 @@ namespace IMSBussinessObjects
         public string RefreshToken { get; set; }
 
         [MaxLength(255)]
+
         public string Email { get; set; }
 
         [MaxLength(100)]
         public string Password { get; set; }
 
-        public int Role { get; set; }
+        public int Role { get; set; } // 1. Admin, 2. Supervisor, 3. Intern
         public ICollection<Notification> Notifications { get; set; }
         public ICollection<Supervisor> Supervisors { get; set; }
         public Intern Intern { get; set; }
