@@ -33,8 +33,8 @@ namespace IMSBussinessObjects.Migrations
                     b.Property<bool>("Complete")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("Deadline")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("Deadline")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -124,8 +124,8 @@ namespace IMSBussinessObjects.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InternId"), 1L, 1);
 
-                    b.Property<int?>("Birthday")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("Birthday")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CvUrl")
                         .IsRequired()
@@ -148,11 +148,11 @@ namespace IMSBussinessObjects.Migrations
                     b.Property<int?>("Grade")
                         .HasColumnType("int");
 
-                    b.Property<int>("InternshipEndingDate")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("InternshipEndingDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("InternshipStartingDate")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("InternshipStartingDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Major")
                         .IsRequired()
@@ -233,8 +233,8 @@ namespace IMSBussinessObjects.Migrations
                     b.Property<int>("NotificationDate")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Timestamp")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("Timestamp")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("TypeCode")
                         .HasColumnType("int");

@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace IMSBussinessObjects.Migrations
 {
-    public partial class v2 : Migration
+    public partial class v3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -69,9 +70,9 @@ namespace IMSBussinessObjects.Migrations
                     Grade = table.Column<int>(type: "int", nullable: true),
                     Gpa = table.Column<int>(type: "int", nullable: true),
                     TeamId = table.Column<int>(type: "int", nullable: false),
-                    Birthday = table.Column<int>(type: "int", nullable: true),
-                    InternshipStartingDate = table.Column<int>(type: "int", nullable: false),
-                    InternshipEndingDate = table.Column<int>(type: "int", nullable: false),
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    InternshipStartingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    InternshipEndingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CvUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     PhotoUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     OverallSuccess = table.Column<int>(type: "int", nullable: true),
@@ -130,7 +131,7 @@ namespace IMSBussinessObjects.Migrations
                     TeamId = table.Column<int>(type: "int", nullable: false),
                     InternId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Deadline = table.Column<int>(type: "int", nullable: true),
+                    Deadline = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Grade = table.Column<int>(type: "int", nullable: true),
                     Weight = table.Column<int>(type: "int", nullable: true),
                     Complete = table.Column<bool>(type: "bit", nullable: false)
@@ -184,7 +185,7 @@ namespace IMSBussinessObjects.Migrations
                     NotificationDate = table.Column<int>(type: "int", nullable: false),
                     TypeCode = table.Column<int>(type: "int", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Timestamp = table.Column<int>(type: "int", nullable: true),
+                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsSeen = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

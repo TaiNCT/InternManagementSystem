@@ -16,7 +16,7 @@ namespace IMSBussinessObjects
         [MaxLength(250)]
         public string Description { get; set; }
 
-        public int? Deadline { get; set; }
+        public DateTime? Deadline { get; set; }
         public int? Grade { get; set; }
         public int? Weight { get; set; }
         public bool Complete { get; set; }
