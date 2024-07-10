@@ -48,13 +48,13 @@ namespace IMSBussinessObjects
         public int? UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         [ForeignKey("TeamId")]
-        public Team Team { get; set; }
-        public ICollection<Document> Documents { get; set; }
-        public ICollection<Notification> Notifications { get; set; }
-        public ICollection<Assignment> Assignments { get; set; }
+        public Team? Team { get; set; }
+        public ICollection<Document>? Documents { get; set; }
+        public ICollection<Notification>? Notifications { get; set; }
+        public ICollection<Assignment>? Assignments { get; set; }
     }
-       
+
 }
