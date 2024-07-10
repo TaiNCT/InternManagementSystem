@@ -1,6 +1,123 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home Page";
+ViewData["Title"] = "Home Page";
 }
 
+<!-- Include FullCalendar CSS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet" />
+
+<div style="margin-top: 20px; background-color: bisque; height: fit-content; border-radius: 20px; padding: 20px;">
+
+    <div style="font-size: xx-large; font-weight: bold;">Team</div>
+    <hr />
+
+    <div style="display: flex; justify-content: space-around; gap: 20px;">
+        <!-- Team info card -->
+        <div style="flex: 1; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+            <h3 style="text-align: center;">Embedded</h3>
+            <hr />
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div><strong>Number of Interns:</strong></div>
+                <div>
+                    12
+                </div>
+
+                <div><strong>Supervisor:</strong></div>
+                <div>
+                    VIl
+                </div>
+            </div>
+        </div>
+
+        <!-- Team info card -->
+        <div style="flex: 1; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+            <h3 style="text-align: center;">FullStack</h3>
+            <hr />
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
+                <div><strong>Number of Interns:</strong></div>
+                <div>
+                    12
+                </div>
+
+                <div><strong>Supervisor:</strong></div>
+                <div>
+                    VIl
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Team info card -->
+        <div style="flex: 1; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+            <h3 style="text-align: center;">Mobility</h3>
+            <hr />
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
+                <div><strong>Number of Interns:</strong></div>
+                <div>
+                    12
+                </div>
+
+                <div><strong>Supervisor:</strong></div>
+                <div>
+                    VIl
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        <h2>Calendar</h2>
+    <div style="margin-top: 20px; background-color:white ;border-radius:20px ;/* padding:50px */">
+        <!-- Calendar Container -->
+       <div id="calendar" style="/* width: 300px; height: 300px; */ margin-left:200px;margin-right:200px; padding-bottom:50px;padding-top:50px"></div>
+    </div>
+
+</div>
+
+<!-- Include FullCalendar JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+
+<!-- Initialize FullCalendar -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth', // Set initial view
+            events: [
+                {
+                    title: 'Event 1',
+                    start: '2024-07-10' // Example start date
+                },
+                {
+                    title: 'Event 2',
+                    start: '2024-07-15' // Example start date
+                }
+                // Add more events as needed
+            ]
+        });
+
+        calendar.render(); // Render the calendar
+    });
+</script>
+
+<!-- Custom CSS for FullCalendar -->
+<style>
+    /* Example styles - adjust as needed */
+    .fc-day-header {
+        background-color: #f0f0f0; /* Header background color */
+        color: #333; /* Header text color */
+        font-weight: bold; /* Header font weight */
+    }
+
+    .fc-day {
+        border: none; /* Remove borders around calendar days */
+    }
+
+    .fc-event {
+        background-color: #007bff; /* Event background color */
+        color: #fff; /* Event text color */
+    }
+</style>
