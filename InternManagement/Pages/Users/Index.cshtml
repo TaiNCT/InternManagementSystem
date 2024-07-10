@@ -1,0 +1,54 @@
+﻿@page
+@model InternManagement.Pages.Users.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Create New</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.User[0].Username)
+            </th >         
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.User[0].Email)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.User[0].Password)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.User[0].Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.User) {
+            <tr class="table-active">
+                <td scope="row">
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>          
+                <td scope="row">
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+                <td scope="row">
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+                <td scope="row">
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                    <a asp-page="./Edit" asp-route-id="@item.UserId" class="btn btn-primary">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.UserId" class="btn btn-info">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.UserId" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

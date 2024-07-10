@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternManagement", "InternManagement\InternManagement.csproj", "{843B0269-04C5-47B7-BD38-A64D6EF4D5C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMSServices", "IMSServices\IMSServices.csproj", "{A443D0E8-004C-46F9-B34E-403EEAF8ECBC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMSRepositories", "IMSRepositories\IMSRepositories.csproj", "{DBA83622-6708-46AF-B54B-5353F1CA66FD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMSDaos", "IMSDaos\IMSDaos.csproj", "{382621E4-B78C-49CC-8551-96BAE0CE374D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMSBussinessObjects", "IMSBussinessObjects\IMSBussinessObjects.csproj", "{63EA253A-05AC-46E0-B995-0C6BCA9803FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasswordHasher", "PasswordHasher\PasswordHasher.csproj", "{25B71F20-45EE-4EFB-9907-92AE2BFD2468}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{843B0269-04C5-47B7-BD38-A64D6EF4D5C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{843B0269-04C5-47B7-BD38-A64D6EF4D5C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{843B0269-04C5-47B7-BD38-A64D6EF4D5C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{843B0269-04C5-47B7-BD38-A64D6EF4D5C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A443D0E8-004C-46F9-B34E-403EEAF8ECBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A443D0E8-004C-46F9-B34E-403EEAF8ECBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A443D0E8-004C-46F9-B34E-403EEAF8ECBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A443D0E8-004C-46F9-B34E-403EEAF8ECBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBA83622-6708-46AF-B54B-5353F1CA66FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBA83622-6708-46AF-B54B-5353F1CA66FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBA83622-6708-46AF-B54B-5353F1CA66FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBA83622-6708-46AF-B54B-5353F1CA66FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{382621E4-B78C-49CC-8551-96BAE0CE374D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{382621E4-B78C-49CC-8551-96BAE0CE374D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{382621E4-B78C-49CC-8551-96BAE0CE374D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{382621E4-B78C-49CC-8551-96BAE0CE374D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63EA253A-05AC-46E0-B995-0C6BCA9803FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63EA253A-05AC-46E0-B995-0C6BCA9803FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63EA253A-05AC-46E0-B995-0C6BCA9803FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63EA253A-05AC-46E0-B995-0C6BCA9803FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25B71F20-45EE-4EFB-9907-92AE2BFD2468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25B71F20-45EE-4EFB-9907-92AE2BFD2468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25B71F20-45EE-4EFB-9907-92AE2BFD2468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25B71F20-45EE-4EFB-9907-92AE2BFD2468}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99CA37CA-F0BA-458F-B0BF-F6E829CCE06D}
+	EndGlobalSection
+EndGlobal
