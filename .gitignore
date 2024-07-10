@@ -490,6 +490,7 @@ FodyWeavers.xsd
 *.msp
 *.env
 *.credentials.json
+
 # JetBrains Rider
 *.sln.iml
 
