@@ -4,7 +4,7 @@
 
 namespace IMSBussinessObjects.Migrations
 {
-    public partial class Initial : Migration
+    public partial class v2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -75,7 +75,8 @@ namespace IMSBussinessObjects.Migrations
                     CvUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     PhotoUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     OverallSuccess = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {

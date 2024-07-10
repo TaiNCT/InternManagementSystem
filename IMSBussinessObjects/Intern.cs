@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -51,10 +52,13 @@ namespace IMSBussinessObjects
         public User? User { get; set; }
 
         [ForeignKey("TeamId")]
-        public Team? Team { get; set; }
-        public ICollection<Document>? Documents { get; set; }
-        public ICollection<Notification>? Notifications { get; set; }
-        public ICollection<Assignment>? Assignments { get; set; }
-    }
+        public Team Team { get; set; }
+        public ICollection<Document> Documents { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
+        public ICollection<Assignment> Assignments { get; set; }
 
+        [Required]
+        [MaxLength(20)] // Adjust max length as needed
+        public string Status { get; set; } // "approved", "waiting", "rejected"
+    }
 }
