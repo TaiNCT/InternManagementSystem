@@ -4,45 +4,96 @@
     ViewData["Title"] = "Approve Internships";
 }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>University</th>
-            <th>Major</th>
-            <th>Grade</th>
-            <th>GPA</th>
-            <th>Status</th>
+<h1>Approve Internships</h1>
 
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var intern in Model.Interns)
-        {
-            <tr>
-                <td>@intern.Name</td>
-                <td>@intern.Uni</td>
-                <td>@intern.Major</td>
-                <td>@intern.Grade</td>
-                <td>@intern.Gpa</td>
+<ul class="nav nav-tabs" id="internTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="waiting-tab" data-bs-toggle="tab" data-bs-target="#waiting" type="button" role="tab" aria-controls="waiting" aria-selected="true">Waiting</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="archived-tab" data-bs-toggle="tab" data-bs-target="#archived" type="button" role="tab" aria-controls="archived" aria-selected="false">Archived</button>
+    </li>
+</ul>
 
-                <td>@intern.Status</td>
-                <td>
-                    @if (intern.Status == "waiting")
-                    {
-                        <form method="post" asp-page-handler="Approve" asp-route-id="@intern.InternId">
-                            <button type="submit" class="btn btn-success">Approve</button>
-                        </form>
-                        <form method="post" asp-page-handler="Reject" asp-route-id="@intern.InternId">
-                            <button type="submit" class="btn btn-danger">Reject</button>
-                        </form>
-                    }
-                    <form method="post" asp-page-handler="Remove" asp-route-id="@intern.InternId">
-                        <button type="submit" class="btn btn-secondary">Remove</button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="tab-content" id="internTabsContent">
+    <div class="tab-pane fade show active" id="waiting" role="tabpanel" aria-labelledby="waiting-tab">
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>University</th>
+                    <th>Major</th>
+                    <th>Grade</th>
+                    <th>GPA</th>
+                    <th>Status</th>
+
+                    <th>Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var intern in Model.WaitingInterns)
+                {
+                    <tr>
+                        <td>@intern.Name</td>
+                        <td>@intern.Uni</td>
+                        <td>@intern.Major</td>
+                        <td>@intern.Grade</td>
+                        <td>@intern.Gpa</td>
+
+                        <td>@intern.Status</td>
+                        <td>
+                            <form method="post" asp-page-handler="Approve" asp-route-id="@intern.InternId">
+                                <button type="submit" class="btn btn-success">Approve</button>
+                            </form>
+                            <form method="post" asp-page-handler="Reject" asp-route-id="@intern.InternId">
+                                <button type="submit" class="btn btn-danger">Reject</button>
+                            </form>
+                            <form method="post" asp-page-handler="Remove" asp-route-id="@intern.InternId">
+                                <button type="submit" class="btn btn-secondary">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="archived" role="tabpanel" aria-labelledby="archived-tab">
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>University</th>
+                    <th>Major</th>
+                    <th>Grade</th>
+                    <th>GPA</th>
+                    <th>Status</th>
+
+                    <th>Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var intern in Model.ArchivedInterns)
+                {
+                    <tr>
+                        <td>@intern.Name</td>
+                        <td>@intern.Uni</td>
+                        <td>@intern.Major</td>
+                        <td>@intern.Grade</td>
+                        <td>@intern.Gpa</td>
+
+                        <td>@intern.Status</td>
+                        <td>                         
+                            <form method="post" asp-page-handler="Remove" asp-route-id="@intern.InternId">
+                                <button type="submit" class="btn btn-secondary">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>

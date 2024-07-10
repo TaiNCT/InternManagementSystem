@@ -1,18 +1,17 @@
 using IMSBussinessObjects;
 using IMSServices;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace InternManagement.Pages.Admin
 {
-    [Authorize]
     public class ApproveInternshipsModel : PageModel
     {
         private readonly IInternService _internService;
         private readonly IUserService _userService;
 
-        public List<Intern> Interns { get; set; }
+        public List<Intern> WaitingInterns { get; set; }
+        public List<Intern> ArchivedInterns { get; set; }
 
         public ApproveInternshipsModel(IInternService internService, IUserService userService)
         {
@@ -22,7 +21,9 @@ namespace InternManagement.Pages.Admin
 
         public void OnGet()
         {
-            Interns = _internService.GetAllIntern();
+            var interns = _internService.GetAllIntern();
+            WaitingInterns = interns.Where(i => i.Status == "waiting").ToList();
+            ArchivedInterns = interns.Where(i => i.Status != "waiting").ToList();
         }
 
         public IActionResult OnPostApprove(int id)
@@ -33,7 +34,7 @@ namespace InternManagement.Pages.Admin
                 // Create a new user for the intern
                 var user = new User
                 {
-                    Username = intern.Email,
+                    Username = intern.FullName,
                     Email = intern.Email,
                     Password = "123456", // This should be securely handled
                     Role = 3 // Intern
@@ -60,6 +61,7 @@ namespace InternManagement.Pages.Admin
 
             return RedirectToPage();
         }
+
         public IActionResult OnPostRemove(int id)
         {
             _internService.RemoveIntern(id);
