@@ -1,10 +1,12 @@
 ﻿using IMSBussinessObjects;
 using IMSServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace InternManagement.Pages.Users
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly IUserService userService;

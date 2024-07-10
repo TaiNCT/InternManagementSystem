@@ -1,0 +1,48 @@
+﻿@page
+@model InternManagement.Pages.Admin.ApproveInternshipsModel
+@{
+    ViewData["Title"] = "Approve Internships";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>University</th>
+            <th>Major</th>
+            <th>Grade</th>
+            <th>GPA</th>
+            <th>Status</th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var intern in Model.Interns)
+        {
+            <tr>
+                <td>@intern.Name</td>
+                <td>@intern.Uni</td>
+                <td>@intern.Major</td>
+                <td>@intern.Grade</td>
+                <td>@intern.Gpa</td>
+
+                <td>@intern.Status</td>
+                <td>
+                    @if (intern.Status == "waiting")
+                    {
+                        <form method="post" asp-page-handler="Approve" asp-route-id="@intern.InternId">
+                            <button type="submit" class="btn btn-success">Approve</button>
+                        </form>
+                        <form method="post" asp-page-handler="Reject" asp-route-id="@intern.InternId">
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    }
+                    <form method="post" asp-page-handler="Remove" asp-route-id="@intern.InternId">
+                        <button type="submit" class="btn btn-secondary">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

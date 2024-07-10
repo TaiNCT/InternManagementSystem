@@ -31,4 +31,9 @@
     <None Include="wwwroot\Image\remix-rumble-1080x1080.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\cvs\" />
+    <Folder Include="wwwroot\uploads\photos\" />
+  </ItemGroup>
+
 </Project>

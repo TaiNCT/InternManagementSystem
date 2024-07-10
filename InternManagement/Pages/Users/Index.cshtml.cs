@@ -1,11 +1,11 @@
 ﻿using IMSBussinessObjects;
 using IMSServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using IMSBussinessObjects;
 
 namespace InternManagement.Pages.Users
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly IUserService userService;
