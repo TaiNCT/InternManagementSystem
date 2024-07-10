@@ -13,18 +13,6 @@ namespace IMSServices
         {
             _userRepository = userRepository;
         }
-
-        public User Authenticate(string email, string password)
-        {
-            var user = _userRepository.GetAccount(email);
-            if (user == null)
-            {
-                return null;
-            }
-            var isPasswordValid = VerifyPassword(password, user.Password, user.RefreshToken);
-            return isPasswordValid ? user : null;
-        }
-
         public User GetUserById(int userID)
         {
             return _userRepository.GetUserById(userID);
@@ -52,9 +40,9 @@ namespace IMSServices
 
         private bool VerifyPassword(string password, string hash, string salt)
         {
-            const int keySize = 64;
+            const int keySize = 32;
             const int iterations = 350_000;
-            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
+            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA256;
 
             var hashToVerify = Rfc2898DeriveBytes.Pbkdf2(
                 Encoding.UTF8.GetBytes(password),
@@ -64,6 +52,11 @@ namespace IMSServices
                 keySize);
 
             return CryptographicOperations.FixedTimeEquals(hashToVerify, Convert.FromHexString(hash));
+        }
+
+        public User GetAccount(string email)
+        {
+            return _userRepository.GetAccount(email);
         }
     }
 }

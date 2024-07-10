@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using IMSBussinessObjects;
+using IMSServices;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using IMSBussinessObjects;
@@ -11,20 +8,20 @@ namespace InternManagement.Pages.Users
 {
     public class IndexModel : PageModel
     {
-        private readonly IMSBussinessObjects.AppDbContext _context;
+        private readonly IUserService userService;
 
-        public IndexModel(IMSBussinessObjects.AppDbContext context)
+        public IndexModel(IUserService userServ)
         {
-            _context = context;
+            userService = userServ;
         }
 
-        public IList<User> User { get;set; } = default!;
+        public IList<User> User { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Users != null)
+            if (userService.GetUsers != null)
             {
-                User = await _context.Users.ToListAsync();
+                User = userService.GetUsers();
             }
         }
     }

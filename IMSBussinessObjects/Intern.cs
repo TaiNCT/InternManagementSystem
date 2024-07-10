@@ -49,7 +49,7 @@ namespace IMSBussinessObjects
         public int? UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         [ForeignKey("TeamId")]
         public Team Team { get; set; }
