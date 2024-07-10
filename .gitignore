@@ -497,4 +497,13 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sw?
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,rider

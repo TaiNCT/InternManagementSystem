@@ -7,9 +7,9 @@ namespace PasswordHasher
     {
         static void Main(string[] args)
         {
-            const int keySize = 64;
+            const int keySize = 32;
             const int iterations = 350_000;
-            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
+            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA256;
 
             // Generate a random salt
             var saltInBytes = RandomNumberGenerator.GetBytes(keySize);
