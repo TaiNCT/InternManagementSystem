@@ -18,7 +18,7 @@ namespace IMSBussinessObjects
         [MaxLength(250)]
         public string Content { get; set; }
 
-        public int? Timestamp { get; set; }
+        public DateTime? Timestamp { get; set; }
         public bool IsSeen { get; set; }
 
         [ForeignKey("UserId")]

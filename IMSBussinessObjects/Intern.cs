@@ -34,9 +34,9 @@ namespace IMSBussinessObjects
         public int? Grade { get; set; }
         public int? Gpa { get; set; }
         public int? TeamId { get; set; }
-        public int? Birthday { get; set; }
-        public int InternshipStartingDate { get; set; }
-        public int InternshipEndingDate { get; set; }
+        public DateTime? Birthday { get; set; }
+        public DateTime InternshipStartingDate { get; set; }
+        public DateTime InternshipEndingDate { get; set; }
 
         [MaxLength(500)]
         public string CvUrl { get; set; }
