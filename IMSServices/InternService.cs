@@ -17,6 +17,16 @@ namespace IMSServices
             _internRepository.AddIntern(intern);
         }
 
+        public void ArchiveIntern(int internID)
+        {
+            var intern = _internRepository.GetInternById(internID);
+            if (intern != null)
+            {
+                intern.Status = "archived";
+                _internRepository.UpdateIntern(internID, intern);
+            }
+        }
+
         public List<Intern> GetAllIntern()
         {
             return _internRepository.GetAllIntern();
@@ -40,6 +50,16 @@ namespace IMSServices
         public void UpdateIntern(int internID, Intern newIntern)
         {
             _internRepository.UpdateIntern(internID, newIntern);
+        }
+
+        public void UpdateInternStatus(int internID, string status)
+        {
+            var intern = _internRepository.GetInternById(internID);
+            if (intern != null)
+            {
+                intern.Status = status;
+                _internRepository.UpdateIntern(internID, intern);
+            }
         }
     }
 }

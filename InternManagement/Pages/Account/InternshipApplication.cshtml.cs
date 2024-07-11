@@ -8,6 +8,13 @@ namespace InternManagement.Pages.Account
     public class InternshipApplicationModel : PageModel
     {
         private readonly IInternService _internService;
+        private readonly IWebHostEnvironment _environment;
+
+        public InternshipApplicationModel(IInternService internService, IWebHostEnvironment environment)
+        {
+            _internService = internService;
+            _environment = environment;
+        }
 
         [BindProperty]
         public Intern Intern { get; set; }
@@ -17,11 +24,6 @@ namespace InternManagement.Pages.Account
 
         [BindProperty]
         public IFormFile PhotoFile { get; set; }
-
-        public InternshipApplicationModel(IInternService internService)
-        {
-            _internService = internService;
-        }
 
         public void OnGet()
         {
@@ -34,30 +36,39 @@ namespace InternManagement.Pages.Account
                 return Page();
             }
 
-            if (CvFile != null)
+            try
             {
-                var cvFilePath = Path.Combine("wwwroot/uploads/cvs", CvFile.FileName);
-                using (var stream = new FileStream(cvFilePath, FileMode.Create))
+                if (CvFile != null)
                 {
-                    await CvFile.CopyToAsync(stream);
+                    var cvPath = Path.Combine(_environment.WebRootPath, "uploads", CvFile.FileName);
+                    using (var stream = new FileStream(cvPath, FileMode.Create))
+                    {
+                        await CvFile.CopyToAsync(stream);
+                    }
+                    Intern.CvUrl = "/uploads/" + CvFile.FileName;
                 }
-                Intern.CvUrl = $"/uploads/cvs/{CvFile.FileName}";
-            }
 
-            if (PhotoFile != null)
+                if (PhotoFile != null)
+                {
+                    var photoPath = Path.Combine(_environment.WebRootPath, "uploads", PhotoFile.FileName);
+                    using (var stream = new FileStream(photoPath, FileMode.Create))
+                    {
+                        await PhotoFile.CopyToAsync(stream);
+                    }
+                    Intern.PhotoUrl = "/uploads/" + PhotoFile.FileName;
+                }
+
+                Intern.Status = "waiting";
+                _internService.AddIntern(Intern);
+
+                return RedirectToPage("/Index");
+            }
+            catch (Exception ex)
             {
-                var photoFilePath = Path.Combine("wwwroot/uploads/photos", PhotoFile.FileName);
-                using (var stream = new FileStream(photoFilePath, FileMode.Create))
-                {
-                    await PhotoFile.CopyToAsync(stream);
-                }
-                Intern.PhotoUrl = $"/uploads/photos/{PhotoFile.FileName}";
+                // Log the error and add a model error for the user
+                ModelState.AddModelError(string.Empty, "File upload failed. Please try again.");
+                return Page();
             }
-
-            Intern.Status = "waiting";
-            _internService.AddIntern(Intern);
-
-            return RedirectToPage("/Account/ApplicationSubmitted");
         }
     }
 }

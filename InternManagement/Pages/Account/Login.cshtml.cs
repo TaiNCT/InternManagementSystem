@@ -20,7 +20,6 @@ namespace InternManagement.Pages.Account
 
         [TempData]
         public string ErrorMessage { get; set; }
-
         public string ReturnUrl { get; set; }
 
         [BindProperty, Required]
@@ -47,57 +46,77 @@ namespace InternManagement.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            ModelState.Remove("ReturnUrl");
 
             if (ModelState.IsValid)
             {
                 var defaultUser = _configuration.GetSection("DefaultUser").Get<User>();
+
+                // Fetch the most recent user data from the database
                 var user = _userService.GetAccount(Email);
+                Console.WriteLine($"Login attempt for user: {Email}");
 
                 bool isAuthenticated = false;
-
                 if (user != null)
                 {
                     // Verify password for database user
                     isAuthenticated = VerifyPassword(Password, user.Password, user.RefreshToken);
+                    Console.WriteLine($"Database user found: {user.Email}, Authenticated: {isAuthenticated}");
                 }
                 else if (Email == defaultUser.Email)
                 {
                     // Verify password for default user
                     isAuthenticated = VerifyPassword(Password, defaultUser.Password, defaultUser.RefreshToken);
+                    user = defaultUser;
+                    Console.WriteLine($"Default user found: {user.Email}, Authenticated: {isAuthenticated}");
                 }
 
                 if (isAuthenticated)
                 {
                     var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.Email, Email)
-                    };
+            {
+                new Claim(ClaimTypes.Email, Email),
+                new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern")
+            };
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    // Sign in with a new session
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
-                    return LocalRedirect(returnUrl);
-                }
 
+                    // Safely handle the returnUrl
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+                    return LocalRedirect(Url.Content("~/"));
+                }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
 
             // If we got this far, something failed, redisplay form
+            foreach (var modelStateEntry in ModelState.Values)
+            {
+                foreach (var error in modelStateEntry.Errors)
+                {
+                    Console.WriteLine($"Validation Error: {error.ErrorMessage}");
+                }
+            }
             return Page();
         }
+
+
+
 
         private bool VerifyPassword(string password, string hash, string salt)
         {
             const int keySize = 32;
             const int iterations = 350000;
             HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA256;
-
             var hashToVerify = Rfc2898DeriveBytes.Pbkdf2(
                 Encoding.UTF8.GetBytes(password),
                 Convert.FromHexString(salt),
                 iterations,
                 hashAlgorithm,
                 keySize);
-
             return CryptographicOperations.FixedTimeEquals(hashToVerify, Convert.FromHexString(hash));
         }
     }

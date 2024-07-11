@@ -1,10 +1,12 @@
 using IMSBussinessObjects;
 using IMSServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace InternManagement.Pages.Admin
 {
+    [Authorize]
     public class ApproveInternshipsModel : PageModel
     {
         private readonly IInternService _internService;
@@ -43,7 +45,7 @@ namespace InternManagement.Pages.Admin
 
                 // Update intern's UserId and status
                 intern.UserId = user.UserId;
-                intern.Status = "approved";
+                _internService.UpdateInternStatus(id, "approved");
                 _internService.UpdateIntern(intern.InternId, intern);
             }
 
@@ -56,6 +58,7 @@ namespace InternManagement.Pages.Admin
             if (intern != null)
             {
                 intern.Status = "rejected";
+                _internService.UpdateInternStatus(id, "rejected");
                 _internService.UpdateIntern(intern.InternId, intern);
             }
 

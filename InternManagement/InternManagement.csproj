@@ -32,8 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\uploads\cvs\" />
-    <Folder Include="wwwroot\uploads\photos\" />
+    <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
 </Project>

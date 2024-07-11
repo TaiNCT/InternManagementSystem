@@ -4,6 +4,12 @@
     Layout = null;
     ViewData["Title"] = "Apply for Internship";
 }
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -76,14 +82,12 @@
                         <span asp-validation-for="Intern.InternshipEndingDate" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
-                        <label asp-for="CvFile" class="control-label">Upload CV</label>
+                        <label asp-for="CvFile"></label>
                         <input asp-for="CvFile" type="file" class="form-control" />
-                        <span asp-validation-for="CvFile" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
-                        <label asp-for="PhotoFile" class="control-label">Upload Photo</label>
+                        <label asp-for="PhotoFile"></label>
                         <input asp-for="PhotoFile" type="file" class="form-control" />
-                        <span asp-validation-for="PhotoFile" class="text-danger"></span>
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary">Submit Application</button>
