@@ -39,7 +39,7 @@ namespace InternManagement.Pages.Admin
                     Username = intern.FullName,
                     Email = intern.Email,
                     Password = "123456", // This should be securely handled
-                    Role = 3 // Intern
+                    Role = 3, // Intern
                 };
                 _userService.AddUser(user);
 

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Approve Internships";
 }
 
-<h1>Approve Internships</h1>
+<div class="container mt-4">
 
 <ul class="nav nav-tabs" id="internTabs" role="tablist">
     <li class="nav-item" role="presentation">
@@ -44,15 +44,17 @@
                         <td>@intern.Gpa</td>
                         <td>@intern.Status</td>
                         <td>
-                            <form method="post" asp-page-handler="Approve" asp-route-id="@intern.InternId">
-                                <button type="submit" class="btn btn-success">Approve</button>
-                            </form>
-                            <form method="post" asp-page-handler="Reject" asp-route-id="@intern.InternId">
-                                <button type="submit" class="btn btn-danger">Reject</button>
-                            </form>
-                            <form method="post" asp-page-handler="Remove" asp-route-id="@intern.InternId">
-                                <button type="submit" class="btn btn-secondary">Remove</button>
-                            </form>
+                            <div class="d-flex">
+                                <form method="post" asp-page-handler="Approve" asp-route-id="@intern.InternId" class="me-1">
+                                    <button type="submit" class="btn btn-success">Approve</button>
+                                </form>
+                                <form method="post" asp-page-handler="Reject" asp-route-id="@intern.InternId" class="me-1">
+                                    <button type="submit" class="btn btn-danger">Reject</button>
+                                </form>
+                                <form method="post" asp-page-handler="Remove" asp-route-id="@intern.InternId">
+                                    <button type="submit" class="btn btn-secondary">Remove</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 }
@@ -88,7 +90,7 @@
                         <td>@intern.Status</td>
                         <td>
                             <form method="post" asp-page-handler="Remove" asp-route-id="@intern.InternId">
-                                <button type="submit" class="btn btn-secondary">Remove</button>
+                                    <button type="submit" class="btn btn-danger">Remove</button>
                             </form>
                         </td>
                     </tr>
@@ -117,7 +119,7 @@
         </div>
     </div>
 </div>
-
+</div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
