@@ -23,7 +23,6 @@
                     <th>Name</th>
                     <th>University</th>
                     <th>Major</th>
-                    <th>Grade</th>
                     <th>GPA</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -67,7 +66,6 @@
                     <th>Name</th>
                     <th>University</th>
                     <th>Major</th>
-                    <th>Grade</th>
                     <th>GPA</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -97,39 +95,38 @@
         </table>
     </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="internDetailsModal" tabindex="-1" aria-labelledby="internDetailsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="internDetailsModalLabel">Intern Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div id="internDetailsContent">
-                    <!-- Intern details will be loaded here via JavaScript -->
+    <div class="modal fade" id="internDetailsModal" tabindex="-1" aria-labelledby="internDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="internDetailsModalLabel">Intern Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="modal-body" id="internDetailsContent">
+                    <!-- Intern details will be loaded here -->
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+<script src="~/lib/jquery/jquery.min.js"></script>
 <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
     $(document).ready(function () {
         $('.intern-details-link').on('click', function () {
             var internId = $(this).data('id');
             $.ajax({
-                url: '@Url.Page("/Admin/GetInternDetails")',
+                url: '/Admin/ApproveInternships?handler=InternDetails',
                 type: 'GET',
                 data: { id: internId },
                 success: function (data) {
                     $('#internDetailsContent').html(data);
+                    $('#internDetailsModal').modal('show');
+                },
+                error: function () {
+                    alert('An error occurred while fetching intern details.');
                 }
             });
         });

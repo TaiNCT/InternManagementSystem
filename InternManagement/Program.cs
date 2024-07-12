@@ -42,6 +42,8 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("InternOnly", policy => policy.RequireRole("Intern"));
 });
 
+
+
 builder.Services.AddControllersWithViews();
 
 // Add Razor Pages services to the container.
