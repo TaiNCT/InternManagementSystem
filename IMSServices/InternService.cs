@@ -61,5 +61,9 @@ namespace IMSServices
                 _internRepository.UpdateIntern(internID, intern);
             }
         }
+        public int GetInternCountByTeamId(int teamId)
+        {
+            return _internRepository.GetInternsByTeamId(teamId).Count();
+        }
     }
 }

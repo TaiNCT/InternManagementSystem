@@ -15,6 +15,7 @@ namespace IMSServices
         public Team GetTeamByName(string teamName);
 
 
+        Task<List<Team>> GetAllTeamsAsync();
         public List<Team> GetAllTeams();
 
 

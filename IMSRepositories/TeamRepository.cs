@@ -20,10 +20,14 @@ namespace IMSRepositories
             }
         }
         public void AddTeam(Team team)=> TeamDAO.Instance.AddTeam(team);
-        
 
+
+        public async Task<List<Team>> GetAllTeamsAsync()
+        {
+            return await TeamDAO.Instance.GetAllTeamsAsync();
+        }
         public List<Team> GetAllTeams()
-        =>TeamDAO.Instance.GetAllTeams();
+=> TeamDAO.Instance.GetAllTeams();
 
         public Team GetTeamById(int teamId)
         =>TeamDAO.Instance.GetTeamById(teamId);

@@ -10,35 +10,39 @@ namespace IMSServices
 {
     public class TeamService : ITeamService
     {   
-        private readonly ITeamRepository _TeamRepository;
+        private readonly ITeamRepository _teamRepository;
         public TeamService(ITeamRepository teamRepository)
         {
-            _TeamRepository = teamRepository;
+            _teamRepository = teamRepository;
         }
 
         public void AddTeam(Team team)
         {
-            _TeamRepository.AddTeam(team);
+            _teamRepository.AddTeam(team);
+        }
+
+        public async Task<List<Team>> GetAllTeamsAsync()
+        {
+            return await _teamRepository.GetAllTeamsAsync();
         }
 
         public List<Team> GetAllTeams()
         {
-            return _TeamRepository.GetAllTeams();
+            return _teamRepository.GetAllTeams();
         }
-
         public Team GetTeamById(int teamId)
         {
-            return _TeamRepository.GetTeamById(teamId);
+            return _teamRepository.GetTeamById(teamId);
         }
 
         public Team GetTeamByName(string teamName)
         {
-            return _TeamRepository.GetTeamByName(teamName); 
+            return _teamRepository.GetTeamByName(teamName); 
         }
 
         public void RemoveTeam(int teamId)
         {
-           _TeamRepository.RemoveTeam(teamId);
+           _teamRepository.RemoveTeam(teamId);
         }
     }
 }

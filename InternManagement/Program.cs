@@ -24,6 +24,8 @@ builder.Services.AddScoped<IInternRepository, InternRepository>();
 builder.Services.AddSingleton<InternDAO>();
 
 builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<ISupervisorService, SupervisorService>();
+builder.Services.AddScoped<ISupervisorRepository, SupervisorRepository>();   
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddSingleton<TeamDAO>();
 

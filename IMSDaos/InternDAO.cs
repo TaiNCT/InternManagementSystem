@@ -29,6 +29,10 @@ namespace IMSDaos
         {
             return db.Interns.FirstOrDefault(x => x.InternId == internID);
         }
+        public int GetInternCountByTeamId(int teamId)
+        {
+            return db.Interns.Count(i => i.TeamId == teamId);
+        }
 
         public Intern GetInternByName(string fullName)
         {
