@@ -33,5 +33,6 @@ namespace IMSRepositories
         public void UpdateUser(int userID, User newUser)
         => UserDAO.Instance.UpdateUser(userID, newUser);
 
+
     }
 }

@@ -1,0 +1,137 @@
+﻿@page
+@model InternManagement.Pages.Admin.ApproveInternshipsModel
+@{
+    ViewData["Title"] = "Approve Internships";
+}
+
+<h1>Approve Internships</h1>
+
+<ul class="nav nav-tabs" id="internTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="waiting-tab" data-bs-toggle="tab" data-bs-target="#waiting" type="button" role="tab" aria-controls="waiting" aria-selected="true">Waiting</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="archived-tab" data-bs-toggle="tab" data-bs-target="#archived" type="button" role="tab" aria-controls="archived" aria-selected="false">Archived</button>
+    </li>
+</ul>
+
+<div class="tab-content" id="internTabsContent">
+    <div class="tab-pane fade show active" id="waiting" role="tabpanel" aria-labelledby="waiting-tab">
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>University</th>
+                    <th>Major</th>
+                    <th>Grade</th>
+                    <th>GPA</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var intern in Model.WaitingInterns)
+                {
+                    <tr>
+                        <td>
+                            <a href="#" class="intern-details-link" data-bs-toggle="modal" data-bs-target="#internDetailsModal" data-id="@intern.InternId">
+                                @intern.Name
+                            </a>
+                        </td>
+                        <td>@intern.Uni</td>
+                        <td>@intern.Major</td>
+                        <td>@intern.Grade</td>
+                        <td>@intern.Gpa</td>
+                        <td>@intern.Status</td>
+                        <td>
+                            <form method="post" asp-page-handler="Approve" asp-route-id="@intern.InternId">
+                                <button type="submit" class="btn btn-success">Approve</button>
+                            </form>
+                            <form method="post" asp-page-handler="Reject" asp-route-id="@intern.InternId">
+                                <button type="submit" class="btn btn-danger">Reject</button>
+                            </form>
+                            <form method="post" asp-page-handler="Remove" asp-route-id="@intern.InternId">
+                                <button type="submit" class="btn btn-secondary">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="archived" role="tabpanel" aria-labelledby="archived-tab">
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>University</th>
+                    <th>Major</th>
+                    <th>Grade</th>
+                    <th>GPA</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var intern in Model.ArchivedInterns)
+                {
+                    <tr>
+                        <td>
+                            <a href="#" class="intern-details-link" data-bs-toggle="modal" data-bs-target="#internDetailsModal" data-id="@intern.InternId">
+                                @intern.Name
+                            </a>
+                        </td>
+                        <td>@intern.Uni</td>
+                        <td>@intern.Major</td>
+                        <td>@intern.Grade</td>
+                        <td>@intern.Gpa</td>
+                        <td>@intern.Status</td>
+                        <td>
+                            <form method="post" asp-page-handler="Remove" asp-route-id="@intern.InternId">
+                                <button type="submit" class="btn btn-secondary">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="internDetailsModal" tabindex="-1" aria-labelledby="internDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="internDetailsModalLabel">Intern Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="internDetailsContent">
+                    <!-- Intern details will be loaded here via JavaScript -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.intern-details-link').on('click', function () {
+            var internId = $(this).data('id');
+            $.ajax({
+                url: '@Url.Page("/Admin/GetInternDetails")',
+                type: 'GET',
+                data: { id: internId },
+                success: function (data) {
+                    $('#internDetailsContent').html(data);
+                }
+            });
+        });
+    });
+</script>

@@ -29,7 +29,7 @@ namespace IMSDaos
 
         public User GetAccount(string email)
         {
-            return db.Users.FirstOrDefault(x => x.Email.Equals(email));
+            return db.Users.FirstOrDefault(x => x.Email.ToLower() == email.ToLower());
         }
 
         public User GetUserById(int userID)
@@ -45,9 +45,9 @@ namespace IMSDaos
             User newUser = GetUserById(user.UserId);
             if (newUser == null)
             {
-                HashPassword(user.Password, out string hashedPassword, out string salt);
+                HashPassword(user.Password, out string hashedPassword, out string refreshToken);
                 user.Password = hashedPassword;
-                user.RefreshToken = salt;  // Set the RefreshToken here
+                user.RefreshToken = refreshToken;  // Set the RefreshToken here
 
                 db.Users.Add(user);
                 db.SaveChanges();
@@ -71,9 +71,9 @@ namespace IMSDaos
                 if (!string.IsNullOrEmpty(newUser.Password))
                 {
                     // Only update the password if a new password is provided
-                    HashPassword(newUser.Password, out string hashedPassword, out string salt);
+                    HashPassword(newUser.Password, out string hashedPassword, out string refreshToken);
                     existingUser.Password = hashedPassword;
-                    existingUser.RefreshToken = salt;
+                    existingUser.RefreshToken = refreshToken;
                 }
 
                 existingUser.Username = newUser.Username;

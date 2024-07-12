@@ -12,6 +12,7 @@ namespace InternManagement.Pages.Account
         public async Task<IActionResult> OnGetAsync()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
             return RedirectToPage("Login");
         }
     }

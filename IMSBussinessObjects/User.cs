@@ -27,5 +27,20 @@ namespace IMSBussinessObjects
         public ICollection<Notification>? Notifications { get; set; }
         public ICollection<Supervisor>? Supervisors { get; set; }
         public Intern? Intern { get; set; }
+
+        [NotMapped]
+        public string RoleName
+        {
+            get
+            {
+                return Role switch
+                {
+                    1 => "Admin",
+                    2 => "Supervisor",
+                    3 => "Intern",
+                    _ => "Unknown"
+                };
+            }
+        }
     }
 }

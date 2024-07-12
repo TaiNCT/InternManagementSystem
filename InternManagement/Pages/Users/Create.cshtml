@@ -30,7 +30,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="User.Role" class="control-label"></label>
-                <input asp-for="User.Role" class="form-control" />
+                <select asp-for="User.Role" class="form-control">
+                    <option value="1">Admin</option>
+                    <option value="2">Supervisor</option>
+                    <option value="3">Intern</option>
+                </select>
                 <span asp-validation-for="User.Role" class="text-danger"></span>
             </div>
             <div class="form-group">
