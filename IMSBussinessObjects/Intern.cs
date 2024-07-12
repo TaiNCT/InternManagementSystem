@@ -44,8 +44,8 @@ namespace IMSBussinessObjects
         [MaxLength]
         public byte[]? PhotoUrl { get; set; }
 
-        public int OverallSuccess { get; set; }
-        public int UserId { get; set; }
+        public int? OverallSuccess { get; set; }
+        public int? UserId { get; set; }
 
         [ForeignKey("UserId")]
         public User User { get; set; }
