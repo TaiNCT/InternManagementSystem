@@ -65,12 +65,10 @@ namespace IMSDaos
             if (existingIntern != null)
             {
                 existingIntern.FullName = newIntern.FullName;
-                existingIntern.Name = newIntern.Name;
                 existingIntern.PersonalId = newIntern.PersonalId;
                 existingIntern.PhoneNumber = newIntern.PhoneNumber;
                 existingIntern.Uni = newIntern.Uni;
                 existingIntern.Major = newIntern.Major;
-                existingIntern.Grade = newIntern.Grade;
                 existingIntern.Gpa = newIntern.Gpa;
                 existingIntern.TeamId = newIntern.TeamId;
                 existingIntern.Birthday = newIntern.Birthday;
