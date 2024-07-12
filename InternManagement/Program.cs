@@ -18,9 +18,15 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUploadFileService, UploadFileService>();
 builder.Services.AddScoped<UserDAO>(); // Register UserDAO
+
 builder.Services.AddScoped<IInternService, InternService>();
 builder.Services.AddScoped<IInternRepository, InternRepository>();
 builder.Services.AddSingleton<InternDAO>();
+
+builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+builder.Services.AddSingleton<TeamDAO>();
+
 
 // Register other services
 builder.Services.AddScoped<IDataaseInitialiser, DatabaseInitialiser>();

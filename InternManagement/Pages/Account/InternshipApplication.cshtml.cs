@@ -10,20 +10,13 @@ namespace InternManagement.Pages.Account
     {
         private readonly IInternService _internService;
         private readonly IWebHostEnvironment _environment;
-        /*private readonly ITeamService _teamService;*/
-
-        public InternshipApplicationModel(IInternService internService, IWebHostEnvironment environment)
-        {
-            _internService = internService;
-            _environment = environment;
-        }
-
-        /*public InternshipApplicationModel(IInternService internService, ITeamService teamService, IWebHostEnvironment environment)
+        private readonly ITeamService _teamService;
+        public InternshipApplicationModel(IInternService internService, ITeamService teamService, IWebHostEnvironment environment)
         {
             _internService = internService;
             _teamService = teamService;
             _environment = environment;
-        }*/
+        }
 
         [BindProperty]
         public Intern Intern { get; set; }
@@ -33,18 +26,19 @@ namespace InternManagement.Pages.Account
 
         [BindProperty]
         public IFormFile PhotoFile { get; set; }
-        public List<SelectListItem> TeamOptions { get; set; }
+        public SelectList Teams { get; set; }
+
         public void OnGet()
         {
+            Teams = new SelectList(_teamService.GetAllTeams(), "TeamId", "TeamName");
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            /*     if (!ModelState.IsValid)
-                 {
-                     LoadTeamOptions();
-                     return Page();
-                 }*/
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
             try
             {
@@ -70,17 +64,9 @@ namespace InternManagement.Pages.Account
             {
                 // Log the error and add a model error for the user
                 ModelState.AddModelError(string.Empty, "File upload failed. Please try again.");
+                Teams = new SelectList(_teamService.GetAllTeams(), "TeamId", "TeamName");
                 return Page();
             }
-        }
-        private void LoadTeamOptions()
-        {
-            /*var teams = _teamService.GetAllTeams();
-            TeamOptions = teams.Select(t => new SelectListItem
-            {
-                Value = t.TeamId.ToString(),
-                Text = t.TeamName
-            }).ToList();*/
         }
     }
 }

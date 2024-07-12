@@ -70,7 +70,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label asp-for="Intern.TeamId" class="control-label">Select Team</label>
-                        <select asp-for="Intern.TeamId" class="form-control" asp-items="Model.TeamOptions">
+                        <select asp-for="Intern.TeamId" class="form-control" asp-items="Model.Teams">
                             <option value="">-- Select Team --</option>
                         </select>
                         <span asp-validation-for="Intern.TeamId" class="text-danger"></span>
