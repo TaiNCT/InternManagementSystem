@@ -48,7 +48,7 @@ namespace IMSDaos
                 HashPassword(user.Password, out string hashedPassword, out string refreshToken);
                 user.Password = hashedPassword;
                 user.RefreshToken = refreshToken;  // Set the RefreshToken here
-                user.Username = newUser.Username;
+            
                 db.Users.Add(user);
                 db.SaveChanges();
             }
