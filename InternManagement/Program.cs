@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Register services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUploadFileService, UploadFileService>();
 builder.Services.AddScoped<UserDAO>(); // Register UserDAO
 
 // Register other services
