@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IMSBussinessObjects;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
@@ -15,8 +16,7 @@ namespace IMSBussinessObjects
         }
 
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<DocumentRequest> DocumentRequests { get; set; }
-        public virtual DbSet<Document> Documents { get; set; }
+        public virtual DbSet<Documents> Documents { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Assignment> Assignments { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
@@ -36,7 +36,7 @@ namespace IMSBussinessObjects
             base.OnModelCreating(modelBuilder);
 
             // Configure entity relationships
-            modelBuilder.Entity<Document>()
+            modelBuilder.Entity<Documents>()
                 .HasOne(d => d.Intern)
                 .WithMany(i => i.Documents)
                 .HasForeignKey(d => d.InternId)

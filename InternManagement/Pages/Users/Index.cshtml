@@ -20,10 +20,7 @@
                 @Html.DisplayNameFor(model => model.User[0].Email)
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.User[0].Password)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.User[0].Role)
+                Role
             </th>
             <th></th>
         </tr>
@@ -36,13 +33,9 @@
             </td>          
                 <td scope="row">
                 @Html.DisplayFor(modelItem => item.Email)
-            </td>
                 <td scope="row">
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-                <td scope="row">
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
+                        @item.RoleName
+                </td>
             <td>
                     <a asp-page="./Edit" asp-route-id="@item.UserId" class="btn btn-primary">Edit</a> |
                     <a asp-page="./Details" asp-route-id="@item.UserId" class="btn btn-info">Details</a> |

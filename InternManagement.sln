@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMSDaos", "IMSDaos\IMSDaos.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMSBussinessObjects", "IMSBussinessObjects\IMSBussinessObjects.csproj", "{63EA253A-05AC-46E0-B995-0C6BCA9803FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasswordHasher", "PasswordHasher\PasswordHasher.csproj", "{25B71F20-45EE-4EFB-9907-92AE2BFD2468}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PasswordHasher", "PasswordHasher\PasswordHasher.csproj", "{25B71F20-45EE-4EFB-9907-92AE2BFD2468}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

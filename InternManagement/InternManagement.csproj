@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\uploads\**" />
+    <Content Remove="wwwroot\uploads\**" />
+    <EmbeddedResource Remove="wwwroot\uploads\**" />
+    <None Remove="wwwroot\uploads\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Admin\_InternDetails.cshtml" />
     <Content Remove="wwwroot\Image\remix-rumble-1080x1080.jpg" />
   </ItemGroup>
 
@@ -18,17 +26,26 @@
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.29" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.29" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.29">
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.32" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.32" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.32">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.17" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\Admin\_InternDetails.cshtml" />
     <None Include="wwwroot\Image\remix-rumble-1080x1080.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Admin\_InternDetails.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Admin\_InternDetails.cshtml" />
   </ItemGroup>
 
 </Project>
