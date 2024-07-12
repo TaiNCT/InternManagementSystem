@@ -58,8 +58,8 @@ namespace InternManagement.Pages.Account
                             Intern.CvUrl = target.ToArray();
                             PhotoFile.CopyTo(target);
                             Intern.PhotoUrl = target.ToArray();
-                        }   
-                      
+                        }
+
                     }
                 }
                 Intern.Status = "waiting";
