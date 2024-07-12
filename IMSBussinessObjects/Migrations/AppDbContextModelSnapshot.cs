@@ -143,7 +143,7 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("OverallSuccess")
+                    b.Property<int>("OverallSuccess")
                         .HasColumnType("int");
 
                     b.Property<string>("PersonalId")
@@ -173,7 +173,7 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("InternId");
@@ -181,8 +181,7 @@ namespace IMSBussinessObjects.Migrations
                     b.HasIndex("TeamId");
 
                     b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Interns");
                 });
@@ -346,7 +345,8 @@ namespace IMSBussinessObjects.Migrations
                     b.HasOne("IMSBussinessObjects.User", "User")
                         .WithOne("Intern")
                         .HasForeignKey("IMSBussinessObjects.Intern", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Team");
 

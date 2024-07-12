@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240712054034_updateCVandPT")]
-    partial class updateCVandPT
+    [Migration("20240712083346_v3")]
+    partial class v3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -106,11 +106,12 @@ namespace IMSBussinessObjects.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InternId"), 1L, 1);
 
-                    b.Property<DateTime?>("Birthday")
+                    b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte?>("CvUrl")
-                        .HasColumnType("tinyint");
+                    b.Property<byte[]>("CvUrl")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -122,10 +123,10 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("Gpa")
+                    b.Property<int>("Gpa")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Grade")
+                    b.Property<int>("Grade")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("InternshipEndingDate")
@@ -144,7 +145,7 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("OverallSuccess")
+                    b.Property<int>("OverallSuccess")
                         .HasColumnType("int");
 
                     b.Property<string>("PersonalId")
@@ -157,16 +158,16 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<byte?>("PhotoUrl")
-                        .HasColumnType("tinyint");
+                    b.Property<byte[]>("PhotoUrl")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int?>("TeamId")
-                        .IsRequired()
+                    b.Property<int>("TeamId")
                         .HasColumnType("int");
 
                     b.Property<string>("Uni")
@@ -174,7 +175,7 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("InternId");
@@ -182,8 +183,7 @@ namespace IMSBussinessObjects.Migrations
                     b.HasIndex("TeamId");
 
                     b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Interns");
                 });
@@ -289,6 +289,7 @@ namespace IMSBussinessObjects.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("RefreshToken")
+                        .IsRequired()
                         .HasMaxLength(800)
                         .HasColumnType("nvarchar(800)");
 
@@ -346,7 +347,8 @@ namespace IMSBussinessObjects.Migrations
                     b.HasOne("IMSBussinessObjects.User", "User")
                         .WithOne("Intern")
                         .HasForeignKey("IMSBussinessObjects.Intern", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Team");
 
@@ -411,7 +413,8 @@ namespace IMSBussinessObjects.Migrations
 
             modelBuilder.Entity("IMSBussinessObjects.User", b =>
                 {
-                    b.Navigation("Intern");
+                    b.Navigation("Intern")
+                        .IsRequired();
 
                     b.Navigation("Notifications");
 

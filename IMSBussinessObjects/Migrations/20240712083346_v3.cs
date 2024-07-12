@@ -10,21 +10,6 @@ namespace IMSBussinessObjects.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Document",
-                columns: table => new
-                {
-                    DocumentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DocumentName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    DocumentUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TeamId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Document", x => x.DocumentId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Teams",
                 columns: table => new
                 {
@@ -67,15 +52,15 @@ namespace IMSBussinessObjects.Migrations
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Uni = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Major = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Grade = table.Column<int>(type: "int", nullable: true),
-                    Gpa = table.Column<int>(type: "int", nullable: true),
+                    Grade = table.Column<int>(type: "int", nullable: false),
+                    Gpa = table.Column<int>(type: "int", nullable: false),
                     TeamId = table.Column<int>(type: "int", nullable: false),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
                     InternshipStartingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     InternshipEndingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CvUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    PhotoUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    OverallSuccess = table.Column<int>(type: "int", nullable: true),
+                    CvUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    PhotoUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    OverallSuccess = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
@@ -159,9 +144,10 @@ namespace IMSBussinessObjects.Migrations
                 {
                     DocumentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DocumentName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DocumentName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DocumentType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     InternId = table.Column<int>(type: "int", nullable: false),
-                    DocumentUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                    DocumentData = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -256,9 +242,6 @@ namespace IMSBussinessObjects.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Assignments");
-
-            migrationBuilder.DropTable(
-                name: "Document");
 
             migrationBuilder.DropTable(
                 name: "Documents");
