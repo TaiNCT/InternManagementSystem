@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Admin\_InternDetails.cshtml" />
     <Content Remove="wwwroot\Image\remix-rumble-1080x1080.jpg" />
   </ItemGroup>
 
@@ -28,11 +29,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\Admin\_InternDetails.cshtml" />
     <None Include="wwwroot\Image\remix-rumble-1080x1080.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Admin\_InternDetails.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Admin\_InternDetails.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -25,7 +25,7 @@ namespace InternManagement.Pages.Admin
         {
             var interns = _internService.GetAllIntern();
             WaitingInterns = interns.Where(i => i.Status == "waiting").ToList();
-            ArchivedInterns = interns.Where(i => i.Status != "waiting").ToList();
+            ArchivedInterns = interns.Where(i => i.Status != "waiting" && i.Status != "rejected").ToList();
         }
 
         public IActionResult OnPostApprove(int id)
@@ -69,6 +69,17 @@ namespace InternManagement.Pages.Admin
         {
             _internService.RemoveIntern(id);
             return RedirectToPage();
+        }
+
+        public IActionResult OnGetInternDetails(int id)
+        {
+            var intern = _internService.GetInternById(id);
+            if (intern == null)
+            {
+                return NotFound();
+            }
+
+            return Partial("_InternDetails", intern);
         }
     }
 }

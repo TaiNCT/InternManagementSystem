@@ -26,21 +26,22 @@
                     <th>Grade</th>
                     <th>GPA</th>
                     <th>Status</th>
-
                     <th>Actions</th>
-
                 </tr>
             </thead>
             <tbody>
                 @foreach (var intern in Model.WaitingInterns)
                 {
                     <tr>
-                        <td>@intern.Name</td>
+                        <td>
+                            <a href="#" class="intern-details-link" data-bs-toggle="modal" data-bs-target="#internDetailsModal" data-id="@intern.InternId">
+                                @intern.Name
+                            </a>
+                        </td>
                         <td>@intern.Uni</td>
                         <td>@intern.Major</td>
                         <td>@intern.Grade</td>
                         <td>@intern.Gpa</td>
-
                         <td>@intern.Status</td>
                         <td>
                             <form method="post" asp-page-handler="Approve" asp-route-id="@intern.InternId">
@@ -68,23 +69,24 @@
                     <th>Grade</th>
                     <th>GPA</th>
                     <th>Status</th>
-
                     <th>Actions</th>
-
                 </tr>
             </thead>
             <tbody>
                 @foreach (var intern in Model.ArchivedInterns)
                 {
                     <tr>
-                        <td>@intern.Name</td>
+                        <td>
+                            <a href="#" class="intern-details-link" data-bs-toggle="modal" data-bs-target="#internDetailsModal" data-id="@intern.InternId">
+                                @intern.Name
+                            </a>
+                        </td>
                         <td>@intern.Uni</td>
                         <td>@intern.Major</td>
                         <td>@intern.Grade</td>
                         <td>@intern.Gpa</td>
-
                         <td>@intern.Status</td>
-                        <td>                         
+                        <td>
                             <form method="post" asp-page-handler="Remove" asp-route-id="@intern.InternId">
                                 <button type="submit" class="btn btn-secondary">Remove</button>
                             </form>
@@ -96,4 +98,40 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="internDetailsModal" tabindex="-1" aria-labelledby="internDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="internDetailsModalLabel">Intern Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="internDetailsContent">
+                    <!-- Intern details will be loaded here via JavaScript -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.intern-details-link').on('click', function () {
+            var internId = $(this).data('id');
+            $.ajax({
+                url: '@Url.Page("/Admin/GetInternDetails")',
+                type: 'GET',
+                data: { id: internId },
+                success: function (data) {
+                    $('#internDetailsContent').html(data);
+                }
+            });
+        });
+    });
+</script>
