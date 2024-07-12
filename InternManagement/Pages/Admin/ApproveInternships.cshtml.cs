@@ -24,8 +24,8 @@ namespace InternManagement.Pages.Admin
         public void OnGet()
         {
             var interns = _internService.GetAllIntern();
-            WaitingInterns = interns.Where(i => i.Status == "waiting").ToList();
-            ArchivedInterns = interns.Where(i => i.Status != "waiting" && i.Status != "rejected").ToList();
+            WaitingInterns = interns.Where(i => i.Status.Equals("waiting")).ToList();
+            ArchivedInterns = interns.Where(i => !i.Status.Equals("waiting") && !i.Status.Equals("rejected")).ToList();
         }
 
         public IActionResult OnPostApprove(int id)

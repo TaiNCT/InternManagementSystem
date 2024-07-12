@@ -14,7 +14,7 @@ namespace IMSBussinessObjects
         public string Username { get; set; }
 
         [MaxLength(800)]
-        public string? RefreshToken { get; set; }
+        public string RefreshToken { get; set; }
 
         [MaxLength(255)]
 
@@ -26,7 +26,7 @@ namespace IMSBussinessObjects
         public int Role { get; set; } // 1. Admin, 2. Supervisor, 3. Intern
         public ICollection<Notification>? Notifications { get; set; }
         public ICollection<Supervisor>? Supervisors { get; set; }
-        public Intern? Intern { get; set; }
+        public Intern Intern { get; set; }
 
         [NotMapped]
         public string RoleName

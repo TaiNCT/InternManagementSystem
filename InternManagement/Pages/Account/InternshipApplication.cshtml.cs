@@ -40,37 +40,30 @@ namespace InternManagement.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                LoadTeamOptions();
-                return Page();
-            }
+            /*     if (!ModelState.IsValid)
+                 {
+                     LoadTeamOptions();
+                     return Page();
+                 }*/
 
             try
             {
-                if (CvFile != null)
+                if (CvFile != null && PhotoFile != null)
                 {
-                    var cvPath = Path.Combine(_environment.WebRootPath, "uploads", CvFile.FileName);
-                    using (var stream = new FileStream(cvPath, FileMode.Create))
+                    if (CvFile.Length > 0 && PhotoFile.Length > 0)
                     {
-                        await CvFile.CopyToAsync(stream);
+                        using (var target = new MemoryStream())
+                        {
+                            CvFile.CopyTo(target);
+                            Intern.CvUrl = target.ToArray();
+                            PhotoFile.CopyTo(target);
+                            Intern.PhotoUrl = target.ToArray();
+                        }   
+                      
                     }
-                    Intern.CvUrl = "/uploads/" + CvFile.FileName;
                 }
-
-                if (PhotoFile != null)
-                {
-                    var photoPath = Path.Combine(_environment.WebRootPath, "uploads", PhotoFile.FileName);
-                    using (var stream = new FileStream(photoPath, FileMode.Create))
-                    {
-                        await PhotoFile.CopyToAsync(stream);
-                    }
-                    Intern.PhotoUrl = "/uploads/" + PhotoFile.FileName;
-                }
-
                 Intern.Status = "waiting";
                 _internService.AddIntern(Intern);
-
                 return RedirectToPage("/Index");
             }
             catch (Exception ex)

@@ -31,24 +31,24 @@ namespace IMSBussinessObjects
         [MaxLength(150)]
         public string Major { get; set; }
 
-        public int? Grade { get; set; }
-        public int? Gpa { get; set; }
-        public int? TeamId { get; set; }
-        public DateTime? Birthday { get; set; }
+        public int Grade { get; set; }
+        public int Gpa { get; set; }
+        public int TeamId { get; set; }
+        public DateTime Birthday { get; set; }
         public DateTime InternshipStartingDate { get; set; }
         public DateTime InternshipEndingDate { get; set; }
 
-        [MaxLength(500)]
-        public string CvUrl { get; set; }
+        [MaxLength]
+        public byte[] CvUrl { get; set; }
 
-        [MaxLength(500)]
-        public string PhotoUrl { get; set; }
+        [MaxLength]
+        public byte[] PhotoUrl { get; set; }
 
-        public int? OverallSuccess { get; set; }
-        public int? UserId { get; set; }
+        public int OverallSuccess { get; set; }
+        public int UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public User? User { get; set; }
+        public User User { get; set; }
 
         [ForeignKey("TeamId")]
         public Team Team { get; set; }
