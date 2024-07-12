@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IMSBussinessObjects.Migrations
 {
-    public partial class v3 : Migration
+    public partial class v4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,8 +58,8 @@ namespace IMSBussinessObjects.Migrations
                     Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
                     InternshipStartingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     InternshipEndingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CvUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    PhotoUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    CvUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    PhotoUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     OverallSuccess = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)

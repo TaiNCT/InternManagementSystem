@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240712083346_v3")]
-    partial class v3
+    [Migration("20240712084304_v4")]
+    partial class v4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,7 +110,6 @@ namespace IMSBussinessObjects.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<byte[]>("CvUrl")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Email")
@@ -159,7 +158,6 @@ namespace IMSBussinessObjects.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<byte[]>("PhotoUrl")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Status")

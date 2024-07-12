@@ -39,10 +39,10 @@ namespace IMSBussinessObjects
         public DateTime InternshipEndingDate { get; set; }
 
         [MaxLength]
-        public byte[] CvUrl { get; set; }
+        public byte[]? CvUrl { get; set; }
 
         [MaxLength]
-        public byte[] PhotoUrl { get; set; }
+        public byte[]? PhotoUrl { get; set; }
 
         public int OverallSuccess { get; set; }
         public int UserId { get; set; }

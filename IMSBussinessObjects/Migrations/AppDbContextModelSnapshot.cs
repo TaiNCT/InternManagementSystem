@@ -108,7 +108,6 @@ namespace IMSBussinessObjects.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<byte[]>("CvUrl")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Email")
@@ -157,7 +156,6 @@ namespace IMSBussinessObjects.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<byte[]>("PhotoUrl")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Status")
