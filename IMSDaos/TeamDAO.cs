@@ -1,9 +1,4 @@
 ﻿using IMSBussinessObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IMSDaos
 {
@@ -43,9 +38,9 @@ namespace IMSDaos
         public void AddTeam(Team team)
         {
             Team newTeam = GetTeamById(team.TeamId);
-            if(newTeam != null)
+            if (newTeam == null)
             {
-                db.Teams.Add(newTeam);
+                db.Teams.Add(team);
                 db.SaveChanges();
             }
         }
