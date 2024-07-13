@@ -6,9 +6,18 @@ ViewData["Title"] = "Home Page";
 
 <!-- Include FullCalendar CSS -->
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet" />
-
+<div class="row">
+    @if (TempData["done"] != null)
+    {
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script type="text/javascript">
+            toastr.success('@TempData["done"]');
+        </script>
+    }
+</div>
 <div style="margin-top: 20px; background-color: bisque; height: fit-content; border-radius: 20px; padding: 20px;">
-
+ 
     <div style="font-size: xx-large; font-weight: bold;">Team</div>
     <hr />
 

@@ -51,7 +51,6 @@ namespace InternManagement.Pages.Account
             if (ModelState.IsValid)
             {
                 var defaultUser = _configuration.GetSection("DefaultUser").Get<User>();
-
                 // Fetch the most recent user data from the database
                 var user = _userService.GetAccount(Email);
                 Console.WriteLine($"Login attempt for user: {Email}");
@@ -74,10 +73,10 @@ namespace InternManagement.Pages.Account
                 if (isAuthenticated)
                 {
                     var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Email, Email),
-                new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern")
-            };
+                    {
+                        new Claim(ClaimTypes.Email, Email),
+                        new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern")
+                    };
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     // Sign in with a new session
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
@@ -85,6 +84,7 @@ namespace InternManagement.Pages.Account
                     // Safely handle the returnUrl
                     if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
+                        TempData["done"] = "Login Success";
                         return LocalRedirect(returnUrl);
                     }
                     return LocalRedirect(Url.Content("~/"));

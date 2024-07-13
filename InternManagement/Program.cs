@@ -16,11 +16,17 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Register services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUploadFileService, UploadFileService>();
 builder.Services.AddScoped<UserDAO>(); // Register UserDAO
 builder.Services.AddScoped<IInternService, InternService>();
 builder.Services.AddScoped<IInternRepository, InternRepository>();
 builder.Services.AddSingleton<InternDAO>();
+builder.Services.AddScoped<IDocumentsService, DocumentsService>();
+builder.Services.AddScoped<IDocumentsRepository, DocumentsRepository>();
+
+
+
+
+
 
 // Register other services
 builder.Services.AddScoped<IDataaseInitialiser, DatabaseInitialiser>();

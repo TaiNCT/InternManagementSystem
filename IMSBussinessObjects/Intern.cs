@@ -33,7 +33,7 @@ namespace IMSBussinessObjects
 
         public int Grade { get; set; }
         public int Gpa { get; set; }
-        public int TeamId { get; set; }
+        public int? TeamId { get; set; }
         public DateTime Birthday { get; set; }
         public DateTime InternshipStartingDate { get; set; }
         public DateTime InternshipEndingDate { get; set; }
@@ -44,8 +44,8 @@ namespace IMSBussinessObjects
         [MaxLength]
         public byte[]? PhotoUrl { get; set; }
 
-        public int OverallSuccess { get; set; }
-        public int UserId { get; set; }
+        public int? OverallSuccess { get; set; }
+        public int? UserId { get; set; }
 
         [ForeignKey("UserId")]
         public User User { get; set; }

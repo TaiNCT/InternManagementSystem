@@ -18,7 +18,7 @@ namespace InternManagement.Pages.Account
             _environment = environment;
         }
 
-        /*public InternshipApplicationModel(IInternService internService, ITeamService teamService, IWebHostEnvironment environment)
+/*        public InternshipApplicationModel(IInternService internService, ITeamService teamService, IWebHostEnvironment environment)
         {
             _internService = internService;
             _teamService = teamService;
@@ -40,11 +40,11 @@ namespace InternManagement.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
-            /*     if (!ModelState.IsValid)
-                 {
-                     LoadTeamOptions();
-                     return Page();
-                 }*/
+            /*if (!ModelState.IsValid)
+            {
+                LoadTeamOptions();
+                return Page();
+            }*/
 
             try
             {
@@ -58,12 +58,11 @@ namespace InternManagement.Pages.Account
                             Intern.CvUrl = target.ToArray();
                             PhotoFile.CopyTo(target);
                             Intern.PhotoUrl = target.ToArray();
-                        }   
-                      
+                        }
+                        Intern.Status = "waiting";
+                        _internService.AddIntern(Intern);
                     }
                 }
-                Intern.Status = "waiting";
-                _internService.AddIntern(Intern);
                 return RedirectToPage("/Index");
             }
             catch (Exception ex)
@@ -75,7 +74,7 @@ namespace InternManagement.Pages.Account
         }
         private void LoadTeamOptions()
         {
-            /*var teams = _teamService.GetAllTeams();
+           /* var teams = _teamService.GetAllTeams();
             TeamOptions = teams.Select(t => new SelectListItem
             {
                 Value = t.TeamId.ToString(),
