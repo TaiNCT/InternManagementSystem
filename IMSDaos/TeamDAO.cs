@@ -48,9 +48,9 @@ namespace IMSDaos
         public void AddTeam(Team team)
         {
             Team newTeam = GetTeamById(team.TeamId);
-            if(newTeam != null)
+            if (newTeam == null)
             {
-                db.Teams.Add(newTeam);
+                db.Teams.Add(team);
                 db.SaveChanges();
             }
         }
