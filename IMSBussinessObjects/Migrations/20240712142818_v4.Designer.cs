@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240712084304_v4")]
+    [Migration("20240712142818_v4")]
     partial class v4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,11 +122,8 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("Gpa")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Grade")
-                        .HasColumnType("int");
+                    b.Property<double>("Gpa")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("InternshipEndingDate")
                         .HasColumnType("datetime2");
@@ -139,12 +136,7 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("OverallSuccess")
+                    b.Property<int?>("OverallSuccess")
                         .HasColumnType("int");
 
                     b.Property<string>("PersonalId")
@@ -173,7 +165,8 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("InternId");

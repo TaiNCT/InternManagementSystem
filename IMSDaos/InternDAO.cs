@@ -30,9 +30,9 @@ namespace IMSDaos
             return db.Interns.FirstOrDefault(x => x.InternId == internID);
         }
 
-        public Intern GetInternByName(string name)
+        public Intern GetInternByName(string fullName)
         {
-            return db.Interns.FirstOrDefault(x => x.Name == name);
+            return db.Interns.FirstOrDefault(x => x.FullName == fullName);
         }
 
         public List<Intern> GetAllIntern()
@@ -65,12 +65,10 @@ namespace IMSDaos
             if (existingIntern != null)
             {
                 existingIntern.FullName = newIntern.FullName;
-                existingIntern.Name = newIntern.Name;
                 existingIntern.PersonalId = newIntern.PersonalId;
                 existingIntern.PhoneNumber = newIntern.PhoneNumber;
                 existingIntern.Uni = newIntern.Uni;
                 existingIntern.Major = newIntern.Major;
-                existingIntern.Grade = newIntern.Grade;
                 existingIntern.Gpa = newIntern.Gpa;
                 existingIntern.TeamId = newIntern.TeamId;
                 existingIntern.Birthday = newIntern.Birthday;

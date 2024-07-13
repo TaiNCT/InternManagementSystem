@@ -26,10 +26,11 @@
             <div class="col-md-6 offset-md-3">
                 <h2 class="text-center mt-5 mb-3">Apply for Internship</h2>
                 <form method="post" enctype="multipart/form-data">
+                   
                     <div class="form-group mb-3">
-                        <label asp-for="Intern.Name" class="control-label"></label>
-                        <input asp-for="Intern.Name" class="form-control" />
-                        <span asp-validation-for="Intern.Name" class="text-danger"></span>
+                        <label asp-for="Intern.FullName" class="control-label"></label>
+                        <input asp-for="Intern.FullName" class="form-control" />
+                        <span asp-validation-for="Intern.FullName" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
                         <label asp-for="Intern.FullName" class="control-label"></label>
@@ -42,7 +43,7 @@
                         <span asp-validation-for="Intern.Email" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
-                        <label asp-for="Intern.PhoneNumber" class="control-label"></label>
+                        <label asp-for="Intern.PhoneNumber" class="control-label">Phone Number</label>
                         <input asp-for="Intern.PhoneNumber" class="form-control" />
                         <span asp-validation-for="Intern.PhoneNumber" class="text-danger"></span>
                     </div>
@@ -61,11 +62,7 @@
                         <input asp-for="Intern.Major" class="form-control" />
                         <span asp-validation-for="Intern.Major" class="text-danger"></span>
                     </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="Intern.Grade" class="control-label"></label>
-                        <input asp-for="Intern.Grade" class="form-control" />
-                        <span asp-validation-for="Intern.Grade" class="text-danger"></span>
-                    </div>
+                    
                     <div class="form-group mb-3">
                         <label asp-for="Intern.Gpa" class="control-label">GPA</label>
                         <input asp-for="Intern.Gpa" class="form-control" />
@@ -73,32 +70,32 @@
                     </div>
                     <div class="form-group mb-3">
                         <label asp-for="Intern.Birthday" class="control-label"></label>
-                        <input asp-for="Intern.Birthday" class="form-control" />
+                        <input asp-for="Intern.Birthday" class="form-control" type="date" />
                         <span asp-validation-for="Intern.Birthday" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
                         <label asp-for="Intern.TeamId" class="control-label">Select Team</label>
-                        <select asp-for="Intern.TeamId" class="form-control" asp-items="Model.TeamOptions">
+                        <select asp-for="Intern.TeamId" class="form-control" asp-items="Model.Teams">
                             <option value="">-- Select Team --</option>
                         </select>
                         <span asp-validation-for="Intern.TeamId" class="text-danger"></span>
-                    </div>
+                    </div>             
                     <div class="form-group mb-3">
-                        <label asp-for="Intern.InternshipStartingDate" class="control-label"></label>
-                        <input asp-for="Intern.InternshipStartingDate" class="form-control" />
+                        <label asp-for="Intern.InternshipStartingDate" class="control-label">Start Date</label>
+                        <input asp-for="Intern.InternshipStartingDate" class="form-control" type="date" />
                         <span asp-validation-for="Intern.InternshipStartingDate" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
-                        <label asp-for="Intern.InternshipEndingDate" class="control-label"></label>
-                        <input asp-for="Intern.InternshipEndingDate" class="form-control" />
+                        <label asp-for="Intern.InternshipEndingDate" class="control-label">End Date</label>
+                        <input asp-for="Intern.InternshipEndingDate" class="form-control" type="date" />
                         <span asp-validation-for="Intern.InternshipEndingDate" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
-                        <label asp-for="CvFile"></label>
+                        <label asp-for="CvFile">CVs</label>
                         <input asp-for="CvFile" type="file" class="form-control" />
                     </div>
                     <div class="form-group mb-3">
-                        <label asp-for="PhotoFile"></label>
+                        <label asp-for="PhotoFile">Photo</label>
                         <input asp-for="PhotoFile" type="file" class="form-control" />
                     </div>
                     <div class="form-group text-center">

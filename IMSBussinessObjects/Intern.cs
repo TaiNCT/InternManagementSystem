@@ -13,9 +13,6 @@ namespace IMSBussinessObjects
         [MaxLength(50)]
         public string FullName { get; set; }
 
-        [MaxLength(50)]
-        public string Name { get; set; }
-
         [MaxLength(20)]
         public string PersonalId { get; set; }
 

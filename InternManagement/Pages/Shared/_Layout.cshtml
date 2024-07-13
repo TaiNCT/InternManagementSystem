@@ -8,52 +8,138 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/InternManagement.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         body {
             overflow-x: hidden; /* Disable horizontal scrollbar */
         }
+
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0;
+            background-color: #007bff;
+        }
+
+            .sidebar .logo-area {
+                margin: 20px auto 0;
+                text-align: center;
+            }
+
+            .sidebar .menu-area {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                padding: 10px;
+                flex-grow: 1;
+            }
+
+                .sidebar .menu-area .btn {
+                    margin-bottom: 10px;
+                }
+
+            .sidebar .logout-area {
+                background-color: #163851;
+                height: 60px;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 10px;
+            }
+
+        .main-content {
+            margin-left: 200px;
+            padding: 20px;
+            width: calc(100% - 200px);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+            .header .notifications {
+                position: relative;
+            }
+
+                .header .notifications .btn {
+                    display: flex;
+                    align-items: center;
+                }
     </style>
 </head>
 <body>
     <div style="display: flex; min-height: 98vh;">
         <!-- Sidebar -->
-        <nav class="navbar navbar-dark bg-primary" style="height: 100vh; position: fixed; width: 200px; display: flex; flex-direction: column; justify-content: space-between; padding:0px">
-            <div class="logo-area" style="margin: 20px auto 0; text-align: center;">
-                <img src="~/Image/remix-rumble-1080x1080.jpg" alt="Logo" style="width: 150px; height: 150px;" />
-                <p style="margin-top: 10px; color: white; font-size: large;">Intern Management System</p>
-            </div>
+        @{
+            var menuItems = new[]
+            {
+        new { Text = "Home", Icon = "home", Link = Url.Page("/Index") },
+        new { Text = "Interns", Icon = "users", Link = Url.Page("/Interns") },
+        new { Text = "Intern Application", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
+        };
 
-            <div style="display: flex; flex-direction: column; width: 180px; flex-grow: 1; justify-content: center;padding-bottom:800px">
-                <button type="button" class="btn btn-primary" style="margin-bottom: 5px;">Primary</button>
-                <button type="button" class="btn btn-primary" style="margin-bottom: 5px;">Primary</button>
-                <button type="button" class="btn btn-primary" style="margin-bottom: 5px;">Primary</button>
-                <button type="button" class="btn btn-primary" style="margin-bottom: 5px;">Primary</button>
-            </div>
+            var reportItems = new[]
+            {
+        new { Text = "Add User/Team", Link = Url.Page("/Users/Index") },
+        new { Text = "Change Password", Link = Url.Page("/Shared/ChangePassword") },
+        };
+        }
 
-            <div class="logout-area" style="background-color: #163851; height: 60px; width: 200px; display: flex; justify-content: center; align-items: center;">
-                <span style="font-size: 20px; font-weight: initial; color: white; margin-left: 5px;">Admin</span>
-                <a class="btn btn-danger" href="/Account/Logout" style="margin-left: 30px; color: black;">Sign out</a>
+        <nav class="sidebar">
+            <div class="logo-area">
+                <img src="~/Image/remix-rumble-1080x1080.jpg" alt="Logo" style="width: 150px; height: 150px; border-radius: 50%;" />
+                <h4 style="margin-top: 15px; color: white;">Intern Management System</h4>
+            </div>
+            <div class="menu-area">
+                @foreach (var item in menuItems)
+                {
+                    <a href="@item.Link" class="btn btn-primary text-left mb-2" style="display: flex; align-items: center;">
+                        <i class="fas fa-@item.Icon mr-2" style="width: 1px;"></i>
+                        <span>@item.Text</span>
+                    </a>
+                }
+
+                <div class="btn-group dropdown mb-2">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display: flex; align-items: center;">
+                        <i class="fas fa-bar-chart mr-2" style="width: 1px;"></i>
+                        <span>Tools</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        @foreach (var report in reportItems)
+                        {
+                            <a class="dropdown-item" href="@report.Link">@report.Text</a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="logout-area">
+                <span style="font-size: 18px; color: white;">
+                    <i class="fas fa-user-shield mr-2"></i>Admin
+                </span>
+                <a class="btn btn-danger btn-sm" href="Account/Logout">
+                    <i class="fas fa-sign-out-alt mr-1"></i>Sign out
+                </a>
             </div>
         </nav>
 
-
-
-
-
         <!-- Main content -->
-        <div style="margin-left: 220px;margin-right:20px; border-radius: 25px; width: 100%  ;height:100px; background-color:blueviolet">
-            <header class="header" style="padding: 20px;display:flex ; justify-content:space-between">
-                <div>
-
-                    <h1 class="header-title">@ViewData["Title"]</h1>
-                </div>
-                <div class="notifications" style="position: relative;">
-                    <div style=" align-items:center;display:flex ">
-                        <button class="btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="badge badge-pill badge-danger">3</span> <!-- Adjust this count dynamically -->
-                            <i class="fas fa-bell"></i>
-                        </button>
-                    </div>
+        <div class="main-content">
+            <header class="header">
+                <h1 class="header-title">@ViewData["Title"]</h1>
+                <div class="notifications">
+                    <button class="btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="badge badge-pill badge-danger">3</span> <!-- Adjust this count dynamically -->
+                        <i class="fas fa-bell"></i>
+                    </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#">Notification 1</a></li>
                         <li><a class="dropdown-item" href="#">Notification 2</a></li>
@@ -64,16 +150,16 @@
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>
-            @*  <footer class="border-top footer text-muted">
-            <div class="container">
-            &copy; 2024 - InternManagement - <a asp-area="" asp-page="/Privacy">Privacy</a>
-            </div>
-            </footer> *@
+            <footer class="footer">
+                <p>&copy; 2024 Intern Management System. All rights reserved.</p>
+            </footer>
         </div>
     </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

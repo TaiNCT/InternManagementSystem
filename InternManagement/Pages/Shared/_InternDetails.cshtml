@@ -1,0 +1,44 @@
+﻿@model IMSBussinessObjects.Intern
+@using System.Text
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Personal Information</h4>
+        <p><strong>Full Name:</strong> @Model.FullName</p>
+        <p><strong>Personal ID:</strong> @Model.PersonalId</p>
+        <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+        <p><strong>Birthday:</strong> @Model.Birthday.ToShortDateString()</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+    </div>
+    <div class="col-md-6">
+        <h4>Academic Information</h4>
+        <p><strong>University:</strong> @Model.Uni</p>
+        <p><strong>Major:</strong> @Model.Major</p>
+        <p><strong>GPA:</strong> @Model.Gpa</p>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-6">
+        <h4>Internship Details</h4>
+        <p><strong>Status:</strong> @Model.Status</p>
+        <p><strong>Team ID:</strong> @Model.TeamId</p>
+        <p><strong>Overall Success:</strong> @Model.OverallSuccess</p>
+        <p><strong>Start Date:</strong> @Model.InternshipStartingDate.ToShortDateString()</p>
+        <p><strong>End Date:</strong> @Model.InternshipEndingDate.ToShortDateString()</p>
+    </div>
+    <div class="col-md-6">
+        <h4>Documents</h4>
+        @if (Model.CvUrl != null && Model.CvUrl.Length > 0)
+        {
+            var base64Cv = Convert.ToBase64String(Model.CvUrl);
+            var cvSrc = String.Format("data:application/pdf;base64,{0}", base64Cv);
+            <p><a href="@cvSrc" target="_blank" download="CV.pdf">Download CV</a></p>
+        }
+        @if (Model.PhotoUrl != null && Model.PhotoUrl.Length > 0)
+        {
+            var base64Photo = Convert.ToBase64String(Model.PhotoUrl);
+            var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64Photo);
+            <img src="@imgSrc" alt="Intern Photo" class="img-thumbnail" style="max-width: 200px;" />
+        }
+    </div>
+</div>
