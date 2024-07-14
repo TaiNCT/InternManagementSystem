@@ -6,32 +6,33 @@
 }
 
 <div class="row">
-     <h2>Add User</h2>
+    <h2>Add User</h2>
     <div class="col-md-4 mt-4">
         <form method="post" asp-page-handler="CreateUser">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="User.Username" class="control-label"></label>
-                <input asp-for="User.Username" class="form-control" />
+                <input asp-for="User.Username" class="form-control" maxlength="50" required />
                 <span asp-validation-for="User.Username" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="User.Email" class="control-label"></label>
-                <input asp-for="User.Email" class="form-control" />
+                <input asp-for="User.Email" class="form-control" maxlength="255" required />
                 <span asp-validation-for="User.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="User.Password" class="control-label"></label>
-                <input asp-for="User.Password" class="form-control" type="password" />
+                <input asp-for="User.Password" class="form-control" type="password" maxlength="100" required />
                 <span asp-validation-for="User.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="User.Role" class="control-label"></label>
-                <select asp-for="User.Role" class="form-control">
+                <select asp-for="User.Role" class="form-control" required>
+                    <option value="">Select a role</option>
                     <option value="1">Admin</option>
                     <option value="2">Supervisor</option>
                     <option value="3">Intern</option>
-                </select> 
+                </select>
                 <span asp-validation-for="User.Role" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
@@ -104,42 +105,50 @@
     </div>
 
     <div class="col-md-8 mt-4">
-<h2 class="mt-8">Teams</h2>
-@if (Model.Teams != null && Model.Teams.Count > 0)
-{
+        <h2 class="mt-8">Teams</h2>
+        @if (Model.Teams != null && Model.Teams.Count > 0)
+        {
             <div class="table-responsive border rounded p-1" style="max-height: 400px; overflow-y: auto;max-width:1000px">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.Teams[0].TeamName)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Teams)
-                {
-                    <tr class="table-active">
-                        <td scope="row">
-                            @Html.DisplayFor(modelItem => item.TeamName)
-                        </td>
-                        <td>
-                            <a asp-page="./DeleteTeam" asp-route-id="@item.TeamId" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.Teams[0].TeamName)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Teams)
+                        {
+                            <tr class="table-active">
+                                <td scope="row">
+                                    @Html.DisplayFor(modelItem => item.TeamName)
+                                </td>
+                                <td>
+                                    <a asp-page="./DeleteTeam" asp-route-id="@item.TeamId" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         }
     </div>
-    </div>
+</div>
 
 
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+@section Scripts {   
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $('form').submit(function (event) {
+                if (!$(this).valid()) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
     }
 }
