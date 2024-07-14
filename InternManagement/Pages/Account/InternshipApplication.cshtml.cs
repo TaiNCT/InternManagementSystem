@@ -68,7 +68,11 @@ namespace InternManagement.Pages.Account
 
                     }
                 }
-              
+          /*      Notification notification = new Notification()
+                {
+                    UserId = 
+                };*/
+
                 //Some one delete this
                 Intern.Status = "waiting";
                 _internService.AddIntern(Intern);
