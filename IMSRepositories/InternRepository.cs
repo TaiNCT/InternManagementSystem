@@ -31,5 +31,10 @@ namespace IMSRepositories
         {
             return InternDAO.Instance.GetApprovedInternsByTeamId(teamId);
         }
+
+        public async Task<IEnumerable<Intern>> GetApprovedInternsByTeamIdAsync(int teamId)
+        {
+            return await Task.Run(() => InternDAO.Instance.GetApprovedInternsByTeamId(teamId));
+        }
     }
 }

@@ -10,15 +10,26 @@ namespace IMSRepositories
 {
     public class AssignmentRepository : IAssignmentRepository
     {
-        public void AddIntern(Assignment assignment) => AssignmentDAO.Instance.AddIntern(assignment);
+        public void AddAssignment(Assignment assignment) => AssignmentDAO.Instance.AddAssignment(assignment);
 
         public Assignment GetAssignmentById(int assignId) => AssignmentDAO.Instance.GetAssignmentById(assignId);
 
         public List<Assignment> GetAssignmentByInternId(int internId) => AssignmentDAO.Instance.GetAssignmentByInternId(internId);
 
         public List<Assignment> GetAssignments() => AssignmentDAO.Instance.GetAssignments();
+
         public void RemoveAssignment(int assignId) => AssignmentDAO.Instance.RemoveAssignment(assignId);
 
-        public void UpdateAssignment(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern) => UpdateAssignment(assignId, newAssignment, newTeam, newIntern);
+        public void UpdateAssignment(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern) => AssignmentDAO.Instance.UpdateAssignment(assignId, newAssignment, newTeam, newIntern);
+
+        public async Task<List<Assignment>> GetAssignmentsAsync()
+        {
+            return await Task.Run(() => AssignmentDAO.Instance.GetAssignments());
+        }
+
+        public async Task AddAssignmentAsync(Assignment assignment)
+        {
+            await Task.Run(() => AssignmentDAO.Instance.AddAssignment(assignment));
+        }
     }
 }
