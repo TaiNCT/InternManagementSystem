@@ -11,11 +11,13 @@ namespace InternManagement.Pages.Account
         private readonly IInternService _internService;
         private readonly IWebHostEnvironment _environment;
         private readonly ITeamService _teamService;
-        public InternshipApplicationModel(IInternService internService, ITeamService teamService, IWebHostEnvironment environment)
+        private readonly INotificationService _notificationService;
+        public InternshipApplicationModel(IInternService internService, ITeamService teamService, IWebHostEnvironment environment, INotificationService notificationService)
         {
             _internService = internService;
             _teamService = teamService;
             _environment = environment;
+            _notificationService=notificationService;
         }
 
         [BindProperty]
@@ -35,27 +37,42 @@ namespace InternManagement.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            //ModelState alway invalid
+           /* if (!ModelState.IsValid)
             {
                 return Page();
-            }
+            }*/
 
+            //User need to be allowed null
             try
             {
                 if (CvFile != null && PhotoFile != null)
                 {
-                    if (CvFile.Length > 0 && PhotoFile.Length > 0)
+                    if (PhotoFile.Length > 0)
+                    {
+                        using (var target = new MemoryStream())
+                        {
+                            PhotoFile.CopyTo(target);
+                            Intern.PhotoUrl = target.ToArray();
+                            target.Dispose();
+                        }
+                    }
+                    if(CvFile.Length > 0)
                     {
                         using (var target = new MemoryStream())
                         {
                             CvFile.CopyTo(target);
                             Intern.CvUrl = target.ToArray();
-                            PhotoFile.CopyTo(target);
-                            Intern.PhotoUrl = target.ToArray();
+                            target.Dispose();
                         }
+
                     }
                 }
-                return RedirectToPage("/Index");
+              
+                //Some one delete this
+                Intern.Status = "waiting";
+                _internService.AddIntern(Intern);
+            return RedirectToPage("/Index");
             }
             catch (Exception ex)
             {

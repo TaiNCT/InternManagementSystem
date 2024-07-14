@@ -10,18 +10,8 @@ namespace IMSRepositories
 {
     public class TeamRepository : ITeamRepository
     {
-        private readonly TeamDAO teamDAO = null;
-
-        public TeamRepository()
-        {
-            if (teamDAO == null)
-            {
-                teamDAO = new TeamDAO();
-            }
-        }
         public void AddTeam(Team team)=> TeamDAO.Instance.AddTeam(team);
         
-
         public List<Team> GetAllTeams()
         =>TeamDAO.Instance.GetAllTeams();
 

@@ -5,22 +5,10 @@ namespace IMSRepositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly UserDAO userDAO = null;
-        public UserRepository()
-        {
-            if (userDAO == null)
-            {
-                userDAO = new UserDAO();
-            }
-        }
         public void AddUser(User user)
         => UserDAO.Instance.AddUser(user);
 
-        public User GetAccount(string email)
-        {
-            return userDAO.GetAccount(email);
-        }
-
+        public User GetAccount(string email) => UserDAO.Instance.GetAccount(email);
         public User GetUserById(int userID)
         => UserDAO.Instance.GetUserById(userID);
 
@@ -32,7 +20,5 @@ namespace IMSRepositories
 
         public void UpdateUser(int userID, User newUser)
         => UserDAO.Instance.UpdateUser(userID, newUser);
-
-
     }
 }

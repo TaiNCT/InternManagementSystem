@@ -83,7 +83,9 @@ namespace IMSDaos
                 db.SaveChanges();
             }
         }
-
-
+        public List<Intern> GetAllInternByStatus(string status)
+        {
+            return db.Interns.Where(x => x.Status.Equals(status)).ToList();
+        }
     }
 }
