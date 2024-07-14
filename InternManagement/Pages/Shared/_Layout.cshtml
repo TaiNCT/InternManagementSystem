@@ -84,6 +84,9 @@
         new { Text = "Home", Icon = "home", Link = Url.Page("/Index") },
         new { Text = "Interns", Icon = "users", Link = Url.Page("/Interns/ManageInterns") },
         new { Text = "Intern Application", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
+        new { Text = "My Profile", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
+        new { Text = "Upload Document", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
+
         };
 
             var reportItems = new[]
@@ -103,25 +106,29 @@
             <div class="menu-area">
                 @foreach (var item in menuItems)
                 {
-                    // Hide certain items for Intern role
+                    // Hide items for Intern role
                     if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Add User/Team"))
                     {
                         continue;
                     }
 
-                    // Hide certain items for Supervisor role
-                    if (user.IsInRole("Supervisor") && (item.Text == "Intern Application" || item.Text == "Add User/Team"))
+                    // Hide items for Supervisor role
+                    if (user.IsInRole("Supervisor") && (item.Text == "Intern Application" || item.Text == "Add User/Team" || item.Text == "My Profile" || item.Text == "Upload Document"))
                     {
                         continue;
                     }
 
-                    if (item.Text == "Home" || user.IsInRole("Admin") || (item.Text == "Interns" && user.IsInRole("Supervisor")))
+                    // Hide items for Admin
+                    if (user.IsInRole("Admin") && (item.Text == "My Profile" || item.Text == "Upload Document"))
                     {
+                        continue;
+                    }
+
                         <a href="@item.Link" class="btn btn-primary text-left mb-2" style="display: flex; align-items: center;">
                             <i class="fas fa-@item.Icon mr-2" style="width: 1px;"></i>
                             <span>@item.Text</span>
                         </a>
-                    }
+                    
                 }
 
                 <div class="btn-group dropdown mb-2">
