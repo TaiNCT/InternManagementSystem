@@ -13,6 +13,7 @@ namespace IMSRepositories
         Task<List<Assignment>> GetAssignmentsAsync();
         Task AddAssignmentAsync(Assignment assignment);
         Task<Assignment> GetAssignmentByIdAsync(int assignId);
+        Task RemoveAssignmentAsync(int assignId);
         Task UpdateAssignmentAsync(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern);
     }
 }

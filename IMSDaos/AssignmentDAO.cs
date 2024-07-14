@@ -111,5 +111,17 @@ namespace IMSDaos
             await db.Assignments.AddAsync(assignment);
             await db.SaveChangesAsync();
         }
+
+
+
+        public async Task RemoveAssignmentAsync(int assignId)
+        {
+            var assignment = await GetAssignmentByIdAsync(assignId);
+            if (assignment != null)
+            {
+                db.Assignments.Remove(assignment);
+                await db.SaveChangesAsync();
+            }
+        }
     }
 }

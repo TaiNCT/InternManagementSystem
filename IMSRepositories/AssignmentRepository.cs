@@ -41,5 +41,9 @@ namespace IMSRepositories
         {
             await AssignmentDAO.Instance.UpdateAssignmentAsync(assignId, newAssignment, newTeam, newIntern);
         }
+        public async Task RemoveAssignmentAsync(int assignId)
+        {
+            await AssignmentDAO.Instance.RemoveAssignmentAsync(assignId);
+        }
     }
 }

@@ -43,5 +43,10 @@ namespace IMSServices
         {
             await _assignmentRepository.UpdateAssignmentAsync(assignId, newAssignment, newTeam, newIntern);
         }
+
+        public async Task RemoveAssignmentAsync(int assignId)
+        {
+            await _assignmentRepository.RemoveAssignmentAsync(assignId);
+        }
     }
 }
