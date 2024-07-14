@@ -13,6 +13,6 @@ namespace IMSServices
         public void UpdateInternStatus(int internID, string status);
         public void ArchiveIntern(int internID);
         public int GetInternCountByTeamId(int teamId);
-
+        List<Intern> GetApprovedInterns();
     }
 }

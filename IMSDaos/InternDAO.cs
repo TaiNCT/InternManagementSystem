@@ -87,6 +87,10 @@ namespace IMSDaos
                 db.SaveChanges();
             }
         }
+        public List<Intern> GetApprovedInterns()
+        {
+            return db.Interns.Where(i => i.Status == "approved").ToList();
+        }
 
 
     }

@@ -65,5 +65,9 @@ namespace IMSServices
         {
             return _internRepository.GetInternsByTeamId(teamId).Count();
         }
+        public List<Intern> GetApprovedInterns()
+        {
+            return _internRepository.GetApprovedInterns();
+        }
     }
 }

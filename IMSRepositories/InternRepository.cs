@@ -19,8 +19,8 @@ namespace IMSRepositories
         public void UpdateIntern(int internID, Intern newIntern) => InternDAO.Instance.UpdateIntern(internID, newIntern);
         public IEnumerable<Intern> GetInternsByTeamId(int teamId)
         {
-            // Gọi phương thức GetInternsByTeamId từ InternDAO và trả về danh sách thực tập sinh
             return InternDAO.Instance.GetAllIntern().Where(i => i.TeamId == teamId);
         }
+        public List<Intern> GetApprovedInterns() => InternDAO.Instance.GetApprovedInterns();
     }
 }

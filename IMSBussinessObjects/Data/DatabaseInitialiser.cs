@@ -127,8 +127,8 @@ namespace IMSBussinessObjects.Data
                 Gpa = 4,
                 Team = fullstackTeam,
                 Birthday = new DateTime(1998, 4, 12),
-                InternshipStartingDate = new DateTime(2024, 1, 1),
-                InternshipEndingDate = new DateTime(2024, 6, 30),
+                InternshipStartingDate = new DateTime(2024, 7, 1),
+                InternshipEndingDate = new DateTime(2024, 7, 30),
                 OverallSuccess = 90,
                 Status = "approved",
                 User = internUser
