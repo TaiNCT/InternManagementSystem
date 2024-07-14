@@ -1,6 +1,5 @@
 ﻿@page
 @model InternManagement.Pages.Users.UserManagementModel
-
 @{
     ViewData["Title"] = "Intern Managment System";
 }
@@ -91,12 +90,23 @@
 
     <h2 class="mt-4">Add Team</h2>
     <div class="col-md-4 mt-4">
+        <form method="get">
+            
+        </form>
         <form method="post" asp-page-handler="CreateTeam">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Team.TeamName" class="control-label">Team Name</label>
                 <input asp-for="Team.TeamName" class="form-control" required />
                 <span asp-validation-for="Team.TeamName" class="text-danger"></span>
+               <!-- Drop list supervisor-->
+                <div class="form-group">
+                    <label for="UserId">Select Supervisor:</label>
+                    <select id="UserId" name="UserId" asp-items="Model.SupervisorSelectList" class="form-control mt-1 short-select">
+                        <option value="" class="text-center">--- Select a Team ---</option>
+                    </select>
+
+                </div>
             </div>
             <div class="form-group mt-3">
                 <input type="submit" value="Create Team" class="btn btn-primary" />

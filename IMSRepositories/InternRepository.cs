@@ -23,7 +23,7 @@ namespace IMSRepositories
         public void UpdateIntern(int internID, Intern newIntern) => InternDAO.Instance.UpdateIntern(internID, newIntern);
         public IEnumerable<Intern> GetInternsByTeamId(int teamId)
         {
-            return InternDAO.Instance.GetAllIntern().Where(i => i.TeamId == teamId);
+            return InternDAO.Instance.GetAllIntern().Where(i => i.TeamId == teamId && i.Status.Equals("approved"));
         }
         public List<Intern> GetApprovedInterns() => InternDAO.Instance.GetApprovedInterns();
 
