@@ -17,7 +17,7 @@ namespace IMSServices
             return _userRepository.GetUserById(userID);
         }
         public Task<User> GetUserBySupervisorIdAsync(int supervisorId)
-     => _userRepository.GetUserBySupervisorIdAsync(supervisorId);
+             => _userRepository.GetUserBySupervisorIdAsync(supervisorId);
         public List<User> GetUsers()
         {
             return _userRepository.GetUsers();

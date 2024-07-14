@@ -13,7 +13,7 @@ namespace IMSRepositories
         => UserDAO.Instance.GetUserById(userID);
 
         public Task<User> GetUserBySupervisorIdAsync(int supervisorId)
-    => UserDAO.Instance.GetUserBySupervisorIdAsync(supervisorId);
+             => UserDAO.Instance.GetUserBySupervisorIdAsync(supervisorId);
         public List<User> GetUsers()
         => UserDAO.Instance.GetUsers();
 
