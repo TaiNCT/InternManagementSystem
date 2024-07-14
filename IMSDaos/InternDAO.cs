@@ -35,6 +35,11 @@ namespace IMSDaos
             return db.Interns.FirstOrDefault(x => x.FullName == fullName);
         }
 
+        public IEnumerable<Intern> GetInternByTeamId(int teamID)
+        {
+            return db.Interns.Where(i => i.TeamId == teamID).ToList();
+        }
+
         public List<Intern> GetAllIntern()
         {
             return db.Interns.ToList();

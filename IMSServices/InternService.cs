@@ -42,6 +42,11 @@ namespace IMSServices
             return _internRepository.GetInternByName(name);
         }
 
+        public IEnumerable<Intern> GetInternByTeamId(int teamID)
+        {
+            return _internRepository.GetInternByTeamId(teamID);
+        }
+
         public void RemoveIntern(int internID)
         {
             _internRepository.RemoveIntern(internID);
