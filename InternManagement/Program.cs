@@ -16,11 +16,30 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Register services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUploadFileService, UploadFileService>();
 builder.Services.AddScoped<UserDAO>(); // Register UserDAO
+
 builder.Services.AddScoped<IInternService, InternService>();
 builder.Services.AddScoped<IInternRepository, InternRepository>();
 builder.Services.AddSingleton<InternDAO>();
+
+builder.Services.AddScoped<IDocumentsService, DocumentsService>();
+builder.Services.AddScoped<IDocumentsRepository, DocumentsRepository>();
+
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+
+builder.Services.AddScoped<IAssignmentService, AssignmentService>();
+builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
+
+
+
+
+builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<ISupervisorService, SupervisorService>();
+builder.Services.AddScoped<ISupervisorRepository, SupervisorRepository>();   
+builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+builder.Services.AddSingleton<TeamDAO>();
+
 
 // Register other services
 builder.Services.AddScoped<IDataaseInitialiser, DatabaseInitialiser>();
@@ -35,6 +54,8 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("SupervisorOnly", policy => policy.RequireRole("Supervisor"));
     options.AddPolicy("InternOnly", policy => policy.RequireRole("Intern"));
 });
+
+
 
 builder.Services.AddControllersWithViews();
 

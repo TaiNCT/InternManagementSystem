@@ -1,5 +1,6 @@
 ﻿using IMSBussinessObjects;
 using IMSRepositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace IMSServices
 {
@@ -42,6 +43,15 @@ namespace IMSServices
             return _internRepository.GetInternByName(name);
         }
 
+        public List<Intern> GetInternsByStatus(string status)
+        {
+            return _internRepository.GetAllInternByStatus(status);
+        }
+        public IEnumerable<Intern> GetInternByTeamId(int teamID)
+        {
+            return _internRepository.GetInternByTeamId(teamID);
+        }
+
         public void RemoveIntern(int internID)
         {
             _internRepository.RemoveIntern(internID);
@@ -60,6 +70,14 @@ namespace IMSServices
                 intern.Status = status;
                 _internRepository.UpdateIntern(internID, intern);
             }
+        }
+        public int GetInternCountByTeamId(int teamId)
+        {
+            return _internRepository.GetInternsByTeamId(teamId).Count();
+        }
+        public List<Intern> GetApprovedInterns()
+        {
+            return _internRepository.GetApprovedInterns();
         }
     }
 }

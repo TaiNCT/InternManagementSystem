@@ -29,10 +29,19 @@ namespace IMSDaos
         {
             return db.Interns.FirstOrDefault(x => x.InternId == internID);
         }
-
-        public Intern GetInternByName(string name)
+        public int GetInternCountByTeamId(int teamId)
         {
-            return db.Interns.FirstOrDefault(x => x.Name == name);
+            return db.Interns.Count(i => i.TeamId == teamId);
+        }
+
+        public Intern GetInternByName(string fullName)
+        {
+            return db.Interns.FirstOrDefault(x => x.FullName == fullName);
+        }
+
+        public IEnumerable<Intern> GetInternByTeamId(int teamID)
+        {
+            return db.Interns.Where(i => i.TeamId == teamID).ToList();
         }
 
         public List<Intern> GetAllIntern()
@@ -65,12 +74,10 @@ namespace IMSDaos
             if (existingIntern != null)
             {
                 existingIntern.FullName = newIntern.FullName;
-                existingIntern.Name = newIntern.Name;
                 existingIntern.PersonalId = newIntern.PersonalId;
                 existingIntern.PhoneNumber = newIntern.PhoneNumber;
                 existingIntern.Uni = newIntern.Uni;
                 existingIntern.Major = newIntern.Major;
-                existingIntern.Grade = newIntern.Grade;
                 existingIntern.Gpa = newIntern.Gpa;
                 existingIntern.TeamId = newIntern.TeamId;
                 existingIntern.Birthday = newIntern.Birthday;
@@ -84,6 +91,14 @@ namespace IMSDaos
                 db.Entry(existingIntern).State = EntityState.Modified;
                 db.SaveChanges();
             }
+        }
+        public List<Intern> GetAllInternByStatus(string status)
+        {
+            return db.Interns.Where(x => x.Status.Equals(status)).ToList();
+        }
+        public List<Intern> GetApprovedInterns()
+        {
+            return db.Interns.Where(i => i.Status == "approved").ToList();
         }
 
 

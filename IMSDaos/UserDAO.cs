@@ -36,6 +36,24 @@ namespace IMSDaos
         {
             return db.Users.FirstOrDefault(x => x.UserId == userID);
         }
+        public async Task<User> GetUserBySupervisorIdAsync(int supervisorId)
+        {
+            var userId = await db.Supervisors
+                .Where(s => s.SupervisorId == supervisorId)
+                .Select(s => s.UserId)
+                .FirstOrDefaultAsync();
+
+            if (userId == 0)
+            {
+                return null;
+            }
+
+            return await db.Users
+                .Where(u => u.UserId == userId)
+                .FirstOrDefaultAsync();
+        }
+
+
         public List<User> GetUsers()
         {
             return db.Users.ToList();

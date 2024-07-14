@@ -11,6 +11,7 @@ namespace IMSBussinessObjects
         public int TeamId { get; set; }
 
         [MaxLength(50)]
+        [Required(ErrorMessage = "Team Name is required")]
         public string TeamName { get; set; }
         public ICollection<Assignment> Assignments { get; set; }
         public ICollection<Supervisor> Supervisors { get; set; }

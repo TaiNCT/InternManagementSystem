@@ -13,9 +13,6 @@ namespace IMSBussinessObjects
         [MaxLength(50)]
         public string FullName { get; set; }
 
-        [MaxLength(50)]
-        public string Name { get; set; }
-
         [MaxLength(20)]
         public string PersonalId { get; set; }
 
@@ -30,10 +27,8 @@ namespace IMSBussinessObjects
 
         [MaxLength(150)]
         public string Major { get; set; }
-
-        public int Grade { get; set; }
-        public int Gpa { get; set; }
-        public int TeamId { get; set; }
+        public double Gpa { get; set; }
+        public int? TeamId { get; set; }
         public DateTime Birthday { get; set; }
         public DateTime InternshipStartingDate { get; set; }
         public DateTime InternshipEndingDate { get; set; }

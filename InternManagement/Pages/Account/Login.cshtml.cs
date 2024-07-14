@@ -17,6 +17,7 @@ namespace InternManagement.Pages.Account
     {
         private readonly IUserService _userService;
         private readonly IConfiguration _configuration;
+        private readonly IInternService _internService;
 
         [TempData]
         public string ErrorMessage { get; set; }
@@ -28,10 +29,11 @@ namespace InternManagement.Pages.Account
         [BindProperty, Required, DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public LoginModel(IUserService userService, IConfiguration configuration)
+        public LoginModel(IUserService userService, IInternService internService,IConfiguration configuration)
         {
             _userService = userService;
             _configuration = configuration;
+            _internService = internService;
         }
 
         public void OnGet(string returnUrl = null)
@@ -51,7 +53,6 @@ namespace InternManagement.Pages.Account
             if (ModelState.IsValid)
             {
                 var defaultUser = _configuration.GetSection("DefaultUser").Get<User>();
-
                 // Fetch the most recent user data from the database
                 var user = _userService.GetAccount(Email);
                 Console.WriteLine($"Login attempt for user: {Email}");
@@ -68,16 +69,18 @@ namespace InternManagement.Pages.Account
                     // Verify password for default user
                     isAuthenticated = VerifyPassword(Password, defaultUser.Password, defaultUser.RefreshToken);
                     user = defaultUser;
+                    
                     Console.WriteLine($"Default user found: {user.Email}, Authenticated: {isAuthenticated}");
                 }
-
+                string userName = user.Username;
                 if (isAuthenticated)
                 {
                     var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Email, Email),
-                new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern")
-            };
+                    {
+                        new Claim(ClaimTypes.Email, Email),
+                        new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern")
+                    };
+                    TempData["Role"] = $"{user.RoleName}";
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     // Sign in with a new session
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
@@ -85,6 +88,11 @@ namespace InternManagement.Pages.Account
                     // Safely handle the returnUrl
                     if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
+                        if (_internService.GetInternsByStatus("waiting")!=null && user.Role != 3)
+                        {
+                            TempData["Approve"] = $"{_internService.GetInternsByStatus("waiting").Count} application is waiting to be approve";
+                        }
+                        TempData["done"] = $"{userName} Login Success";
                         return LocalRedirect(returnUrl);
                     }
                     return LocalRedirect(Url.Content("~/"));
