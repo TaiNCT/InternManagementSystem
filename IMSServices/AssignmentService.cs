@@ -33,5 +33,15 @@ namespace IMSServices
         {
             return await _assignmentRepository.GetAssignmentsAsync();
         }
+
+        public async Task<Assignment> GetAssignmentByIdAsync(int assignId)
+        {
+            return await _assignmentRepository.GetAssignmentByIdAsync(assignId);
+        }
+
+        public async Task UpdateAssignmentAsync(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern)
+        {
+            await _assignmentRepository.UpdateAssignmentAsync(assignId, newAssignment, newTeam, newIntern);
+        }
     }
 }

@@ -82,6 +82,30 @@ namespace IMSDaos
                 db.SaveChanges();
             }
         }
+
+        public async Task<Assignment> GetAssignmentByIdAsync(int assignId)
+        {
+            return await db.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignId);
+        }
+
+        public async Task UpdateAssignmentAsync(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern)
+        {
+            var existingAssignment = await GetAssignmentByIdAsync(assignId);
+            if (existingAssignment != null)
+            {
+                existingAssignment.TeamId = newTeam.TeamId;
+                existingAssignment.InternId = newIntern.InternId;
+                existingAssignment.Description = newAssignment.Description;
+                existingAssignment.Deadline = newAssignment.Deadline;
+                existingAssignment.Grade = newAssignment.Grade;
+                existingAssignment.Weight = newAssignment.Weight;
+                existingAssignment.Complete = newAssignment.Complete;
+                db.Assignments.Attach(existingAssignment);
+                db.Entry(existingAssignment).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+        }
+
         public async Task AddAssignmentAsync(Assignment assignment)
         {
             await db.Assignments.AddAsync(assignment);

@@ -31,5 +31,15 @@ namespace IMSRepositories
         {
             await Task.Run(() => AssignmentDAO.Instance.AddAssignment(assignment));
         }
+
+        public async Task<Assignment> GetAssignmentByIdAsync(int assignId)
+        {
+            return await AssignmentDAO.Instance.GetAssignmentByIdAsync(assignId);
+        }
+
+        public async Task UpdateAssignmentAsync(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern)
+        {
+            await AssignmentDAO.Instance.UpdateAssignmentAsync(assignId, newAssignment, newTeam, newIntern);
+        }
     }
 }

@@ -23,5 +23,6 @@ namespace IMSServices
 
 
         public void RemoveTeam(int teamId);
+        Task<Team> GetTeamByIdAsync(int teamId);
     }
 }

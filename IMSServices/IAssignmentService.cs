@@ -4,14 +4,15 @@ namespace IMSServices
 {
     public interface IAssignmentService
     {
-
-        public void AddAssignment(Assignment assignment);
-        public Assignment GetAssignmentById(int assignId);
+        void AddAssignment(Assignment assignment);
+        Assignment GetAssignmentById(int assignId);
         Task AddAssignmentAsync(Assignment assignment);
-        public List<Assignment> GetAssignments();
-        public void RemoveAssignment(int assignId);
-        public void UpdateAssignment(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern);
-        public List<Assignment> GetAssignmentByInternId(int internId);
-        public Task<List<Assignment>> GetAssignmentsAsync();
+        List<Assignment> GetAssignments();
+        void RemoveAssignment(int assignId);
+        void UpdateAssignment(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern);
+        List<Assignment> GetAssignmentByInternId(int internId);
+        Task<List<Assignment>> GetAssignmentsAsync();
+        Task<Assignment> GetAssignmentByIdAsync(int assignId);
+        Task UpdateAssignmentAsync(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern);
     }
 }
