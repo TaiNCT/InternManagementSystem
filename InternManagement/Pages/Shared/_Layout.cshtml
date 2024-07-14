@@ -87,6 +87,8 @@
         new { Text = "Intern Application", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
         new { Text = "My Profile", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
         new { Text = "Upload Document", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
+        new { Text = "Assignment", Icon = "briefcase", Link = Url.Page("/Assignments/AssignmentManagement") },
+
 
         };
 
@@ -108,7 +110,7 @@
                 @foreach (var item in menuItems)
                 {
                     // Hide items for Intern role
-                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Add User/Team"))
+                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Add User/Team") || item.Text == "Assignment")
                     {
                         continue;
                     }
@@ -120,7 +122,7 @@
                     }
 
                     // Hide items for Admin
-                    if (user.IsInRole("Admin") && (item.Text == "My Profile" || item.Text == "Upload Document"))
+                    if (user.IsInRole("Admin") && (item.Text == "My Profile" || item.Text == "Upload Document" || item.Text == "Assignment"))
                     {
                         continue;
                     }

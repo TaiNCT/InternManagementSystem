@@ -12,7 +12,6 @@ namespace InternManagement.Pages.Users
         private readonly IUserService userService;
         private readonly ITeamService teamService;
 
-
         public UserManagementModel(IUserService userServ, ITeamService teamServ)
         {
             userService = userServ;
@@ -37,49 +36,34 @@ namespace InternManagement.Pages.Users
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, $"Error retrieving users: {ex.Message}");
+                ModelState.AddModelError(string.Empty, $"Error retrieving data: {ex.Message}");
             }
         }
 
         public async Task<IActionResult> OnPostCreateUserAsync()
         {
-            if (User == null)
+
+
+            try
             {
-                ModelState.AddModelError(string.Empty, "Invalid user data.");
+                EnsureUserHasRefreshToken(User);
+                userService.AddUser(User);
+                return RedirectToPage();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"An error occurred while creating the user: {ex.Message}");
+                Teams = teamService.GetAllTeams();
                 return Page();
             }
-
-            EnsureUserHasRefreshToken(User);
-
-            if (!ModelState.IsValid)
-            {
-                foreach (var modelState in ModelState.Values)
-                {
-                    foreach (var error in modelState.Errors)
-                    {
-                        Console.WriteLine($"Validation Error: {error.ErrorMessage}");
-                    }
-                }
-                return Page();
-            }
-
-            userService.AddUser(User);
-
-            return RedirectToPage();
         }
 
         public async Task<IActionResult> OnPostCreateTeamAsync()
         {
-            if (Team == null || string.IsNullOrWhiteSpace(Team.TeamName))
-            {
-                ModelState.AddModelError(string.Empty, "Team Name is required.");
-                return Page();
-            }
-
             try
             {
                 teamService.AddTeam(Team);
-                return RedirectToPage("./Index"); // Redirect to the team list page
+                return RedirectToPage();
             }
             catch (Exception ex)
             {
@@ -87,8 +71,6 @@ namespace InternManagement.Pages.Users
                 return Page();
             }
         }
-
-
 
         private void EnsureUserHasRefreshToken(User user)
         {
@@ -100,7 +82,7 @@ namespace InternManagement.Pages.Users
 
         private string GenerateNewRefreshToken()
         {
-            return "generated_refresh_token";
+            return Guid.NewGuid().ToString();
         }
     }
 }

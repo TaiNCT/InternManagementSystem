@@ -1,0 +1,49 @@
+﻿@page
+@model EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Assignment.AssignmentId" />
+            <div class="form-group">
+                <label asp-for="Assignment.Description" class="control-label"></label>
+                <input asp-for="Assignment.Description" class="form-control" />
+                <span asp-validation-for="Assignment.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assignment.Deadline" class="control-label"></label>
+                <input asp-for="Assignment.Deadline" class="form-control" />
+                <span asp-validation-for="Assignment.Deadline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assignment.Grade" class="control-label">New Password</label>
+                <input asp-for="Assignment.Grade" class="form-control" autocomplete="off" value="" />
+                <span asp-validation-for="Assignment.Grade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assignment.Weight" class="control-label">New Password</label>
+                <input asp-for="Assignment.Weight" class="form-control" autocomplete="off" value="" />
+                <span asp-validation-for="Assignment.Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assignment.Complete" class="control-label">New Password</label>
+                <input asp-for="Assignment.Complete" class="form-control" autocomplete="off" value="" />
+                <span asp-validation-for="Assignment.Complete" class="text-danger"></span>
+            </div>
+         
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -1,6 +1,5 @@
 ﻿using IMSBussinessObjects;
 using IMSDaos;
-using Microsoft.EntityFrameworkCore;
 
 namespace IMSRepositories
 {
@@ -27,5 +26,10 @@ namespace IMSRepositories
             return InternDAO.Instance.GetAllIntern().Where(i => i.TeamId == teamId);
         }
         public List<Intern> GetApprovedInterns() => InternDAO.Instance.GetApprovedInterns();
+
+        public IEnumerable<Intern> GetApprovedInternsByTeamId(int teamId)
+        {
+            return InternDAO.Instance.GetApprovedInternsByTeamId(teamId);
+        }
     }
 }
