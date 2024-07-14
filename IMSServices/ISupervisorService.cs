@@ -11,6 +11,6 @@ namespace IMSServices
     {
         Task<Supervisor> GetSupervisorByTeamIdAsync(int teamId);
         public Supervisor GetSupervisorById(int supId);
-        public void UpdateSupervisor(int supId, Supervisor newSupervisor, User newUser, Team newTeam);
+        public void AddSupervisor(int UserId, Team newTeam);
     }
 }

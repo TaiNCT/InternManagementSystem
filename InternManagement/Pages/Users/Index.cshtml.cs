@@ -29,7 +29,7 @@ namespace InternManagement.Pages.Users
         public IList<User> Users { get; set; } = new List<User>();
         public IList<Team> Teams { get; set; } = new List<Team>();
         [BindProperty(SupportsGet = true)]
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
         [BindProperty]
         public List<SelectListItem> SupervisorSelectList { get; set; }
         public async Task OnGetAsync()
@@ -73,6 +73,7 @@ namespace InternManagement.Pages.Users
             try
             {
                 teamService.AddTeam(Team);
+                supervisorService.AddSupervisor(UserId, teamService.GetTeamById(Team.TeamId));
                 return RedirectToPage();
             }
             catch (Exception ex)

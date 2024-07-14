@@ -26,9 +26,9 @@ namespace IMSServices
             return await _supervisorRepository.GetSupervisorByTeamIdAsync(teamId);
         }
 
-        public void UpdateSupervisor(int supId, Supervisor newSupervisor, User newUser, Team newTeam)
+        public void AddSupervisor(int UserId, Team newTeam)
         {
-            _supervisorRepository.UpdateSupervisor(supId, newSupervisor, newUser, newTeam);
+            _supervisorRepository.AddSupervisor(UserId, newTeam);
         }
     }
 }
