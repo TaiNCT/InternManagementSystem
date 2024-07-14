@@ -36,7 +36,7 @@ namespace InternManagement.Pages
 
             InternCountByTeam = new Dictionary<string, int>();
             SupervisorByTeam = new Dictionary<string, string>();
-           
+
             foreach (var team in Teams)
             {
                 var internCount = _internService.GetInternCountByTeamId(team.TeamId);

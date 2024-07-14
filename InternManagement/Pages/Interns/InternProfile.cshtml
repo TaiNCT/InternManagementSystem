@@ -1,0 +1,52 @@
+﻿@page
+<!--InternManagement.Pages.Interns.InternProfileModel -->
+@model InternManagement.Pages.Interns.InternProfileModel
+@{
+    ViewData["Title"] = "Intern Profile";
+}
+@using System.Text
+@using IMSBussinessObjects
+
+<form method="get">
+<div class="row">
+    <div class="col-md-6">
+        <h4>Personal Information</h4>
+            <p><strong>Full Name:</strong> @Model.SelectedIntern.FullName</p>
+        <p><strong>Personal ID:</strong> @Model.SelectedIntern.PersonalId</p>
+        <p><strong>Phone Number:</strong> @Model.SelectedIntern.PhoneNumber</p>
+        <p><strong>Birthday:</strong> @Model.SelectedIntern.Birthday.ToShortDateString()</p>
+        <p><strong>Email:</strong> @Model.SelectedIntern.Email</p>
+    </div>
+    <div class="col-md-6">
+        <h4>Academic Information</h4>
+        <p><strong>University:</strong> @Model.SelectedIntern.Uni</p>
+        <p><strong>Major:</strong> @Model.SelectedIntern.Major</p>
+        <p><strong>GPA:</strong> @Model.SelectedIntern.Gpa</p>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-6">
+        <h4>Internship Details</h4>
+        <p><strong>Status:</strong> @Model.SelectedIntern.Status</p>
+        <p><strong>Team ID:</strong> @Model.SelectedIntern.TeamId</p>
+        <p><strong>Overall Success:</strong> @Model.SelectedIntern.OverallSuccess</p>
+        <p><strong>Start Date:</strong> @Model.SelectedIntern.InternshipStartingDate.ToShortDateString()</p>
+        <p><strong>End Date:</strong> @Model.SelectedIntern.InternshipEndingDate.ToShortDateString()</p>
+    </div>
+    <div class="col-md-6">
+        <h4>Documents</h4>
+        @if (Model.SelectedIntern.CvUrl != null && Model.SelectedIntern.CvUrl.Length > 0)
+        {
+            var base64Cv = Convert.ToBase64String(Model.SelectedIntern.CvUrl);
+            var cvSrc = String.Format("data:application/pdf;base64,{0}", base64Cv);
+            <p><a href="@cvSrc" target="_blank" download="YourCV.pdf">Download CV</a></p>
+        }
+        @if (Model.SelectedIntern.PhotoUrl != null && Model.SelectedIntern.PhotoUrl.Length > 0)
+        {
+            var base64Photo = Convert.ToBase64String(Model.SelectedIntern.PhotoUrl);
+            var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64Photo);
+            <img src="@imgSrc" alt="Intern Photo" class="img-thumbnail" style="max-width: 200px;" />
+        }
+    </div>
+</div>
+</form>
