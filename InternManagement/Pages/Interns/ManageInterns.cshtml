@@ -52,4 +52,61 @@
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
     </div>
+    <div>
+        <h3>Assignments</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Deadline</th>
+                    <th>Grade</th>
+                    <th>Weight</th>
+                    <th>Complete</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var assignment in Model.Assignments)
+                {
+                    <tr>
+                        <td>@assignment.Description</td>
+                        <td>@assignment.Deadline?.ToString("yyyy-MM-dd")</td>
+                        <td>@assignment.Grade</td>
+                        <td>@assignment.Weight</td>
+                        <td>@assignment.Complete</td>
+                        <td>
+                            <form method="post" asp-page-handler="DeleteAssignment" asp-route-assignmentId="@assignment.AssignmentId" onsubmit="return confirm('Are you sure you want to delete this assignment?');">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h4>Add New Assignment</h4>
+        <form method="post" asp-page-handler="AddAssignment">
+            <div class="form-group">
+                <label for="Description">Description:</label>
+                <input type="text" id="Description" name="NewAssignment.Description" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Deadline">Deadline:</label>
+                <input type="date" id="Deadline" name="NewAssignment.Deadline" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Grade">Grade:</label>
+                <input type="number" id="Grade" name="NewAssignment.Grade" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Weight">Weight:</label>
+                <input type="number" id="Weight" name="NewAssignment.Weight" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Complete">Complete:</label>
+                <input type="checkbox" id="Complete" name="NewAssignment.Complete" />
+            </div>
+            <button type="submit" class="btn btn-primary">Add Assignment</button>
+        </form>
+    </div>
 }

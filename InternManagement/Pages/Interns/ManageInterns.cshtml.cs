@@ -10,11 +10,12 @@ namespace InternManagement.Pages.Interns
     {
         private readonly ITeamRepository _teamRepository;
         private readonly IInternRepository _internRepository;
-
-        public ManageInternModel(ITeamRepository teamRepository, IInternRepository internRepository)
+        private readonly IAssignmentRepository _assignmentRepository;
+        public ManageInternModel(ITeamRepository teamRepository, IInternRepository internRepository,IAssignmentRepository assignmentRepository)
         {
             _teamRepository = teamRepository;
             _internRepository = internRepository;
+            _assignmentRepository=assignmentRepository;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -22,12 +23,14 @@ namespace InternManagement.Pages.Interns
 
         [BindProperty(SupportsGet = true)]
         public int? InternId { get; set; }
-
+        [BindProperty]
+        public Assignment NewAssignment { get; set; }
         public List<SelectListItem> TeamsSelectList { get; set; }
         public List<SelectListItem> InternsSelectList { get; set; }
 
         public Team SelectedTeam { get; set; }
         public Intern SelectedIntern { get; set; }
+        public List<Assignment> Assignments { get; set; }
 
         public void OnGet()
         {
@@ -53,6 +56,7 @@ namespace InternManagement.Pages.Interns
             if (InternId.HasValue)
             {
                 SelectedIntern = _internRepository.GetInternById(InternId.Value);
+                Assignments = _assignmentRepository.GetAssignmentByInternId(InternId.Value);
             }
         }
         public IActionResult OnPostDelete(int id)

@@ -45,7 +45,8 @@ namespace IMSServices
 
         public List<Intern> GetInternsByStatus(string status)
         {
-           return _internRepository.GetAllInternByStatus(status);
+            return _internRepository.GetAllInternByStatus(status);
+        }
         public IEnumerable<Intern> GetInternByTeamId(int teamID)
         {
             return _internRepository.GetInternByTeamId(teamID);

@@ -21,11 +21,15 @@ builder.Services.AddScoped<UserDAO>(); // Register UserDAO
 builder.Services.AddScoped<IInternService, InternService>();
 builder.Services.AddScoped<IInternRepository, InternRepository>();
 builder.Services.AddSingleton<InternDAO>();
+
 builder.Services.AddScoped<IDocumentsService, DocumentsService>();
 builder.Services.AddScoped<IDocumentsRepository, DocumentsRepository>();
+
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 
+builder.Services.AddScoped<IAssignmentService, AssignmentService>();
+builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 
 
 
