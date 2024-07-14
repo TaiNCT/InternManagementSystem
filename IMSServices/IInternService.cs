@@ -13,5 +13,7 @@ namespace IMSServices
         public void UpdateInternStatus(int internID, string status);
         public void ArchiveIntern(int internID);
         public List<Intern> GetInternsByStatus(string status);
+        IEnumerable<Intern> GetInternByTeamId(int teamID);
+
     }
 }
