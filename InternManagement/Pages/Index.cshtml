@@ -1,79 +1,70 @@
 ﻿@page
 @model IndexModel
+@using IMSBussinessObjects
 @{
-ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";
+    var supervisorByTeam = ViewData["SupervisorByTeam"] as Dictionary<string, string>;
+    var approvedInterns = ViewData["ApprovedInterns"] as List<Intern>;
 }
 
 <!-- Include FullCalendar CSS -->
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet" />
-
+<div class="row">
+    @if (TempData["done"] != null)
+    {
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script type="text/javascript">
+            toastr.success('@TempData["done"]');
+        </script>
+    }
+    @if (TempData["Approve"] != null)
+    {
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script type="text/javascript">
+            toastr.warning('@TempData["Approve"]');
+        </script>
+    }
+</div>
 <div style="margin-top: 20px; background-color: bisque; height: fit-content; border-radius: 20px; padding: 20px;">
-
+ 
     <div style="font-size: xx-large; font-weight: bold;">Team</div>
     <hr />
 
-    <div style="display: flex; justify-content: space-around; gap: 20px;">
+    <div style="max-width: 100%; overflow-x: auto; display: flex; flex-wrap: nowrap; gap: 20px; padding-bottom: 20px;">
         <!-- Team info card -->
-        <div style="flex: 1; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-            <h3 style="text-align: center;">Embedded</h3>
-            <hr />
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <div><strong>Number of Interns:</strong></div>
-                <div>
-                    12
-                </div>
+        @foreach (var team in Model.Teams)
+        {
+            <div style="flex: 0 0 calc(33.33% - 20px); background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+                <h3 style="text-align: center;">@team.TeamName</h3>
+                <hr />
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div><strong>Number of Interns:</strong></div>
+                    <div>
+                        @{
+                            var internCountText = Model.InternCountByTeam.TryGetValue(team.TeamName, out var internCount) ? internCount.ToString() : "N/A";
+                        }
+                        @internCountText
+                    </div>
 
-                <div><strong>Supervisor:</strong></div>
-                <div>
-                    VIl
+                    <div><strong>Supervisor:</strong></div>
+                    <div>
+                        @(supervisorByTeam != null && supervisorByTeam.TryGetValue(team.TeamName, out var supervisorName) ? supervisorName : "No Supervisor")
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Team info card -->
-        <div style="flex: 1; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-            <h3 style="text-align: center;">FullStack</h3>
-            <hr />
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
-                <div><strong>Number of Interns:</strong></div>
-                <div>
-                    12
-                </div>
-
-                <div><strong>Supervisor:</strong></div>
-                <div>
-                    VIl
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Team info card -->
-        <div style="flex: 1; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-            <h3 style="text-align: center;">Mobility</h3>
-            <hr />
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
-                <div><strong>Number of Interns:</strong></div>
-                <div>
-                    12
-                </div>
-
-                <div><strong>Supervisor:</strong></div>
-                <div>
-                    VIl
-                </div>
-            </div>
-        </div>
+        }
     </div>
 
+    <hr />
+    <h2>Calendar</h2>
+    <hr />
 
-
-        <h2>Calendar</h2>
-    <div style="margin-top: 20px; background-color:white ;border-radius:20px ;/* padding:50px */">
+    <div style="margin-top: 20px; background-color:white ;border-radius:20px ;/* padding:30px */">
         <!-- Calendar Container -->
-       <div id="calendar" style="/* width: 300px; height: 300px; */ margin-left:200px;margin-right:200px; padding-bottom:50px;padding-top:50px"></div>
+        <div id="calendar" style="/* width: 300px; height: 300px; */ margin-left:200px;margin-right:200px; padding-bottom:50px;padding-top:50px"></div>
     </div>
-
 </div>
 
 <!-- Include FullCalendar JavaScript -->
@@ -81,27 +72,39 @@ ViewData["Title"] = "Home Page";
 
 <!-- Initialize FullCalendar -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
+        var approvedInterns = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(approvedInterns));
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth', // Set initial view
-            events: [
-                {
-                    title: 'Event 1',
-                    start: '2024-07-10' // Example start date
-                },
-                {
-                    title: 'Event 2',
-                    start: '2024-07-15' // Example start date
+            events: approvedInterns.map(intern => ({
+                title: intern.FullName,
+                start: intern.InternshipStartingDate,
+                extendedProps: {
+                    startDate: new Date(intern.InternshipStartingDate).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    })
                 }
-                // Add more events as needed
-            ]
+            })),
+            eventContent: function (arg) {
+                var eventTitle = arg.event.title;
+                var startDate = arg.event.extendedProps.startDate;
+
+                // Custom HTML for event content
+                var content = document.createElement('div');
+                content.innerHTML = `<div>${eventTitle}</div><div>Starting date: ${startDate}</div>`;
+
+                return { domNodes: [content] };
+            }
         });
 
         calendar.render(); // Render the calendar
     });
 </script>
+
 
 <!-- Custom CSS for FullCalendar -->
 <style>
@@ -120,4 +123,25 @@ ViewData["Title"] = "Home Page";
         background-color: #007bff; /* Event background color */
         color: #fff; /* Event text color */
     }
+
+    /* Style for days of the current month */
+    .fc-daygrid-day.fc-day-today {
+        background-color: #ffe5b4; /* Highlight today */
+    }
+
+    /* Style for days of the current month */
+    .fc-daygrid-day:not(.fc-day-other) {
+        background-color: #ffffff; /* Background color for current month days */
+    }
+
+    /* Style for days of the previous or next month */
+    .fc-day-other {
+        background-color: #f0f0f0; /* Background color for other month days */
+        color: #999; /* Text color for other month days */
+    }
+    .fc-daygrid-event {
+        overflow-y: auto; 
+        white-space: nowrap;
+    }
+
 </style>

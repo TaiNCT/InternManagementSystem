@@ -27,9 +27,8 @@ namespace IMSBussinessObjects
 
         [MaxLength(150)]
         public string Major { get; set; }
-
-        public Double Gpa { get; set; }
-        public int TeamId { get; set; }
+        public double Gpa { get; set; }
+        public int? TeamId { get; set; }
         public DateTime Birthday { get; set; }
         public DateTime InternshipStartingDate { get; set; }
         public DateTime InternshipEndingDate { get; set; }
@@ -41,10 +40,10 @@ namespace IMSBussinessObjects
         public byte[]? PhotoUrl { get; set; }
 
         public int? OverallSuccess { get; set; }
-        public int? UserId { get; set; }
+        public int? UserId { get; set; } // Allow null
 
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         [ForeignKey("TeamId")]
         public Team Team { get; set; }
@@ -56,4 +55,5 @@ namespace IMSBussinessObjects
         [MaxLength(20)] // Adjust max length as needed
         public string Status { get; set; } // "approved", "waiting", "rejected"
     }
+
 }

@@ -1,4 +1,5 @@
 ﻿using IMSBussinessObjects;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace IMSDaos
             return db.Documents.FirstOrDefault(x => x.DocumentId == documentId);
 
         }
-        public List<Documents> GetUsers()
+        public List<Documents> GetDocuments()
         {
              return db.Documents.ToList();
         }
@@ -44,6 +45,31 @@ namespace IMSDaos
             {
                 db.Documents.Remove(document);
                 db.SaveChanges();
+            }
+        }
+        public void UploadDocumentAsync(IFormFile file, int internId)
+        {
+            if (file != null)
+            {
+                if (file.Length > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var fileExtension = Path.GetExtension(fileName);
+                    var objFiles = new Documents()
+                    {
+                        DocumentId = 0,
+                        DocumentName = fileName.Split(new Char[] { '.' })[0],
+                        DocumentType = fileExtension,
+                        InternId = internId
+                    };
+                    using (var target = new MemoryStream())
+                    {
+                        file.CopyTo(target);
+                        objFiles.DocumentData = target.ToArray();
+                    }
+                    db.Documents.Add(objFiles);
+                    db.SaveChanges();
+                }
             }
         }
     }

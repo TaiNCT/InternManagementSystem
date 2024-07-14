@@ -1,4 +1,10 @@
 ﻿using IMSBussinessObjects;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace IMSDaos
 {
@@ -30,6 +36,10 @@ namespace IMSDaos
         public Team GetTeamByName(string teamName)
         {
             return db.Teams.FirstOrDefault(y => y.TeamName == teamName);
+        }
+        public async Task<List<Team>> GetAllTeamsAsync()
+        {
+            return await db.Teams.ToListAsync();
         }
         public List<Team> GetAllTeams()
         {

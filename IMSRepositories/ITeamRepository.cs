@@ -1,4 +1,5 @@
 ﻿using IMSBussinessObjects;
+using IMSDaos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,8 @@ namespace IMSRepositories
 
         public Team GetTeamByName(string teamName);
 
-
         public List<Team> GetAllTeams();
+        Task<List<Team>> GetAllTeamsAsync();
 
 
         public void AddTeam(Team team);

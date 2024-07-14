@@ -29,6 +29,10 @@ namespace IMSDaos
         {
             return db.Interns.FirstOrDefault(x => x.InternId == internID);
         }
+        public int GetInternCountByTeamId(int teamId)
+        {
+            return db.Interns.Count(x => x.TeamId == teamId && x.Status == "approved");
+        }
 
         public Intern GetInternByName(string fullName)
         {
@@ -82,11 +86,18 @@ namespace IMSDaos
                 existingIntern.OverallSuccess = newIntern.OverallSuccess;
                 existingIntern.InternshipStartingDate = newIntern.InternshipStartingDate;
                 existingIntern.InternshipEndingDate = newIntern.InternshipEndingDate;
-
                 db.Interns.Attach(existingIntern);
                 db.Entry(existingIntern).State = EntityState.Modified;
                 db.SaveChanges();
             }
+        }
+        public List<Intern> GetAllInternByStatus(string status)
+        {
+            return db.Interns.Where(x => x.Status.Equals(status)).ToList();
+        }
+        public List<Intern> GetApprovedInterns()
+        {
+            return db.Interns.Where(i => i.Status == "approved").ToList();
         }
 
 
