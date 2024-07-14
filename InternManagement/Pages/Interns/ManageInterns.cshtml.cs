@@ -46,7 +46,7 @@ namespace InternManagement.Pages.Interns
             if (TeamId.HasValue)
             {
                 SelectedTeam = _teamRepository.GetTeamById(TeamId.Value);
-                Interns = _internRepository.GetInternByTeamId(TeamId.Value).ToList();
+                Interns = _internRepository.GetApprovedInternsByTeamId(TeamId.Value).ToList();
                 InternsSelectList = Interns
                     .Select(i => new SelectListItem
                     {

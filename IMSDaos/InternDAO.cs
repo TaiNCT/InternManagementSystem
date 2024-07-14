@@ -33,7 +33,10 @@ namespace IMSDaos
         {
             return db.Interns.Count(x => x.TeamId == teamId && x.Status == "approved");
         }
-
+        public IEnumerable<Intern> GetApprovedInternsByTeamId(int teamId)
+        {
+            return db.Interns.Where(x => x.TeamId == teamId && x.Status == "approved").ToList();
+        }
         public Intern GetInternByName(string fullName)
         {
             return db.Interns.FirstOrDefault(x => x.FullName == fullName);

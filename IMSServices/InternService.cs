@@ -1,6 +1,5 @@
 ﻿using IMSBussinessObjects;
 using IMSRepositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace IMSServices
 {
@@ -78,6 +77,11 @@ namespace IMSServices
         public List<Intern> GetApprovedInterns()
         {
             return _internRepository.GetApprovedInterns();
+        }
+
+        public IEnumerable<Intern> GetApprovedInternsByTeamId(int teamId)
+        {
+            return _internRepository.GetApprovedInternsByTeamId(teamId);
         }
     }
 }
