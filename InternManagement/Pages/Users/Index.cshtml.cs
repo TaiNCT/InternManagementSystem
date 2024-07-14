@@ -42,8 +42,6 @@ namespace InternManagement.Pages.Users
 
         public async Task<IActionResult> OnPostCreateUserAsync()
         {
-
-
             try
             {
                 EnsureUserHasRefreshToken(User);

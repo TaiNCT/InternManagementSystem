@@ -17,7 +17,7 @@ namespace InternManagement.Pages.Account
             _internService = internService;
             _teamService = teamService;
             _environment = environment;
-            _notificationService=notificationService;
+            _notificationService = notificationService;
         }
 
         [BindProperty]
@@ -38,10 +38,10 @@ namespace InternManagement.Pages.Account
         public async Task<IActionResult> OnPostAsync()
         {
             //ModelState alway invalid
-           /* if (!ModelState.IsValid)
-            {
-                return Page();
-            }*/
+            /* if (!ModelState.IsValid)
+             {
+                 return Page();
+             }*/
 
             //User need to be allowed null
             try
@@ -57,7 +57,7 @@ namespace InternManagement.Pages.Account
                             target.Dispose();
                         }
                     }
-                    if(CvFile.Length > 0)
+                    if (CvFile.Length > 0)
                     {
                         using (var target = new MemoryStream())
                         {
@@ -68,11 +68,11 @@ namespace InternManagement.Pages.Account
 
                     }
                 }
-              
+
                 //Some one delete this
                 Intern.Status = "waiting";
                 _internService.AddIntern(Intern);
-            return RedirectToPage("/Index");
+                return RedirectToPage("/Index");
             }
             catch (Exception ex)
             {

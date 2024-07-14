@@ -67,6 +67,9 @@ namespace IMSDaos
             Intern intern = GetInternById(internID);
             if (intern != null)
             {
+                /* var assignments = db.Assignments.Where(a => a.InternId == internID).ToList();
+                 db.Assignments.RemoveRange(assignments);*/
+
                 db.Interns.Remove(intern);
                 db.SaveChanges();
             }
