@@ -91,6 +91,8 @@
         new { Text = "Add User/Team", Link = Url.Page("/Users/Index") },
         new { Text = "Change Password", Link = Url.Page("/Shared/ChangePassword") },
         };
+
+            var user = User; // For current user login
         }
 
         <nav class="sidebar">
@@ -101,24 +103,35 @@
             <div class="menu-area">
                 @foreach (var item in menuItems)
                 {
+                    @if (item.Text == "Home" || user.IsInRole("Admin"))
+                    {                       
                     <a href="@item.Link" class="btn btn-primary text-left mb-2" style="display: flex; align-items: center;">
                         <i class="fas fa-@item.Icon mr-2" style="width: 1px;"></i>
                         <span>@item.Text</span>
                     </a>
+                    }
                 }
-
-                <div class="btn-group dropdown mb-2">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display: flex; align-items: center;">
-                        <i class="fas fa-bar-chart mr-2" style="width: 1px;"></i>
-                        <span>Tools</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        @foreach (var report in reportItems)
-                        {
-                            <a class="dropdown-item" href="@report.Link">@report.Text</a>
-                        }
+           
+                    <div class="btn-group dropdown mb-2">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display: flex; align-items: center;">
+                            <i class="fas fa-bar-chart mr-2" style="width: 1px;"></i>
+                            <span>Tools</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            @foreach (var report in reportItems)
+                            {
+                                @if (report.Text == "Add User/Team" && user.IsInRole("Admin"))
+                                {
+                                    <a class="dropdown-item" href="@report.Link">@report.Text</a>
+                                }
+                                else if (report.Text == "Change Password")
+                                {
+                                    <a class="dropdown-item" href="@report.Link">@report.Text</a>
+                                }
+                            }
+                        </div>
                     </div>
-                </div>
+                
             </div>
             <div class="logout-area">
                 <span style="font-size: 18px; color: white;">
