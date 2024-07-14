@@ -103,39 +103,75 @@
             <div class="menu-area">
                 @foreach (var item in menuItems)
                 {
-                    @if (item.Text == "Home" || user.IsInRole("Admin") || user.IsInRole("Supervisor"))
-                    {                       
-                    <a href="@item.Link" class="btn btn-primary text-left mb-2" style="display: flex; align-items: center;">
-                        <i class="fas fa-@item.Icon mr-2" style="width: 1px;"></i>
-                        <span>@item.Text</span>
-                    </a>
+                    // Hide certain items for Intern role
+                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Add User/Team"))
+                    {
+                        continue;
+                    }
+
+                    // Hide certain items for Supervisor role
+                    if (user.IsInRole("Supervisor") && (item.Text == "Intern Application" || item.Text == "Add User/Team"))
+                    {
+                        continue;
+                    }
+
+                    if (item.Text == "Home" || user.IsInRole("Admin") || (item.Text == "Interns" && user.IsInRole("Supervisor")))
+                    {
+                        <a href="@item.Link" class="btn btn-primary text-left mb-2" style="display: flex; align-items: center;">
+                            <i class="fas fa-@item.Icon mr-2" style="width: 1px;"></i>
+                            <span>@item.Text</span>
+                        </a>
                     }
                 }
-           
-                    <div class="btn-group dropdown mb-2">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display: flex; align-items: center;">
-                            <i class="fas fa-bar-chart mr-2" style="width: 1px;"></i>
-                            <span>Tools</span>
-                        </button>
-                        <div class="dropdown-menu">
-                            @foreach (var report in reportItems)
+
+                <div class="btn-group dropdown mb-2">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display: flex; align-items: center;">
+                        <i class="fas fa-bar-chart mr-2" style="width: 1px;"></i>
+                        <span>Tools</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        @foreach (var report in reportItems)
+                        {
+                            // Hide certain items for Intern role
+                            if (user.IsInRole("Intern") && report.Text == "Add User/Team")
                             {
-                                @if (report.Text == "Add User/Team" && user.IsInRole("Admin"))
-                                {
-                                    <a class="dropdown-item" href="@report.Link">@report.Text</a>
-                                }
-                                else if (report.Text == "Change Password")
-                                {
-                                    <a class="dropdown-item" href="@report.Link">@report.Text</a>
-                                }
+                                continue;
                             }
-                        </div>
+
+                            // Hide certain items for Supervisor role
+                            if (user.IsInRole("Supervisor") && (report.Text == "Intern Application" || report.Text == "Add User/Team"))
+                            {
+                                continue;
+                            }
+
+                            if (report.Text == "Add User/Team" && user.IsInRole("Admin"))
+                            {
+                                <a class="dropdown-item" href="@report.Link">@report.Text</a>
+                            }
+                            else if (report.Text == "Change Password")
+                            {
+                                <a class="dropdown-item" href="@report.Link">@report.Text</a>
+                            }
+                        }
                     </div>
-                
+                </div>
             </div>
+
             <div class="logout-area">
                 <span style="font-size: 18px; color: white;">
-                    <i class="fas fa-user-shield mr-2"></i>Admin
+                    <i class="fas fa-user-shield mr-2"></i>
+                    @if (user.IsInRole("Admin"))
+                    {
+                        <text>Admin</text>
+                    }
+                    else if (user.IsInRole("Supervisor"))
+                    {
+                        <text>Supervisor</text>
+                    }
+                    else 
+                    {
+                        <text>Intern</text>
+                    }                 
                 </span>
                 <a class="btn btn-danger btn-sm" href="~/Account/Logout">
                     <i class="fas fa-sign-out-alt mr-1"></i>Sign out
