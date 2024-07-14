@@ -31,7 +31,7 @@ namespace IMSDaos
         }
         public int GetInternCountByTeamId(int teamId)
         {
-            return db.Interns.Count(i => i.TeamId == teamId);
+            return db.Interns.Count(x => x.TeamId == teamId && x.Status == "approved");
         }
 
         public Intern GetInternByName(string fullName)
@@ -86,7 +86,6 @@ namespace IMSDaos
                 existingIntern.OverallSuccess = newIntern.OverallSuccess;
                 existingIntern.InternshipStartingDate = newIntern.InternshipStartingDate;
                 existingIntern.InternshipEndingDate = newIntern.InternshipEndingDate;
-                existingIntern.UserId = 0;
                 db.Interns.Attach(existingIntern);
                 db.Entry(existingIntern).State = EntityState.Modified;
                 db.SaveChanges();
