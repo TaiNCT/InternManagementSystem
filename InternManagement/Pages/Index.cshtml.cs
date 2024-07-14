@@ -27,10 +27,7 @@ namespace InternManagement.Pages
         public Dictionary<string, int> InternCountByTeam { get; set; }
         public Dictionary<string, string> SupervisorByTeam { get; set; }
         public List<Intern> ApprovedInterns { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public int? UserId { get; set; }
-        [BindProperty]
-        public List<SelectListItem> SupervisorSelectList { get; set; }
+     
     
         public async Task OnGetAsync()
         {
@@ -39,13 +36,7 @@ namespace InternManagement.Pages
 
             InternCountByTeam = new Dictionary<string, int>();
             SupervisorByTeam = new Dictionary<string, string>();
-            SupervisorSelectList = _userService.GetUsers().Where(x => x.Role == 2)
-               .Select(t => new SelectListItem
-               {
-                   Value = t.UserId.ToString(),
-                   Text = t.Username.ToString(),
-               })
-               .ToList();
+           
             foreach (var team in Teams)
             {
                 var internCount = _internService.GetInternCountByTeamId(team.TeamId);
@@ -72,7 +63,6 @@ namespace InternManagement.Pages
 
             ViewData["SupervisorByTeam"] = SupervisorByTeam;
             ViewData["ApprovedInterns"] = ApprovedInterns;
-            ViewData["Supervisor"] = SupervisorSelectList;
         }
 
 

@@ -3,6 +3,7 @@ using IMSServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace InternManagement.Pages.Users
 {
@@ -11,11 +12,12 @@ namespace InternManagement.Pages.Users
     {
         private readonly IUserService userService;
         private readonly ITeamService teamService;
-
-        public UserManagementModel(IUserService userServ, ITeamService teamServ)
+        private readonly ISupervisorService supervisorService;
+        public UserManagementModel(IUserService userServ, ITeamService teamServ, ISupervisorService superService)
         {
             userService = userServ;
             teamService = teamServ;
+            supervisorService = superService;
         }
 
         [BindProperty]
@@ -26,11 +28,21 @@ namespace InternManagement.Pages.Users
 
         public IList<User> Users { get; set; } = new List<User>();
         public IList<Team> Teams { get; set; } = new List<Team>();
-
+        [BindProperty(SupportsGet = true)]
+        public int? UserId { get; set; }
+        [BindProperty]
+        public List<SelectListItem> SupervisorSelectList { get; set; }
         public async Task OnGetAsync()
         {
             try
             {
+               SupervisorSelectList = userService.GetUsers().Where(x => x.Role == 2)
+              .Select(t => new SelectListItem
+              {
+                  Value = t.UserId.ToString(),
+                  Text = t.Username.ToString(),
+              })
+              .ToList();
                 Users = userService.GetUsers();
                 Teams = teamService.GetAllTeams();
             }
@@ -42,8 +54,6 @@ namespace InternManagement.Pages.Users
 
         public async Task<IActionResult> OnPostCreateUserAsync()
         {
-
-
             try
             {
                 EnsureUserHasRefreshToken(User);

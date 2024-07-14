@@ -10,5 +10,7 @@ namespace IMSServices
     public interface ISupervisorService
     {
         Task<Supervisor> GetSupervisorByTeamIdAsync(int teamId);
+        public Supervisor GetSupervisorById(int supId);
+        public void UpdateSupervisor(int supId, Supervisor newSupervisor, User newUser, Team newTeam);
     }
 }

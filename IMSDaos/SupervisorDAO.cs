@@ -31,5 +31,22 @@ namespace IMSDaos
         {
             return await db.Supervisors.FirstOrDefaultAsync(x => x.TeamId == teamId);
         }
+        public Supervisor GetSupervisorById(int supId)
+        {
+            return db.Supervisors.FirstOrDefault(x => x.SupervisorId == supId);
+        }
+        public void UpdateSupervisor(int supId, Supervisor newSupervisor, User newUser, Team newTeam)
+        {
+            var existingSuperVisor = GetSupervisorById(supId);
+            if (existingSuperVisor != null)
+            {
+                existingSuperVisor.UserId = newUser.UserId;
+                existingSuperVisor.TeamId = newTeam.TeamId;
+
+                db.Supervisors.Attach(existingSuperVisor);
+                db.Entry(existingSuperVisor).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
     }
 }
