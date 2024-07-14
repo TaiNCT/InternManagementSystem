@@ -72,7 +72,13 @@ namespace InternManagement.Pages.Account
                     
                     Console.WriteLine($"Default user found: {user.Email}, Authenticated: {isAuthenticated}");
                 }
-                string userName = user.Username;
+                if (user.Username == null)
+                {
+                    return Page();
+                }else
+                {
+                    string userName = user.Username;
+                }
                 if (isAuthenticated)
                 {
                     var claims = new List<Claim>
@@ -88,11 +94,11 @@ namespace InternManagement.Pages.Account
                     // Safely handle the returnUrl
                     if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
-                        if (_internService.GetInternsByStatus("waiting")!=null && user.Role != 3)
+                      /*  if (_internService.GetInternsByStatus("waiting")!=null && user.Role != 3)
                         {
                             TempData["Approve"] = $"{_internService.GetInternsByStatus("waiting").Count} application is waiting to be approve";
                         }
-                        TempData["done"] = $"{userName} Login Success";
+                        TempData["done"] = $"{userName} Login Success";*/
                         return LocalRedirect(returnUrl);
                     }
                     return LocalRedirect(Url.Content("~/"));

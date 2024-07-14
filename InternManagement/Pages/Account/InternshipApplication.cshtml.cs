@@ -12,12 +12,14 @@ namespace InternManagement.Pages.Account
         private readonly IWebHostEnvironment _environment;
         private readonly ITeamService _teamService;
         private readonly INotificationService _notificationService;
-        public InternshipApplicationModel(IInternService internService, ITeamService teamService, IWebHostEnvironment environment, INotificationService notificationService)
+        private readonly IUserService _userService;
+        public InternshipApplicationModel(IInternService internService, ITeamService teamService, IWebHostEnvironment environment, INotificationService notificationService, IUserService userService)
         {
             _internService = internService;
             _teamService = teamService;
             _environment = environment;
             _notificationService=notificationService;
+            _userService=userService;
         }
 
         [BindProperty]
@@ -30,6 +32,7 @@ namespace InternManagement.Pages.Account
         public IFormFile PhotoFile { get; set; }
         public SelectList Teams { get; set; }
 
+        public List<User> Users { get; set; }
         public void OnGet()
         {
             Teams = new SelectList(_teamService.GetAllTeams(), "TeamId", "TeamName");
@@ -43,7 +46,6 @@ namespace InternManagement.Pages.Account
                 return Page();
             }*/
 
-            //User need to be allowed null
             try
             {
                 if (CvFile != null && PhotoFile != null)
@@ -68,14 +70,38 @@ namespace InternManagement.Pages.Account
 
                     }
                 }
-          /*      Notification notification = new Notification()
-                {
-                    UserId = 
-                };*/
-
                 //Some one delete this
                 Intern.Status = "waiting";
                 _internService.AddIntern(Intern);
+                Users = _userService.GetUsers().Where(x => x.Role == 1).ToList();
+
+                foreach (User user in Users)
+                {
+                    Notification notification = new Notification()
+                    {
+                        UserId = user.UserId,
+                        InternId = Intern.InternId,
+                        NotificationDate =  3,
+                        TypeCode = 1, //Approve Internship
+                        Content = $"{_internService.GetInternsByStatus("waiting").Count} application is waiting",
+                        Timestamp = DateTime.Now,
+                        IsSeen = false,
+
+                    };
+                    if (_notificationService.GetNotificationById(notification.NotificationId) == null)
+                    {
+                        _notificationService.AddNotification(notification);
+                    }else
+                    {
+                        Notification newNotification = _notificationService.GetNotificationById(notification.NotificationId);
+                        if (newNotification != null)
+                        {
+                            newNotification.Content = $"{_internService.GetInternsByStatus("waiting").Count} application is waiting";
+                        }
+                        _notificationService.UpdateNotification(notification.NotificationId,newNotification, false);
+                    }
+                }
+              
             return RedirectToPage("/Index");
             }
             catch (Exception ex)

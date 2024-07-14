@@ -32,7 +32,7 @@
         {
             var base64Cv = Convert.ToBase64String(Model.CvUrl);
             var cvSrc = String.Format("data:application/pdf;base64,{0}", base64Cv);
-            <p><a href="@cvSrc" target="_blank" download="CV.pdf">Download CV</a></p>
+            <p><a href="@cvSrc" target="_blank" download="YourCV.pdf">Download CV</a></p>
         }
         @if (Model.PhotoUrl != null && Model.PhotoUrl.Length > 0)
         {
