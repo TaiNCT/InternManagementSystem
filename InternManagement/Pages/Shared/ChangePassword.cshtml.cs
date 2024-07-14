@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace InternManagement.Pages.Shared
+namespace InternManagement.Pages.Account
 {
     [Authorize]
     public class ChangePasswordModel : PageModel
@@ -66,8 +66,7 @@ namespace InternManagement.Pages.Shared
                 RefreshToken = user.RefreshToken
             });
 
-
-            return RedirectToPage("Index", new { message = "Password changed successfully." });
+            return RedirectToPage("/Index", new { message = "Password changed successfully!" });
         }
 
         private bool VerifyPassword(string password, string hash, string salt)
@@ -84,6 +83,23 @@ namespace InternManagement.Pages.Shared
                 keySize);
 
             return CryptographicOperations.FixedTimeEquals(hashToVerify, Convert.FromHexString(hash));
+        }
+        private void HashPassword(string password, out string hashedPassword, out string refreshToken)
+        {
+            const int keySize = 32;
+            const int iterations = 350_000;
+            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA256;
+
+            var saltInBytes = RandomNumberGenerator.GetBytes(keySize);
+            var hashInBytes = Rfc2898DeriveBytes.Pbkdf2(
+                Encoding.UTF8.GetBytes(password),
+                saltInBytes,
+                iterations,
+                hashAlgorithm,
+                keySize);
+
+            refreshToken = Convert.ToHexString(saltInBytes);
+            hashedPassword = Convert.ToHexString(hashInBytes);
         }
     }
 }

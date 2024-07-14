@@ -103,7 +103,7 @@
             <div class="menu-area">
                 @foreach (var item in menuItems)
                 {
-                    @if (item.Text == "Home" || user.IsInRole("Admin"))
+                    @if (item.Text == "Home" || user.IsInRole("Admin") || user.IsInRole("Supervisor"))
                     {                       
                     <a href="@item.Link" class="btn btn-primary text-left mb-2" style="display: flex; align-items: center;">
                         <i class="fas fa-@item.Icon mr-2" style="width: 1px;"></i>
@@ -137,7 +137,7 @@
                 <span style="font-size: 18px; color: white;">
                     <i class="fas fa-user-shield mr-2"></i>Admin
                 </span>
-                <a class="btn btn-danger btn-sm" href="Account/Logout">
+                <a class="btn btn-danger btn-sm" href="~/Account/Logout">
                     <i class="fas fa-sign-out-alt mr-1"></i>Sign out
                 </a>
             </div>
