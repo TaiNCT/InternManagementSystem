@@ -37,12 +37,16 @@ namespace IMSServices
 
         public Team GetTeamByName(string teamName)
         {
-            return _teamRepository.GetTeamByName(teamName); 
+            return _teamRepository.GetTeamByName(teamName);
         }
 
         public void RemoveTeam(int teamId)
         {
-           _teamRepository.RemoveTeam(teamId);
+            _teamRepository.RemoveTeam(teamId);
+        }
+        public async Task<Team> GetTeamByIdAsync(int teamId)
+        {
+            return await _teamRepository.GetTeamByIdAsync(teamId);
         }
     }
 }

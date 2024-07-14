@@ -28,5 +28,9 @@ namespace IMSRepositories
 
         public void RemoveTeam(int teamId)
         => TeamDAO.Instance.RemoveTeam(teamId);
+        public async Task<Team> GetTeamByIdAsync(int teamId)
+        {
+            return await TeamDAO.Instance.GetTeamByIdAsync(teamId);
+        }
     }
 }

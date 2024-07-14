@@ -33,6 +33,7 @@ namespace IMSDaos
         {
             return db.Teams.FirstOrDefault(x => x.TeamId == teamId);
         }
+
         public Team GetTeamByName(string teamName)
         {
             return db.Teams.FirstOrDefault(y => y.TeamName == teamName);
@@ -64,6 +65,9 @@ namespace IMSDaos
             }
         }
 
-
+        public async Task<Team> GetTeamByIdAsync(int teamId)
+        {
+            return await db.Teams.FirstOrDefaultAsync(x => x.TeamId == teamId);
+        }
     }
 }

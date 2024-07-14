@@ -13,7 +13,7 @@ namespace IMSDaos
         private readonly AppDbContext db = null;
         private static AssignmentDAO instance = null;
 
-        public AssignmentDAO()
+        private AssignmentDAO()
         {
             db = new AppDbContext();
         }
@@ -29,10 +29,12 @@ namespace IMSDaos
                 return instance;
             }
         }
+
         public Assignment GetAssignmentById(int assignId)
         {
             return db.Assignments.FirstOrDefault(x => x.AssignmentId == assignId);
         }
+
         public List<Assignment> GetAssignmentByInternId(int internId)
         {
             return db.Assignments.Where(x => x.InternId == internId).ToList();
@@ -43,7 +45,7 @@ namespace IMSDaos
             return db.Assignments.ToList();
         }
 
-        public void AddIntern(Assignment assignment)
+        public void AddAssignment(Assignment assignment)
         {
             Assignment newAssignment = GetAssignmentById(assignment.AssignmentId);
             if (newAssignment == null)
@@ -62,6 +64,7 @@ namespace IMSDaos
                 db.SaveChanges();
             }
         }
+
         public void UpdateAssignment(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern)
         {
             var existingAssignment = GetAssignmentById(assignId);
@@ -77,6 +80,47 @@ namespace IMSDaos
                 db.Assignments.Attach(existingAssignment);
                 db.Entry(existingAssignment).State = EntityState.Modified;
                 db.SaveChanges();
+            }
+        }
+
+        public async Task<Assignment> GetAssignmentByIdAsync(int assignId)
+        {
+            return await db.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignId);
+        }
+
+        public async Task UpdateAssignmentAsync(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern)
+        {
+            var existingAssignment = await GetAssignmentByIdAsync(assignId);
+            if (existingAssignment != null)
+            {
+                existingAssignment.TeamId = newTeam.TeamId;
+                existingAssignment.InternId = newIntern.InternId;
+                existingAssignment.Description = newAssignment.Description;
+                existingAssignment.Deadline = newAssignment.Deadline;
+                existingAssignment.Grade = newAssignment.Grade;
+                existingAssignment.Weight = newAssignment.Weight;
+                existingAssignment.Complete = newAssignment.Complete;
+                db.Assignments.Attach(existingAssignment);
+                db.Entry(existingAssignment).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+        }
+
+        public async Task AddAssignmentAsync(Assignment assignment)
+        {
+            await db.Assignments.AddAsync(assignment);
+            await db.SaveChangesAsync();
+        }
+
+
+
+        public async Task RemoveAssignmentAsync(int assignId)
+        {
+            var assignment = await GetAssignmentByIdAsync(assignId);
+            if (assignment != null)
+            {
+                db.Assignments.Remove(assignment);
+                await db.SaveChangesAsync();
             }
         }
     }

@@ -17,6 +17,6 @@ namespace IMSServices
         public List<Intern> GetInternsByStatus(string status);
         IEnumerable<Intern> GetInternByTeamId(int teamID);
         public IEnumerable<Intern> GetApprovedInternsByTeamId(int teamId);
-
+        Task<IEnumerable<Intern>> GetApprovedInternsByTeamIdAsync(int teamId);
     }
 }
