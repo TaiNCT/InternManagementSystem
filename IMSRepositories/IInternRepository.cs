@@ -11,11 +11,8 @@ namespace IMSRepositories
         public void RemoveIntern(int internID);
         public void UpdateIntern(int internID, Intern newIntern);
         public List<Intern> GetAllInternByStatus(string status);
-        
-        
-        IEnumerable<Intern> GetInternByTeamId(int teamID);
-
-        IEnumerable<Intern> GetInternsByTeamId(int teamId);
-        List<Intern> GetApprovedInterns();
+        public  IEnumerable<Intern> GetInternByTeamId(int teamID);
+        public IEnumerable<Intern> GetInternsByTeamId(int teamId);
+        public List<Intern> GetApprovedInterns();
     }
 }

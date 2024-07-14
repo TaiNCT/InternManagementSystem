@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IMSBussinessObjects.Migrations
 {
-    public partial class v4 : Migration
+    public partial class v5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,7 @@ namespace IMSBussinessObjects.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    RefreshToken = table.Column<string>(type: "nvarchar(800)", maxLength: 800, nullable: false),
+                    RefreshToken = table.Column<string>(type: "nvarchar(800)", maxLength: 800, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Role = table.Column<int>(type: "int", nullable: false)
@@ -59,7 +59,7 @@ namespace IMSBussinessObjects.Migrations
                     CvUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     PhotoUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     OverallSuccess = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable:true),
                     Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>

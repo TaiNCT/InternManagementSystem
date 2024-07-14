@@ -86,7 +86,7 @@ namespace IMSDaos
                 existingIntern.OverallSuccess = newIntern.OverallSuccess;
                 existingIntern.InternshipStartingDate = newIntern.InternshipStartingDate;
                 existingIntern.InternshipEndingDate = newIntern.InternshipEndingDate;
-
+                existingIntern.UserId = 0;
                 db.Interns.Attach(existingIntern);
                 db.Entry(existingIntern).State = EntityState.Modified;
                 db.SaveChanges();

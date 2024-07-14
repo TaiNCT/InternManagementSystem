@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240712142818_v4")]
-    partial class v4
+    [Migration("20240714111652_v5")]
+    partial class v5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -157,7 +157,8 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("TeamId")
+                    b.Property<int?>("TeamId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Uni")
@@ -280,7 +281,6 @@ namespace IMSBussinessObjects.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("RefreshToken")
-                        .IsRequired()
                         .HasMaxLength(800)
                         .HasColumnType("nvarchar(800)");
 
@@ -404,8 +404,7 @@ namespace IMSBussinessObjects.Migrations
 
             modelBuilder.Entity("IMSBussinessObjects.User", b =>
                 {
-                    b.Navigation("Intern")
-                        .IsRequired();
+                    b.Navigation("Intern");
 
                     b.Navigation("Notifications");
 

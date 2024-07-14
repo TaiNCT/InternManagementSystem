@@ -40,7 +40,7 @@ namespace IMSBussinessObjects
         public byte[]? PhotoUrl { get; set; }
 
         public int? OverallSuccess { get; set; }
-        public int? UserId { get; set; }
+        public int? UserId { get; set; } // Allow null
 
         [ForeignKey("UserId")]
         public User User { get; set; }
@@ -55,4 +55,5 @@ namespace IMSBussinessObjects
         [MaxLength(20)] // Adjust max length as needed
         public string Status { get; set; } // "approved", "waiting", "rejected"
     }
+
 }

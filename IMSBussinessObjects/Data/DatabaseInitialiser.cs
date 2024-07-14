@@ -118,10 +118,10 @@ namespace IMSBussinessObjects.Data
             };
             var intern1 = new Intern
             {
-                FullName = "John Doe",
+                FullName = "vinh",
                 PersonalId = "123456789",
                 PhoneNumber = "555-1234",
-                Email = "john.doe@example.com",
+                Email = "Vinh@gmail.com",
                 Uni = "Example University",
                 Major = "Computer Science",
                 Gpa = 4,

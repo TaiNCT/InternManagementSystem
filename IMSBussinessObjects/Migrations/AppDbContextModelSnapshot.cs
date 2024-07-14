@@ -155,7 +155,8 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("TeamId")
+                    b.Property<int?>("TeamId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Uni")
@@ -278,7 +279,6 @@ namespace IMSBussinessObjects.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("RefreshToken")
-                        .IsRequired()
                         .HasMaxLength(800)
                         .HasColumnType("nvarchar(800)");
 
@@ -402,8 +402,7 @@ namespace IMSBussinessObjects.Migrations
 
             modelBuilder.Entity("IMSBussinessObjects.User", b =>
                 {
-                    b.Navigation("Intern")
-                        .IsRequired();
+                    b.Navigation("Intern");
 
                     b.Navigation("Notifications");
 
