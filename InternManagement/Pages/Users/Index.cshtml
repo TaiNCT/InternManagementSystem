@@ -34,7 +34,7 @@
                 </select> 
                 <span asp-validation-for="User.Role" class="text-danger"></span>
             </div>
-            <div class="form-group mt-2">
+            <div class="form-group mt-3">
                 <input type="submit" value="Create User" class="btn btn-primary" />
             </div>
         </form>
@@ -43,7 +43,7 @@
     <div class="col-md-8">
         @if (Model.Users != null && Model.Users.Count > 0)
         {
-            <div class="table-responsive border rounded p-1" style="max-height: 400px; overflow-y: auto;">
+            <div class="table-responsive border rounded p-1" style="max-height: 400px; overflow-y: auto; max-width:1000px">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -97,7 +97,7 @@
                 <input asp-for="Team.TeamName" class="form-control" required />
                 <span asp-validation-for="Team.TeamName" class="text-danger"></span>
             </div>
-            <div class="form-group mt-2">
+            <div class="form-group mt-3">
                 <input type="submit" value="Create Team" class="btn btn-primary" />
             </div>
         </form>
@@ -107,7 +107,7 @@
 <h2 class="mt-8">Teams</h2>
 @if (Model.Teams != null && Model.Teams.Count > 0)
 {
-    <div class="table-responsive border rounded p-1" style="max-height: 400px; overflow-y: auto;">
+            <div class="table-responsive border rounded p-1" style="max-height: 400px; overflow-y: auto;max-width:1000px">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -134,10 +134,8 @@
     </div>
         }
     </div>
-
     </div>
-</div>
-</div>
+
 
 
 @section Scripts {
