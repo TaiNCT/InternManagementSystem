@@ -39,6 +39,11 @@ namespace IMSDaos
             return db.Interns.FirstOrDefault(x => x.FullName == fullName);
         }
 
+        public IEnumerable<Intern> GetInternByTeamId(int teamID)
+        {
+            return db.Interns.Where(i => i.TeamId == teamID).ToList();
+        }
+
         public List<Intern> GetAllIntern()
         {
             return db.Interns.ToList();
@@ -86,6 +91,10 @@ namespace IMSDaos
                 db.Entry(existingIntern).State = EntityState.Modified;
                 db.SaveChanges();
             }
+        }
+        public List<Intern> GetAllInternByStatus(string status)
+        {
+            return db.Interns.Where(x => x.Status.Equals(status)).ToList();
         }
         public List<Intern> GetApprovedInterns()
         {

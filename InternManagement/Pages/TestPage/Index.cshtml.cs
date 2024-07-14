@@ -7,11 +7,11 @@ namespace InternManagement.Pages.TestPage
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> logger;    
-        private readonly IUploadFileService uploadFileService;
-        public IndexModel(ILogger<IndexModel> logger, IUploadFileService uploadFile)
+        private readonly IDocumentsService documentsService;
+        public IndexModel(ILogger<IndexModel> logger, IDocumentsService documentsSer)
         {
             this.logger = logger;
-            this.uploadFileService = uploadFile;
+            this.documentsService = documentsSer;
         }
         public void OnGet()
         {
@@ -21,7 +21,7 @@ namespace InternManagement.Pages.TestPage
         {
             if (file != null)
             {
-               uploadFileService.UploadDocumentAsync(file,1);
+                documentsService.UploadDocumentAsync(file,1);
             }
         }
     }

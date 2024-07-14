@@ -27,9 +27,8 @@ namespace IMSBussinessObjects
 
         [MaxLength(150)]
         public string Major { get; set; }
-
-        public Double Gpa { get; set; }
-        public int TeamId { get; set; }
+        public double Gpa { get; set; }
+        public int? TeamId { get; set; }
         public DateTime Birthday { get; set; }
         public DateTime InternshipStartingDate { get; set; }
         public DateTime InternshipEndingDate { get; set; }

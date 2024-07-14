@@ -79,9 +79,9 @@ namespace IMSBussinessObjects.Data
                 RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
                 Role = 2,
                 Supervisors = new List<Supervisor>
-        {
-            new Supervisor { Team = fullstackTeam }
-        }
+{
+    new Supervisor { Team = fullstackTeam }
+}
             };
             var userSupervisor2 = new User
             {
@@ -91,9 +91,9 @@ namespace IMSBussinessObjects.Data
                 RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
                 Role = 2,
                 Supervisors = new List<Supervisor>
-        {
-            new Supervisor { Team = FETeam }
-        }
+{
+    new Supervisor { Team = FETeam }
+}
             };
             var userSupervisor3 = new User
             {
@@ -103,9 +103,9 @@ namespace IMSBussinessObjects.Data
                 RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
                 Role = 2,
                 Supervisors = new List<Supervisor>
-        {
-            new Supervisor { Team = BETeam }
-        }
+{
+    new Supervisor { Team = BETeam }
+}
             };
             var internUser = new User
             {
@@ -172,8 +172,5 @@ namespace IMSBussinessObjects.Data
 
             await _context.SaveChangesAsync();
         }
-
-
-
     }
 }
