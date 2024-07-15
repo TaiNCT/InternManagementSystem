@@ -84,22 +84,5 @@ namespace InternManagement.Pages.Account
 
             return CryptographicOperations.FixedTimeEquals(hashToVerify, Convert.FromHexString(hash));
         }
-        private void HashPassword(string password, out string hashedPassword, out string refreshToken)
-        {
-            const int keySize = 32;
-            const int iterations = 350_000;
-            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA256;
-
-            var saltInBytes = RandomNumberGenerator.GetBytes(keySize);
-            var hashInBytes = Rfc2898DeriveBytes.Pbkdf2(
-                Encoding.UTF8.GetBytes(password),
-                saltInBytes,
-                iterations,
-                hashAlgorithm,
-                keySize);
-
-            refreshToken = Convert.ToHexString(saltInBytes);
-            hashedPassword = Convert.ToHexString(hashInBytes);
-        }
     }
 }

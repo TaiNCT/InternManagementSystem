@@ -28,11 +28,11 @@ namespace InternManagement.Pages.Interns
         public void OnGet()
         {
             // Get the logged-in user's ID
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (int.TryParse(userIdClaim, out int userId))
+            var userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+            if (!string.IsNullOrEmpty(userEmailClaim))
             {
-                // Get the user details
-                var user = _userRepository.GetUserById(userId);
+                // Get the user details by mail
+                var user = _userRepository.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
                 if (user != null && user.Role == 3) // Role 3 is for Intern
                 {
                     // Get the intern details associated with the user

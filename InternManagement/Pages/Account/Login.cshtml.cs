@@ -9,7 +9,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Xml.Linq;
 
 namespace InternManagement.Pages.Account
 {
@@ -30,7 +29,7 @@ namespace InternManagement.Pages.Account
         [BindProperty, Required, DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public LoginModel(IUserService userService, IInternService internService,IConfiguration configuration)
+        public LoginModel(IUserService userService, IInternService internService, IConfiguration configuration)
         {
             _userService = userService;
             _configuration = configuration;
@@ -70,16 +69,17 @@ namespace InternManagement.Pages.Account
                     // Verify password for default user
                     isAuthenticated = VerifyPassword(Password, defaultUser.Password, defaultUser.RefreshToken);
                     user = defaultUser;
-                    
+
                     Console.WriteLine($"Default user found: {user.Email}, Authenticated: {isAuthenticated}");
                 }
                 string userName;
                 if (user.Username == null)
                 {
                     return Page();
-                }else
+                }
+                else
                 {
-                     userName = user.Username;
+                    userName = user.Username;
                 }
                 if (isAuthenticated)
                 {
@@ -88,7 +88,7 @@ namespace InternManagement.Pages.Account
                         new Claim(ClaimTypes.Email, Email),
                         new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern")
                     };
-                    
+
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     // Sign in with a new session
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
