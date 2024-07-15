@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml.Linq;
 
 namespace InternManagement.Pages.Account
 {
@@ -72,12 +73,13 @@ namespace InternManagement.Pages.Account
                     
                     Console.WriteLine($"Default user found: {user.Email}, Authenticated: {isAuthenticated}");
                 }
+                string userName;
                 if (user.Username == null)
                 {
                     return Page();
                 }else
                 {
-                    string userName = user.Username;
+                     userName = user.Username;
                 }
                 if (isAuthenticated)
                 {
@@ -86,19 +88,18 @@ namespace InternManagement.Pages.Account
                         new Claim(ClaimTypes.Email, Email),
                         new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern")
                     };
-                    TempData["Role"] = $"{user.RoleName}";
+                    
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     // Sign in with a new session
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
-
                     // Safely handle the returnUrl
                     if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
-                      /*  if (_internService.GetInternsByStatus("waiting")!=null && user.Role != 3)
-                        {
-                            TempData["Approve"] = $"{_internService.GetInternsByStatus("waiting").Count} application is waiting to be approve";
-                        }
-                        TempData["done"] = $"{userName} Login Success";*/
+                        /*  if (_internService.GetInternsByStatus("waiting")!=null && user.Role != 3)
+                          {
+                              TempData["Approve"] = $"{_internService.GetInternsByStatus("waiting").Count} application is waiting to be approve";
+                          }*/
+                        TempData["done"] = $"{userName} Login Success";
                         return LocalRedirect(returnUrl);
                     }
                     return LocalRedirect(Url.Content("~/"));

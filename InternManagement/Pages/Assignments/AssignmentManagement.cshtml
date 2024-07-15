@@ -1,12 +1,13 @@
 ﻿@page
+@using IMSBussinessObjects;
 @model InternManagement.Pages.Assignments.AssignmentManagementModel
 @{
     ViewData["Title"] = "Assignment Managment";
 }
 <div class="row">
-    <h2>Add User</h2>
+    <h2>Add Assignment</h2>
     <div class="col-md-4 mt-4">
-        <form method="post" asp-page-handler="CreateUser">
+        <form method="post" asp-page-handler="CreateAssignment">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Assignment.Description" class="control-label"></label>
@@ -19,28 +20,24 @@
                 <span asp-validation-for="Assignment.Deadline" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Assignment.Grade" class="control-label"></label>
-                <input asp-for="Assignment.Grade" class="form-control" type="password" />
-                <span asp-validation-for="Assignment.Grade" class="text-danger"></span>
+                <label for="teamId" class="control-label">Team</label>
+                <select asp-for="Assignment.TeamId" class="form-control" asp-items="Model.Teams">
+                    <option value="">Select a team</option>
+                </select>
+                <span asp-validation-for="Assignment.TeamId" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <label asp-for="Assignment.Weight" class="control-label"></label>
-                <input asp-for="Assignment.Weight" class="form-control" type="password" />
+                <input asp-for="Assignment.Weight" class="form-control" />
                 <span asp-validation-for="Assignment.Weight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="form-check">
-                    <input asp-for="Assignment.Complete" class="form-check-input" type="checkbox" />
-                    <label asp-for="Assignment.Complete" class="form-check-label"></label>
-                </div>
-                <span asp-validation-for="Assignment.Complete" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
                 <input type="submit" value="Create Assignment" class="btn btn-primary" />
             </div>
+         
         </form>
     </div>
-
     <div class="col-md-8">
         @if (Model.Assignments != null && Model.Assignments.Count > 0)
         {
@@ -86,7 +83,7 @@
                                     @Html.DisplayFor(modelItem => item.Complete)
                                 </td>
                                 <td>
-                                    <a asp-page="./Edit" asp-route-id="@item.AssignmentId" class="btn btn-primary">Edit</a> |
+                                    <a asp-page="/Assignments/Edit" asp-route-id="@item.AssignmentId" class="btn btn-primary">Edit</a> |
                                     <a asp-page="./Delete" asp-route-id="@item.AssignmentId" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>

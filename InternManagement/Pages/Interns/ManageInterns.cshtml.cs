@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace InternManagement.Pages.Interns
 {
     [Authorize(Roles = "Admin")]
+
     public class ManageInternModel : PageModel
     {
         private readonly ITeamRepository _teamRepository;

@@ -1,21 +1,19 @@
 ﻿using IMSBussinessObjects;
-using IMSRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IMSServices
 {
     public interface IAssignmentService
     {
-      
-        public Assignment GetAssignmentById(int assignId);
-        public List<Assignment> GetAssignments();
-        public void AddIntern(Assignment assignment);
-        public void RemoveAssignment(int assignId);
-        public void UpdateAssignment(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern);
-        public List<Assignment> GetAssignmentByInternId(int internId);
+        void AddAssignment(Assignment assignment);
+        Assignment GetAssignmentById(int assignId);
+        Task AddAssignmentAsync(Assignment assignment);
+        List<Assignment> GetAssignments();
+        void RemoveAssignment(int assignId);
+        void UpdateAssignment(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern);
+        List<Assignment> GetAssignmentByInternId(int internId);
+        Task<List<Assignment>> GetAssignmentsAsync();
+        Task<Assignment> GetAssignmentByIdAsync(int assignId);
+        Task UpdateAssignmentAsync(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern);
+        Task RemoveAssignmentAsync(int assignId);
     }
 }
