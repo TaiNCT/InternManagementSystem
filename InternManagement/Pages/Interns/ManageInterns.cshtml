@@ -93,30 +93,5 @@
                 }
             </tbody>
         </table>
-
-        <h4>Add New Assignment</h4>
-        <form method="post" asp-page-handler="AddAssignment">
-            <div class="form-group">
-                <label for="Description">Description:</label>
-                <input type="text" id="Description" name="NewAssignment.Description" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="Deadline">Deadline:</label>
-                <input type="date" id="Deadline" name="NewAssignment.Deadline" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="Grade">Grade:</label>
-                <input type="number" id="Grade" name="NewAssignment.Grade" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="Weight">Weight:</label>
-                <input type="number" id="Weight" name="NewAssignment.Weight" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="Complete">Complete:</label>
-                <input type="checkbox" id="Complete" name="NewAssignment.Complete" />
-            </div>
-            <button type="submit" class="btn btn-primary">Add Assignment</button>
-        </form>
     </div>
 }
