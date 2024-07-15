@@ -107,9 +107,9 @@
             var menuItems = new[]
             {
         new { Text = "Home", Icon = "home", Link = Url.Page("/Index") },
+        new { Text = "My Profile", Icon = "briefcase", Link = Url.Page("/Interns/InternProfile") },
         new { Text = "Interns", Icon = "users", Link = Url.Page("/Interns/ManageInterns") },
         new { Text = "Intern Application", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
-        new { Text = "My Profile", Icon = "briefcase", Link = Url.Page("/Interns/InternProfile") },
         new { Text = "Upload Document", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
         new { Text = "Assignment", Icon = "briefcase", Link = Url.Page("/Assignments/AssignmentManagement") },
 
@@ -139,13 +139,13 @@
                     }
 
                     // Hide items for Supervisor role
-                    if (user.IsInRole("Supervisor") && (item.Text == "Intern Application" || item.Text == "Add User/Team" || item.Text == "My Profile" || item.Text == "Upload Document"))
+                    if (user.IsInRole("Supervisor") && (item.Text == "Intern Application" || item.Text == "Add User/Team" || item.Text == "My Profile" || item.Text == "Upload Document" || item.Text== "My Profile"))
                     {
                         continue;
                     }
 
                     // Hide items for Admin
-                    if (user.IsInRole("Admin") && (item.Text == "My Profile" || item.Text == "Upload Document" || item.Text == "Assignment"))
+                    if (user.IsInRole("Admin") && (item.Text == "My Profile" || item.Text == "Upload Document" || item.Text == "Assignment" || item.Text == "My Profile"))
                     {
                         continue;
                     }

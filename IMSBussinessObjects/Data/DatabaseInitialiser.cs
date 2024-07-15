@@ -1,8 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace IMSBussinessObjects.Data
 {
@@ -51,7 +47,7 @@ namespace IMSBussinessObjects.Data
 
         public async Task TrySeedAsync()
         {
-           
+
             if (_context.Teams.Any() && _context.Users.Any()
                 && _context.Interns.Any() && _context.Assignments.Any())
             {
@@ -77,8 +73,6 @@ namespace IMSBussinessObjects.Data
             {
                 TeamName = "Back End"
             };
-          
-
             var userSupervisor1 = new User
             {
                 Username = "Vil",
@@ -174,7 +168,7 @@ namespace IMSBussinessObjects.Data
             };
 
             await _context.Teams.AddRangeAsync(fullstackTeam, FETeam, BETeam);
-            await _context.Users.AddRangeAsync(admin,userSupervisor1, userSupervisor2, userSupervisor3, internUser);
+            await _context.Users.AddRangeAsync(admin, userSupervisor1, userSupervisor2, userSupervisor3, internUser);
             await _context.Interns.AddRangeAsync(intern1);
             await _context.Assignments.AddRangeAsync(assignment1, assignment2, assignment3);
 
