@@ -31,14 +31,17 @@ builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 
-
-
+builder.Services.Configure<SmtpAppSetting>(builder.Configuration.GetSection("SmtpSettings"));
 
 builder.Services.AddScoped<ITeamService, TeamService>();
 builder.Services.AddScoped<ISupervisorService, SupervisorService>();
-builder.Services.AddScoped<ISupervisorRepository, SupervisorRepository>();   
+builder.Services.AddScoped<ISupervisorRepository, SupervisorRepository>();
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddSingleton<TeamDAO>();
+
+builder.Services.AddSingleton<EmailTemplateDao>();
+builder.Services.AddScoped<IEmailTemplateRepository, EmailTemplateRepository>();
+builder.Services.AddScoped<IMailServices, MailServices>();
 
 
 // Register other services

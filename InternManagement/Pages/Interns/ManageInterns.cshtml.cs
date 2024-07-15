@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace InternManagement.Pages.Interns
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Supervisor")]
 
     public class ManageInternModel : PageModel
     {

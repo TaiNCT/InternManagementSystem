@@ -11,14 +11,16 @@ namespace InternManagement.Pages.Admin
     {
         private readonly IInternService _internService;
         private readonly IUserService _userService;
+        private readonly IMailServices _mailService;
 
         public List<Intern> WaitingInterns { get; set; }
         public List<Intern> ArchivedInterns { get; set; }
 
-        public ApproveInternshipsModel(IInternService internService, IUserService userService)
+        public ApproveInternshipsModel(IInternService internService, IUserService userService, IMailServices mailService)
         {
             _internService = internService;
             _userService = userService;
+            _mailService = mailService;
         }
 
         public void OnGet()
@@ -42,6 +44,15 @@ namespace InternManagement.Pages.Admin
                     Role = 3, // Intern
                 };
                 _userService.AddUser(user);
+
+                // sent email 
+                var emailParams = new Dictionary<string, string>()
+                    {
+                        { "Name", $"{user.Username}" },
+
+                    };
+                List<string> toAddress = new List<string> { user.Email };
+                _mailService.SendAsync(EmailType.Welcome_Email, toAddress, new List<string> { }, emailParams);
 
                 // Update intern's UserId and status
                 intern.UserId = user.UserId;

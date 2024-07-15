@@ -1,7 +1,5 @@
-﻿using IMSBussinessObjects;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.IO;
 
 namespace IMSBussinessObjects
 {
@@ -22,7 +20,7 @@ namespace IMSBussinessObjects
         public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<Supervisor> Supervisors { get; set; }
         public virtual DbSet<Intern> Interns { get; set; }
-
+        public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -89,6 +87,8 @@ namespace IMSBussinessObjects
                 .WithMany(t => t.Interns)
                 .HasForeignKey(i => i.TeamId)
                 .OnDelete(DeleteBehavior.Restrict); // Use Restrict or NoAction
+
+            modelBuilder.Seed();
         }
 
         private string GetConnectionString()

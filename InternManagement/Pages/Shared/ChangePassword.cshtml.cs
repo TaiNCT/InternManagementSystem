@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace InternManagement.Pages.Account
+namespace InternManagement.Pages.Shared
 {
     [Authorize]
     public class ChangePasswordModel : PageModel
