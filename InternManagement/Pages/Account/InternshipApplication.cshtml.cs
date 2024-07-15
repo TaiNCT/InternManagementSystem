@@ -41,10 +41,10 @@ namespace InternManagement.Pages.Account
         public async Task<IActionResult> OnPostAsync()
         {
             //ModelState alway invalid
-           /* if (!ModelState.IsValid)
-            {
-                return Page();
-            }*/
+            /* if (!ModelState.IsValid)
+             {
+                 return Page();
+             }*/
 
             try
             {
@@ -59,7 +59,7 @@ namespace InternManagement.Pages.Account
                             target.Dispose();
                         }
                     }
-                    if(CvFile.Length > 0)
+                    if (CvFile.Length > 0)
                     {
                         using (var target = new MemoryStream())
                         {

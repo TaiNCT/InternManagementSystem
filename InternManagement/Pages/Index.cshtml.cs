@@ -60,7 +60,7 @@ namespace InternManagement.Pages
                     }
                     else
                     {
-                        SupervisorByTeam[team.TeamName] = "No User found for Supervisor";
+                        SupervisorByTeam[team.TeamName] = "No Supervisor";
                     }
                 }
                 else

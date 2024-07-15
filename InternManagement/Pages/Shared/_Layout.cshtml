@@ -111,8 +111,7 @@
         new { Text = "Intern Application", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
         new { Text = "My Profile", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
         new { Text = "Upload Document", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
-        new { Text = "Assignment", Icon = "briefcase", Link = Url.Page("/Assignments/AssignmentManagement") },
-
+        new { Text = "Assignment", Icon = "briefcase", Link = Url.Page("/Assignments/AssignmentManagement") }
 
         };
 
@@ -134,7 +133,7 @@
                 @foreach (var item in menuItems)
                 {
                     // Hide items for Intern role
-                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Add User/Team") || item.Text == "Assignment")
+                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Add User/Team" || item.Text == "Assignment"))
                     {
                         continue;
                     }
@@ -151,11 +150,10 @@
                         continue;
                     }
 
-                        <a href="@item.Link" class="btn btn-primary text-left mb-2" style="display: flex; align-items: center;">
-                            <i class="fas fa-@item.Icon mr-2" style="width: 1px;"></i>
-                            <span>@item.Text</span>
-                        </a>
-                    
+                    <a href="@item.Link" class="btn btn-primary text-left mb-2" style="display: flex; align-items: center;">
+                        <i class="fas fa-@item.Icon mr-2" style="width: 1px;"></i>
+                        <span>@item.Text</span>
+                    </a>
                 }
 
                 <div class="btn-group dropdown mb-2">
@@ -202,16 +200,17 @@
                     {
                         <text>Supervisor</text>
                     }
-                    else 
+                    else
                     {
                         <text>Intern</text>
-                    }                 
+                    }
                 </span>
                 <a class="btn btn-danger btn-sm" href="~/Account/Logout">
                     <i class="fas fa-sign-out-alt mr-1"></i>Sign out
                 </a>
             </div>
         </nav>
+
 
         <!-- Main content -->
         <div class="main-content">
