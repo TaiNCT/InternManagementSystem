@@ -1,0 +1,29 @@
+﻿@page
+@model InternManagement.Pages.HomePageModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Intern Management System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto mt-5 text-center">
+                <h1>Welcome to the Intern Management System</h1>
+                <p>Please log in to access your account.</p>
+                <a href="/Account/Login" class="btn btn-primary">Log in</a>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

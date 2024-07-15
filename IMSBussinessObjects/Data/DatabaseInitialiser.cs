@@ -167,6 +167,7 @@ namespace IMSBussinessObjects.Data
                 Complete = true
             };
 
+
             await _context.Teams.AddRangeAsync(fullstackTeam, FETeam, BETeam);
             await _context.Users.AddRangeAsync(admin, userSupervisor1, userSupervisor2, userSupervisor3, internUser);
             await _context.Interns.AddRangeAsync(intern1);

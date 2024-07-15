@@ -1,12 +1,11 @@
 using IMSServices;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace InternManagement.Pages.TestPage
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> logger;    
+        private readonly ILogger<IndexModel> logger;
         private readonly IDocumentsService documentsService;
         public IndexModel(ILogger<IndexModel> logger, IDocumentsService documentsSer)
         {
@@ -17,11 +16,11 @@ namespace InternManagement.Pages.TestPage
         {
         }
 
-        public async void  OnPostAsync(IFormFile file)
+        public async void OnPostAsync(IFormFile file)
         {
             if (file != null)
             {
-                documentsService.UploadDocumentAsync(file,1);
+                documentsService.UploadDocumentAsync(file, 1);
             }
         }
     }

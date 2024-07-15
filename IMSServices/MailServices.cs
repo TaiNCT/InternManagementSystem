@@ -22,12 +22,6 @@ namespace IMSServices
             var template = _emailTemplateRepository.GetEmailsByName(name);
             if (template == null) return;
 
-            await SendAsync(template, toAddress, ccAddresses, param);
-        }
-
-
-        private async Task SendAsync(EmailTemplate template, List<string> toAddress, List<string> ccAddresses, Dictionary<string, string> param)
-        {
             var smtpAppSetting = new SmtpAppSetting // Assuming you have a class SmtpAppSetting with necessary properties
             {
                 SmtpHost = _smtpAppSetting.SmtpHost,
@@ -67,6 +61,7 @@ namespace IMSServices
                     }
                 }
             }
+
         }
 
         private static string ReplaceParam(string data, Dictionary<string, string> parameters)

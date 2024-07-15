@@ -31,6 +31,7 @@ builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 
+// For send email
 builder.Services.Configure<SmtpAppSetting>(builder.Configuration.GetSection("SmtpSettings"));
 
 builder.Services.AddScoped<ITeamService, TeamService>();
@@ -114,7 +115,14 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapRazorPages();
-    endpoints.MapDefaultControllerRoute();
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapGet("/", context =>
+    {
+        context.Response.Redirect("/HomePage");
+        return Task.CompletedTask;
+    });
 });
 
 
