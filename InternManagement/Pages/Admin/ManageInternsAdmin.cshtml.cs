@@ -9,16 +9,16 @@ using System.Security.Claims;
 
 namespace InternManagement.Pages.Interns
 {
-    [Authorize(Roles = "Supervisor")]
+    [Authorize(Roles = "Admin")]
 
-    public class ManageInternModel : PageModel
+    public class ManageInternAdminModel : PageModel
     {
         private readonly ITeamService _teamService;
         private readonly IInternService _internService;
         private readonly IAssignmentService _assignmentService;
         private readonly IUserService _userService;
         private readonly ISupervisorService _supervisorService;
-        public ManageInternModel(ITeamService teamService, IInternService internService, IAssignmentService assignmentService, IUserService userService, ISupervisorService supervisorService)
+        public ManageInternAdminModel(ITeamService teamService, IInternService internService, IAssignmentService assignmentService, IUserService userService, ISupervisorService supervisorService)
         {
             _teamService = teamService;
             _internService = internService;
