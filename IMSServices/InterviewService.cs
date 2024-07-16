@@ -25,10 +25,17 @@ namespace IMSServices
         {
             return _interviewRepository.GetInterviewById(interviewID);
         }
-
-        public void RemoveIntern(int interviewID)
+        public void RemoveExpiredInterviews(List<Interview> expiredInterviews)
         {
-            _interviewRepository.RemoveIntern(interviewID);
+            foreach (var interview in expiredInterviews)
+            {
+                _interviewRepository.RemoveInterview(interview.InterviewId);
+            }
+        }
+
+        public void RemoveInterview(int interviewID)
+        {
+            _interviewRepository.RemoveInterview(interviewID);
         }
 
         public void UpdateInterview(int interviewID, Interview newInterview)

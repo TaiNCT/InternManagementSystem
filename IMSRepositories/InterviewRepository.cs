@@ -15,8 +15,8 @@ namespace IMSRepositories
         public Interview GetInterviewById(int interviewID)
         => InterviewDAO.Instance.GetInterviewById(interviewID);
 
-        public void RemoveIntern(int interviewID)
-        => InterviewDAO.Instance.RemoveIntern(interviewID);
+        public void RemoveInterview(int interviewID)
+        => InterviewDAO.Instance.RemoveInterview(interviewID);
 
         public void UpdateInterview(int interviewID, Interview newInterview)
         => InterviewDAO.Instance.UpdateInterview(interviewID, newInterview);

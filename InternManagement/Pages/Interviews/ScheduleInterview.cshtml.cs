@@ -79,7 +79,6 @@ namespace InternManagement.Pages.Interviews
                         { "InterviewDate", $"{Interview.InterviewDate}" },
                         { "InterviewPlace", $"{Interview.Location}" },
                         { "Room", $"{Interview.RoomNumber}" },
-
                     };
             List<string> toAddressIntern = new List<string> { Intern.Email };
             _mailService.SendAsync(EmailType.Interview_Intern, toAddressIntern, new List<string> { }, emailParamsIntern);
@@ -87,13 +86,13 @@ namespace InternManagement.Pages.Interviews
             // Send mail Supervisor
             var emailParamsSuperVisor = new Dictionary<string, string>()
                     {
-                        { "SupervisorName", $"{Intern.FullName}" },
+                        { "SupervisorName", $"{Supervisor.User.Username}" },
                         { "InternName", $"{Intern.FullName}" },
                         { "InterviewDate", $"{Interview.InterviewDate}" },
                         { "InterviewPlace", $"{Interview.Location}" },
                         { "Room", $"{Interview.RoomNumber}" },
                     };
-            List<string> toAddressSuperVisor = new List<string> { Intern.Email };
+            List<string> toAddressSuperVisor = new List<string> { Supervisor.User.Email };
             _mailService.SendAsync(EmailType.Interview_Intern, toAddressSuperVisor, new List<string> { }, emailParamsSuperVisor);
             SendNotification(existingInterview);
 

@@ -45,7 +45,7 @@ namespace IMSDaos
             }
         }
 
-        public void RemoveIntern(int interviewID)
+        public void RemoveInterview(int interviewID)
         {
             Interview interview = GetInterviewById(interviewID);
             if (interview != null)

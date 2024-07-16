@@ -27,14 +27,23 @@ namespace InternManagement.Pages.Interviews
 
         public void OnGet()
         {
+            // Get all interviews
             Interviews = _interviewService.GetAllInterview();
 
+            // Filter out expired interviews
+            Interviews = Interviews.Where(i => i.InterviewDate == null || i.InterviewDate >= DateTime.Now).ToList();
+
+            // Populate related properties
             foreach (var interview in Interviews)
             {
                 interview.Intern = _internService.GetInternById(interview.InternId);
                 interview.Team = _teamService.GetTeamById(interview.TeamId);
                 interview.Supervisor = _supervisorService.GetSupervisorById(interview.SupervisorId);
             }
+
+            // Remove expired interviews from the database
+            var expiredInterviews = Interviews.Where(i => i.InterviewDate != null && i.InterviewDate < DateTime.Now).ToList();
+            _interviewService.RemoveExpiredInterviews(expiredInterviews);
         }
     }
 }
