@@ -17,7 +17,6 @@ namespace IMSBussinessObjects
         public string? RefreshToken { get; set; }
 
         [MaxLength(255)]
-
         public string Email { get; set; }
 
         [MaxLength(100)]
