@@ -14,6 +14,7 @@ namespace IMSBussinessObjects
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CampaignId { get; set; }
+        public string Tittle { get; set; }
         [Required]
         public string Description { get; set; }
         public DateTime createdDate { get; set; }
