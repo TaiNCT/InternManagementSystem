@@ -25,8 +25,8 @@
     <h3>Interns in @Model.SelectedTeam.TeamName</h3>
     <table class="table table-striped">
         <thead>
-            <tr>
-                <th></th>
+            <tr class="text-center">
+                <th>Avatar</th>
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone</th>
@@ -41,13 +41,13 @@
         <tbody>
             @foreach (var intern in Model.Interns)
             {
-                <tr>
+                <tr class="text-center align-middle">
                     <td>
                         @if (intern.PhotoUrl != null && intern.PhotoUrl.Length > 0)
                         {
                             var base64Photo = Convert.ToBase64String(intern.PhotoUrl);
                             var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64Photo);
-                            <img src="@imgSrc" alt="Intern Photo" class="img-thumbnail" style="max-width: 200px;" />
+                            <img src="@imgSrc" alt="Intern Photo" class="img-thumbnail" style="width: 100px; height: 100px;" />
                         }
                     </td>
                     <td>
@@ -73,6 +73,7 @@
         </tbody>
     </table>
 }
+
 
 @if (Model.SelectedIntern != null)
 {
