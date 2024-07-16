@@ -72,11 +72,7 @@ namespace InternManagement.Pages.Account
 
                     Console.WriteLine($"Default user found: {user.Email}, Authenticated: {isAuthenticated}");
                 }
-                string userName = null;
-                if (user.Username != null)
-                {
-                    userName = user.Username;
-                }
+                string userName = user.Username;
                 if (isAuthenticated)
                 {
                     var claims = new List<Claim>
@@ -98,7 +94,7 @@ namespace InternManagement.Pages.Account
                         TempData["done"] = $"{userName} Login Success";
                         return LocalRedirect(returnUrl);
                     }
-                    return LocalRedirect(Url.Content("/Index"));
+                    return LocalRedirect(Url.Content("~/Index"));
                 }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
