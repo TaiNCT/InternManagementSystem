@@ -13,5 +13,6 @@ namespace IMSServices
         public Supervisor GetSupervisorById(int supId);
         public void AddSupervisor(int UserId, Team newTeam);
         public Supervisor GetSupervisorByUserId(int userId);
+        List<Supervisor> GetSupervisorsByUserId(int userId);
     }
 }

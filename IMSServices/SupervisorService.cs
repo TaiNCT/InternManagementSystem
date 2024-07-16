@@ -34,5 +34,10 @@ namespace IMSServices
         {
             return _supervisorRepository.GetSupervisorByUserId(userId);
         }
+        public List<Supervisor> GetSupervisorsByUserId(int userId)
+        {
+            return _supervisorRepository.GetSupervisorsByUserId(userId);
+        }
+
     }
 }

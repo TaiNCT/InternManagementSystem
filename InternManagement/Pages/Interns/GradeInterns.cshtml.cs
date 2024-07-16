@@ -42,53 +42,59 @@ namespace InternManagement.Pages.Interns
         public Intern SelectedIntern { get; set; }
         public List<Assignment> Assignments { get; set; }
         public List<Intern> Interns { get; set; }
-        public Supervisor supervisor { get; set; }
+        public List<Supervisor> supervisor { get; set; }
 
         public void OnGet()
         {
             string? userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
             User? user = _userService.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
 
-
-
             if (user != null)
             {
-                supervisor = _supervisorService.GetSupervisorByUserId(user.UserId);
+                var supervisors = _supervisorService.GetSupervisorsByUserId(user.UserId);
 
-                if (supervisor != null)
+                if (supervisors != null && supervisors.Any())
                 {
-                    // Get list of all teams
-                    TeamsSelectList = _teamService.GetAllTeams().Where(x => x.TeamId == supervisor.TeamId)
+                    // Collect all team IDs managed by these supervisors
+                    var teamIds = supervisors.Select(s => s.TeamId).ToList();
+
+                    // Get list of all teams managed by the supervisor
+                    TeamsSelectList = _teamService.GetAllTeams()
+                        .Where(t => teamIds.Contains(t.TeamId))
                         .Select(t => new SelectListItem
                         {
                             Value = t.TeamId.ToString(),
                             Text = t.TeamName
                         })
                         .ToList();
-                    // Check if TeamId is specified, otherwise default to supervisor's team
-                    if (!TeamId.HasValue)
+
+                    // Check if TeamId is specified, otherwise default to the first team managed by the supervisor
+                    if (!TeamId.HasValue && teamIds.Any())
                     {
-                        TeamId = supervisor.TeamId;
+                        TeamId = teamIds.First();
                     }
 
                     // Get the selected team
-                    SelectedTeam = _teamService.GetTeamById(TeamId.Value);
+                    if (TeamId.HasValue)
+                    {
+                        SelectedTeam = _teamService.GetTeamById(TeamId.Value);
 
-                    if (SelectedTeam != null)
-                    {
-                        // Fetch interns for the selected team
-                        Interns = _internService.GetApprovedInternsByTeamId(TeamId.Value).ToList();
-                        InternsSelectList = Interns
-                            .Select(i => new SelectListItem
-                            {
-                                Value = i.InternId.ToString(),
-                                Text = i.FullName
-                            })
-                            .ToList();
-                    }
-                    else
-                    {
-                        // Handle case where SelectedTeam is null (e.g., team not found)
+                        if (SelectedTeam != null)
+                        {
+                            // Fetch interns for the selected team
+                            Interns = _internService.GetApprovedInternsByTeamId(TeamId.Value).ToList();
+                            InternsSelectList = Interns
+                                .Select(i => new SelectListItem
+                                {
+                                    Value = i.InternId.ToString(),
+                                    Text = i.FullName
+                                })
+                                .ToList();
+                        }
+                        else
+                        {
+                            // Handle case where SelectedTeam is null (e.g., team not found)
+                        }
                     }
                 }
                 else
@@ -101,6 +107,7 @@ namespace InternManagement.Pages.Interns
                             Text = t.TeamName
                         })
                         .ToList();
+
                     // Handle case where supervisor is null (e.g., user is not a supervisor)
                     if (TeamId.HasValue)
                     {
@@ -128,6 +135,7 @@ namespace InternManagement.Pages.Interns
                 Assignments = _assignmentService.GetAssignmentByInternId(InternId.Value);
             }
         }
+
 
 
         public IActionResult OnPostDelete(int id)

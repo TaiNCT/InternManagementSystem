@@ -48,6 +48,10 @@ namespace IMSDaos
         public Supervisor GetSupervisorByUserId(int userId)
         {
             return db.Supervisors.FirstOrDefault(x => x.UserId == userId);
-        }   
+        }
+        public List<Supervisor> GetSupervisorsByUserId(int userId)
+        {
+            return db.Supervisors.Where(x => x.UserId == userId).ToList();
+        }
     }
 }

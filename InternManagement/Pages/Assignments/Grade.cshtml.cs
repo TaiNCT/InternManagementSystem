@@ -65,12 +65,16 @@ namespace InternManagement.Pages.Assignments
             // Update only the Grade and Complete properties
             assignmentToUpdate.Grade = Assignment.Grade;
             assignmentToUpdate.Feedback = Assignment.Feedback;
-            assignmentToUpdate.Complete = Assignment.Complete;
+            // assignmentToUpdate.Complete = Assignment.Complete; // Uncomment if Complete needs to be updated
 
             // Save the changes
-            await _assignmentService.UpdateAssignmentAsync(id,assignmentToUpdate);
+            await _assignmentService.UpdateAssignmentAsync(id, assignmentToUpdate);
 
-            return RedirectToPage("./AssignmentManagement");
+            // Get the intern ID associated with the assignment
+            var internId = assignmentToUpdate.InternId;
+
+            // Redirect to the desired URL
+            return RedirectToPage("/Interns/GradeInterns", new { internId, handler = "Details" });
         }
 
     }

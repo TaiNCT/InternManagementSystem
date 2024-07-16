@@ -7,17 +7,17 @@
 <form method="post">
     <div class="form-group">
         <label asp-for="Assignment.Description" class="control-label"></label>
-        <input asp-for="Assignment.Description" class="form-control" />
+        <input asp-for="Assignment.Description" class="form-control" readonly />
         <span asp-validation-for="Assignment.Description" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Assignment.Deadline" class="control-label"></label>
-        <input asp-for="Assignment.Deadline" class="form-control" />
+        <input asp-for="Assignment.Deadline" class="form-control" readonly/>
         <span asp-validation-for="Assignment.Deadline" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Assignment.Weight " class="control-label"></label>
-        <input asp-for="Assignment.Weight " class="form-control" />
+        <input asp-for="Assignment.Weight " class="form-control" readonly />
         <span asp-validation-for="Assignment.Weight " class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -26,7 +26,7 @@
     </div>
     <div class="form-group"> @* change label just view *@
         <label asp-for="Assignment.Submited" class="control-label"></label>
-        <input asp-for="Assignment.Submited" class="form-control" />
+        <input asp-for="Assignment.Submited" class="form-control" readonly />
         <span asp-validation-for="Assignment.Submited" class="text-danger"></span>
     </div>
     <div class="form-group">
