@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240716081947_IntialCreate")]
-    partial class IntialCreate
+    [Migration("20240716142826_updateDBV1")]
+    partial class updateDBV1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,12 +43,21 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<int?>("DocumentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Feedback")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Grade")
                         .HasColumnType("int");
 
                     b.Property<int?>("InternId")
                         .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<string>("Submited")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TeamId")
                         .IsRequired()
@@ -59,6 +68,8 @@ namespace IMSBussinessObjects.Migrations
 
                     b.HasKey("AssignmentId");
 
+                    b.HasIndex("DocumentId");
+
                     b.HasIndex("InternId");
 
                     b.HasIndex("TeamId");
@@ -66,7 +77,7 @@ namespace IMSBussinessObjects.Migrations
                     b.ToTable("Assignments");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.Documents", b =>
+            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
                 {
                     b.Property<int>("DocumentId")
                         .ValueGeneratedOnAdd()
@@ -257,16 +268,14 @@ namespace IMSBussinessObjects.Migrations
                     b.Property<int>("InternId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("InterviewDate")
+                    b.Property<DateTime?>("InterviewDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("RoomNumber")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -406,6 +415,10 @@ namespace IMSBussinessObjects.Migrations
 
             modelBuilder.Entity("IMSBussinessObjects.Assignment", b =>
                 {
+                    b.HasOne("IMSBussinessObjects.Document", "Documents")
+                        .WithMany()
+                        .HasForeignKey("DocumentId");
+
                     b.HasOne("IMSBussinessObjects.Intern", "Intern")
                         .WithMany("Assignments")
                         .HasForeignKey("InternId")
@@ -418,12 +431,14 @@ namespace IMSBussinessObjects.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("Documents");
+
                     b.Navigation("Intern");
 
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.Documents", b =>
+            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
                 {
                     b.HasOne("IMSBussinessObjects.Intern", "Intern")
                         .WithMany("Documents")

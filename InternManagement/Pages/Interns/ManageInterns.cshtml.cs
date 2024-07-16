@@ -4,27 +4,21 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis;
-using System.Security.Claims;
 
 namespace InternManagement.Pages.Interns
 {
-    [Authorize(Roles = "Admin,Supervisor")]
+    [Authorize(Roles = "Admin, Supervisor")]
 
     public class ManageInternModel : PageModel
     {
         private readonly ITeamService _teamService;
         private readonly IInternService _internService;
         private readonly IAssignmentService _assignmentService;
-        private readonly IUserService _userService;
-        private readonly ISupervisorService _supervisorService;
-        public ManageInternModel(ITeamService teamService, IInternService internService, IAssignmentService assignmentService, IUserService userService, ISupervisorService supervisorService)
+        public ManageInternModel(ITeamService teamService, IInternService internService, IAssignmentService assignmentService)
         {
+            _assignmentService = assignmentService;
             _teamService = teamService;
             _internService = internService;
-            _assignmentService = assignmentService;
-            _userService = userService;
-            _supervisorService = supervisorService;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -38,18 +32,12 @@ namespace InternManagement.Pages.Interns
         public List<SelectListItem> InternsSelectList { get; set; }
 
         public Team SelectedTeam { get; set; }
-
         public Intern SelectedIntern { get; set; }
         public List<Assignment> Assignments { get; set; }
         public List<Intern> Interns { get; set; }
-        public Supervisor supervisor { get; set; }
 
         public void OnGet()
         {
-            string? userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
-            User? user = _userService.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
-
-            // Get list of all teams
             TeamsSelectList = _teamService.GetAllTeams()
                 .Select(t => new SelectListItem
                 {
@@ -57,73 +45,28 @@ namespace InternManagement.Pages.Interns
                     Text = t.TeamName
                 })
                 .ToList();
-
-            if (user != null)
+            if (TeamId.HasValue)
             {
-                supervisor = _supervisorService.GetSupervisorByUserId(user.UserId);
-
-                if (supervisor != null)
-                {
-                    // Check if TeamId is specified, otherwise default to supervisor's team
-                    if (!TeamId.HasValue)
+                SelectedTeam = _teamService.GetTeamById(TeamId.Value);
+                Interns = _internService.GetApprovedInternsByTeamId(TeamId.Value).ToList();
+                InternsSelectList = Interns
+                    .Select(i => new SelectListItem
                     {
-                        TeamId = supervisor.TeamId;
-                    }
-
-                    // Get the selected team
-                    SelectedTeam = _teamService.GetTeamById(TeamId.Value);
-
-                    if (SelectedTeam != null)
-                    {
-                        // Fetch interns for the selected team
-                        Interns = _internService.GetApprovedInternsByTeamId(TeamId.Value).ToList();
-                        InternsSelectList = Interns
-                            .Select(i => new SelectListItem
-                            {
-                                Value = i.InternId.ToString(),
-                                Text = i.FullName
-                            })
-                            .ToList();
-                    }
-                    else
-                    {
-                        // Handle case where SelectedTeam is null (e.g., team not found)
-                    }
-                }
-                else
-                {
-                    // Handle case where supervisor is null (e.g., user is not a supervisor)
-                    if (TeamId.HasValue)
-                    {
-                        SelectedTeam = _teamService.GetTeamById(TeamId.Value);
-                        Interns = _internService.GetApprovedInternsByTeamId(TeamId.Value).ToList();
-                        InternsSelectList = Interns
-                            .Select(i => new SelectListItem
-                            {
-                                Value = i.InternId.ToString(),
-                                Text = i.FullName
-                            })
-                            .ToList();
-                    }
-                    if (InternId.HasValue)
-                    {
-                        SelectedIntern = _internService.GetInternById(InternId.Value);
-                        Assignments = _assignmentService.GetAssignmentByInternId(InternId.Value);
-                    }
-                }
+                        Value = i.InternId.ToString(),
+                        Text = i.FullName
+                    })
+                    .ToList();
             }
-
-            if (InternId.HasValue)
+            if (InternId != null)
             {
-                SelectedIntern = _internService.GetInternById(InternId.Value);
-                Assignments = _assignmentService.GetAssignmentByInternId(InternId.Value);
+                SelectedIntern = _internService.GetInternById(InternId);
+                Assignments = _assignmentService.GetAssignmentByInternId(InternId);
             }
         }
 
-
         public IActionResult OnPostDelete(int id)
         {
-            Intern intern = _internService.GetInternById(id);
+            var intern = _internService.GetInternById(id);
             if (intern != null)
             {
                 _internService.RemoveIntern(id);

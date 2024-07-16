@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IMSBussinessObjects.Migrations
 {
-    public partial class IntialCreate : Migration
+    public partial class updateDBV1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -124,37 +124,6 @@ namespace IMSBussinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Assignments",
-                columns: table => new
-                {
-                    AssignmentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TeamId = table.Column<int>(type: "int", nullable: false),
-                    InternId = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Deadline = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Grade = table.Column<int>(type: "int", nullable: true),
-                    Weight = table.Column<int>(type: "int", nullable: true),
-                    Complete = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Assignments", x => x.AssignmentId);
-                    table.ForeignKey(
-                        name: "FK_Assignments_Interns_InternId",
-                        column: x => x.InternId,
-                        principalTable: "Interns",
-                        principalColumn: "InternId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Assignments_Teams_TeamId",
-                        column: x => x.TeamId,
-                        principalTable: "Teams",
-                        principalColumn: "TeamId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Documents",
                 columns: table => new
                 {
@@ -213,9 +182,9 @@ namespace IMSBussinessObjects.Migrations
                 {
                     InterviewId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    InterviewDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    RoomNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    InterviewDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    RoomNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     TeamId = table.Column<int>(type: "int", nullable: false),
                     InternId = table.Column<int>(type: "int", nullable: false),
                     SupervisorId = table.Column<int>(type: "int", nullable: false)
@@ -243,6 +212,45 @@ namespace IMSBussinessObjects.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Assignments",
+                columns: table => new
+                {
+                    AssignmentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TeamId = table.Column<int>(type: "int", nullable: false),
+                    InternId = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Deadline = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Grade = table.Column<int>(type: "int", nullable: true),
+                    Weight = table.Column<int>(type: "int", nullable: true),
+                    Complete = table.Column<bool>(type: "bit", nullable: false),
+                    DocumentId = table.Column<int>(type: "int", nullable: true),
+                    Submited = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Feedback = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Assignments", x => x.AssignmentId);
+                    table.ForeignKey(
+                        name: "FK_Assignments_Documents_DocumentId",
+                        column: x => x.DocumentId,
+                        principalTable: "Documents",
+                        principalColumn: "DocumentId");
+                    table.ForeignKey(
+                        name: "FK_Assignments_Interns_InternId",
+                        column: x => x.InternId,
+                        principalTable: "Interns",
+                        principalColumn: "InternId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Assignments_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "TeamId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "EmailTemplates",
                 columns: new[] { "Id", "Body", "Description", "Name", "Params", "Status", "Subject" },
@@ -257,6 +265,11 @@ namespace IMSBussinessObjects.Migrations
                 table: "EmailTemplates",
                 columns: new[] { "Id", "Body", "Description", "Name", "Params", "Status", "Subject" },
                 values: new object[] { 3, "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace] room [Room].", "Email này để gửi supervisor đi phỏng vấn intern.", "Interview_Supervisor", "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace], [Room]", true, "Interview" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Assignments_DocumentId",
+                table: "Assignments",
+                column: "DocumentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Assignments_InternId",
@@ -327,9 +340,6 @@ namespace IMSBussinessObjects.Migrations
                 name: "Assignments");
 
             migrationBuilder.DropTable(
-                name: "Documents");
-
-            migrationBuilder.DropTable(
                 name: "EmailTemplates");
 
             migrationBuilder.DropTable(
@@ -337,6 +347,9 @@ namespace IMSBussinessObjects.Migrations
 
             migrationBuilder.DropTable(
                 name: "Notifications");
+
+            migrationBuilder.DropTable(
+                name: "Documents");
 
             migrationBuilder.DropTable(
                 name: "Supervisors");
