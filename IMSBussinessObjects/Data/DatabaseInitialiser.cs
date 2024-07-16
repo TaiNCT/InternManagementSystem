@@ -47,12 +47,13 @@ namespace IMSBussinessObjects.Data
 
         public async Task TrySeedAsync()
         {
-
             if (_context.Teams.Any() && _context.Users.Any()
                 && _context.Interns.Any() && _context.Assignments.Any())
             {
                 return;
             }
+
+            // Create entities
             var admin = new User
             {
                 Username = "Admin",
@@ -61,160 +62,195 @@ namespace IMSBussinessObjects.Data
                 Role = 1,
                 Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A"
             };
+
             var fullstackTeam = new Team
             {
                 TeamName = "FullStack"
             };
+
             var FETeam = new Team
             {
                 TeamName = "Front End"
             };
+
             var BETeam = new Team
             {
                 TeamName = "Back End"
             };
-            var userSupervisor1 = new User
-            {
-                Username = "Vil",
-                Email = "vil@gmail.com",
-                Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
-                RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
-                Role = 2,
-                Supervisors = new List<Supervisor>
-{
-    new Supervisor { Team = fullstackTeam }
-}
-            };
-            var userSupervisor2 = new User
-            {
-                Username = "Alsha",
-                Email = "Alsha@gmail.com",
-                Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
-                RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
-                Role = 2,
-                Supervisors = new List<Supervisor>
-{
-    new Supervisor { Team = FETeam }
-}
-            };
-            var userSupervisor3 = new User
-            {
-                Username = "Elen",
-                Email = "Elen@gmail.com",
-                Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
-                RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
-                Role = 2,
-                Supervisors = new List<Supervisor>
-{
-    new Supervisor { Team = BETeam }
-}
-            };
-            var internUser = new User
-            {
-                Username = "vinh",
-                Email = "Vinh@gmail.com",
-                Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
-                RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
-                Role = 3,
 
-            };
-            var intern1 = new Intern
-            {
-                FullName = "vinh",
-                PersonalId = "123456789",
-                PhoneNumber = "555-1234",
-                Email = "Vinh@gmail.com",
-                Uni = "Example University",
-                Major = "Computer Science",
-                Gpa = 4,
-                Team = fullstackTeam,
-                Birthday = new DateTime(1998, 4, 12),
-                InternshipStartingDate = new DateTime(2024, 7, 1),
-                InternshipEndingDate = new DateTime(2024, 7, 30),
-                OverallSuccess = 90,
-                Status = "approved",
-                User = internUser
-            };
+            var supervisors = new List<User>
+    {
+        new User
+        {
+            Username = "Vil",
+            Email = "vil@gmail.com",
+            Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
+            RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
+            Role = 2,
+            Supervisors = new List<Supervisor> { new Supervisor { Team = fullstackTeam } }
+        },
+        new User
+        {
+            Username = "Alsha",
+            Email = "Alsha@gmail.com",
+            Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
+            RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
+            Role = 2,
+            Supervisors = new List<Supervisor> { new Supervisor { Team = FETeam } }
+        },
+        new User
+        {
+            Username = "Elen",
+            Email = "Elen@gmail.com",
+            Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
+            RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
+            Role = 2,
+            Supervisors = new List<Supervisor> { new Supervisor { Team = BETeam } }
+        }
+    };
 
-            var assignment1 = new Assignment
-            {
-                Team = fullstackTeam,
-                Intern = intern1,
-                Description = "Develop a new feature for the project",
-                Deadline = new DateTime(2024, 3, 15),
-                Grade = 85,
-                Weight = 20,
-                Complete = false,
-                Submited="abc",
-                
+            var internUsers = new List<User>
+    {
+        new User
+        {
+            Username = "vinh",
+            Email = "Vinh@gmail.com",
+            Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
+            RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
+            Role = 3
+        },
+        new User
+        {
+            Username = "john",
+            Email = "john@gmail.com",
+            Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
+            RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
+            Role = 3
+        },
+        // Add more interns as needed
+    };
 
-                
-            };
-            var assignment2 = new Assignment
-            {
-                Team = fullstackTeam,
-                Intern = intern1,
-                Description = "Develop a Update feature for the project",
-                Deadline = new DateTime(2024, 3, 15),
-                Grade = 95,
-                Weight = 20,
-                Complete = false
-            };
-            var assignment3 = new Assignment
-            {
-                Team = fullstackTeam,
-                Intern = intern1,
-                Description = "Develop a create feature for the project",
-                Deadline = new DateTime(2024, 3, 15),
-                Grade = 75,
-                Weight = 20,
-                Complete = false
-            };
+            var interns = new List<Intern>
+    {
+        new Intern
+        {
+            FullName = "Vinh",
+            PersonalId = "123456789",
+            PhoneNumber = "555-1234",
+            Email = "Vinh@gmail.com",
+            Uni = "Example University",
+            Major = "Computer Science",
+            Gpa = 4,
+            Team = fullstackTeam,
+            Birthday = new DateTime(1998, 4, 12),
+            InternshipStartingDate = new DateTime(2024, 7, 1),
+            InternshipEndingDate = new DateTime(2024, 7, 30),
+            OverallSuccess = 90,
+            Status = "approved",
+            User = internUsers[0] // Associate with the first user in the list
+        },
+        new Intern
+        {
+            FullName = "John",
+            PersonalId = "987654321",
+            PhoneNumber = "555-4321",
+            Email = "john@gmail.com",
+            Uni = "Example University",
+            Major = "Computer Engineering",
+            Gpa = 3.8,
+            Team = fullstackTeam,
+            Birthday = new DateTime(1997, 6, 15),
+            InternshipStartingDate = new DateTime(2024, 7, 1),
+            InternshipEndingDate = new DateTime(2024, 7, 30),
+            OverallSuccess = 85,
+            Status = "approved",
+            User = internUsers[1] // Associate with the second user in the list
+        },
+        // Add more interns as needed
+    };
 
-            var emailTemplate = new EmailTemplate
-            {
-                Id = 1,
-                Name = "Welcome_Email",
-                Status = true,
-                Body = "Chào mừng bạn đến với IMS! Kính gửi [Name], cảm ơn bạn đã tham gia cùng chúng tôi.",
-                Params = "[Name]",
-                Subject = "Welcome to IMS!",
-                Description = "Email này được gửi để chào đón người dùng mới."
-            };
-            var emailTemplate2 = new EmailTemplate
-            {
-                Id = 2,
-                Name = "Interview_Intern",
-                Status = true,
-                Body = "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace].",
-                Params = "[Name], [InterviewDate], [InterviewPlace]",
-                Subject = "Interview",
-                Description = "Email này để gửi intern đi phỏng vấn."
-            };
-            var emailTemplate3 = new EmailTemplate
-            {
-                Id = 3,
-                Name = "Interview_Supervisor",
-                Status = true,
-                Body = "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace].",
-                Params = "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace]",
-                Subject = "Interview",
-                Description = "Email này để gửi supervisor đi phỏng vấn intern."
-            };
+            var assignments = new List<Assignment>
+    {
+        new Assignment
+        {
+            Team = fullstackTeam,
+            Intern = interns[0], // Associate with the first intern in the list
+            Description = "Develop a new feature for the project",
+            Deadline = new DateTime(2024, 3, 15),
+            Grade = 85,
+            Weight = 20,
+            Feedback="good",
+            Submited="abc",
+            Complete = true
+        },
+        new Assignment
+        {
+            Team = fullstackTeam,
+            Intern = interns[0], // Associate with the first intern in the list
+            Description = "Develop an update feature for the project",
+            Deadline = new DateTime(2024, 3, 15),
+            Grade = 95,
+            Weight = 20,
+            Feedback="good",
+            Submited="abc",
+            Complete = true
+        },
+        new Assignment
+        {
+            Team = fullstackTeam,
+            Intern = interns[0], // Associate with the first intern in the list
+            Description = "Develop a create feature for the project",
+            Deadline = new DateTime(2024, 3, 15),
+            Grade = 75,
+            Weight =0 ,
+            Complete = false
+        },new Assignment
+        {
+            Team = fullstackTeam,
+            Intern = interns[1], // Associate with the first intern in the list
+            Description = "Develop a new feature for the project",
+            Deadline = new DateTime(2024, 3, 15),
+            Grade = 100,
+            Weight = 20,
+            Feedback="good",
+            Submited="abc",
+            Complete = true
+        },
+        new Assignment
+        {
+            Team = fullstackTeam,
+            Intern = interns[1], // Associate with the first intern in the list
+            Description = "Develop an update feature for the project",
+            Deadline = new DateTime(2024, 3, 15),
+            Grade = 100,
+            Weight = 20,
+            Feedback="good",
+            Submited="abc",
+            Complete = true
+        },
+        new Assignment
+        {
+            Team = fullstackTeam,
+            Intern = interns[1], // Associate with the first intern in the list
+            Description = "Develop a create feature for the project",
+            Deadline = new DateTime(2024, 3, 15),
+            Grade = 0,
+            Weight = 20,
+            Complete = false
+        }
 
+    };
 
-
-
-
-
-
+            // Add entities to database context and save changes
             await _context.Teams.AddRangeAsync(fullstackTeam, FETeam, BETeam);
-            await _context.Users.AddRangeAsync(admin, userSupervisor1, userSupervisor2, userSupervisor3, internUser);
-            await _context.Interns.AddRangeAsync(intern1);
-            await _context.Assignments.AddRangeAsync(assignment1, assignment2, assignment3);
-            //await _context.EmailTemplates.AddRangeAsync(emailTemplate, emailTemplate2, emailTemplate3);
+            await _context.Users.AddRangeAsync(admin);
+            await _context.Users.AddRangeAsync(supervisors);
+            await _context.Users.AddRangeAsync(internUsers);
+            await _context.Interns.AddRangeAsync(interns);
+            await _context.Assignments.AddRangeAsync(assignments);
 
             await _context.SaveChangesAsync();
         }
+
     }
 }

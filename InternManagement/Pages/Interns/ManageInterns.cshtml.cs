@@ -1,5 +1,4 @@
 using IMSBussinessObjects;
-using IMSRepositories;
 using IMSServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -39,30 +38,44 @@ namespace InternManagement.Pages.Interns
         public List<SelectListItem> InternsSelectList { get; set; }
 
         public Team SelectedTeam { get; set; }
-        public int Team { get; set; }
 
         public Intern SelectedIntern { get; set; }
         public List<Assignment> Assignments { get; set; }
         public List<Intern> Interns { get; set; }
-        [BindProperty]
         public Supervisor supervisor { get; set; }
 
         public void OnGet()
         {
             var userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
             var user = _userService.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
+
+            // Get list of all teams
+            TeamsSelectList = _teamService.GetAllTeams()
+                .Select(t => new SelectListItem
+                {
+                    Value = t.TeamId.ToString(),
+                    Text = t.TeamName
+                })
+                .ToList();
+
             if (user != null)
             {
-                var Supervisor = _supervisorService.GetSupervisorByUserId(user.UserId);
+                var supervisor = _supervisorService.GetSupervisorByUserId(user.UserId);
 
-                if (Supervisor != null)
+                if (supervisor != null)
                 {
-                    SelectedTeam = _teamService.GetTeamById(supervisor.TeamId);
+                    // Check if TeamId is specified, otherwise default to supervisor's team
+                    if (!TeamId.HasValue)
+                    {
+                        TeamId = supervisor.TeamId;
+                    }
+
+                    // Get the selected team
+                    SelectedTeam = _teamService.GetTeamById(TeamId.Value);
 
                     if (SelectedTeam != null)
                     {
-                        TeamId = Supervisor.TeamId; // Assign TeamId if needed
-
+                        // Fetch interns for the selected team
                         Interns = _internService.GetApprovedInternsByTeamId(TeamId.Value).ToList();
                         InternsSelectList = Interns
                             .Select(i => new SelectListItem
@@ -72,9 +85,16 @@ namespace InternManagement.Pages.Interns
                             })
                             .ToList();
                     }
+                    else
+                    {
+                        // Handle case where SelectedTeam is null (e.g., team not found)
+                    }
+                }
+                else
+                {
+                    // Handle case where supervisor is null (e.g., user is not a supervisor)
                 }
             }
-            
 
             if (InternId.HasValue)
             {
@@ -82,6 +102,7 @@ namespace InternManagement.Pages.Interns
                 Assignments = _assignmentService.GetAssignmentByInternId(InternId.Value);
             }
         }
+
 
         public IActionResult OnPostDelete(int id)
         {

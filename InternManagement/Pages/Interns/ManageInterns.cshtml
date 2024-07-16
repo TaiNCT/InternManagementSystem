@@ -9,13 +9,15 @@
      }
 </style>
 <form method="get">
-    <div class="form-group">
-        <label for="TeamId">Select Team:</label>
-        <select id="TeamId" name="TeamId" asp-items="Model.TeamsSelectList" class="form-control mt-1 short-select" onchange="this.form.submit()">
-            <option value="" class="text-center">--- Select a Team ---</option>
-        </select>
-
+    <div class="form-group row mb-2">
+        <label for="TeamId" class="col-sm-2 col-form-label" style="width:fit-content">Select Team:</label>
+        <div class="col-sm-10">
+            <select id="TeamId" name="TeamId" asp-items="Model.TeamsSelectList" class="form-control mt-1 short-select" onchange="this.form.submit()">
+                <option value="" class="text-Start">Choose team</option>
+            </select>
+        </div>
     </div>
+
 </form>
 
 @if (Model.SelectedTeam != null)
@@ -95,7 +97,11 @@
                         <td>@assignment.Weight</td>
                         <td>@assignment.Feedback</td>
                         <td>@assignment.Submited</td>
-                        <td>@assignment.Complete</td>
+                        <td>
+                            <div class="form-check" >
+                                <input class="form-check-input" type="checkbox" style="width:30px; height:30px" disabled @(assignment.Complete ? "checked" : "") />
+                            </div>
+                        </td>
 
                         <td>
                             <div style="display: flex; align-items: center;">
