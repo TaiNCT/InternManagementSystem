@@ -44,6 +44,9 @@ builder.Services.AddSingleton<EmailTemplateDao>();
 builder.Services.AddScoped<IEmailTemplateRepository, EmailTemplateRepository>();
 builder.Services.AddScoped<IMailServices, MailServices>();
 
+builder.Services.AddScoped<IInterviewService, InterviewService>();
+builder.Services.AddScoped<IInterviewRepository, InterviewRepository>();
+builder.Services.AddSingleton<InterviewDAO>();
 
 // Register other services
 builder.Services.AddScoped<IDataaseInitialiser, DatabaseInitialiser>();
@@ -118,9 +121,17 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+
     endpoints.MapGet("/", context =>
     {
-        context.Response.Redirect("/HomePage");
+        if (context.User.Identity.IsAuthenticated)
+        {
+            context.Response.Redirect("/Index");
+        }
+        else
+        {
+            context.Response.Redirect("/HomePage");
+        }
         return Task.CompletedTask;
     });
 });

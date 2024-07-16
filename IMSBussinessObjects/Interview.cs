@@ -10,13 +10,13 @@ namespace IMSBussinessObjects
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int InterviewId { get; set; }
 
-        public DateTime InterviewDate { get; set; }
+        public DateTime? InterviewDate { get; set; }
 
         [MaxLength(100)]
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         [MaxLength(20)]
-        public string RoomNumber { get; set; }
+        public string? RoomNumber { get; set; }
 
         public int TeamId { get; set; }
 

@@ -1,5 +1,5 @@
 using IMSBussinessObjects;
-using IMSRepositories;
+using IMSServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,15 +10,15 @@ namespace InternManagement.Pages.Interns
     [Authorize(Roles = "Intern")]
     public class InternProfileModel : PageModel
     {
-        private readonly IInternRepository _internRepository;
-        private readonly IAssignmentRepository _assignmentRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IInternService _internService;
+        private readonly IAssignmentService _assignmentService;
+        private readonly IUserService _userService;
 
-        public InternProfileModel(IInternRepository internRepository, IAssignmentRepository assignmentRepository, IUserRepository userRepository)
+        public InternProfileModel(IInternService internServ, IAssignmentService assignmentServ, IUserService userServ)
         {
-            _internRepository = internRepository;
-            _assignmentRepository = assignmentRepository;
-            _userRepository = userRepository;
+            _internService = internServ;
+            _assignmentService = assignmentServ;
+            _userService = userServ;
         }
 
         public List<Assignment> Assignments { get; set; }
@@ -32,15 +32,15 @@ namespace InternManagement.Pages.Interns
             if (!string.IsNullOrEmpty(userEmailClaim))
             {
                 // Get the user details by mail
-                var user = _userRepository.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
+                var user = _userService.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
                 if (user != null && user.Role == 3) // Role 3 is for Intern
                 {
                     // Get the intern details associated with the user
-                    SelectedIntern = _internRepository.GetAllIntern().SingleOrDefault(x => x.UserId == user.UserId);
+                    SelectedIntern = _internService.GetAllIntern().SingleOrDefault(x => x.UserId == user.UserId);
                     if (SelectedIntern != null)
                     {
                         // Get assignments for the selected intern
-                        Assignments = _assignmentRepository.GetAssignmentByInternId(SelectedIntern.InternId);
+                        Assignments = _assignmentService.GetAssignmentByInternId(SelectedIntern.InternId);
                     }
                 }
             }

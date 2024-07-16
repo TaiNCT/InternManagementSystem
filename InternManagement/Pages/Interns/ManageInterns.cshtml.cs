@@ -1,5 +1,5 @@
 using IMSBussinessObjects;
-using IMSRepositories;
+using IMSServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,21 +11,21 @@ namespace InternManagement.Pages.Interns
 
     public class ManageInternModel : PageModel
     {
-        private readonly ITeamRepository _teamRepository;
-        private readonly IInternRepository _internRepository;
-        private readonly IAssignmentRepository _assignmentRepository;
-        public ManageInternModel(ITeamRepository teamRepository, IInternRepository internRepository, IAssignmentRepository assignmentRepository)
+        private readonly ITeamService _teamService;
+        private readonly IInternService _internService;
+        private readonly IAssignmentService _assignmentService;
+        public ManageInternModel(ITeamService teamService, IInternService internService, IAssignmentService assignmentService)
         {
-            _teamRepository = teamRepository;
-            _internRepository = internRepository;
-            _assignmentRepository = assignmentRepository;
+            _assignmentService = assignmentService;
+            _teamService = teamService;
+            _internService = internService;
         }
 
         [BindProperty(SupportsGet = true)]
         public int? TeamId { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public int? InternId { get; set; }
+        public int InternId { get; set; }
         [BindProperty]
         public Assignment NewAssignment { get; set; }
         public List<SelectListItem> TeamsSelectList { get; set; }
@@ -38,18 +38,17 @@ namespace InternManagement.Pages.Interns
 
         public void OnGet()
         {
-            TeamsSelectList = _teamRepository.GetAllTeams()
+            TeamsSelectList = _teamService.GetAllTeams()
                 .Select(t => new SelectListItem
                 {
                     Value = t.TeamId.ToString(),
                     Text = t.TeamName
                 })
                 .ToList();
-
             if (TeamId.HasValue)
             {
-                SelectedTeam = _teamRepository.GetTeamById(TeamId.Value);
-                Interns = _internRepository.GetApprovedInternsByTeamId(TeamId.Value).ToList();
+                SelectedTeam = _teamService.GetTeamById(TeamId.Value);
+                Interns = _internService.GetApprovedInternsByTeamId(TeamId.Value).ToList();
                 InternsSelectList = Interns
                     .Select(i => new SelectListItem
                     {
@@ -58,21 +57,22 @@ namespace InternManagement.Pages.Interns
                     })
                     .ToList();
             }
-            if (InternId.HasValue)
+            if (InternId != null)
             {
-                SelectedIntern = _internRepository.GetInternById(InternId.Value);
-                Assignments = _assignmentRepository.GetAssignmentByInternId(InternId.Value);
+                SelectedIntern = _internService.GetInternById(InternId);
+                Assignments = _assignmentService.GetAssignmentByInternId(InternId);
             }
         }
 
         public IActionResult OnPostDelete(int id)
         {
-            var intern = _internRepository.GetInternById(id);
+            var intern = _internService.GetInternById(id);
             if (intern != null)
             {
-                _internRepository.RemoveIntern(id);
+                _internService.RemoveIntern(id);
             }
             return RedirectToPage();
         }
     }
+
 }

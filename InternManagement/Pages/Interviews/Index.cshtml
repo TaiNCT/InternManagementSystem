@@ -1,0 +1,40 @@
+﻿@page
+@model InternManagement.Pages.Interviews.IndexModel
+@{
+    ViewData["Title"] = "Interviews";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Intern</th>
+            <th>Team</th>
+            <th>Supervisor</th>
+            <th>Interview Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var interview in Model.Interviews)
+        {
+            <tr>
+                <td>@interview.Intern.FullName</td>
+                <td>@interview.Team.TeamName</td>
+                <td>
+                    @if (interview.Supervisor?.User != null)
+                    {
+                        @interview.Supervisor.User.Username
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
+                </td>
+                <td>@interview.InterviewDate</td>
+                <td>
+                    <a asp-page="./ScheduleInterview" asp-route-interviewId="@interview.InterviewId" class="btn btn-primary">Schedule</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

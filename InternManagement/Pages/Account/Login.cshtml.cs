@@ -98,7 +98,7 @@ namespace InternManagement.Pages.Account
                         TempData["done"] = $"{userName} Login Success";
                         return LocalRedirect(returnUrl);
                     }
-                    return LocalRedirect(Url.Content("~/Index"));
+                    return LocalRedirect(Url.Content("/Index"));
                 }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
@@ -113,9 +113,6 @@ namespace InternManagement.Pages.Account
             }
             return Page();
         }
-
-
-
 
         private bool VerifyPassword(string password, string hash, string salt)
         {
