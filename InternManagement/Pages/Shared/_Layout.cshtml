@@ -134,7 +134,7 @@
                 @foreach (var item in menuItems)
                 {
                     // Hide items for Intern role
-                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Add User/Team" || item.Text == "Assignment" || item.Text == "Interview Management" || item.Text == "Schedule Interview"))
+                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" ||item.Text=="Grade"|| item.Text == "Add User/Team" || item.Text == "Assignment"))
                     {
                         continue;
                     }
@@ -146,7 +146,7 @@
                     }
 
                     // Hide items for Admin
-                    if (user.IsInRole("Admin") && (item.Text == "My Profile" || item.Text == "Upload Document" || item.Text == "Assignment" || item.Text == "My Profile" || item.Text == "Intern Application"))
+                    if (user.IsInRole("Admin") && (item.Text == "My Profile" || item.Text == "Upload Document" || item.Text == "Grade" || item.Text == "Assignment" || item.Text == "My Profile"))
                     {
                         continue;
                     }
