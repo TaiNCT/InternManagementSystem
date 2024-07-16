@@ -118,12 +118,19 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+
     endpoints.MapGet("/", context =>
     {
-        context.Response.Redirect("/HomePage");
+        if (context.User.Identity.IsAuthenticated)
+        {
+            context.Response.Redirect("/Index");
+        }
+        else
+        {
+            context.Response.Redirect("/HomePage");
+        }
         return Task.CompletedTask;
     });
 });
-
 
 app.Run();

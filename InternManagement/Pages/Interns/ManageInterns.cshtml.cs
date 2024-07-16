@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using System.Security.Claims;
 
 namespace InternManagement.Pages.Interns
@@ -17,13 +18,14 @@ namespace InternManagement.Pages.Interns
         private readonly IInternService _internService;
         private readonly IAssignmentService _assignmentService;
         private readonly IUserService _userService;
-        private readonly ISupervisorService _SupervisorService;
-        public ManageInternModel(ITeamService teamService, IInternService internService, IAssignmentService assignmentService, IUserService userService)
+        private readonly ISupervisorService _supervisorService;
+        public ManageInternModel(ITeamService teamService, IInternService internService, IAssignmentService assignmentService, IUserService userService, ISupervisorService supervisorService)
         {
             _teamService = teamService;
             _internService = internService;
             _assignmentService = assignmentService;
             _userService = userService;
+            _supervisorService = supervisorService;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -49,18 +51,17 @@ namespace InternManagement.Pages.Interns
         {
             var userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
             var user = _userService.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
-            var UserId = user.UserId;
             if (user != null)
             {
-                 supervisor = _SupervisorService.GetSupervisorByUserId(UserId);
+                var Supervisor = _supervisorService.GetSupervisorByUserId(user.UserId);
 
-                if (supervisor != null)
+                if (Supervisor != null)
                 {
                     SelectedTeam = _teamService.GetTeamById(supervisor.TeamId);
 
                     if (SelectedTeam != null)
                     {
-                        TeamId = supervisor.TeamId; // Assign TeamId if needed
+                        TeamId = Supervisor.TeamId; // Assign TeamId if needed
 
                         Interns = _internService.GetApprovedInternsByTeamId(TeamId.Value).ToList();
                         InternsSelectList = Interns
