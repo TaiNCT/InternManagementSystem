@@ -22,6 +22,7 @@ namespace IMSBussinessObjects
         public virtual DbSet<Intern> Interns { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         public virtual DbSet<Campaign> Campaigns { get; set; }
+        public virtual DbSet<Interview> Interviews { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -88,6 +89,25 @@ namespace IMSBussinessObjects
                 .WithMany(t => t.Interns)
                 .HasForeignKey(i => i.TeamId)
                 .OnDelete(DeleteBehavior.Restrict); // Use Restrict or NoAction
+
+            modelBuilder.Entity<Interview>()
+            .HasOne(i => i.Team)
+            .WithMany(t => t.Interviews)
+            .HasForeignKey(i => i.TeamId)
+            .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
+
+            modelBuilder.Entity<Interview>()
+                .HasOne(i => i.Intern)
+                .WithMany(intern => intern.Interviews)
+                .HasForeignKey(i => i.InternId)
+                .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
+
+            modelBuilder.Entity<Interview>()
+                .HasOne(i => i.Supervisor)
+                .WithMany()
+                .HasForeignKey(i => i.SupervisorId)
+                .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
+
             modelBuilder.Seed();
         }
 

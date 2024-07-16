@@ -113,7 +113,7 @@
         new { Text = "Intern Application", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
         new { Text = "Upload Document", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
         new { Text = "Assignment", Icon = "briefcase", Link = Url.Page("/Assignments/AssignmentManagement") },
-
+        new { Text = "Schedule Interview", Icon = "briefcase", Link = Url.Page("/Interviews/Index") },
         };
 
             var reportItems = new[]
@@ -140,7 +140,7 @@
                     }
 
                     // Hide items for Supervisor role
-                    if (user.IsInRole("Supervisor") && (item.Text == "Intern Application" || item.Text == "Add User/Team" || item.Text == "My Profile" || item.Text == "Upload Document" || item.Text== "My Profile"))
+                    if (user.IsInRole("Supervisor") && (item.Text == "Add User/Team" || item.Text == "My Profile" || item.Text == "Upload Document" || item.Text == "My Profile" || item.Text == "Interview Management" || item.Text == "Schedule Interview"))
                     {
                         continue;
                     }

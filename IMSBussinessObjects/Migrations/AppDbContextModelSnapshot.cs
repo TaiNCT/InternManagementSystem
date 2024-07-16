@@ -189,30 +189,30 @@ namespace IMSBussinessObjects.Migrations
                         new
                         {
                             Id = 1,
-                            Body = "Chào mừng bạn đến với IMS! Kính gửi [Name], cảm ơn bạn đã tham gia cùng chúng tôi.",
+                            Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship at team [Team].",
                             Description = "Email này được gửi để chào đón người dùng mới.",
                             Name = "Welcome_Email",
-                            Params = "[Name]",
+                            Params = "[Name], [Team]",
                             Status = true,
                             Subject = "Welcome to IMS!"
                         },
                         new
                         {
                             Id = 2,
-                            Body = "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace].",
+                            Body = "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace] at room [Room].",
                             Description = "Email này để gửi intern đi phỏng vấn.",
                             Name = "Interview_Intern",
-                            Params = "[Name], [InterviewDate], [InterviewPlace]",
+                            Params = "[Name], [InterviewDate], [InterviewPlace], [Room]",
                             Status = true,
                             Subject = "Interview"
                         },
                         new
                         {
                             Id = 3,
-                            Body = "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace].",
+                            Body = "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace] room [Room].",
                             Description = "Email này để gửi supervisor đi phỏng vấn intern.",
                             Name = "Interview_Supervisor",
-                            Params = "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace]",
+                            Params = "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace], [Room]",
                             Status = true,
                             Subject = "Interview"
                         });
@@ -298,6 +298,45 @@ namespace IMSBussinessObjects.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Interns");
+                });
+
+            modelBuilder.Entity("IMSBussinessObjects.Interview", b =>
+                {
+                    b.Property<int>("InterviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InterviewId"), 1L, 1);
+
+                    b.Property<int>("InternId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("InterviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Location")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("RoomNumber")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("SupervisorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("InterviewId");
+
+                    b.HasIndex("InternId");
+
+                    b.HasIndex("SupervisorId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("Interview");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Notification", b =>
@@ -482,6 +521,33 @@ namespace IMSBussinessObjects.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("IMSBussinessObjects.Interview", b =>
+                {
+                    b.HasOne("IMSBussinessObjects.Intern", "Intern")
+                        .WithMany("Interviews")
+                        .HasForeignKey("InternId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("IMSBussinessObjects.Supervisor", "Supervisor")
+                        .WithMany()
+                        .HasForeignKey("SupervisorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("IMSBussinessObjects.Team", "Team")
+                        .WithMany("Interviews")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Intern");
+
+                    b.Navigation("Supervisor");
+
+                    b.Navigation("Team");
+                });
+
             modelBuilder.Entity("IMSBussinessObjects.Notification", b =>
                 {
                     b.HasOne("IMSBussinessObjects.Intern", "Intern")
@@ -526,6 +592,8 @@ namespace IMSBussinessObjects.Migrations
 
                     b.Navigation("Documents");
 
+                    b.Navigation("Interviews");
+
                     b.Navigation("Notifications");
                 });
 
@@ -534,6 +602,8 @@ namespace IMSBussinessObjects.Migrations
                     b.Navigation("Assignments");
 
                     b.Navigation("Interns");
+
+                    b.Navigation("Interviews");
 
                     b.Navigation("Supervisors");
                 });

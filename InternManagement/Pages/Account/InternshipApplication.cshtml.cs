@@ -13,13 +13,20 @@ namespace InternManagement.Pages.Account
         private readonly ITeamService _teamService;
         private readonly INotificationService _notificationService;
         private readonly IUserService _userService;
-        public InternshipApplicationModel(IInternService internService, ITeamService teamService, IWebHostEnvironment environment, INotificationService notificationService, IUserService userService)
+        private readonly IInterviewService _interviewService;
+        private readonly ISupervisorService _supervisorService;
+
+        public InternshipApplicationModel(IInternService internService, ITeamService teamService,
+            IWebHostEnvironment environment, INotificationService notificationService,
+            IUserService userService, IInterviewService interviewServ, ISupervisorService supervisorService)
         {
             _internService = internService;
             _teamService = teamService;
             _environment = environment;
-            _notificationService=notificationService;
-            _userService=userService;
+            _notificationService = notificationService;
+            _userService = userService;
+            _interviewService = interviewServ;
+            _supervisorService = supervisorService;
         }
 
         [BindProperty]
@@ -30,9 +37,14 @@ namespace InternManagement.Pages.Account
 
         [BindProperty]
         public IFormFile PhotoFile { get; set; }
+
+        [BindProperty]
+        public int SelectedTeamId { get; set; }
+
         public SelectList Teams { get; set; }
 
         public List<User> Users { get; set; }
+
         public void OnGet()
         {
             Teams = new SelectList(_teamService.GetAllTeams(), "TeamId", "TeamName");
@@ -40,12 +52,6 @@ namespace InternManagement.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
-            //ModelState alway invalid
-            /* if (!ModelState.IsValid)
-             {
-                 return Page();
-             }*/
-
             try
             {
                 if (CvFile != null && PhotoFile != null)
@@ -56,7 +62,6 @@ namespace InternManagement.Pages.Account
                         {
                             PhotoFile.CopyTo(target);
                             Intern.PhotoUrl = target.ToArray();
-                            target.Dispose();
                         }
                     }
                     if (CvFile.Length > 0)
@@ -65,17 +70,33 @@ namespace InternManagement.Pages.Account
                         {
                             CvFile.CopyTo(target);
                             Intern.CvUrl = target.ToArray();
-                            target.Dispose();
                         }
-
                     }
                 }
-                //Some one delete this
+
                 Intern.Status = "waiting";
-                //Intern.TeamId = ;// lay ben post 
-                //Intern.StartDate =// lay ben post
-                //Intern.EndDate = // lay ben post 
+                Intern.TeamId = SelectedTeamId;
                 _internService.AddIntern(Intern);
+
+                // Get the supervisor for the selected team
+                var supervisor = await _supervisorService.GetSupervisorByTeamIdAsync(SelectedTeamId);
+
+                if (supervisor == null)
+                {
+                    ModelState.AddModelError(string.Empty, "No supervisor found for the selected team. Please try again or contact the administrator.");
+                    Teams = new SelectList(_teamService.GetAllTeams(), "TeamId", "TeamName");
+                    return Page();
+                }
+
+                var interview = new Interview
+                {
+                    TeamId = SelectedTeamId,
+                    InternId = Intern.InternId,
+                    SupervisorId = supervisor.SupervisorId
+                    // Other fields are not set, they will remain null
+                };
+                _interviewService.AddInterview(interview);
+
                 Users = _userService.GetUsers().Where(x => x.Role == 1).ToList();
 
                 foreach (User user in Users)
@@ -84,33 +105,33 @@ namespace InternManagement.Pages.Account
                     {
                         UserId = user.UserId,
                         InternId = Intern.InternId,
-                        NotificationDate =  3,
+                        NotificationDate = 3,
                         TypeCode = 1, //Approve Internship
                         Content = $"{_internService.GetInternsByStatus("waiting").Count} application is waiting",
                         Timestamp = DateTime.Now,
                         IsSeen = false,
-
                     };
                     if (_notificationService.GetNotificationById(notification.NotificationId) == null)
                     {
                         _notificationService.AddNotification(notification);
-                    }else
+                    }
+                    else
                     {
                         Notification newNotification = _notificationService.GetNotificationById(notification.NotificationId);
                         if (newNotification != null)
                         {
                             newNotification.Content = $"{_internService.GetInternsByStatus("waiting").Count} application is waiting";
                         }
-                        _notificationService.UpdateNotification(notification.NotificationId,newNotification, false);
+                        _notificationService.UpdateNotification(notification.NotificationId, newNotification, false);
                     }
                 }
-              
-            return RedirectToPage("/Index");
+
+                return RedirectToPage("/Index");
             }
             catch (Exception ex)
             {
                 // Log the error and add a model error for the user
-                ModelState.AddModelError(string.Empty, "File upload failed. Please try again.");
+                ModelState.AddModelError(string.Empty, "Application submission failed. Please try again.");
                 Teams = new SelectList(_teamService.GetAllTeams(), "TeamId", "TeamName");
                 return Page();
             }

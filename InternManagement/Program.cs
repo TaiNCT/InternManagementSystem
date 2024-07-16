@@ -46,6 +46,9 @@ builder.Services.AddSingleton<EmailTemplateDao>();
 builder.Services.AddScoped<IEmailTemplateRepository, EmailTemplateRepository>();
 builder.Services.AddScoped<IMailServices, MailServices>();
 
+builder.Services.AddScoped<IInterviewService, InterviewService>();
+builder.Services.AddScoped<IInterviewRepository, InterviewRepository>();
+builder.Services.AddSingleton<InterviewDAO>();
 
 // Register other services
 builder.Services.AddScoped<IDataaseInitialiser, DatabaseInitialiser>();
