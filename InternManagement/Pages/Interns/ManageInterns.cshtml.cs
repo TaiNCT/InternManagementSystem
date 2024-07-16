@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace InternManagement.Pages.Interns
 {
-    [Authorize(Roles = "Supervisor")]
+    [Authorize(Roles = "Admin,Supervisor")]
 
     public class ManageInternModel : PageModel
     {
