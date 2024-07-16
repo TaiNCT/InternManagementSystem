@@ -109,6 +109,7 @@
         new { Text = "Home", Icon = "home", Link = Url.Page("/Index") },
         new { Text = "My Profile", Icon = "briefcase", Link = Url.Page("/Interns/InternProfile") },
         new { Text = "Interns", Icon = "users", Link = Url.Page("/Interns/ManageInterns") },
+        new { Text = "Grade", Icon = "users", Link = Url.Page("/Interns/GradeInterns") },
         new { Text = "Intern Application", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
         new { Text = "Upload Document", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
         new { Text = "Assignment", Icon = "briefcase", Link = Url.Page("/Assignments/AssignmentManagement") },
@@ -133,7 +134,7 @@
                 @foreach (var item in menuItems)
                 {
                     // Hide items for Intern role
-                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Add User/Team" || item.Text == "Assignment"))
+                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" ||item.Text=="Grade"|| item.Text == "Add User/Team" || item.Text == "Assignment"))
                     {
                         continue;
                     }
@@ -145,7 +146,7 @@
                     }
 
                     // Hide items for Admin
-                    if (user.IsInRole("Admin") && (item.Text == "My Profile" || item.Text == "Upload Document" || item.Text == "Assignment" || item.Text == "My Profile"))
+                    if (user.IsInRole("Admin") && (item.Text == "My Profile" || item.Text == "Upload Document" || item.Text == "Grade" || item.Text == "Assignment" || item.Text == "My Profile"))
                     {
                         continue;
                     }

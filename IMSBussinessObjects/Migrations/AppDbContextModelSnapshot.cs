@@ -75,7 +75,6 @@ namespace IMSBussinessObjects.Migrations
                     b.ToTable("Assignments");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
             modelBuilder.Entity("IMSBussinessObjects.Campaign", b =>
                 {
                     b.Property<int>("CampaignId")
@@ -121,7 +120,7 @@ namespace IMSBussinessObjects.Migrations
                     b.ToTable("Campaign");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.Documents", b =>
+            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
                 {
                     b.Property<int>("DocumentId")
                         .ValueGeneratedOnAdd()
@@ -443,7 +442,6 @@ namespace IMSBussinessObjects.Migrations
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
             modelBuilder.Entity("IMSBussinessObjects.Campaign", b =>
                 {
                     b.HasOne("IMSBussinessObjects.Team", "Team")
@@ -455,7 +453,7 @@ namespace IMSBussinessObjects.Migrations
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.Documents", b =>
+            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
                 {
                     b.HasOne("IMSBussinessObjects.Intern", "Intern")
                         .WithMany("Documents")

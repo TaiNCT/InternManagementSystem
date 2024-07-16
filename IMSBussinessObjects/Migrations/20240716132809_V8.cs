@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IMSBussinessObjects.Migrations
 {
-    public partial class v8 : Migration
+    public partial class V8 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,6 +55,33 @@ namespace IMSBussinessObjects.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Campaign",
+                columns: table => new
+                {
+                    CampaignId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Tittle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createdDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    startDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    endDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    createdBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TeamId = table.Column<int>(type: "int", nullable: false),
+                    Progress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    pictureUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Campaign", x => x.CampaignId);
+                    table.ForeignKey(
+                        name: "FK_Campaign_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "TeamId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -215,6 +242,21 @@ namespace IMSBussinessObjects.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "EmailTemplates",
+                columns: new[] { "Id", "Body", "Description", "Name", "Params", "Status", "Subject" },
+                values: new object[] { 1, "Chào mừng bạn đến với IMS! Kính gửi [Name], cảm ơn bạn đã tham gia cùng chúng tôi.", "Email này được gửi để chào đón người dùng mới.", "Welcome_Email", "[Name]", true, "Welcome to IMS!" });
+
+            migrationBuilder.InsertData(
+                table: "EmailTemplates",
+                columns: new[] { "Id", "Body", "Description", "Name", "Params", "Status", "Subject" },
+                values: new object[] { 2, "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace].", "Email này để gửi intern đi phỏng vấn.", "Interview_Intern", "[Name], [InterviewDate], [InterviewPlace]", true, "Interview" });
+
+            migrationBuilder.InsertData(
+                table: "EmailTemplates",
+                columns: new[] { "Id", "Body", "Description", "Name", "Params", "Status", "Subject" },
+                values: new object[] { 3, "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace].", "Email này để gửi supervisor đi phỏng vấn intern.", "Interview_Supervisor", "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace]", true, "Interview" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Assignments_DocumentId",
                 table: "Assignments",
@@ -228,6 +270,11 @@ namespace IMSBussinessObjects.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Assignments_TeamId",
                 table: "Assignments",
+                column: "TeamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Campaign_TeamId",
+                table: "Campaign",
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
@@ -272,6 +319,9 @@ namespace IMSBussinessObjects.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Assignments");
+
+            migrationBuilder.DropTable(
+                name: "Campaign");
 
             migrationBuilder.DropTable(
                 name: "EmailTemplates");

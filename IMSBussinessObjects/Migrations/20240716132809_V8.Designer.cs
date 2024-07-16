@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240716080321_v8")]
-    partial class v8
+    [Migration("20240716132809_V8")]
+    partial class V8
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,6 +75,51 @@ namespace IMSBussinessObjects.Migrations
                     b.HasIndex("TeamId");
 
                     b.ToTable("Assignments");
+                });
+
+            modelBuilder.Entity("IMSBussinessObjects.Campaign", b =>
+                {
+                    b.Property<int>("CampaignId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CampaignId"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Progress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tittle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("createdBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("createdDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("endDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("pictureUrl")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime>("startDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("CampaignId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("Campaign");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Document", b =>
@@ -141,6 +186,38 @@ namespace IMSBussinessObjects.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EmailTemplates");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Body = "Chào mừng bạn đến với IMS! Kính gửi [Name], cảm ơn bạn đã tham gia cùng chúng tôi.",
+                            Description = "Email này được gửi để chào đón người dùng mới.",
+                            Name = "Welcome_Email",
+                            Params = "[Name]",
+                            Status = true,
+                            Subject = "Welcome to IMS!"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Body = "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace].",
+                            Description = "Email này để gửi intern đi phỏng vấn.",
+                            Name = "Interview_Intern",
+                            Params = "[Name], [InterviewDate], [InterviewPlace]",
+                            Status = true,
+                            Subject = "Interview"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Body = "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace].",
+                            Description = "Email này để gửi supervisor đi phỏng vấn intern.",
+                            Name = "Interview_Supervisor",
+                            Params = "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace]",
+                            Status = true,
+                            Subject = "Interview"
+                        });
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Intern", b =>
@@ -363,6 +440,17 @@ namespace IMSBussinessObjects.Migrations
                     b.Navigation("Documents");
 
                     b.Navigation("Intern");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("IMSBussinessObjects.Campaign", b =>
+                {
+                    b.HasOne("IMSBussinessObjects.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Team");
                 });

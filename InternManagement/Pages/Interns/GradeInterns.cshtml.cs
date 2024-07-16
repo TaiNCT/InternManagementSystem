@@ -9,16 +9,16 @@ using System.Security.Claims;
 
 namespace InternManagement.Pages.Interns
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Supervisor")]
 
-    public class ManageInternAdminModel : PageModel
+    public class GradeInternModel : PageModel
     {
         private readonly ITeamService _teamService;
         private readonly IInternService _internService;
         private readonly IAssignmentService _assignmentService;
         private readonly IUserService _userService;
         private readonly ISupervisorService _supervisorService;
-        public ManageInternAdminModel(ITeamService teamService, IInternService internService, IAssignmentService assignmentService, IUserService userService, ISupervisorService supervisorService)
+        public GradeInternModel(ITeamService teamService, IInternService internService, IAssignmentService assignmentService, IUserService userService, ISupervisorService supervisorService)
         {
             _teamService = teamService;
             _internService = internService;
@@ -46,24 +46,25 @@ namespace InternManagement.Pages.Interns
 
         public void OnGet()
         {
-            var userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
-            var user = _userService.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
+            string? userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+            User? user = _userService.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
 
-            // Get list of all teams
-            TeamsSelectList = _teamService.GetAllTeams()
-                .Select(t => new SelectListItem
-                {
-                    Value = t.TeamId.ToString(),
-                    Text = t.TeamName
-                })
-                .ToList();
+
 
             if (user != null)
             {
-                var supervisor = _supervisorService.GetSupervisorByUserId(user.UserId);
+                supervisor = _supervisorService.GetSupervisorByUserId(user.UserId);
 
                 if (supervisor != null)
                 {
+                    // Get list of all teams
+                    TeamsSelectList = _teamService.GetAllTeams().Where(x => x.TeamId == supervisor.TeamId)
+                        .Select(t => new SelectListItem
+                        {
+                            Value = t.TeamId.ToString(),
+                            Text = t.TeamName
+                        })
+                        .ToList();
                     // Check if TeamId is specified, otherwise default to supervisor's team
                     if (!TeamId.HasValue)
                     {
@@ -92,7 +93,32 @@ namespace InternManagement.Pages.Interns
                 }
                 else
                 {
+                    // Get list of all teams
+                    TeamsSelectList = _teamService.GetAllTeams()
+                        .Select(t => new SelectListItem
+                        {
+                            Value = t.TeamId.ToString(),
+                            Text = t.TeamName
+                        })
+                        .ToList();
                     // Handle case where supervisor is null (e.g., user is not a supervisor)
+                    if (TeamId.HasValue)
+                    {
+                        SelectedTeam = _teamService.GetTeamById(TeamId.Value);
+                        Interns = _internService.GetApprovedInternsByTeamId(TeamId.Value).ToList();
+                        InternsSelectList = Interns
+                            .Select(i => new SelectListItem
+                            {
+                                Value = i.InternId.ToString(),
+                                Text = i.FullName
+                            })
+                            .ToList();
+                    }
+                    if (InternId.HasValue)
+                    {
+                        SelectedIntern = _internService.GetInternById(InternId.Value);
+                        Assignments = _assignmentService.GetAssignmentByInternId(InternId.Value);
+                    }
                 }
             }
 
@@ -106,7 +132,7 @@ namespace InternManagement.Pages.Interns
 
         public IActionResult OnPostDelete(int id)
         {
-            var intern = _internService.GetInternById(id);
+            Intern intern = _internService.GetInternById(id);
             if (intern != null)
             {
                 _internService.RemoveIntern(id);
