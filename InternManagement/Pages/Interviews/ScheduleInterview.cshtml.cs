@@ -13,19 +13,22 @@ namespace InternManagement.Pages.Interviews
         private readonly ITeamService _teamService;
         private readonly ISupervisorService _supervisorService;
         private readonly INotificationService _notificationService;
+        private readonly IMailServices _mailService;
 
         public ScheduleInterviewModel(
             IInterviewService interviewService,
             IInternService internService,
             ITeamService teamService,
             ISupervisorService supervisorService,
-            INotificationService notificationService)
+            INotificationService notificationService,
+            IMailServices mailService)
         {
             _interviewService = interviewService;
             _internService = internService;
             _teamService = teamService;
             _supervisorService = supervisorService;
             _notificationService = notificationService;
+            _mailService = mailService;
         }
 
         [BindProperty]
@@ -68,6 +71,30 @@ namespace InternManagement.Pages.Interviews
             existingInterview.RoomNumber = Interview.RoomNumber;
 
             _interviewService.UpdateInterview(existingInterview.InterviewId, existingInterview);
+
+            // Send mail intern
+            var emailParamsIntern = new Dictionary<string, string>()
+                    {
+                        { "Name", $"{Intern.FullName}" },
+                        { "InterviewDate", $"{Interview.InterviewDate}" },
+                        { "InterviewPlace", $"{Interview.Location}" },
+                        { "Room", $"{Interview.RoomNumber}" },
+
+                    };
+            List<string> toAddressIntern = new List<string> { Intern.Email };
+            _mailService.SendAsync(EmailType.Interview_Intern, toAddressIntern, new List<string> { }, emailParamsIntern);
+
+            // Send mail Supervisor
+            var emailParamsSuperVisor = new Dictionary<string, string>()
+                    {
+                        { "Name", $"{Intern.FullName}" },
+                        { "InterviewDate", $"{Interview.InterviewDate}" },
+                        { "InterviewPlace", $"{Interview.Location}" },
+                        { "Room", $"{Interview.RoomNumber}" },
+
+                    };
+            List<string> toAddressSuperVisor = new List<string> { Intern.Email };
+            _mailService.SendAsync(EmailType.Interview_Intern, toAddressSuperVisor, new List<string> { }, emailParamsSuperVisor);
             SendNotification(existingInterview);
 
             return RedirectToPage("./Index");
