@@ -72,6 +72,9 @@ namespace InternManagement.Pages.Account
                 }
                 //Some one delete this
                 Intern.Status = "waiting";
+                //Intern.TeamId = ;// lay ben post 
+                //Intern.StartDate =// lay ben post
+                //Intern.EndDate = // lay ben post 
                 _internService.AddIntern(Intern);
                 Users = _userService.GetUsers().Where(x => x.Role == 1).ToList();
 
