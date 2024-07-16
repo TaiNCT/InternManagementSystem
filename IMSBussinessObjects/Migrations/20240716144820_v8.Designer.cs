@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-<<<<<<<< HEAD:IMSBussinessObjects/Migrations/20240716132809_V8.Designer.cs
-    [Migration("20240716132809_V8")]
-    partial class V8
-========
-    [Migration("20240716142826_updateDBV1")]
-    partial class updateDBV1
->>>>>>>> main:IMSBussinessObjects/Migrations/20240716142826_updateDBV1.Designer.cs
+    [Migration("20240716144820_v8")]
+    partial class v8
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -196,51 +191,30 @@ namespace IMSBussinessObjects.Migrations
                         new
                         {
                             Id = 1,
-<<<<<<<< HEAD:IMSBussinessObjects/Migrations/20240716132809_V8.Designer.cs
-                            Body = "Chào mừng bạn đến với IMS! Kính gửi [Name], cảm ơn bạn đã tham gia cùng chúng tôi.",
-                            Description = "Email này được gửi để chào đón người dùng mới.",
-                            Name = "Welcome_Email",
-                            Params = "[Name]",
-========
                             Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship at team [Team].",
                             Description = "Email này được gửi để chào đón người dùng mới.",
                             Name = "Welcome_Email",
                             Params = "[Name], [Team]",
->>>>>>>> main:IMSBussinessObjects/Migrations/20240716142826_updateDBV1.Designer.cs
                             Status = true,
                             Subject = "Welcome to IMS!"
                         },
                         new
                         {
                             Id = 2,
-<<<<<<<< HEAD:IMSBussinessObjects/Migrations/20240716132809_V8.Designer.cs
-                            Body = "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace].",
-                            Description = "Email này để gửi intern đi phỏng vấn.",
-                            Name = "Interview_Intern",
-                            Params = "[Name], [InterviewDate], [InterviewPlace]",
-========
                             Body = "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace] at room [Room].",
                             Description = "Email này để gửi intern đi phỏng vấn.",
                             Name = "Interview_Intern",
                             Params = "[Name], [InterviewDate], [InterviewPlace], [Room]",
->>>>>>>> main:IMSBussinessObjects/Migrations/20240716142826_updateDBV1.Designer.cs
                             Status = true,
                             Subject = "Interview"
                         },
                         new
                         {
                             Id = 3,
-<<<<<<<< HEAD:IMSBussinessObjects/Migrations/20240716132809_V8.Designer.cs
-                            Body = "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace].",
-                            Description = "Email này để gửi supervisor đi phỏng vấn intern.",
-                            Name = "Interview_Supervisor",
-                            Params = "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace]",
-========
                             Body = "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace] room [Room].",
                             Description = "Email này để gửi supervisor đi phỏng vấn intern.",
                             Name = "Interview_Supervisor",
                             Params = "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace], [Room]",
->>>>>>>> main:IMSBussinessObjects/Migrations/20240716142826_updateDBV1.Designer.cs
                             Status = true,
                             Subject = "Interview"
                         });
