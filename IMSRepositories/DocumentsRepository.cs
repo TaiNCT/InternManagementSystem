@@ -13,8 +13,8 @@ namespace IMSRepositories
     {
         public void DeleteDocument(int documentId) => DocumentDAO.Instance.DeleteDocument(documentId);
 
-        public Documents GetDocumentById(int documentId) => DocumentDAO.Instance.GetDocumentById(documentId);
-        public List<Documents> GetDocuments() => DocumentDAO.Instance.GetDocuments();
+        public Document GetDocumentById(int documentId) => DocumentDAO.Instance.GetDocumentById(documentId);
+        public List<Document> GetDocuments() => DocumentDAO.Instance.GetDocuments();
 
         public void UploadDocumentAsync(IFormFile file, int internId) => DocumentDAO.Instance.UploadDocumentAsync(file, internId);
     }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240714111652_v5")]
-    partial class v5
+    [Migration("20240716080321_v8")]
+    partial class v8
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,12 +43,21 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<int?>("DocumentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Feedback")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Grade")
                         .HasColumnType("int");
 
                     b.Property<int?>("InternId")
                         .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<string>("Submited")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TeamId")
                         .IsRequired()
@@ -59,6 +68,8 @@ namespace IMSBussinessObjects.Migrations
 
                     b.HasKey("AssignmentId");
 
+                    b.HasIndex("DocumentId");
+
                     b.HasIndex("InternId");
 
                     b.HasIndex("TeamId");
@@ -66,7 +77,7 @@ namespace IMSBussinessObjects.Migrations
                     b.ToTable("Assignments");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.Documents", b =>
+            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
                 {
                     b.Property<int>("DocumentId")
                         .ValueGeneratedOnAdd()
@@ -96,6 +107,40 @@ namespace IMSBussinessObjects.Migrations
                     b.HasIndex("InternId");
 
                     b.ToTable("Documents");
+                });
+
+            modelBuilder.Entity("IMSBussinessObjects.EmailTemplate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Params")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmailTemplates");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Intern", b =>
@@ -167,7 +212,6 @@ namespace IMSBussinessObjects.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<int?>("UserId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("InternId");
@@ -175,7 +219,8 @@ namespace IMSBussinessObjects.Migrations
                     b.HasIndex("TeamId");
 
                     b.HasIndex("UserId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Interns");
                 });
@@ -299,6 +344,10 @@ namespace IMSBussinessObjects.Migrations
 
             modelBuilder.Entity("IMSBussinessObjects.Assignment", b =>
                 {
+                    b.HasOne("IMSBussinessObjects.Document", "Documents")
+                        .WithMany()
+                        .HasForeignKey("DocumentId");
+
                     b.HasOne("IMSBussinessObjects.Intern", "Intern")
                         .WithMany("Assignments")
                         .HasForeignKey("InternId")
@@ -311,12 +360,14 @@ namespace IMSBussinessObjects.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("Documents");
+
                     b.Navigation("Intern");
 
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.Documents", b =>
+            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
                 {
                     b.HasOne("IMSBussinessObjects.Intern", "Intern")
                         .WithMany("Documents")
@@ -338,8 +389,7 @@ namespace IMSBussinessObjects.Migrations
                     b.HasOne("IMSBussinessObjects.User", "User")
                         .WithOne("Intern")
                         .HasForeignKey("IMSBussinessObjects.Intern", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Team");
 

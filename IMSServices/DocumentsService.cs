@@ -21,12 +21,12 @@ namespace IMSServices
             _documentsRepository.DeleteDocument(documentId);
         }
 
-        public Documents GetDocumentById(int documentId)
+        public Document GetDocumentById(int documentId)
         {
             return _documentsRepository.GetDocumentById(documentId);
         }
 
-        public List<Documents> GetDocuments()
+        public List<Document> GetDocuments()
         {
             return _documentsRepository.GetDocuments();
         }

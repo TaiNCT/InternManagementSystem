@@ -45,5 +45,9 @@ namespace IMSDaos
             db.Add(newSup);
             db.SaveChanges();
         }
+        public Supervisor GetSupervisorByUserId(int userId)
+        {
+            return db.Supervisors.FirstOrDefault(x => x.UserId == userId);
+        }   
     }
 }

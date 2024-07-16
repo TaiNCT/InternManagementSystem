@@ -41,12 +41,21 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<int?>("DocumentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Feedback")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Grade")
                         .HasColumnType("int");
 
                     b.Property<int?>("InternId")
                         .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<string>("Submited")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TeamId")
                         .IsRequired()
@@ -57,6 +66,8 @@ namespace IMSBussinessObjects.Migrations
 
                     b.HasKey("AssignmentId");
 
+                    b.HasIndex("DocumentId");
+
                     b.HasIndex("InternId");
 
                     b.HasIndex("TeamId");
@@ -64,6 +75,7 @@ namespace IMSBussinessObjects.Migrations
                     b.ToTable("Assignments");
                 });
 
+            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
             modelBuilder.Entity("IMSBussinessObjects.Campaign", b =>
                 {
                     b.Property<int>("CampaignId")
@@ -408,6 +420,10 @@ namespace IMSBussinessObjects.Migrations
 
             modelBuilder.Entity("IMSBussinessObjects.Assignment", b =>
                 {
+                    b.HasOne("IMSBussinessObjects.Document", "Documents")
+                        .WithMany()
+                        .HasForeignKey("DocumentId");
+
                     b.HasOne("IMSBussinessObjects.Intern", "Intern")
                         .WithMany("Assignments")
                         .HasForeignKey("InternId")
@@ -420,11 +436,14 @@ namespace IMSBussinessObjects.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("Documents");
+
                     b.Navigation("Intern");
 
                     b.Navigation("Team");
                 });
 
+            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
             modelBuilder.Entity("IMSBussinessObjects.Campaign", b =>
                 {
                     b.HasOne("IMSBussinessObjects.Team", "Team")
