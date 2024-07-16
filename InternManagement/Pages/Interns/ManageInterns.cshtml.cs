@@ -25,7 +25,7 @@ namespace InternManagement.Pages.Interns
         public int? TeamId { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public int InternId { get; set; }
+        public int? InternId { get; set; }
         [BindProperty]
         public Assignment NewAssignment { get; set; }
         public List<SelectListItem> TeamsSelectList { get; set; }
@@ -57,10 +57,10 @@ namespace InternManagement.Pages.Interns
                     })
                     .ToList();
             }
-            if (InternId != null)
+            if (InternId.HasValue)
             {
-                SelectedIntern = _internService.GetInternById(InternId);
-                Assignments = _assignmentService.GetAssignmentByInternId(InternId);
+                SelectedIntern = _internService.GetInternById(InternId.Value);
+                Assignments = _assignmentService.GetAssignmentByInternId(InternId.Value);
             }
         }
 
