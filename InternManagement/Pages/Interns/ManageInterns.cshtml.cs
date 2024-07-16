@@ -46,8 +46,8 @@ namespace InternManagement.Pages.Interns
 
         public void OnGet()
         {
-            var userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
-            var user = _userService.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
+            string? userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+            User? user = _userService.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
 
             // Get list of all teams
             TeamsSelectList = _teamService.GetAllTeams()
@@ -60,7 +60,7 @@ namespace InternManagement.Pages.Interns
 
             if (user != null)
             {
-                var supervisor = _supervisorService.GetSupervisorByUserId(user.UserId);
+                supervisor = _supervisorService.GetSupervisorByUserId(user.UserId);
 
                 if (supervisor != null)
                 {
@@ -93,6 +93,23 @@ namespace InternManagement.Pages.Interns
                 else
                 {
                     // Handle case where supervisor is null (e.g., user is not a supervisor)
+                    if (TeamId.HasValue)
+                    {
+                        SelectedTeam = _teamService.GetTeamById(TeamId.Value);
+                        Interns = _internService.GetApprovedInternsByTeamId(TeamId.Value).ToList();
+                        InternsSelectList = Interns
+                            .Select(i => new SelectListItem
+                            {
+                                Value = i.InternId.ToString(),
+                                Text = i.FullName
+                            })
+                            .ToList();
+                    }
+                    if (InternId.HasValue)
+                    {
+                        SelectedIntern = _internService.GetInternById(InternId.Value);
+                        Assignments = _assignmentService.GetAssignmentByInternId(InternId.Value);
+                    }
                 }
             }
 
@@ -106,7 +123,7 @@ namespace InternManagement.Pages.Interns
 
         public IActionResult OnPostDelete(int id)
         {
-            var intern = _internService.GetInternById(id);
+            Intern intern = _internService.GetInternById(id);
             if (intern != null)
             {
                 _internService.RemoveIntern(id);
