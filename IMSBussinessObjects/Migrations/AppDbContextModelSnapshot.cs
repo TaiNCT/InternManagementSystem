@@ -41,12 +41,21 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<int?>("DocumentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Feedback")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Grade")
                         .HasColumnType("int");
 
                     b.Property<int?>("InternId")
                         .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<string>("Submited")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TeamId")
                         .IsRequired()
@@ -57,6 +66,8 @@ namespace IMSBussinessObjects.Migrations
 
                     b.HasKey("AssignmentId");
 
+                    b.HasIndex("DocumentId");
+
                     b.HasIndex("InternId");
 
                     b.HasIndex("TeamId");
@@ -64,7 +75,7 @@ namespace IMSBussinessObjects.Migrations
                     b.ToTable("Assignments");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.Documents", b =>
+            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
                 {
                     b.Property<int>("DocumentId")
                         .ValueGeneratedOnAdd()
@@ -128,28 +139,6 @@ namespace IMSBussinessObjects.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EmailTemplates");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Body = "Chào mừng bạn đến với OnDemandTutor! Kính gửi [Name], cảm ơn bạn đã tham gia cùng chúng tôi.",
-                            Description = "Email này được gửi để chào đón người dùng mới.",
-                            Name = "Welcome_Email",
-                            Params = "[Name]",
-                            Status = true,
-                            Subject = "Welcome to OnDemandTutor!"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Body = "Kính gửi [Name], vui lòng nhấp vào liên kết để kích hoạt tài khoản của bạn: [ActivationLink].",
-                            Description = "Email này chứa hướng dẫn để kích hoạt tài khoản người dùng.",
-                            Name = "Account_Activation",
-                            Params = "[Name], [ActivationLink]",
-                            Status = true,
-                            Subject = "Account Activation"
-                        });
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Intern", b =>
@@ -353,6 +342,10 @@ namespace IMSBussinessObjects.Migrations
 
             modelBuilder.Entity("IMSBussinessObjects.Assignment", b =>
                 {
+                    b.HasOne("IMSBussinessObjects.Document", "Documents")
+                        .WithMany()
+                        .HasForeignKey("DocumentId");
+
                     b.HasOne("IMSBussinessObjects.Intern", "Intern")
                         .WithMany("Assignments")
                         .HasForeignKey("InternId")
@@ -365,12 +358,14 @@ namespace IMSBussinessObjects.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("Documents");
+
                     b.Navigation("Intern");
 
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.Documents", b =>
+            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
                 {
                     b.HasOne("IMSBussinessObjects.Intern", "Intern")
                         .WithMany("Documents")

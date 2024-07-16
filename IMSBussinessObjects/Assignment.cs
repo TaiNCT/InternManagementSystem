@@ -20,6 +20,14 @@ namespace IMSBussinessObjects
         public int? Grade { get; set; }
         public int? Weight { get; set; }
         public bool Complete { get; set; }
+        public int? DocumentId { get; set; }
+
+        public string? Submited { get; set; }
+
+        public string? Feedback { get; set; }
+
+        [ForeignKey("DocumentId")]
+        public Document? Documents { get; set; }
 
         [ForeignKey("TeamId")]
         public Team Team { get; set; }

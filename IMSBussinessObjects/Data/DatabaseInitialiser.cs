@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace IMSBussinessObjects.Data
 {
@@ -144,7 +144,11 @@ namespace IMSBussinessObjects.Data
                 Deadline = new DateTime(2024, 3, 15),
                 Grade = 85,
                 Weight = 20,
-                Complete = true
+                Complete = false,
+                Submited="abc",
+                
+
+                
             };
             var assignment2 = new Assignment
             {
@@ -154,7 +158,7 @@ namespace IMSBussinessObjects.Data
                 Deadline = new DateTime(2024, 3, 15),
                 Grade = 95,
                 Weight = 20,
-                Complete = true
+                Complete = false
             };
             var assignment3 = new Assignment
             {
@@ -164,14 +168,51 @@ namespace IMSBussinessObjects.Data
                 Deadline = new DateTime(2024, 3, 15),
                 Grade = 75,
                 Weight = 20,
-                Complete = true
+                Complete = false
             };
+
+            var emailTemplate = new EmailTemplate
+            {
+                Id = 1,
+                Name = "Welcome_Email",
+                Status = true,
+                Body = "Chào mừng bạn đến với IMS! Kính gửi [Name], cảm ơn bạn đã tham gia cùng chúng tôi.",
+                Params = "[Name]",
+                Subject = "Welcome to IMS!",
+                Description = "Email này được gửi để chào đón người dùng mới."
+            };
+            var emailTemplate2 = new EmailTemplate
+            {
+                Id = 2,
+                Name = "Interview_Intern",
+                Status = true,
+                Body = "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace].",
+                Params = "[Name], [InterviewDate], [InterviewPlace]",
+                Subject = "Interview",
+                Description = "Email này để gửi intern đi phỏng vấn."
+            };
+            var emailTemplate3 = new EmailTemplate
+            {
+                Id = 3,
+                Name = "Interview_Supervisor",
+                Status = true,
+                Body = "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace].",
+                Params = "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace]",
+                Subject = "Interview",
+                Description = "Email này để gửi supervisor đi phỏng vấn intern."
+            };
+
+
+
+
+
 
 
             await _context.Teams.AddRangeAsync(fullstackTeam, FETeam, BETeam);
             await _context.Users.AddRangeAsync(admin, userSupervisor1, userSupervisor2, userSupervisor3, internUser);
             await _context.Interns.AddRangeAsync(intern1);
             await _context.Assignments.AddRangeAsync(assignment1, assignment2, assignment3);
+            //await _context.EmailTemplates.AddRangeAsync(emailTemplate, emailTemplate2, emailTemplate3);
 
             await _context.SaveChangesAsync();
         }

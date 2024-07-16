@@ -10,9 +10,9 @@ namespace IMSServices
 {
     public interface IDocumentsService
     {
-        public Documents GetDocumentById(int documentId);
+        public Document GetDocumentById(int documentId);
 
-        public List<Documents> GetDocuments();
+        public List<Document> GetDocuments();
 
         public void DeleteDocument(int documentId);
 
