@@ -5,10 +5,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IMSBussinessObjects.Migrations
 {
-    public partial class v5 : Migration
+    public partial class IntialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "EmailTemplates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    Body = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Params = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmailTemplates", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Teams",
                 columns: table => new
@@ -59,7 +77,7 @@ namespace IMSBussinessObjects.Migrations
                     CvUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     PhotoUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     OverallSuccess = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable:true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
@@ -189,6 +207,57 @@ namespace IMSBussinessObjects.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Interview",
+                columns: table => new
+                {
+                    InterviewId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    InterviewDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    RoomNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    TeamId = table.Column<int>(type: "int", nullable: false),
+                    InternId = table.Column<int>(type: "int", nullable: false),
+                    SupervisorId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Interview", x => x.InterviewId);
+                    table.ForeignKey(
+                        name: "FK_Interview_Interns_InternId",
+                        column: x => x.InternId,
+                        principalTable: "Interns",
+                        principalColumn: "InternId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Interview_Supervisors_SupervisorId",
+                        column: x => x.SupervisorId,
+                        principalTable: "Supervisors",
+                        principalColumn: "SupervisorId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Interview_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "TeamId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "EmailTemplates",
+                columns: new[] { "Id", "Body", "Description", "Name", "Params", "Status", "Subject" },
+                values: new object[] { 1, "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship at team [Team].", "Email này được gửi để chào đón người dùng mới.", "Welcome_Email", "[Name], [Team]", true, "Welcome to IMS!" });
+
+            migrationBuilder.InsertData(
+                table: "EmailTemplates",
+                columns: new[] { "Id", "Body", "Description", "Name", "Params", "Status", "Subject" },
+                values: new object[] { 2, "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace] at room [Room].", "Email này để gửi intern đi phỏng vấn.", "Interview_Intern", "[Name], [InterviewDate], [InterviewPlace], [Room]", true, "Interview" });
+
+            migrationBuilder.InsertData(
+                table: "EmailTemplates",
+                columns: new[] { "Id", "Body", "Description", "Name", "Params", "Status", "Subject" },
+                values: new object[] { 3, "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace] room [Room].", "Email này để gửi supervisor đi phỏng vấn intern.", "Interview_Supervisor", "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace], [Room]", true, "Interview" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Assignments_InternId",
                 table: "Assignments",
@@ -213,7 +282,23 @@ namespace IMSBussinessObjects.Migrations
                 name: "IX_Interns_UserId",
                 table: "Interns",
                 column: "UserId",
-                unique: true);
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Interview_InternId",
+                table: "Interview",
+                column: "InternId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Interview_SupervisorId",
+                table: "Interview",
+                column: "SupervisorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Interview_TeamId",
+                table: "Interview",
+                column: "TeamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notifications_InternId",
@@ -243,6 +328,12 @@ namespace IMSBussinessObjects.Migrations
 
             migrationBuilder.DropTable(
                 name: "Documents");
+
+            migrationBuilder.DropTable(
+                name: "EmailTemplates");
+
+            migrationBuilder.DropTable(
+                name: "Interview");
 
             migrationBuilder.DropTable(
                 name: "Notifications");

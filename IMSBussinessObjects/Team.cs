@@ -16,5 +16,7 @@ namespace IMSBussinessObjects
         public ICollection<Assignment> Assignments { get; set; }
         public ICollection<Supervisor> Supervisors { get; set; }
         public ICollection<Intern> Interns { get; set; }
+        public ICollection<Interview> Interviews { get; set; }
+
     }
 }

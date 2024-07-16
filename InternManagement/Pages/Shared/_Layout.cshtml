@@ -139,13 +139,13 @@
                     }
 
                     // Hide items for Supervisor role
-                    if (user.IsInRole("Supervisor") && (item.Text == "Intern Application" || item.Text == "Add User/Team" || item.Text == "My Profile" || item.Text == "Upload Document" || item.Text== "My Profile"))
+                    if (user.IsInRole("Supervisor") && (item.Text == "Add User/Team" || item.Text == "My Profile" || item.Text == "Upload Document" || item.Text== "My Profile"))
                     {
                         continue;
                     }
 
                     // Hide items for Admin
-                    if (user.IsInRole("Admin") && (item.Text == "My Profile" || item.Text == "Upload Document" || item.Text == "Assignment" || item.Text == "My Profile"))
+                    if (user.IsInRole("Admin") && (item.Text == "My Profile" || item.Text == "Upload Document" || item.Text == "Assignment" || item.Text == "My Profile" || item.Text == "Intern Application"))
                     {
                         continue;
                     }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240714111652_v5")]
-    partial class v5
+    [Migration("20240716081947_IntialCreate")]
+    partial class IntialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -98,6 +98,72 @@ namespace IMSBussinessObjects.Migrations
                     b.ToTable("Documents");
                 });
 
+            modelBuilder.Entity("IMSBussinessObjects.EmailTemplate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Params")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmailTemplates");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship at team [Team].",
+                            Description = "Email này được gửi để chào đón người dùng mới.",
+                            Name = "Welcome_Email",
+                            Params = "[Name], [Team]",
+                            Status = true,
+                            Subject = "Welcome to IMS!"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Body = "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace] at room [Room].",
+                            Description = "Email này để gửi intern đi phỏng vấn.",
+                            Name = "Interview_Intern",
+                            Params = "[Name], [InterviewDate], [InterviewPlace], [Room]",
+                            Status = true,
+                            Subject = "Interview"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Body = "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace] room [Room].",
+                            Description = "Email này để gửi supervisor đi phỏng vấn intern.",
+                            Name = "Interview_Supervisor",
+                            Params = "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace], [Room]",
+                            Status = true,
+                            Subject = "Interview"
+                        });
+                });
+
             modelBuilder.Entity("IMSBussinessObjects.Intern", b =>
                 {
                     b.Property<int>("InternId")
@@ -167,7 +233,6 @@ namespace IMSBussinessObjects.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<int?>("UserId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("InternId");
@@ -175,9 +240,51 @@ namespace IMSBussinessObjects.Migrations
                     b.HasIndex("TeamId");
 
                     b.HasIndex("UserId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Interns");
+                });
+
+            modelBuilder.Entity("IMSBussinessObjects.Interview", b =>
+                {
+                    b.Property<int>("InterviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InterviewId"), 1L, 1);
+
+                    b.Property<int>("InternId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("InterviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("RoomNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("SupervisorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("InterviewId");
+
+                    b.HasIndex("InternId");
+
+                    b.HasIndex("SupervisorId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("Interview");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Notification", b =>
@@ -338,12 +445,38 @@ namespace IMSBussinessObjects.Migrations
                     b.HasOne("IMSBussinessObjects.User", "User")
                         .WithOne("Intern")
                         .HasForeignKey("IMSBussinessObjects.Intern", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Team");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("IMSBussinessObjects.Interview", b =>
+                {
+                    b.HasOne("IMSBussinessObjects.Intern", "Intern")
+                        .WithMany("Interviews")
+                        .HasForeignKey("InternId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("IMSBussinessObjects.Supervisor", "Supervisor")
+                        .WithMany()
+                        .HasForeignKey("SupervisorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("IMSBussinessObjects.Team", "Team")
+                        .WithMany("Interviews")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Intern");
+
+                    b.Navigation("Supervisor");
+
+                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Notification", b =>
@@ -390,6 +523,8 @@ namespace IMSBussinessObjects.Migrations
 
                     b.Navigation("Documents");
 
+                    b.Navigation("Interviews");
+
                     b.Navigation("Notifications");
                 });
 
@@ -398,6 +533,8 @@ namespace IMSBussinessObjects.Migrations
                     b.Navigation("Assignments");
 
                     b.Navigation("Interns");
+
+                    b.Navigation("Interviews");
 
                     b.Navigation("Supervisors");
                 });
