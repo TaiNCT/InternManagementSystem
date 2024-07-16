@@ -87,11 +87,11 @@ namespace InternManagement.Pages.Interviews
             // Send mail Supervisor
             var emailParamsSuperVisor = new Dictionary<string, string>()
                     {
-                        { "Name", $"{Intern.FullName}" },
+                        { "SupervisorName", $"{Intern.FullName}" },
+                        { "InternName", $"{Intern.FullName}" },
                         { "InterviewDate", $"{Interview.InterviewDate}" },
                         { "InterviewPlace", $"{Interview.Location}" },
                         { "Room", $"{Interview.RoomNumber}" },
-
                     };
             List<string> toAddressSuperVisor = new List<string> { Intern.Email };
             _mailService.SendAsync(EmailType.Interview_Intern, toAddressSuperVisor, new List<string> { }, emailParamsSuperVisor);
