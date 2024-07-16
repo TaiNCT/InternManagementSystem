@@ -25,7 +25,6 @@ namespace IMSServices
 
         public void RemoveAssignment(int assignId) => _assignmentRepository.RemoveAssignment(assignId);
 
-        public void UpdateAssignment(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern) => _assignmentRepository.UpdateAssignment(assignId, newAssignment, newTeam, newIntern);
 
         public List<Assignment> GetAssignmentByInternId(int internId) => _assignmentRepository.GetAssignmentByInternId(internId);
 
@@ -47,6 +46,11 @@ namespace IMSServices
         public async Task RemoveAssignmentAsync(int assignId)
         {
             await _assignmentRepository.RemoveAssignmentAsync(assignId);
+        }
+
+        public async Task UpdateAssignmentAsync(int assignId, Assignment newAssignment)
+        {
+            await _assignmentRepository.UpdateAssignment(assignId, newAssignment);
         }
     }
 }

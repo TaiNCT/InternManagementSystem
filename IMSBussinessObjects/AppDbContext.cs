@@ -14,7 +14,7 @@ namespace IMSBussinessObjects
         }
 
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Documents> Documents { get; set; }
+        public virtual DbSet<Document> Documents { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Assignment> Assignments { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
@@ -35,7 +35,7 @@ namespace IMSBussinessObjects
             base.OnModelCreating(modelBuilder);
 
             // Configure entity relationships
-            modelBuilder.Entity<Documents>()
+            modelBuilder.Entity<Document>()
                 .HasOne(d => d.Intern)
                 .WithMany(i => i.Documents)
                 .HasForeignKey(d => d.InternId)

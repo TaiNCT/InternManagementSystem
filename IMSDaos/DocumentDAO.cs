@@ -29,18 +29,18 @@ namespace IMSDaos
                 return instance;
             }
         }
-        public Documents GetDocumentById(int documentId)
+        public Document GetDocumentById(int documentId)
         {
             return db.Documents.FirstOrDefault(x => x.DocumentId == documentId);
 
         }
-        public List<Documents> GetDocuments()
+        public List<Document> GetDocuments()
         {
              return db.Documents.ToList();
         }
         public void DeleteDocument(int documentId)
         {
-            Documents document = GetDocumentById(documentId);
+            Document document = GetDocumentById(documentId);
             if (document != null)
             {
                 db.Documents.Remove(document);
@@ -55,7 +55,7 @@ namespace IMSDaos
                 {
                     var fileName = Path.GetFileName(file.FileName);
                     var fileExtension = Path.GetExtension(fileName);
-                    var objFiles = new Documents()
+                    var objFiles = new Document()
                     {
                         DocumentId = 0,
                         DocumentName = fileName.Split(new Char[] { '.' })[0],

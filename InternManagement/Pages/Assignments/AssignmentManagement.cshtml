@@ -74,16 +74,14 @@
                                     @Html.DisplayFor(modelItem => item.Deadline)
                                 </td>
                                 <td scope="row">
-                                    @Html.DisplayFor(modelItem => item.Grade)
+                                    @* @Html.DisplayFor(modelItem => item.Grade) *@
                                 </td>
                                 <td scope="row">
                                     @Html.DisplayFor(modelItem => item.Weight)
                                 </td>
-                                <td scope="row">
-                                    @Html.DisplayFor(modelItem => item.Complete)
-                                </td>
+                             
                                 <td>
-                                    <a asp-page="/Assignments/Edit" asp-route-id="@item.AssignmentId" class="btn btn-primary">Edit</a> |
+                                    <a asp-page="/Assignments/Grade" asp-route-id="@item.AssignmentId" class="btn btn-primary">Edit</a> |
                                     <a asp-page="./Delete" asp-route-id="@item.AssignmentId" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>

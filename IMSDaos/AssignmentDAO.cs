@@ -65,13 +65,13 @@ namespace IMSDaos
             }
         }
 
-        public void UpdateAssignment(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern)
+        public void UpdateAssignment(int assignId, Assignment newAssignment)
         {
             var existingAssignment = GetAssignmentById(assignId);
             if (existingAssignment != null)
             {
-                existingAssignment.TeamId = newTeam.TeamId;
-                existingAssignment.InternId = newIntern.InternId;
+                existingAssignment.TeamId = newAssignment.TeamId;
+                existingAssignment.InternId = newAssignment.InternId;
                 existingAssignment.Description = newAssignment.Description;
                 existingAssignment.Deadline = newAssignment.Deadline;
                 existingAssignment.Grade = newAssignment.Grade;

@@ -20,7 +20,7 @@ namespace IMSRepositories
 
         public void RemoveAssignment(int assignId) => AssignmentDAO.Instance.RemoveAssignment(assignId);
 
-        public void UpdateAssignment(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern) => AssignmentDAO.Instance.UpdateAssignment(assignId, newAssignment, newTeam, newIntern);
+        public async Task UpdateAssignment(int assignId, Assignment newAssignment) => AssignmentDAO.Instance.UpdateAssignment(assignId, newAssignment);
 
         public async Task<List<Assignment>> GetAssignmentsAsync()
         {

@@ -4,6 +4,7 @@ using IMSBussinessObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+<<<<<<<< HEAD:IMSBussinessObjects/Migrations/20240716111535_updateInterview.Designer.cs
+    [Migration("20240716111535_updateInterview")]
+    partial class updateInterview
+========
+    [Migration("20240716080321_v8")]
+    partial class v8
+>>>>>>>> Assignment:IMSBussinessObjects/Migrations/20240716080321_v8.Designer.cs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,6 +146,7 @@ namespace IMSBussinessObjects.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EmailTemplates");
+<<<<<<<< HEAD:IMSBussinessObjects/Migrations/20240716111535_updateInterview.Designer.cs
 
                     b.HasData(
                         new
@@ -171,6 +179,8 @@ namespace IMSBussinessObjects.Migrations
                             Status = true,
                             Subject = "Interview"
                         });
+========
+>>>>>>>> Assignment:IMSBussinessObjects/Migrations/20240716080321_v8.Designer.cs
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Intern", b =>
