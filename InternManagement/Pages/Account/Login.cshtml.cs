@@ -54,7 +54,7 @@ namespace InternManagement.Pages.Account
             {
                 var defaultUser = _configuration.GetSection("DefaultUser").Get<User>();
                 // Fetch the most recent user data from the database
-                var user = _userService.GetAccount(Email);
+                var user = _userService.GetAccount(Email.Trim());
                 Console.WriteLine($"Login attempt for user: {Email}");
 
                 bool isAuthenticated = false;
@@ -64,7 +64,7 @@ namespace InternManagement.Pages.Account
                     isAuthenticated = VerifyPassword(Password, user.Password, user.RefreshToken);
                     Console.WriteLine($"Database user found: {user.Email}, Authenticated: {isAuthenticated}");
                 }
-                else if (Email == defaultUser.Email)
+                else if (Email.Trim().Equals(defaultUser.Email, StringComparison.OrdinalIgnoreCase))
                 {
                     // Verify password for default user
                     isAuthenticated = VerifyPassword(Password, defaultUser.Password, defaultUser.RefreshToken);
@@ -76,10 +76,10 @@ namespace InternManagement.Pages.Account
                 if (isAuthenticated)
                 {
                     var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.Email, Email),
-                        new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern")
-                    };
+            {
+                new Claim(ClaimTypes.Email, Email.Trim()),
+                new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern")
+            };
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     // Sign in with a new session

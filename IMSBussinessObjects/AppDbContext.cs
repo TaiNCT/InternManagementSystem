@@ -23,7 +23,6 @@ namespace IMSBussinessObjects
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         public virtual DbSet<Campaign> Campaigns { get; set; }
         public virtual DbSet<Interview> Interviews { get; set; }
-        public virtual DbSet<Campaign> Campaigns { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
