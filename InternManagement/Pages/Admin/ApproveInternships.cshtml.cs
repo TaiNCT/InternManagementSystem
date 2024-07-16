@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace InternManagement.Pages.Admin
 {
-    [Authorize(Roles = "Supervisor")]
+    [Authorize(Roles = "Admin")]
     public class ApproveInternshipsModel : PageModel
     {
         private readonly IInternService _internService;
