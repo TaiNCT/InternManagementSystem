@@ -29,6 +29,8 @@ namespace InternManagement.Pages.Account
         [BindProperty, Required, DataType(DataType.Password)]
         public string Password { get; set; }
 
+        public int UserID { get; set; }
+
         public LoginModel(IUserService userService, IInternService internService, IConfiguration configuration)
         {
             _userService = userService;
@@ -78,8 +80,9 @@ namespace InternManagement.Pages.Account
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, Email),
-                        new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern")
-                    };
+                        new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern"),
+                        new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()) // Add the user ID to the claims           
+                };
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     // Sign in with a new session

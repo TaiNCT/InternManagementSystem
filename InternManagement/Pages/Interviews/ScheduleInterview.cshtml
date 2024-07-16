@@ -88,40 +88,37 @@
     <input type="hidden" asp-for="Interview.InternId" />
     <input type="hidden" asp-for="Interview.TeamId" />
     <input type="hidden" asp-for="Interview.SupervisorId" />
-
     <div class="form-group">
         <label class="control-label">Intern</label>
         <input class="form-control" value="@Model.Intern.FullName" readonly />
     </div>
-
     <div class="form-group">
         <label class="control-label">Team</label>
         <input class="form-control" value="@Model.Team.TeamName" readonly />
     </div>
-
     <div class="form-group">
         <label class="control-label">Supervisor</label>
         <input class="form-control" value="@(Model.Supervisor?.User?.Username ?? "N/A")" readonly />
     </div>
-
+    <div class="form-group">
+        <label class="control-label">Supervisor Email</label>
+        <input class="form-control" value="@(Model.SupervisorEmail ?? "N/A")" readonly />
+    </div>
     <div class="form-group">
         <label asp-for="Interview.InterviewDate" class="control-label">Interview Date</label>
         <input asp-for="Interview.InterviewDate" class="form-control" type="datetime-local" />
         <span asp-validation-for="Interview.InterviewDate" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="Interview.Location" class="control-label">Location</label>
         <input asp-for="Interview.Location" class="form-control" maxlength="100" />
         <span asp-validation-for="Interview.Location" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="Interview.RoomNumber" class="control-label">Room Number</label>
         <input asp-for="Interview.RoomNumber" class="form-control" maxlength="20" />
         <span asp-validation-for="Interview.RoomNumber" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <input type="submit" value="Schedule Interview" class="btn btn-primary" />
     </div>

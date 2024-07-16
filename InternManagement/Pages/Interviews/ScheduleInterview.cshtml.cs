@@ -13,19 +13,22 @@ namespace InternManagement.Pages.Interviews
         private readonly ITeamService _teamService;
         private readonly ISupervisorService _supervisorService;
         private readonly IMailServices _mailService;
+        private readonly IUserService _userService;
 
         public ScheduleInterviewModel(
             IInterviewService interviewService,
             IInternService internService,
             ITeamService teamService,
             ISupervisorService supervisorService,
-            IMailServices mailService)
+            IMailServices mailService,
+            IUserService userService)
         {
             _interviewService = interviewService;
             _internService = internService;
             _teamService = teamService;
             _supervisorService = supervisorService;
             _mailService = mailService;
+            _userService = userService;
         }
 
         [BindProperty]
@@ -33,6 +36,7 @@ namespace InternManagement.Pages.Interviews
         public Intern Intern { get; set; }
         public Team Team { get; set; }
         public Supervisor Supervisor { get; set; }
+        public string SupervisorEmail { get; set; }
 
         public IActionResult OnGet(int interviewId)
         {
@@ -45,12 +49,19 @@ namespace InternManagement.Pages.Interviews
             Intern = _internService.GetInternById(Interview.InternId);
             if (Intern == null)
             {
-                // Handle the case when the Intern is not found
                 return new StatusCodeResult(StatusCodes.Status404NotFound);
             }
 
             Team = _teamService.GetTeamById(Interview.TeamId);
             Supervisor = _supervisorService.GetSupervisorById(Interview.SupervisorId);
+
+            // Fetch the supervisor's email
+            if (Supervisor != null && Supervisor.UserId != null)
+            {
+                var user = _userService.GetUserById(Supervisor.UserId);
+                SupervisorEmail = user?.Email;
+            }
+
             return Page();
         }
 
@@ -124,7 +135,7 @@ namespace InternManagement.Pages.Interviews
             { "InterviewPlace", Interview.Location },
             { "Room", Interview.RoomNumber },
         };
-                List<string> toAddressSuperVisor = new List<string> { Supervisor.User.Email };
+                List<string> toAddressSuperVisor = new List<string> { SupervisorEmail };
                 _mailService.SendAsync(EmailType.Interview_Supervisor, toAddressSuperVisor, new List<string>(), emailParamsSuperVisor);
             }
             else
