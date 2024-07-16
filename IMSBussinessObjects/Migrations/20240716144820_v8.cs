@@ -5,11 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IMSBussinessObjects.Migrations
 {
-<<<<<<<< HEAD:IMSBussinessObjects/Migrations/20240716132809_V8.cs
-    public partial class V8 : Migration
-========
-    public partial class updateDBV1 : Migration
->>>>>>>> main:IMSBussinessObjects/Migrations/20240716142826_updateDBV1.cs
+    public partial class v8 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -285,29 +281,17 @@ namespace IMSBussinessObjects.Migrations
             migrationBuilder.InsertData(
                 table: "EmailTemplates",
                 columns: new[] { "Id", "Body", "Description", "Name", "Params", "Status", "Subject" },
-<<<<<<<< HEAD:IMSBussinessObjects/Migrations/20240716132809_V8.cs
-                values: new object[] { 1, "Chào mừng bạn đến với IMS! Kính gửi [Name], cảm ơn bạn đã tham gia cùng chúng tôi.", "Email này được gửi để chào đón người dùng mới.", "Welcome_Email", "[Name]", true, "Welcome to IMS!" });
-========
                 values: new object[] { 1, "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship at team [Team].", "Email này được gửi để chào đón người dùng mới.", "Welcome_Email", "[Name], [Team]", true, "Welcome to IMS!" });
->>>>>>>> main:IMSBussinessObjects/Migrations/20240716142826_updateDBV1.cs
 
             migrationBuilder.InsertData(
                 table: "EmailTemplates",
                 columns: new[] { "Id", "Body", "Description", "Name", "Params", "Status", "Subject" },
-<<<<<<<< HEAD:IMSBussinessObjects/Migrations/20240716132809_V8.cs
-                values: new object[] { 2, "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace].", "Email này để gửi intern đi phỏng vấn.", "Interview_Intern", "[Name], [InterviewDate], [InterviewPlace]", true, "Interview" });
-========
                 values: new object[] { 2, "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace] at room [Room].", "Email này để gửi intern đi phỏng vấn.", "Interview_Intern", "[Name], [InterviewDate], [InterviewPlace], [Room]", true, "Interview" });
->>>>>>>> main:IMSBussinessObjects/Migrations/20240716142826_updateDBV1.cs
 
             migrationBuilder.InsertData(
                 table: "EmailTemplates",
                 columns: new[] { "Id", "Body", "Description", "Name", "Params", "Status", "Subject" },
-<<<<<<<< HEAD:IMSBussinessObjects/Migrations/20240716132809_V8.cs
-                values: new object[] { 3, "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace].", "Email này để gửi supervisor đi phỏng vấn intern.", "Interview_Supervisor", "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace]", true, "Interview" });
-========
                 values: new object[] { 3, "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace] room [Room].", "Email này để gửi supervisor đi phỏng vấn intern.", "Interview_Supervisor", "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace], [Room]", true, "Interview" });
->>>>>>>> main:IMSBussinessObjects/Migrations/20240716142826_updateDBV1.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_Assignments_DocumentId",
