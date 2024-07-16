@@ -8,7 +8,7 @@ namespace IMSRepositories
         List<Assignment> GetAssignments();
         void AddAssignment(Assignment assignment);
         void RemoveAssignment(int assignId);
-        void UpdateAssignment(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern);
+        Task UpdateAssignment(int assignId, Assignment newAssignment);
         List<Assignment> GetAssignmentByInternId(int internId);
         Task<List<Assignment>> GetAssignmentsAsync();
         Task AddAssignmentAsync(Assignment assignment);

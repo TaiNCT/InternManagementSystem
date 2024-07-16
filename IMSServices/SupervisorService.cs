@@ -30,5 +30,9 @@ namespace IMSServices
         {
             _supervisorRepository.AddSupervisor(UserId, newTeam);
         }
+        public Supervisor GetSupervisorByUserId(int userId)
+        {
+            return _supervisorRepository.GetSupervisorByUserId(userId);
+        }
     }
 }

@@ -1,9 +1,11 @@
 using IMSBussinessObjects;
 using IMSRepositories;
+using IMSServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace InternManagement.Pages.Interns
 {
@@ -11,14 +13,17 @@ namespace InternManagement.Pages.Interns
 
     public class ManageInternModel : PageModel
     {
-        private readonly ITeamRepository _teamRepository;
-        private readonly IInternRepository _internRepository;
-        private readonly IAssignmentRepository _assignmentRepository;
-        public ManageInternModel(ITeamRepository teamRepository, IInternRepository internRepository, IAssignmentRepository assignmentRepository)
+        private readonly ITeamService _teamService;
+        private readonly IInternService _internService;
+        private readonly IAssignmentService _assignmentService;
+        private readonly IUserService _userService;
+        private readonly ISupervisorService _SupervisorService;
+        public ManageInternModel(ITeamService teamService, IInternService internService, IAssignmentService assignmentService, IUserService userService)
         {
-            _teamRepository = teamRepository;
-            _internRepository = internRepository;
-            _assignmentRepository = assignmentRepository;
+            _teamService = teamService;
+            _internService = internService;
+            _assignmentService = assignmentService;
+            _userService = userService;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -32,45 +37,57 @@ namespace InternManagement.Pages.Interns
         public List<SelectListItem> InternsSelectList { get; set; }
 
         public Team SelectedTeam { get; set; }
+        public int Team { get; set; }
+
         public Intern SelectedIntern { get; set; }
         public List<Assignment> Assignments { get; set; }
         public List<Intern> Interns { get; set; }
+        [BindProperty]
+        public Supervisor supervisor { get; set; }
 
         public void OnGet()
         {
-            TeamsSelectList = _teamRepository.GetAllTeams()
-                .Select(t => new SelectListItem
-                {
-                    Value = t.TeamId.ToString(),
-                    Text = t.TeamName
-                })
-                .ToList();
-
-            if (TeamId.HasValue)
+            var userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+            var user = _userService.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
+            var UserId = user.UserId;
+            if (user != null)
             {
-                SelectedTeam = _teamRepository.GetTeamById(TeamId.Value);
-                Interns = _internRepository.GetApprovedInternsByTeamId(TeamId.Value).ToList();
-                InternsSelectList = Interns
-                    .Select(i => new SelectListItem
+                 supervisor = _SupervisorService.GetSupervisorByUserId(UserId);
+
+                if (supervisor != null)
+                {
+                    SelectedTeam = _teamService.GetTeamById(supervisor.TeamId);
+
+                    if (SelectedTeam != null)
                     {
-                        Value = i.InternId.ToString(),
-                        Text = i.FullName
-                    })
-                    .ToList();
+                        TeamId = supervisor.TeamId; // Assign TeamId if needed
+
+                        Interns = _internService.GetApprovedInternsByTeamId(TeamId.Value).ToList();
+                        InternsSelectList = Interns
+                            .Select(i => new SelectListItem
+                            {
+                                Value = i.InternId.ToString(),
+                                Text = i.FullName
+                            })
+                            .ToList();
+                    }
+                }
             }
+            
+
             if (InternId.HasValue)
             {
-                SelectedIntern = _internRepository.GetInternById(InternId.Value);
-                Assignments = _assignmentRepository.GetAssignmentByInternId(InternId.Value);
+                SelectedIntern = _internService.GetInternById(InternId.Value);
+                Assignments = _assignmentService.GetAssignmentByInternId(InternId.Value);
             }
         }
 
         public IActionResult OnPostDelete(int id)
         {
-            var intern = _internRepository.GetInternById(id);
+            var intern = _internService.GetInternById(id);
             if (intern != null)
             {
-                _internRepository.RemoveIntern(id);
+                _internService.RemoveIntern(id);
             }
             return RedirectToPage();
         }
