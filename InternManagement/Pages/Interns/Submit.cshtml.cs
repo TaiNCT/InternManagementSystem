@@ -14,21 +14,26 @@ namespace InternManagement.Pages.Interns
         private readonly IAssignmentService _assignmentService;
         private readonly ITeamService _teamService;
         private readonly IInternService _internService;
+        private readonly IDocumentsService documentsService;
 
         public SubmitModel(
             IAssignmentService assignmentService,
             ITeamService teamService,
-            IInternService internService)
+            IInternService internService,
+            IDocumentsService documentsSer)
         {
             _assignmentService = assignmentService;
             _teamService = teamService;
             _internService = internService;
+            documentsService=documentsSer;
         }
         [BindProperty]
         public Assignment Assignment { get; set; }
 
         [BindProperty]
         public Team Team { get; set; }
+        [BindProperty]
+        public IFormFile DocumentFile { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -60,6 +65,10 @@ namespace InternManagement.Pages.Interns
             if (assignmentToUpdate == null)
             {
                 return NotFound();
+            }
+            if(DocumentFile!=null)
+            {
+                documentsService.UploadDocumentAsync(DocumentFile, 1);
             }
 
             // Update only the Grade and Complete properties

@@ -36,11 +36,6 @@ namespace IMSBussinessObjects
             base.OnModelCreating(modelBuilder);
 
             // Configure entity relationships
-            modelBuilder.Entity<Document>()
-                .HasOne(d => d.Intern)
-                .WithMany(i => i.Documents)
-                .HasForeignKey(d => d.InternId)
-                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Notification>()
                 .HasOne(n => n.User)

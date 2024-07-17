@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IMSBussinessObjects.Migrations
 {
-    public partial class v8 : Migration
+    public partial class deleteIternId : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,9 +66,9 @@ namespace IMSBussinessObjects.Migrations
                     Tittle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Progress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PictureUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
@@ -159,8 +159,8 @@ namespace IMSBussinessObjects.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DocumentName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     DocumentType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    InternId = table.Column<int>(type: "int", nullable: false),
-                    DocumentData = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    DocumentData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    InternId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -169,8 +169,7 @@ namespace IMSBussinessObjects.Migrations
                         name: "FK_Documents_Interns_InternId",
                         column: x => x.InternId,
                         principalTable: "Interns",
-                        principalColumn: "InternId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "InternId");
                 });
 
             migrationBuilder.CreateTable(

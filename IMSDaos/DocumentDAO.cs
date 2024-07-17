@@ -60,7 +60,6 @@ namespace IMSDaos
                         DocumentId = 0,
                         DocumentName = fileName.Split(new Char[] { '.' })[0],
                         DocumentType = fileExtension,
-                        InternId = internId
                     };
                     using (var target = new MemoryStream())
                     {

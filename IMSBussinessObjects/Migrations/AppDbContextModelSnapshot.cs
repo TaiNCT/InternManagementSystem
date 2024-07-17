@@ -146,7 +146,7 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("InternId")
+                    b.Property<int?>("InternId")
                         .HasColumnType("int");
 
                     b.HasKey("DocumentId");
@@ -498,13 +498,9 @@ namespace IMSBussinessObjects.Migrations
 
             modelBuilder.Entity("IMSBussinessObjects.Document", b =>
                 {
-                    b.HasOne("IMSBussinessObjects.Intern", "Intern")
+                    b.HasOne("IMSBussinessObjects.Intern", null)
                         .WithMany("Documents")
-                        .HasForeignKey("InternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Intern");
+                        .HasForeignKey("InternId");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Intern", b =>
