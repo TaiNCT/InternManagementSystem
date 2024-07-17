@@ -43,7 +43,7 @@
                     <div>Description: @campaign.Description</div>
                     <div>Start date: @campaign.StartDate.ToString("MM/dd/yyyy")</div> |
                     <div>End date: @campaign.EndDate.ToString("MM/dd/yyyy")</div>
-                    @*            <div>Team: @campaign.Team.Name</div> *@
+                    <div>Team: @campaign.Team.TeamName</div>
                     <div>
                         @if (campaign.PictureUrl != null && campaign.PictureUrl.Length > 0)
                         {
@@ -52,8 +52,9 @@
                             <img src="@imgSrc" alt="Campaign Photo" class="img-thumbnail" style="max-width: 200px;" />
                         }
                     </div>
-                    <a href="/Account/InternshipApplication?teamId=@campaign.TeamId&startDate=@campaign.StartDate&endDate=@campaign.EndDate"
-                       class="btn btn-primary">Apply for Internship</a>
+                    <a href="/Account/InternshipApplication?teamId=@campaign.TeamId&startDate=@campaign.StartDate&endDate=@campaign.EndDate"class="btn btn-primary">
+                        Apply for Internship
+                   </a>
                 </div>
                 <hr class="m-4">
             }
