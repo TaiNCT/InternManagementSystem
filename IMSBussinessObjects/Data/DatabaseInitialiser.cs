@@ -187,7 +187,7 @@ namespace IMSBussinessObjects.Data
                     StartDate = new DateTime(2024, 7, 1),
                     EndDate = new DateTime(2024, 7, 30),
                     Team = fullstackTeam,
-                    PictureUrl= pictureData
+                   // PictureUrl= pictureData
                 },
                  new Campaign
                 {
@@ -198,7 +198,7 @@ namespace IMSBussinessObjects.Data
                     StartDate = new DateTime(2024, 7, 1),
                     EndDate = new DateTime(2024, 7, 30),
                     Team = FETeam,
-                    PictureUrl= pictureData
+                  //  PictureUrl= pictureData
                 },
                  new Campaign
                 {
@@ -209,7 +209,7 @@ namespace IMSBussinessObjects.Data
                     StartDate = new DateTime(2024, 7, 1),
                     EndDate = new DateTime(2024, 7, 30),
                     Team = BETeam,
-                    PictureUrl= pictureData
+                 //   PictureUrl= pictureData
                 }
             };
             List<Assignment> assignments = new()
