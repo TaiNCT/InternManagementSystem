@@ -193,10 +193,10 @@ namespace IMSBussinessObjects.Migrations
                         new
                         {
                             Id = 1,
-                            Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship at team [Team].",
+                            Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship and have fun.",
                             Description = "Email này được gửi để chào đón người dùng mới.",
                             Name = "Welcome_Email",
-                            Params = "[Name], [Team]",
+                            Params = "[Name]",
                             Status = true,
                             Subject = "Welcome to IMS!"
                         },
@@ -436,12 +436,14 @@ namespace IMSBussinessObjects.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(255)")
+                        .UseCollation("SQL_Latin1_General_CP1_CS_AS");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .UseCollation("SQL_Latin1_General_CP1_CS_AS");
 
                     b.Property<string>("RefreshToken")
                         .HasMaxLength(800)

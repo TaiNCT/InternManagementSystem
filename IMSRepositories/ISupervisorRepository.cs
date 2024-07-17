@@ -1,9 +1,4 @@
 ﻿using IMSBussinessObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IMSRepositories
 {
@@ -13,6 +8,8 @@ namespace IMSRepositories
         public Supervisor GetSupervisorById(int supId);
         public void AddSupervisor(int UserId, Team newTeam);
         public Supervisor GetSupervisorByUserId(int userId);
+        public List<Supervisor> GetAllSupervisors();
+
 
     }
 }

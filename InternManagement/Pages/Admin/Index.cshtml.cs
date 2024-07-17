@@ -1,32 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using IMSBussinessObjects;
+﻿using IMSBussinessObjects;
 using IMSServices;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace InternManagement.Pages.Admin
 {
     public class IndexModel : PageModel
     {
         private readonly ICampaignService campaignService;
+        private readonly ITeamService _teamService;
 
-        public IndexModel(ICampaignService campaignSer)
+
+        public IndexModel(ICampaignService campaignSer, ITeamService teamService)
         {
             campaignService = campaignSer;
+            _teamService = teamService;
         }
 
-        public IList<Campaign> Campaign { get;set; } = default!;
+        public IList<Campaign> Campaigns { get; set; } = new List<Campaign>();
 
         public async Task OnGetAsync()
         {
-            if (campaignService.GetCampaigns != null)
+            Campaigns = campaignService.GetCampaigns();
+
+            foreach (var campaign in Campaigns)
             {
-                Campaign = campaignService.GetCampaigns();
+                campaign.Team = await _teamService.GetTeamByIdAsync(campaign.TeamId);
             }
         }
     }
 }
+

@@ -14,8 +14,8 @@ namespace IMSBussinessObjects
                 Id = 1,
                 Name = "Welcome_Email",
                 Status = true,
-                Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship at team [Team].",
-                Params = "[Name], [Team]",
+                Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship and have fun.",
+                Params = "[Name]",
                 Subject = "Welcome to IMS!",
                 Description = "Email này được gửi để chào đón người dùng mới."
             },
@@ -42,5 +42,7 @@ namespace IMSBussinessObjects
         );
         }
         #endregion
+
+
     }
 }

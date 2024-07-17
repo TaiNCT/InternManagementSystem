@@ -27,6 +27,7 @@ namespace InternManagement.Pages.Account
             _userService = userService;
             _interviewService = interviewServ;
             _supervisorService = supervisorService;
+            Supervisors = new List<Supervisor>();
         }
 
         [BindProperty]
@@ -44,10 +45,27 @@ namespace InternManagement.Pages.Account
         public SelectList Teams { get; set; }
 
         public List<User> Users { get; set; }
+        public List<Supervisor> Supervisors { get; set; }
 
-        public void OnGet()
+        public void OnGet(int? teamId, DateTime? startDate, DateTime? endDate)
         {
             Teams = new SelectList(_teamService.GetAllTeams(), "TeamId", "TeamName");
+            Supervisors = _supervisorService.GetAllSupervisors();
+
+            if (teamId.HasValue)
+            {
+                SelectedTeamId = teamId.Value;
+            }
+
+            if (startDate.HasValue)
+            {
+                Intern.InternshipStartingDate = startDate.Value;
+            }
+
+            if (endDate.HasValue)
+            {
+                Intern.InternshipEndingDate = endDate.Value;
+            }
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -79,7 +97,8 @@ namespace InternManagement.Pages.Account
                 _internService.AddIntern(Intern);
 
                 // Get the supervisor for the selected team
-                var supervisor = await _supervisorService.GetSupervisorByTeamIdAsync(SelectedTeamId);
+                Supervisors = _supervisorService.GetAllSupervisors();
+                var supervisor = Supervisors.FirstOrDefault(s => s.TeamId == SelectedTeamId);
 
                 if (supervisor == null)
                 {

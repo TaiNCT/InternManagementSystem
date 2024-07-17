@@ -6,22 +6,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Intern Management System</title>
+    <title>FPT Sofware's Campaign'</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body class="body">
-    <div class="container">
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Job Campaign</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <form class="d-flex">
+                    <input class="form-control me-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+            <a href="/Account/Login" class="btn btn-success">Log in</a>
+        </div>
+    </nav>
+    @* <div class="container mt-5">
+        <h1 class="text-center mb-4">Welcome to Job Campaign</h1>
         <div class="row">
-            <div class="col-md-6 mx-auto mt-5 text-center">
-                <h1>Welcome to the Intern Management System</h1>
-                <p>Please log in to access your account.</p>
-                <a href="/Account/Login" class="btn btn-primary">Log in</a>
+            <div class="col-md-8 mx-auto">
+                <h2 class="mb-3">Available Campaigns</h2>
+                @foreach (var campaign in Model.Campaigns)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">@campaign.Tittle</h5>
+                            <p class="card-text">@campaign.Description</p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    Start Date: @campaign.StartDate.ToShortDateString() |
+                                    End Date: @campaign.EndDate.ToShortDateString()
+                                </small>
+                            </p>
+                            <a href="/Account/InternshipApplication?teamId=@campaign.TeamId&startDate=@campaign.StartDate.ToString("yyyy-MM-dd")&endDate=@campaign.EndDate.ToString("yyyy-MM-dd")"
+                               class="btn btn-primary">Apply for Internship</a>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
-    </div>
+    </div> *@
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
