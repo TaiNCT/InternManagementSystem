@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using IMSBussinessObjects;
 using IMSServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InternManagement.Pages.Admin
 {
+    [Authorize(Roles = "Admin")]
     public class DetailsModel : PageModel
     {
         private readonly ICampaignService campaignService;

@@ -19,13 +19,7 @@ namespace IMSBussinessObjects
         public DateTime StartDate { get; set; }
         [Required]
         public DateTime EndDate { get; set; }
-        public string? Progress { get; set; }
         public byte[]? PictureUrl { get; set; }
-
-        [MaxLength(20)]
-        public string? Status { get; set; }
-
-
         public int TeamId { get; set; }
         [ForeignKey("TeamId")]
         public Team? Team { get; set; }

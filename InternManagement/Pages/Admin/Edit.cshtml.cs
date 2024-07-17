@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IMSBussinessObjects;
 using IMSServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InternManagement.Pages.Admin
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly ICampaignService campaignService;
