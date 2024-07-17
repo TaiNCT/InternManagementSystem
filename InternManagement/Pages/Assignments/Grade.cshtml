@@ -39,6 +39,9 @@
                 var cvSrc = String.Format("data:application/pdf;base64,{0}", base64Cv);
                 <p><a href="@cvSrc" target="_blank" download="@Model.Document.DocumentName@Model.Document.DocumentType" class="btn btn-success mt-2">Download Answer</a></p>
             }
+        }else
+        {
+            <h1>N/A</h1>
         }
     </div>
     <div class="form-group">

@@ -111,7 +111,6 @@
         new { Text = "Interns", Icon = "users", Link = Url.Page("/Interns/ManageInterns") },
         new { Text = "Grade", Icon = "users", Link = Url.Page("/Interns/GradeInterns") },
         new { Text = "Intern Application", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
-        new { Text = "Upload Document", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
         new { Text = "Assignment", Icon = "briefcase", Link = Url.Page("/Assignments/AssignmentManagement") },
         new { Text = "Schedule Interview", Icon = "briefcase", Link = Url.Page("/Interviews/Index") },
         new { Text = "Post Management", Icon = "briefcase", Link = Url.Page("/Admin/Index") },
@@ -135,7 +134,7 @@
                 @foreach (var item in menuItems)
                 {
                     // Hide items for Intern role
-                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Grade" || item.Text == "Add User/Team" || item.Text == "Assignment" || item.Text == "Interview Management" || item.Text == "Post Management" ||item.Text == "Interview Management"))
+                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Grade" || item.Text == "Add User/Team" || item.Text == "Assignment" || item.Text == "Interview Management" || item.Text == "Post Management" || item.Text == "Schedule Interview"))
                     {
                         continue;
                     }

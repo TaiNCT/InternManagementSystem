@@ -20,14 +20,23 @@ namespace InternManagement.Pages
         }
 
         public List<Campaign> Campaigns { get; set; }
-
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
         // Thêm m?t danh sách ?? l?u tên ??i cho t?ng chi?n d?ch
         public Dictionary<int, string> TeamNames { get; set; }
 
         public void OnGet()
         {
-            Campaigns = _campaignService.GetCampaigns();
-
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                IEnumerable<Campaign> filteredCampaigns = _campaignService.GetCampaigns().Where(x => x.Tittle.Contains(SearchString));
+                List<IMSBussinessObjects.Campaign> campaignsList = filteredCampaigns.ToList();
+                Campaigns = campaignsList;
+            }
+            else
+            {
+                Campaigns = _campaignService.GetCampaigns();
+            }
             // Kh?i t?o Dictionary ?? l?u tên ??i
             TeamNames = new Dictionary<int, string>();
 

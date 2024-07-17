@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -58,7 +59,7 @@ namespace IMSBussinessObjects
         [MaxLength(20)] // Adjust max length as needed
         public string Status { get; set; } // "approved", "waiting", "rejected"
 
-
+        
     }
 
 }
