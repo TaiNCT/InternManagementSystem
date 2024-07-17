@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using IMSBussinessObjects;
 using IMSServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InternManagement.Pages.Admin
 {
+    [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
     {
+      
         private readonly ICampaignService campaignService;
 
         public DeleteModel(ICampaignService campaignSer)

@@ -33,9 +33,6 @@
                 @Html.DisplayNameFor(model => model.Campaigns[0].Team)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Campaigns[0].Progress)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Campaigns[0].PictureUrl)
             </th>
             <th>Action</th>
@@ -66,9 +63,6 @@
                 @Html.DisplayFor(modelItem => item.Team.TeamName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Progress)
-            </td>
-            <td>
                     @if (item.PictureUrl != null && item.PictureUrl.Length > 0)
                     {
                         var base64Photo = Convert.ToBase64String(item.PictureUrl);
@@ -77,11 +71,7 @@
                     }
             </td>
             <td>
-                    <a asp-page="./Edit" asp-route-id="@item.CampaignId" class="btn btn-primary">Edit</a>
-                    <hr />
-                    <a asp-page="./Details" asp-route-id="@item.CampaignId" class="btn btn-primary">Details</a>
-                    <hr />
-                    <a asp-page="./Delete" asp-route-id="@item.CampaignId" class="btn btn-primary">Delete</a>
+                    <a asp-page="./Delete" asp-route-id="@item.CampaignId" class="btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>
 }

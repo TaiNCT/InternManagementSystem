@@ -1,9 +1,11 @@
 ﻿using IMSBussinessObjects;
 using IMSServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace InternManagement.Pages.Admin
 {
+    [Authorize(Roles ="Admin")]
     public class IndexModel : PageModel
     {
         private readonly ICampaignService campaignService;
