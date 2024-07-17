@@ -47,11 +47,25 @@ namespace InternManagement.Pages.Account
         public List<User> Users { get; set; }
         public List<Supervisor> Supervisors { get; set; }
 
-        public void OnGet()
+        public void OnGet(int? teamId, DateTime? startDate, DateTime? endDate)
         {
             Teams = new SelectList(_teamService.GetAllTeams(), "TeamId", "TeamName");
             Supervisors = _supervisorService.GetAllSupervisors();
 
+            if (teamId.HasValue)
+            {
+                SelectedTeamId = teamId.Value;
+            }
+
+            if (startDate.HasValue)
+            {
+                Intern.InternshipStartingDate = startDate.Value;
+            }
+
+            if (endDate.HasValue)
+            {
+                Intern.InternshipEndingDate = endDate.Value;
+            }
         }
 
         public async Task<IActionResult> OnPostAsync()

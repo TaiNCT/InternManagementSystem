@@ -13,7 +13,7 @@ namespace InternManagement.Pages.Account
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToPage("Login");
+            return RedirectToPage("/HomePage");
         }
     }
 }
