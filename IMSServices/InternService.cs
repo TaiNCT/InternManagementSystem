@@ -87,5 +87,14 @@ namespace IMSServices
         {
             return await _internRepository.GetApprovedInternsByTeamIdAsync(teamId);
         }
+        public async Task<Intern> GetInternByIdAsync(int internID)
+        {
+            return await _internRepository.GetInternByIdAsync(internID);
+        }
+
+        public async Task UpdateInternAsync(int internID, Intern newIntern)
+        {
+            await _internRepository.UpdateInternAsync(internID, newIntern);
+        }
     }
 }

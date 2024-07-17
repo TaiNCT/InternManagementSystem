@@ -33,11 +33,12 @@
 
     <!-- Hiển thị tên đội -->
 
-    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    <button type="submit" class="btn btn-primary mt-4">Submit</button>
 </form>
-
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <form method="get" asp-page="./InternProfile">
+        <button type="submit" class="btn btn-secondary mt-2">Back to List</button>
+    </form>
 </div>
 
 @section Scripts {

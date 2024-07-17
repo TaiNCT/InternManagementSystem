@@ -16,5 +16,7 @@ namespace IMSRepositories
         public List<Intern> GetApprovedInterns();
         public IEnumerable<Intern> GetApprovedInternsByTeamId(int teamId);
          public Task<IEnumerable<Intern>> GetApprovedInternsByTeamIdAsync(int teamId);
+        public Task<Intern> GetInternByIdAsync(int internID);
+        public Task UpdateInternAsync(int internID, Intern newIntern);
     }
 }

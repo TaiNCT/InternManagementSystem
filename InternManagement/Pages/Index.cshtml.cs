@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace InternManagement.Pages
 {
-    [Authorize]
+    [Authorize(Roles = "Supervisor,Admin")]
     public class IndexModel : PageModel
     {
         private readonly ITeamService _teamService;

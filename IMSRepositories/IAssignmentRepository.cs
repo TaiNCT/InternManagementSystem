@@ -15,5 +15,6 @@ namespace IMSRepositories
         Task<Assignment> GetAssignmentByIdAsync(int assignId);
         Task RemoveAssignmentAsync(int assignId);
         Task UpdateAssignmentAsync(int assignId, Assignment newAssignment, Team newTeam, Intern newIntern);
+
     }
 }

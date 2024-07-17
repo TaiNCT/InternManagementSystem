@@ -134,7 +134,7 @@
                 @foreach (var item in menuItems)
                 {
                     // Hide items for Intern role
-                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" ||item.Text=="Grade"|| item.Text == "Add User/Team" || item.Text == "Assignment"))
+                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Home" || item.Text == "Grade" || item.Text == "Add User/Team" || item.Text == "Assignment"))
                     {
                         continue;
                     }

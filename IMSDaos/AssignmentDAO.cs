@@ -123,5 +123,9 @@ namespace IMSDaos
                 await db.SaveChangesAsync();
             }
         }
+        public async Task<List<Assignment>> GetAssignmentsByInternIdAsync(int internId)
+        {
+            return await db.Assignments.Where(x => x.InternId == internId).ToListAsync();
+        }
     }
 }
