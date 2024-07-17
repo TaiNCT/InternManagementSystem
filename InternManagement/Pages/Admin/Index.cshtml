@@ -1,0 +1,86 @@
+﻿@page
+@model InternManagement.Pages.Admin.IndexModel
+
+@{
+    ViewData["Title"] = "Post Management";
+}
+
+
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaign[0].Tittle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaign[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaign[0].CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaign[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaign[0].EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaign[0].CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaign[0].Team)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaign[0].Progress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaign[0].PictureUrl)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Campaign) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tittle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Progress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PictureUrl)
+            </td>
+            <td>
+                    <a asp-page="./Edit" asp-route-id="@item.CampaignId" class="btn btn-primary">Edit</a>
+                    <hr />
+                    <a asp-page="./Details" asp-route-id="@item.CampaignId" class="btn btn-primary">Details</a>
+                    <hr />
+                    <a asp-page="./Delete" asp-route-id="@item.CampaignId" class="btn btn-primary">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -4,14 +4,15 @@
     ViewData["Title"] = "Manage Interns";
 }
 <style>
-     .short-select {
-         width: 200px;
-     }
+    .short-select {
+        width: 200px;
+    }
 </style>
 <form method="get">
     <div class="form-group">
         <label for="TeamId">Select Team:</label>
-        <select id="TeamId" name="TeamId" asp-items="Model.TeamsSelectList" class="form-control mt-1 short-select" onchange="this.form.submit()">
+        <select id="TeamId" name="TeamId" asp-items="Model.TeamsSelectList" class="form-control mt-1 short-select"
+            onchange="this.form.submit()">
             <option value="" class="text-center">--- Select a Team ---</option>
         </select>
 
@@ -40,9 +41,17 @@
             @foreach (var intern in Model.Interns)
             {
                 <tr>
-                    <td>@intern.PhotoUrl</td>
+                    <td style>
+                        @if (intern.PhotoUrl != null && intern.PhotoUrl.Length > 0)
+                        {
+                            var base64Photo = Convert.ToBase64String(intern.PhotoUrl);
+                            var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64Photo);
+                            <img src="@imgSrc" alt="Intern Photo" class="img-thumbnail" />
+                        }
+                    </td>
                     <td>
-                        <a href="#" class="intern-details-link" data-bs-toggle="modal" data-bs-target="#internDetailsModal" data-id="@intern.InternId">
+                        <a href="#" class="intern-details-link" data-bs-toggle="modal" data-bs-target="#internDetailsModal"
+                            data-id="@intern.InternId">
                             @intern.FullName
                         </a>
                     </td>
@@ -52,10 +61,12 @@
                     <td>@intern.Major</td>
                     <td>@intern.Gpa</td>
                     <td>@intern.Birthday.ToString("yyyy-MM-dd")</td>
-                    <td>@intern.InternshipStartingDate.ToString("yyyy-MM-dd") - @intern.InternshipEndingDate.ToString("yyyy-MM-dd")</td>
+                    <td>@intern.InternshipStartingDate.ToString("yyyy-MM-dd") -
+                        @intern.InternshipEndingDate.ToString("yyyy-MM-dd")</td>
                     <td>
                         <a asp-page-handler="Details" asp-route-internId="@intern.InternId" class="btn btn-info">Details</a>
-                        <form method="post" asp-page-handler="Delete" asp-route-id="@intern.InternId" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this intern?');">
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@intern.InternId" style="display:inline;"
+                            onsubmit="return confirm('Are you sure you want to delete this intern?');">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
@@ -67,7 +78,7 @@
 
 @if (Model.SelectedIntern != null)
 {
-   
+
     <div>
         <h3>Assignments</h3>
         <table class="table">
@@ -91,7 +102,9 @@
                         <td>@assignment.Weight</td>
                         <td>@assignment.Complete</td>
                         <td>
-                            <form method="post" asp-page-handler="DeleteAssignment" asp-route-assignmentId="@assignment.AssignmentId" onsubmit="return confirm('Are you sure you want to delete this assignment?');">
+                            <form method="post" asp-page-handler="DeleteAssignment"
+                                asp-route-assignmentId="@assignment.AssignmentId"
+                                onsubmit="return confirm('Are you sure you want to delete this assignment?');">
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
                         </td>
@@ -101,7 +114,8 @@
         </table>
     </div>
 }
-<div class="modal fade" id="internDetailsModal" tabindex="-1" aria-labelledby="internDetailsModalLabel" aria-hidden="true">
+<div class="modal fade" id="internDetailsModal" tabindex="-1" aria-labelledby="internDetailsModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -114,23 +128,24 @@
         </div>
     </div>
 </div>
-
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
-     $(document).ready(function () {
-         $('.intern-details-link').on('click', function () {
-             var internId = $(this).data('id');
-             $.ajax({
-                 url: '/Admin/ApproveInternships?handler=InternDetails',
-                 type: 'GET',
-                 data: { id: internId },
-                 success: function (data) {
-                     $('#internDetailsContent').html(data);
-                     $('#internDetailsModal').modal('show');
-                 },
-                 error: function () {
-                     alert('An error occurred while fetching intern details.');
-                 }
-             });
-         });
-     });
+    $(document).ready(function () {
+        $('.intern-details-link').on('click', function () {
+            var internId = $(this).data('id');
+            $.ajax({
+                url: '/Admin/ApproveInternships?handler=InternDetails',
+                type: 'GET',
+                data: { id: internId },
+                success: function (data) {
+                    $('#internDetailsContent').html(data);
+                    $('#internDetailsModal').modal('show');
+                },
+                error: function () {
+                    alert('An error occurred while fetching intern details.');
+                }
+            });
+        });
+    });
 </script>
