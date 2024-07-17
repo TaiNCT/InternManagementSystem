@@ -3,6 +3,7 @@ using IMSServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace InternManagement.Pages.Admin
 {
@@ -10,16 +11,17 @@ namespace InternManagement.Pages.Admin
     {
         private readonly ICampaignService campaignService;
         private readonly ITeamService _teamService;
-
-        public CreateModel(ICampaignService campaignSer, ITeamService teamService)
+        private readonly IUserService userService;
+        public CreateModel(ICampaignService campaignSer, ITeamService teamService, IUserService userSer)
         {
             campaignService = campaignSer;
             _teamService = teamService;
+            userService = userSer;
         }
 
         public IActionResult OnGet()
         {
-            var teams = _teamService.GetAllTeams();
+            List<Team> teams = _teamService.GetAllTeams();
             TeamList = new SelectList(teams, nameof(Team.TeamId), nameof(Team.TeamName));
             return Page();
         }
@@ -27,23 +29,34 @@ namespace InternManagement.Pages.Admin
         [BindProperty]
         public Campaign Campaign { get; set; } = default!;
         public SelectList TeamList { get; set; }
+        [BindProperty]
+        public IFormFile PictureURL { get; set; }
 
-
-        public async Task<IActionResult> OnPostAsync()
+        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        public IActionResult OnPost()
         {
+
             if (!ModelState.IsValid)
             {
-                var teams = _teamService.GetAllTeams();
+                string? userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+                User? user = userService.GetUsers().SingleOrDefault(x => x.Email.Equals(userEmailClaim, StringComparison.OrdinalIgnoreCase));
+                List<Team> teams = _teamService.GetAllTeams();
                 TeamList = new SelectList(teams, nameof(Team.TeamId), nameof(Team.TeamName));
-                foreach (var modelState in ModelState.Values)
+                if (PictureURL != null)
                 {
-                    foreach (var error in modelState.Errors)
+                    if (PictureURL.Length > 0)
                     {
-                        Console.WriteLine($"Validation Error: {error.ErrorMessage}");
+                        using (var target = new MemoryStream())
+                        {
+                            PictureURL.CopyTo(target);
+                            Campaign.PictureUrl  = target.ToArray();
+                        }
                     }
                 }
-                return Page();
+                Campaign.CreatedDate = DateTime.Now;
+                Campaign.CreatedBy =user.Username != null ? user.Username : "Admin";
             }
+            campaignService.AddCampaign(Campaign);
             return RedirectToPage("./Index");
         }
     }

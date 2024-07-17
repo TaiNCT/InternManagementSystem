@@ -28,31 +28,39 @@
             <a href="/Account/Login" class="btn btn-success">Log in</a>
         </div>
     </nav>
-    @* <div class="container mt-5">
-        <h1 class="text-center mb-4">Welcome to Job Campaign</h1>
+    <div class="container" style="text-align: center">
         <div class="row">
-            <div class="col-md-8 mx-auto">
-                <h2 class="mb-3">Available Campaigns</h2>
-                @foreach (var campaign in Model.Campaigns)
-                {
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">@campaign.Tittle</h5>
-                            <p class="card-text">@campaign.Description</p>
-                            <p class="card-text">
-                                <small class="text-muted">
-                                    Start Date: @campaign.StartDate.ToShortDateString() |
-                                    End Date: @campaign.EndDate.ToShortDateString()
-                                </small>
-                            </p>
-                            <a href="/Account/InternshipApplication?teamId=@campaign.TeamId&startDate=@campaign.StartDate.ToString("yyyy-MM-dd")&endDate=@campaign.EndDate.ToString("yyyy-MM-dd")"
-                               class="btn btn-primary">Apply for Internship</a>
-                        </div>
-                    </div>
-                }
+            <div class="col-md-6 mx-auto mt-5 text-center">
+                <h1>Welcome to FPT Sofware</h1>
             </div>
         </div>
-    </div> *@
+        @* Campaign *@
+        <div>
+            @foreach (var campaign in Model.Campaigns)
+            {
+                <div style="background-color:aliceblue; ">
+                    <div>Creative Project Manager: @campaign.Tittle</div>
+                    <div>Description: @campaign.Description</div>
+                    <div>Start date: @campaign.StartDate.ToString("MM/dd/yyyy")</div> |
+                    <div>End date: @campaign.EndDate.ToString("MM/dd/yyyy")</div>
+                    @*            <div>Team: @campaign.Team.Name</div> *@
+                    <div>
+                        @if (campaign.PictureUrl != null && campaign.PictureUrl.Length > 0)
+                        {
+                            var base64Photo = Convert.ToBase64String(campaign.PictureUrl);
+                            var imgSrc = $"data:image/jpeg;base64,{base64Photo}";
+                            <img src="@imgSrc" alt="Campaign Photo" class="img-thumbnail" style="max-width: 200px;" />
+                        }
+                    </div>
+                    <a href="/Account/InternshipApplication?teamId=@campaign.TeamId&startDate=@campaign.StartDate.ToString("yyyy-MM-dd")&endDate=@campaign.EndDate.ToString("yyyy-MM-dd")"
+                       class="btn btn-primary">Apply for Internship</a>
+                </div>
+                <hr class="m-4">
+            }
+        </div>
+
+
+    </div>
 
 
 
