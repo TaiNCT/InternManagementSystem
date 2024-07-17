@@ -172,7 +172,7 @@ namespace IMSBussinessObjects.Data
 
 
             // Đường dẫn tệp ảnh
-            string imagePath = @"D:\Study\Summer 2024\PRN221\InternManagementSystem\InternManagement\wwwroot\Image\remix-rumble-1080x1080.jpg";
+            string imagePath = @"D:\PRN221\InternManagementSystem\InternManagementSystem\InternManagement\wwwroot\Image\remix-rumble-1080x1080.jpg";
 
             // Đọc dữ liệu nhị phân từ tệp ảnh
             byte[] pictureData = await File.ReadAllBytesAsync(imagePath);

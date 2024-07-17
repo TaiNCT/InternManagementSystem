@@ -31,8 +31,18 @@
         <span asp-validation-for="Assignment.Submited" class="text-danger"></span>
     </div>
     <div class="form-group mb-3">
-        <label asp-for="Assignment.DocumentId">Document</label>
-        <input asp-for="Assignment.DocumentId" type="file" class="form-control" />
+        <label asp-for="DocumentFile" class="mt-2">Document</label>
+        <input asp-for="DocumentFile" type="file" class="form-control" />
+        @if (Model.Assignment.DocumentId != null)
+        {
+            @if (Model.Document.DocumentData != null && Model.Document.DocumentData.Length > 0)
+            {
+                var base64Cv = Convert.ToBase64String(Model.Document.DocumentData);
+                var cvSrc = String.Format("data:application/pdf;base64,{0}", base64Cv);
+                <p><a href="@cvSrc" target="_blank" download="@Model.Document.DocumentName@Model.Document.DocumentType" class="btn btn-success mt-2">Download Latest Answer </a></p>
+            }
+        }
+       
     </div>
     <!-- Hiển thị tên đội -->
 

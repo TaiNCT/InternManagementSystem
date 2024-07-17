@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240717163233_deleteIternId")]
+    [Migration("20240717164427_deleteIternId")]
     partial class deleteIternId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -148,12 +148,7 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("InternId")
-                        .HasColumnType("int");
-
                     b.HasKey("DocumentId");
-
-                    b.HasIndex("InternId");
 
                     b.ToTable("Documents");
                 });
@@ -498,13 +493,6 @@ namespace IMSBussinessObjects.Migrations
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
-                {
-                    b.HasOne("IMSBussinessObjects.Intern", null)
-                        .WithMany("Documents")
-                        .HasForeignKey("InternId");
-                });
-
             modelBuilder.Entity("IMSBussinessObjects.Intern", b =>
                 {
                     b.HasOne("IMSBussinessObjects.Team", "Team")
@@ -591,8 +579,6 @@ namespace IMSBussinessObjects.Migrations
             modelBuilder.Entity("IMSBussinessObjects.Intern", b =>
                 {
                     b.Navigation("Assignments");
-
-                    b.Navigation("Documents");
 
                     b.Navigation("Interviews");
 

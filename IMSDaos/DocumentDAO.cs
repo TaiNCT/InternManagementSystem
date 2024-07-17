@@ -47,26 +47,26 @@ namespace IMSDaos
                 db.SaveChanges();
             }
         }
-        public void UploadDocumentAsync(IFormFile file, int internId)
+        public void UploadDocumentAsync(Document document, IFormFile file)
         {
             if (file != null)
             {
                 if (file.Length > 0)
                 {
-                    var fileName = Path.GetFileName(file.FileName);
+/*                    var fileName = Path.GetFileName(file.FileName);
                     var fileExtension = Path.GetExtension(fileName);
-                    var objFiles = new Document()
+                    document = new Document()
                     {
                         DocumentId = 0,
                         DocumentName = fileName.Split(new Char[] { '.' })[0],
                         DocumentType = fileExtension,
-                    };
+                    };*/
                     using (var target = new MemoryStream())
                     {
                         file.CopyTo(target);
-                        objFiles.DocumentData = target.ToArray();
+                        document.DocumentData = target.ToArray();
                     }
-                    db.Documents.Add(objFiles);
+                    db.Documents.Add(document);
                     db.SaveChanges();
                 }
             }

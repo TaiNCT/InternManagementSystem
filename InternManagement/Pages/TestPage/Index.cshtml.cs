@@ -16,12 +16,12 @@ namespace InternManagement.Pages.TestPage
         {
         }
 
-        public async void OnPostAsync(IFormFile file)
+    /*    public async void OnPostAsync(IFormFile file)
         {
             if (file != null)
             {
-                documentsService.UploadDocumentAsync(file, 1);
+                documentsService.UploadDocumentAsync(file);
             }
-        }
+        }*/
     }
 }

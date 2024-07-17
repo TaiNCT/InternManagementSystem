@@ -29,11 +29,13 @@ namespace InternManagement.Pages.Interns
         }
         [BindProperty]
         public Assignment Assignment { get; set; }
-
+        public Document Document { get; set; }
         [BindProperty]
         public Team Team { get; set; }
         [BindProperty]
         public IFormFile DocumentFile { get; set; }
+        
+
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -43,7 +45,11 @@ namespace InternManagement.Pages.Interns
             {
                 return NotFound();
             }
-
+            if (Assignment.DocumentId!=null)
+            {
+                int documentId = (int)Assignment.DocumentId;
+                Document = documentsService.GetDocumentById(documentId);
+            }
             // Check if Assignment.TeamId has a value before using it
             if (Assignment.TeamId.HasValue)
             {
@@ -66,14 +72,23 @@ namespace InternManagement.Pages.Interns
             {
                 return NotFound();
             }
-            if(DocumentFile!=null)
+            var fileName = Path.GetFileName(DocumentFile.FileName);
+            var fileExtension = Path.GetExtension(fileName);
+            var document = new Document()
             {
-                documentsService.UploadDocumentAsync(DocumentFile, 1);
+                DocumentId = 0,
+                DocumentName = fileName.Split(new Char[] { '.' })[0],
+                DocumentType = fileExtension,
+            };
+            if (DocumentFile!=null)
+            {
+                documentsService.UploadDocumentAsync(document, DocumentFile) ;
             }
-
+            //Update assignment == document Id
+            assignmentToUpdate.DocumentId = document.DocumentId;
             // Update only the Grade and Complete properties
             assignmentToUpdate.Submited = Assignment.Submited;
-            assignmentToUpdate.Complete =true;
+
 
             // Save the changes
             await _assignmentService.UpdateAssignmentAsync(id,assignmentToUpdate);

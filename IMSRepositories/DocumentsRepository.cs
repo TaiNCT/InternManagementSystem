@@ -16,6 +16,6 @@ namespace IMSRepositories
         public Document GetDocumentById(int documentId) => DocumentDAO.Instance.GetDocumentById(documentId);
         public List<Document> GetDocuments() => DocumentDAO.Instance.GetDocuments();
 
-        public void UploadDocumentAsync(IFormFile file, int internId) => DocumentDAO.Instance.UploadDocumentAsync(file, internId);
+        public void UploadDocumentAsync(Document document, IFormFile file) => DocumentDAO.Instance.UploadDocumentAsync(document,file);
     }
 }

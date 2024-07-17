@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace InternManagement.Pages.Assignments
 {
         [Authorize(Roles = "Supervisor")]
@@ -13,15 +14,18 @@ namespace InternManagement.Pages.Assignments
         private readonly IAssignmentService _assignmentService;
         private readonly ITeamService _teamService;
         private readonly IInternService _internService;
+        private readonly IDocumentsService _documentService;
 
         public GradeModel(
             IAssignmentService assignmentService,
             ITeamService teamService,
-            IInternService internService)
+            IInternService internService,
+            IDocumentsService documentService)
         {
             _assignmentService = assignmentService;
             _teamService = teamService;
             _internService = internService;
+            _documentService=documentService;
         }
 
         [BindProperty]
@@ -34,7 +38,7 @@ namespace InternManagement.Pages.Assignments
         [BindProperty]
         public Intern SelectedIntern { get; set; }
         public Intern newIntern { get; set; }
-
+        public Document Document { get; set; }
         public async Task<IActionResult> OnGetAsync(int id)
         {
             Assignment = await _assignmentService.GetAssignmentByIdAsync(id);
@@ -57,7 +61,7 @@ namespace InternManagement.Pages.Assignments
             }
 
             SelectedIntern = await _internService.GetInternByIdAsync(Assignment.InternId.Value);
-
+            Document = _documentService.GetDocumentById((int)Assignment.DocumentId);
             return Page();
         }
 

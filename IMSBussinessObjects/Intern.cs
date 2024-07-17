@@ -47,7 +47,6 @@ namespace IMSBussinessObjects
 
         [ForeignKey("TeamId")]
         public Team Team { get; set; }
-        public ICollection<Document> Documents { get; set; }
         public ICollection<Notification> Notifications { get; set; }
         public ICollection<Assignment> Assignments { get; set; }
         public ICollection<Interview> Interviews { get; set; }

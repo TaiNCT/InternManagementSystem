@@ -10,6 +10,21 @@ namespace IMSBussinessObjects.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Documents",
+                columns: table => new
+                {
+                    DocumentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DocumentName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DocumentType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DocumentData = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Documents", x => x.DocumentId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EmailTemplates",
                 columns: table => new
                 {
@@ -152,24 +167,42 @@ namespace IMSBussinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Documents",
+                name: "Assignments",
                 columns: table => new
                 {
-                    DocumentId = table.Column<int>(type: "int", nullable: false)
+                    AssignmentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DocumentName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    DocumentType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    DocumentData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    InternId = table.Column<int>(type: "int", nullable: true)
+                    TeamId = table.Column<int>(type: "int", nullable: false),
+                    InternId = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Deadline = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Grade = table.Column<int>(type: "int", nullable: true),
+                    Weight = table.Column<int>(type: "int", nullable: true),
+                    Complete = table.Column<bool>(type: "bit", nullable: false),
+                    DocumentId = table.Column<int>(type: "int", nullable: true),
+                    Submited = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Feedback = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Documents", x => x.DocumentId);
+                    table.PrimaryKey("PK_Assignments", x => x.AssignmentId);
                     table.ForeignKey(
-                        name: "FK_Documents_Interns_InternId",
+                        name: "FK_Assignments_Documents_DocumentId",
+                        column: x => x.DocumentId,
+                        principalTable: "Documents",
+                        principalColumn: "DocumentId");
+                    table.ForeignKey(
+                        name: "FK_Assignments_Interns_InternId",
                         column: x => x.InternId,
                         principalTable: "Interns",
-                        principalColumn: "InternId");
+                        principalColumn: "InternId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Assignments_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "TeamId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,45 +272,6 @@ namespace IMSBussinessObjects.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Assignments",
-                columns: table => new
-                {
-                    AssignmentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TeamId = table.Column<int>(type: "int", nullable: false),
-                    InternId = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Deadline = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Grade = table.Column<int>(type: "int", nullable: true),
-                    Weight = table.Column<int>(type: "int", nullable: true),
-                    Complete = table.Column<bool>(type: "bit", nullable: false),
-                    DocumentId = table.Column<int>(type: "int", nullable: true),
-                    Submited = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Feedback = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Assignments", x => x.AssignmentId);
-                    table.ForeignKey(
-                        name: "FK_Assignments_Documents_DocumentId",
-                        column: x => x.DocumentId,
-                        principalTable: "Documents",
-                        principalColumn: "DocumentId");
-                    table.ForeignKey(
-                        name: "FK_Assignments_Interns_InternId",
-                        column: x => x.InternId,
-                        principalTable: "Interns",
-                        principalColumn: "InternId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Assignments_Teams_TeamId",
-                        column: x => x.TeamId,
-                        principalTable: "Teams",
-                        principalColumn: "TeamId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.InsertData(
                 table: "EmailTemplates",
                 columns: new[] { "Id", "Body", "Description", "Name", "Params", "Status", "Subject" },
@@ -312,11 +306,6 @@ namespace IMSBussinessObjects.Migrations
                 name: "IX_Campaigns_TeamId",
                 table: "Campaigns",
                 column: "TeamId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Documents_InternId",
-                table: "Documents",
-                column: "InternId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Interns_TeamId",
