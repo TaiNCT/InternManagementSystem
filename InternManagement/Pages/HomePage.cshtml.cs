@@ -16,7 +16,8 @@ namespace InternManagement.Pages
         }
         public void OnGet()
         {
-            Campaigns = _campaignService.GetCampaigns();
+            /*            Campaigns = _campaignService.GetCampaigns();
+            */
         }
     }
 }

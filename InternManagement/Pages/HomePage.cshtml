@@ -28,7 +28,7 @@
             <a href="/Account/Login" class="btn btn-success">Log in</a>
         </div>
     </nav>
-    <div class="container mt-5">
+    @* <div class="container mt-5">
         <h1 class="text-center mb-4">Welcome to Job Campaign</h1>
         <div class="row">
             <div class="col-md-8 mx-auto">
@@ -41,18 +41,18 @@
                             <p class="card-text">@campaign.Description</p>
                             <p class="card-text">
                                 <small class="text-muted">
-                                    Start Date: @campaign.startDate.ToShortDateString() |
-                                    End Date: @campaign.endDate.ToShortDateString()
+                                    Start Date: @campaign.StartDate.ToShortDateString() |
+                                    End Date: @campaign.EndDate.ToShortDateString()
                                 </small>
                             </p>
-                            <a href="/Account/InternshipApplication?teamId=@campaign.TeamId&startDate=@campaign.startDate.ToString("yyyy-MM-dd")&endDate=@campaign.endDate.ToString("yyyy-MM-dd")"
+                            <a href="/Account/InternshipApplication?teamId=@campaign.TeamId&startDate=@campaign.StartDate.ToString("yyyy-MM-dd")&endDate=@campaign.EndDate.ToString("yyyy-MM-dd")"
                                class="btn btn-primary">Apply for Internship</a>
                         </div>
                     </div>
                 }
             </div>
         </div>
-    </div>
+    </div> *@
 
 
 

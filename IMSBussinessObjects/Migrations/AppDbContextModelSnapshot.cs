@@ -193,10 +193,10 @@ namespace IMSBussinessObjects.Migrations
                         new
                         {
                             Id = 1,
-                            Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship at team [Team].",
+                            Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship and have fun.",
                             Description = "Email này được gửi để chào đón người dùng mới.",
                             Name = "Welcome_Email",
-                            Params = "[Name], [Team]",
+                            Params = "[Name]",
                             Status = true,
                             Subject = "Welcome to IMS!"
                         },
