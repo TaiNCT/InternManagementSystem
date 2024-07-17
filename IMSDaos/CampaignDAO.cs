@@ -1,4 +1,5 @@
 ﻿using IMSBussinessObjects;
+using System.Data.Entity;
 
 namespace IMSDaos
 {
@@ -29,7 +30,7 @@ namespace IMSDaos
         }
         public List<Campaign> GetCampaigns()
         {
-            return db.Campaigns.ToList();
+            return db.Campaigns.Include(x=>x.Team.TeamName).ToList();
         }
         public void AddCampaign(Campaign campaign)
         {
