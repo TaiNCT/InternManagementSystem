@@ -65,6 +65,7 @@ namespace IMSDaos
                 db.Supervisors.Update(supervisor);
                 await db.SaveChangesAsync();
             }
+        }
         public List<Supervisor> GetAllSupervisors()
         {
             return db.Supervisors.ToList();
