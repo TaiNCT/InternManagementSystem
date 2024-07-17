@@ -83,12 +83,32 @@ namespace IMSBussinessObjects.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CampaignId"), 1L, 1);
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("PictureUrl")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Progress")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
@@ -97,27 +117,11 @@ namespace IMSBussinessObjects.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("createdBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("createdDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("endDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("pictureUrl")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<DateTime>("startDate")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("CampaignId");
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("Campaign");
+                    b.ToTable("Campaigns");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Document", b =>
@@ -189,30 +193,30 @@ namespace IMSBussinessObjects.Migrations
                         new
                         {
                             Id = 1,
-                            Body = "Chào mừng bạn đến với IMS! Kính gửi [Name], cảm ơn bạn đã tham gia cùng chúng tôi.",
+                            Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship at team [Team].",
                             Description = "Email này được gửi để chào đón người dùng mới.",
                             Name = "Welcome_Email",
-                            Params = "[Name]",
+                            Params = "[Name], [Team]",
                             Status = true,
                             Subject = "Welcome to IMS!"
                         },
                         new
                         {
                             Id = 2,
-                            Body = "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace].",
+                            Body = "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace] at room [Room].",
                             Description = "Email này để gửi intern đi phỏng vấn.",
                             Name = "Interview_Intern",
-                            Params = "[Name], [InterviewDate], [InterviewPlace]",
+                            Params = "[Name], [InterviewDate], [InterviewPlace], [Room]",
                             Status = true,
                             Subject = "Interview"
                         },
                         new
                         {
                             Id = 3,
-                            Body = "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace].",
+                            Body = "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace] room [Room].",
                             Description = "Email này để gửi supervisor đi phỏng vấn intern.",
                             Name = "Interview_Supervisor",
-                            Params = "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace]",
+                            Params = "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace], [Room]",
                             Status = true,
                             Subject = "Interview"
                         });

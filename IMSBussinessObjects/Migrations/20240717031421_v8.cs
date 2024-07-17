@@ -58,26 +58,27 @@ namespace IMSBussinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Campaign",
+                name: "Campaigns",
                 columns: table => new
                 {
                     CampaignId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Tittle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    createdDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    startDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    endDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    createdBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TeamId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Progress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    pictureUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                    PictureUrl = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    TeamId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Campaign", x => x.CampaignId);
+                    table.PrimaryKey("PK_Campaigns", x => x.CampaignId);
                     table.ForeignKey(
-                        name: "FK_Campaign_Teams_TeamId",
+                        name: "FK_Campaigns_Teams_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Teams",
                         principalColumn: "TeamId",
@@ -309,8 +310,8 @@ namespace IMSBussinessObjects.Migrations
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Campaign_TeamId",
-                table: "Campaign",
+                name: "IX_Campaigns_TeamId",
+                table: "Campaigns",
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
@@ -372,7 +373,7 @@ namespace IMSBussinessObjects.Migrations
                 name: "Assignments");
 
             migrationBuilder.DropTable(
-                name: "Campaign");
+                name: "Campaigns");
 
             migrationBuilder.DropTable(
                 name: "EmailTemplates");

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240716144820_v8")]
+    [Migration("20240717031421_v8")]
     partial class v8
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,12 +85,32 @@ namespace IMSBussinessObjects.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CampaignId"), 1L, 1);
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("PictureUrl")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Progress")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
@@ -99,27 +119,11 @@ namespace IMSBussinessObjects.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("createdBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("createdDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("endDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("pictureUrl")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<DateTime>("startDate")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("CampaignId");
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("Campaign");
+                    b.ToTable("Campaigns");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Document", b =>

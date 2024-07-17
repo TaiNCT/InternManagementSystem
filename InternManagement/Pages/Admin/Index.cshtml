@@ -20,16 +20,16 @@
                 @Html.DisplayNameFor(model => model.Campaign[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Campaign[0].createdDate)
+                @Html.DisplayNameFor(model => model.Campaign[0].CreatedDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Campaign[0].startDate)
+                @Html.DisplayNameFor(model => model.Campaign[0].StartDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Campaign[0].endDate)
+                @Html.DisplayNameFor(model => model.Campaign[0].EndDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Campaign[0].createdBy)
+                @Html.DisplayNameFor(model => model.Campaign[0].CreatedBy)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Campaign[0].Team)
@@ -38,7 +38,7 @@
                 @Html.DisplayNameFor(model => model.Campaign[0].Progress)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Campaign[0].pictureUrl)
+                @Html.DisplayNameFor(model => model.Campaign[0].PictureUrl)
             </th>
             <th></th>
         </tr>
@@ -53,16 +53,16 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.createdDate)
+                @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.startDate)
+                @Html.DisplayFor(modelItem => item.StartDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.endDate)
+                @Html.DisplayFor(modelItem => item.EndDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.createdBy)
+                @Html.DisplayFor(modelItem => item.CreatedBy)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Team.TeamName)
@@ -71,7 +71,7 @@
                 @Html.DisplayFor(modelItem => item.Progress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.pictureUrl)
+                @Html.DisplayFor(modelItem => item.PictureUrl)
             </td>
             <td>
                     <a asp-page="./Edit" asp-route-id="@item.CampaignId" class="btn btn-primary">Edit</a>

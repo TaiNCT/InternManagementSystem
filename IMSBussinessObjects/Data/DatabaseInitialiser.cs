@@ -147,6 +147,7 @@ namespace IMSBussinessObjects.Data
             InternshipEndingDate = new DateTime(2024, 7, 30),
             OverallSuccess = 90,
             Status = "approved",
+
             User = internUsers[0] // Associate with the first user in the list
         },
         new Intern
@@ -169,6 +170,48 @@ namespace IMSBussinessObjects.Data
         // Add more interns as needed
     };
 
+
+            // Đường dẫn tệp ảnh
+            string imagePath = @"D:\Study\Summer 2024\PRN221\InternManagementSystem\InternManagement\wwwroot\Image\remix-rumble-1080x1080.jpg";
+
+            // Đọc dữ liệu nhị phân từ tệp ảnh
+            byte[] pictureData = await File.ReadAllBytesAsync(imagePath);
+            var campains = new List<Campaign>
+            {
+                new Campaign
+                {
+                    Tittle = "Fullstack",
+                    Description  = "dev",
+                    CreatedDate = new DateTime(2024, 7, 1),
+                    CreatedBy = "Admin",
+                    StartDate = new DateTime(2024, 7, 1),
+                    EndDate = new DateTime(2024, 7, 30),
+                    Team = fullstackTeam,
+                    PictureUrl= pictureData
+                },
+                 new Campaign
+                {
+                    Tittle = "BackEnd",
+                    Description  = "dev",
+                    CreatedDate = new DateTime(2024, 7, 1),
+                    CreatedBy = "Admin",
+                    StartDate = new DateTime(2024, 7, 1),
+                    EndDate = new DateTime(2024, 7, 30),
+                    Team = FETeam,
+                    PictureUrl= pictureData
+                },
+                 new Campaign
+                {
+                    Tittle = "Fronend",
+                    Description  = "dev",
+                    CreatedDate = new DateTime(2024, 7, 1),
+                    CreatedBy = "Admin",
+                    StartDate = new DateTime(2024, 7, 1),
+                    EndDate = new DateTime(2024, 7, 30),
+                    Team = BETeam,
+                    PictureUrl= pictureData
+                }
+            };
             var assignments = new List<Assignment>
     {
         new Assignment
@@ -248,6 +291,7 @@ namespace IMSBussinessObjects.Data
             await _context.Users.AddRangeAsync(internUsers);
             await _context.Interns.AddRangeAsync(interns);
             await _context.Assignments.AddRangeAsync(assignments);
+            await _context.Campaigns.AddRangeAsync(campains);
 
             await _context.SaveChangesAsync();
         }
