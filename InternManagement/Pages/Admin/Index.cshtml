@@ -40,7 +40,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Campaign[0].PictureUrl)
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -71,7 +71,12 @@
                 @Html.DisplayFor(modelItem => item.Progress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PictureUrl)
+                    @if (item.PictureUrl != null && item.PictureUrl.Length > 0)
+                    {
+                        var base64Photo = Convert.ToBase64String(item.PictureUrl);
+                        var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64Photo);
+                        <img src="@imgSrc" alt="Intern Photo" class="img-thumbnail" style="width: 50%; height:50%"/>
+                    }
             </td>
             <td>
                     <a asp-page="./Edit" asp-route-id="@item.CampaignId" class="btn btn-primary">Edit</a>
