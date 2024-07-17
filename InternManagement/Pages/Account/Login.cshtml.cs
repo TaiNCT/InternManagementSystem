@@ -29,6 +29,8 @@ namespace InternManagement.Pages.Account
         [BindProperty, Required, DataType(DataType.Password)]
         public string Password { get; set; }
 
+        public int UserID { get; set; }
+
         public LoginModel(IUserService userService, IInternService internService, IConfiguration configuration)
         {
             _userService = userService;
@@ -54,7 +56,7 @@ namespace InternManagement.Pages.Account
             {
                 var defaultUser = _configuration.GetSection("DefaultUser").Get<User>();
                 // Fetch the most recent user data from the database
-                var user = _userService.GetAccount(Email);
+                var user = _userService.GetAccount(Email.ToLowerInvariant()); // Convert email to lowercase for case-insensitive compare
                 Console.WriteLine($"Login attempt for user: {Email}");
 
                 bool isAuthenticated = false;
@@ -64,7 +66,7 @@ namespace InternManagement.Pages.Account
                     isAuthenticated = VerifyPassword(Password, user.Password, user.RefreshToken);
                     Console.WriteLine($"Database user found: {user.Email}, Authenticated: {isAuthenticated}");
                 }
-                else if (Email == defaultUser.Email)
+                else if (Email.ToLowerInvariant().Equals(defaultUser.Email.ToLowerInvariant(), StringComparison.Ordinal)) // Use case-insensitive comparison
                 {
                     // Verify password for default user
                     isAuthenticated = VerifyPassword(Password, defaultUser.Password, defaultUser.RefreshToken);
@@ -72,14 +74,15 @@ namespace InternManagement.Pages.Account
 
                     Console.WriteLine($"Default user found: {user.Email}, Authenticated: {isAuthenticated}");
                 }
-                string userName = user.Username;
+                string userName = user?.Username;
                 if (isAuthenticated)
                 {
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, Email),
-                        new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern")
-                    };
+                        new Claim(ClaimTypes.Role, user.Role == 1 ? "Admin" : user.Role == 2 ? "Supervisor" : "Intern"),
+                        new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()) // Add the user ID to the claims           
+                };
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     // Sign in with a new session
@@ -87,10 +90,6 @@ namespace InternManagement.Pages.Account
                     // Safely handle the returnUrl
                     if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
-                        /*  if (_internService.GetInternsByStatus("waiting")!=null && user.Role != 3)
-                          {
-                              TempData["Approve"] = $"{_internService.GetInternsByStatus("waiting").Count} application is waiting to be approve";
-                          }*/
                         TempData["done"] = $"{userName} Login Success";
                         return LocalRedirect(returnUrl);
                     }

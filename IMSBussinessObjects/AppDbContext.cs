@@ -103,6 +103,20 @@ namespace IMSBussinessObjects
                 .HasForeignKey(i => i.SupervisorId)
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
 
+            // Add case sensitive
+            modelBuilder.Entity<User>()
+            .Property(u => u.Email)
+            .HasMaxLength(255)
+            .IsRequired()
+            .UseCollation("SQL_Latin1_General_CP1_CS_AS");
+
+            // Add case sensitive
+            modelBuilder.Entity<User>()
+            .Property(u => u.Password)
+            .HasMaxLength(100)
+            .IsRequired()
+            .UseCollation("SQL_Latin1_General_CP1_CS_AS");
+
             modelBuilder.Seed();
         }
 

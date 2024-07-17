@@ -114,6 +114,7 @@
         new { Text = "Upload Document", Icon = "briefcase", Link = Url.Page("/Admin/ApproveInternships") },
         new { Text = "Assignment", Icon = "briefcase", Link = Url.Page("/Assignments/AssignmentManagement") },
         new { Text = "Schedule Interview", Icon = "briefcase", Link = Url.Page("/Interviews/Index") },
+        new { Text = "Post Management", Icon = "briefcase", Link = Url.Page("/Admin/Index") },
         };
 
             var reportItems = new[]
@@ -134,13 +135,13 @@
                 @foreach (var item in menuItems)
                 {
                     // Hide items for Intern role
-                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Home" || item.Text == "Grade" || item.Text == "Add User/Team" || item.Text == "Assignment"))
+                    if (user.IsInRole("Intern") && (item.Text == "Interns" || item.Text == "Intern Application" || item.Text == "Grade" || item.Text == "Add User/Team" || item.Text == "Assignment" || item.Text == "Interview Management" || item.Text == "Post Management"))
                     {
                         continue;
                     }
 
                     // Hide items for Supervisor role
-                    if (user.IsInRole("Supervisor") && (item.Text == "Add User/Team" || item.Text == "My Profile" || item.Text == "Upload Document" || item.Text == "My Profile" || item.Text == "Interview Management" || item.Text == "Schedule Interview"))
+                    if (user.IsInRole("Supervisor") && (item.Text == "Intern Application" || item.Text == "Add User/Team" || item.Text == "My Profile" || item.Text == "Upload Document" || item.Text == "My Profile" || item.Text == "Interview Management" || item.Text == "Schedule Interview" || item.Text == "Post Management"))
                     {
                         continue;
                     }

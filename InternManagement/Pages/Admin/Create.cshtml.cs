@@ -1,40 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IMSBussinessObjects;
+using IMSServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using IMSBussinessObjects;
-using IMSServices;
+using System.Security.Claims;
 
 namespace InternManagement.Pages.Admin
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly ICampaignService campaignService;
-
-        public CreateModel(ICampaignService campaignSer)
+        private readonly ITeamService _teamService;
+        private readonly IUserService userService;
+        public CreateModel(ICampaignService campaignSer, ITeamService teamService, IUserService userSer)
         {
             campaignService = campaignSer;
+            _teamService = teamService;
+            userService = userSer;
         }
 
         public IActionResult OnGet()
         {
-        //ViewData["TeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName");
+            List<Team> teams = _teamService.GetAllTeams();
+            TeamList = new SelectList(teams, nameof(Team.TeamId), nameof(Team.TeamName));
             return Page();
         }
 
         [BindProperty]
         public Campaign Campaign { get; set; } = default!;
-        
+        public SelectList TeamList { get; set; }
+        [BindProperty]
+        public IFormFile PictureURL { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
-          if (!ModelState.IsValid || campaignService.GetCampaigns == null || Campaign == null)
+
+            if (!ModelState.IsValid)
             {
-                return Page();
+                string? userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+                User? user = userService.GetUsers().SingleOrDefault(x => x.Email.Equals(userEmailClaim, StringComparison.OrdinalIgnoreCase));
+                List<Team> teams = _teamService.GetAllTeams();
+                TeamList = new SelectList(teams, nameof(Team.TeamId), nameof(Team.TeamName));
+                if (PictureURL != null)
+                {
+                    if (PictureURL.Length > 0)
+                    {
+                        using (var target = new MemoryStream())
+                        {
+                            PictureURL.CopyTo(target);
+                            Campaign.PictureUrl  = target.ToArray();
+                        }
+                    }
+                }
+                Campaign.CreatedDate = DateTime.Now;
+                Campaign.CreatedBy =user.Username != null ? user.Username : "Admin";
             }
             campaignService.AddCampaign(Campaign);
             return RedirectToPage("./Index");

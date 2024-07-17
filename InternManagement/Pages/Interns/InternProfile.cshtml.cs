@@ -30,8 +30,8 @@ namespace InternManagement.Pages.Interns
             var userEmailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
             if (!string.IsNullOrEmpty(userEmailClaim))
             {
-                // Get the user details by email
-                var user = _userService.GetUsers().SingleOrDefault(x => x.Email == userEmailClaim);
+                // Get the user details by mail (case-insensitive)
+                var user = _userService.GetUsers().SingleOrDefault(x => x.Email.Equals(userEmailClaim, StringComparison.OrdinalIgnoreCase));
                 if (user != null && user.Role == 3) // Role 3 is for Intern
                 {
                     SelectedIntern = _internService.GetAllIntern().SingleOrDefault(x => x.UserId == user.UserId);

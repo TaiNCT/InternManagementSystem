@@ -54,7 +54,7 @@ namespace IMSBussinessObjects.Data
             }
 
             // Create entities
-            var admin = new User
+            User admin = new()
             {
                 Username = "Admin",
                 Email = "admin@gmail.com",
@@ -63,23 +63,23 @@ namespace IMSBussinessObjects.Data
                 Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A"
             };
 
-            var fullstackTeam = new Team
+            Team fullstackTeam = new()
             {
                 TeamName = "FullStack"
             };
 
-            var FETeam = new Team
+            Team FETeam = new()
             {
                 TeamName = "Front End"
             };
 
-            var BETeam = new Team
+            Team BETeam = new()
             {
                 TeamName = "Back End"
             };
 
-            var supervisors = new List<User>
-    {
+            List<User> supervisors = new()
+            {
         new User
         {
             Username = "Vil",
@@ -87,7 +87,7 @@ namespace IMSBussinessObjects.Data
             Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
             RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
             Role = 2,
-            Supervisors = new List<Supervisor> { new Supervisor { Team = fullstackTeam } }
+            Supervisors = new List<Supervisor> { new() { Team = fullstackTeam } }
         },
         new User
         {
@@ -96,7 +96,7 @@ namespace IMSBussinessObjects.Data
             Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
             RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
             Role = 2,
-            Supervisors = new List<Supervisor> { new Supervisor { Team = FETeam } }
+            Supervisors = new List<Supervisor> { new() { Team = FETeam } }
         },
         new User
         {
@@ -105,12 +105,12 @@ namespace IMSBussinessObjects.Data
             Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
             RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
             Role = 2,
-            Supervisors = new List<Supervisor> { new Supervisor { Team = BETeam } }
+            Supervisors = new List<Supervisor> { new() { Team = BETeam } }
         }
     };
 
-            var internUsers = new List<User>
-    {
+            List<User> internUsers = new()
+            {
         new User
         {
             Username = "vinh",
@@ -130,8 +130,8 @@ namespace IMSBussinessObjects.Data
         // Add more interns as needed
     };
 
-            var interns = new List<Intern>
-    {
+            List<Intern> interns = new()
+            {
         new Intern
         {
             FullName = "Vinh",
@@ -176,7 +176,7 @@ namespace IMSBussinessObjects.Data
 
             // Đọc dữ liệu nhị phân từ tệp ảnh
             byte[] pictureData = await File.ReadAllBytesAsync(imagePath);
-            var campains = new List<Campaign>
+            List<Campaign> campains = new()
             {
                 new Campaign
                 {
@@ -212,8 +212,8 @@ namespace IMSBussinessObjects.Data
                     PictureUrl= pictureData
                 }
             };
-            var assignments = new List<Assignment>
-    {
+            List<Assignment> assignments = new()
+            {
         new Assignment
         {
             Team = fullstackTeam,
@@ -293,7 +293,7 @@ namespace IMSBussinessObjects.Data
             await _context.Assignments.AddRangeAsync(assignments);
             await _context.Campaigns.AddRangeAsync(campains);
 
-            await _context.SaveChangesAsync();
+            _=await _context.SaveChangesAsync();
         }
 
     }

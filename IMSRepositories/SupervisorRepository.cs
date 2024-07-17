@@ -1,10 +1,5 @@
 ﻿using IMSBussinessObjects;
 using IMSDaos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IMSRepositories
 {
@@ -23,6 +18,10 @@ namespace IMSRepositories
         public async Task UpdateSupervisorTeamAsync(int supervisorId, int teamId)
         {
             await SupervisorDAO.Instance.UpdateSupervisorTeamAsync(supervisorId, teamId);
+        }
+        public List<Supervisor> GetAllSupervisors()
+        {
+            return SupervisorDAO.Instance.GetAllSupervisors();
         }
     }
 }

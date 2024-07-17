@@ -21,16 +21,16 @@ namespace IMSBussinessObjects
         public int TeamId { get; set; }
 
         [ForeignKey("TeamId")]
-        public Team Team { get; set; }
+        public Team? Team { get; set; }
 
         public int InternId { get; set; }
 
         [ForeignKey("InternId")]
-        public Intern Intern { get; set; }
+        public Intern? Intern { get; set; }
 
         public int SupervisorId { get; set; } // Foreign key for Supervisor
 
         [ForeignKey("SupervisorId")]
-        public Supervisor Supervisor { get; set; }
+        public Supervisor? Supervisor { get; set; }
     }
 }

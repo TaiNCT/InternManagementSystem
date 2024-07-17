@@ -1,20 +1,15 @@
 ﻿using IMSBussinessObjects;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IMSDaos
 {
     public class SupervisorDAO
     {
         private readonly AppDbContext db = null;
-        private static SupervisorDAO instance=null;
+        private static SupervisorDAO instance = null;
         public SupervisorDAO()
         {
-            db= new AppDbContext();
+            db = new AppDbContext();
         }
         public static SupervisorDAO Instance
         {
@@ -70,6 +65,9 @@ namespace IMSDaos
                 db.Supervisors.Update(supervisor);
                 await db.SaveChangesAsync();
             }
+        public List<Supervisor> GetAllSupervisors()
+        {
+            return db.Supervisors.ToList();
         }
     }
 }

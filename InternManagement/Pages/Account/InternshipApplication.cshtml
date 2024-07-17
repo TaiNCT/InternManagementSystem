@@ -70,19 +70,19 @@
                     </div>
                     <div class="form-group mb-3">
                         <label asp-for="SelectedTeamId" class="control-label">Select Team</label>
-                        <select asp-for="SelectedTeamId" class="form-control" asp-items="Model.Teams">
+                        <select asp-for="SelectedTeamId" class="form-control" asp-items="Model.Teams" disabled>
                             <option value="">-- Select Team --</option>
                         </select>
                         <span asp-validation-for="SelectedTeamId" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
                         <label asp-for="Intern.InternshipStartingDate" class="control-label">Start Date</label>
-                        <input asp-for="Intern.InternshipStartingDate" class="form-control" type="date" />
+                        <input asp-for="Intern.InternshipStartingDate" class="form-control" type="date" readonly />
                         <span asp-validation-for="Intern.InternshipStartingDate" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
                         <label asp-for="Intern.InternshipEndingDate" class="control-label">End Date</label>
-                        <input asp-for="Intern.InternshipEndingDate" class="form-control" type="date" />
+                        <input asp-for="Intern.InternshipEndingDate" class="form-control" type="date" readonly />
                         <span asp-validation-for="Intern.InternshipEndingDate" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
@@ -98,7 +98,7 @@
                     </div>
                 </form>
                 <div class="text-center mt-3">
-                    <a href="/Account/Login" class="btn btn-link">Back to Login</a>
+                    <a href="/HomePage" class="btn btn-link">Back to Homepage</a>
                 </div>
             </div>
         </div>
