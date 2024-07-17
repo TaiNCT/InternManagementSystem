@@ -11,6 +11,7 @@ namespace IMSBussinessObjects
         public int InternId { get; set; }
 
         [MaxLength(50)]
+        [Required]
         public string FullName { get; set; }
 
         [MaxLength(20)]
@@ -20,6 +21,8 @@ namespace IMSBussinessObjects
         public string PhoneNumber { get; set; }
 
         [MaxLength(150)]
+        [Required]
+        [EmailAddress(ErrorMessage = "Invalid Email Address.")]
         public string Email { get; set; }
 
         [MaxLength(150)]
