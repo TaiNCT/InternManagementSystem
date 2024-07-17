@@ -13,6 +13,7 @@ namespace IMSRepositories
         public Supervisor GetSupervisorById(int supId);
         public void AddSupervisor(int UserId, Team newTeam);
         public Supervisor GetSupervisorByUserId(int userId);
-
+        void UpdateSupervisorTeam(int supervisorId, int teamId);
+        Task UpdateSupervisorTeamAsync(int supervisorId, int teamId);
     }
 }

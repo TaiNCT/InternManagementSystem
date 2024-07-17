@@ -19,6 +19,10 @@ namespace IMSRepositories
 
         public void AddSupervisor(int UserId, Team newTeam) => SupervisorDAO.Instance.AddSupervisor(UserId, newTeam);
         public Supervisor GetSupervisorByUserId(int userId)=>SupervisorDAO.Instance.GetSupervisorByUserId(userId);
-        
+        public void UpdateSupervisorTeam(int supervisorId, int teamId) => SupervisorDAO.Instance.UpdateSupervisorTeam(supervisorId, teamId);
+        public async Task UpdateSupervisorTeamAsync(int supervisorId, int teamId)
+        {
+            await SupervisorDAO.Instance.UpdateSupervisorTeamAsync(supervisorId, teamId);
+        }
     }
 }

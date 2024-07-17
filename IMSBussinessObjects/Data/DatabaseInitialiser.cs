@@ -145,7 +145,7 @@ namespace IMSBussinessObjects.Data
             Birthday = new DateTime(1998, 4, 12),
             InternshipStartingDate = new DateTime(2024, 7, 1),
             InternshipEndingDate = new DateTime(2024, 7, 30),
-            OverallSuccess = 90,
+            OverallSuccess = 0,
             Status = "approved",
 
             User = internUsers[0] // Associate with the first user in the list
@@ -163,7 +163,7 @@ namespace IMSBussinessObjects.Data
             Birthday = new DateTime(1997, 6, 15),
             InternshipStartingDate = new DateTime(2024, 7, 1),
             InternshipEndingDate = new DateTime(2024, 7, 30),
-            OverallSuccess = 85,
+            OverallSuccess = 0,
             Status = "approved",
             User = internUsers[1] // Associate with the second user in the list
         },

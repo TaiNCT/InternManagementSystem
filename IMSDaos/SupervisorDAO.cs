@@ -48,6 +48,28 @@ namespace IMSDaos
         public Supervisor GetSupervisorByUserId(int userId)
         {
             return db.Supervisors.FirstOrDefault(x => x.UserId == userId);
-        }   
+        }
+
+        public void UpdateSupervisorTeam(int supervisorId, int teamId)
+        {
+            var existingSupervisor = db.Supervisors.FirstOrDefault(x => x.SupervisorId == supervisorId);
+            if (existingSupervisor != null)
+            {
+                existingSupervisor.TeamId = teamId;
+                db.Supervisors.Update(existingSupervisor);
+                db.SaveChanges();
+            }
+        }
+
+        public async Task UpdateSupervisorTeamAsync(int supervisorId, int teamId)
+        {
+            var supervisor = await db.Supervisors.FindAsync(supervisorId);
+            if (supervisor != null)
+            {
+                supervisor.TeamId = teamId;
+                db.Supervisors.Update(supervisor);
+                await db.SaveChangesAsync();
+            }
+        }
     }
 }

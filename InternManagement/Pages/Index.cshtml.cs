@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace InternManagement.Pages
 {
-    [Authorize(Roles = "Supervisor,Admin")]
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly ITeamService _teamService;
@@ -26,9 +26,9 @@ namespace InternManagement.Pages
         public IList<Team> Teams { get; set; }
         public Dictionary<string, int> InternCountByTeam { get; set; }
         public Dictionary<string, string> SupervisorByTeam { get; set; }
+        public Dictionary<string, double> OverallSuccessByTeam { get; set; }
         public List<Intern> ApprovedInterns { get; set; }
-     
-    
+
         public async Task OnGetAsync()
         {
             Teams = await _teamService.GetAllTeamsAsync();
@@ -36,12 +36,25 @@ namespace InternManagement.Pages
 
             InternCountByTeam = new Dictionary<string, int>();
             SupervisorByTeam = new Dictionary<string, string>();
+            OverallSuccessByTeam = new Dictionary<string, double>();
 
             foreach (var team in Teams)
             {
                 var internCount = _internService.GetInternCountByTeamId(team.TeamId);
                 InternCountByTeam[team.TeamName] = internCount;
                 var supervisor = await _supervisorService.GetSupervisorByTeamIdAsync(team.TeamId);
+
+                var internsInTeam = ApprovedInterns.Where(i => i.TeamId == team.TeamId).ToList();
+                if (internsInTeam.Count > 0)
+                {
+                    var totalSuccess = internsInTeam.Where(i => i.OverallSuccess.HasValue).Sum(i => i.OverallSuccess.Value);
+                    OverallSuccessByTeam[team.TeamName] = totalSuccess / internsInTeam.Count;
+                }
+                else
+                {
+                    OverallSuccessByTeam[team.TeamName] = 0;
+                }
+
                 if (supervisor != null)
                 {
                     var user = await _userService.GetUserBySupervisorIdAsync(supervisor.UserId);
@@ -63,8 +76,8 @@ namespace InternManagement.Pages
 
             ViewData["SupervisorByTeam"] = SupervisorByTeam;
             ViewData["ApprovedInterns"] = ApprovedInterns;
+            ViewData["OverallSuccessByTeam"] = OverallSuccessByTeam;
         }
-
 
     }
 }

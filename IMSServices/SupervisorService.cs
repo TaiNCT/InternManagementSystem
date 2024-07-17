@@ -34,5 +34,14 @@ namespace IMSServices
         {
             return _supervisorRepository.GetSupervisorByUserId(userId);
         }
+        public void UpdateSupervisorTeam(int supervisorId, int teamId)
+        {
+            _supervisorRepository.UpdateSupervisorTeam(supervisorId, teamId);
+        }
+        public async Task UpdateSupervisorTeamAsync(int supervisorId, int teamId)
+        {
+            await _supervisorRepository.UpdateSupervisorTeamAsync(supervisorId, teamId);
+        }
+
     }
 }
