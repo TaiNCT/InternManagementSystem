@@ -172,10 +172,10 @@ namespace IMSBussinessObjects.Data
 
 
             // Đường dẫn tệp ảnh
-            string imagePath = @"D:\Study\Summer 2024\PRN221\InternManagementSystem\InternManagement\wwwroot\Image\remix-rumble-1080x1080.jpg";
+          //  string imagePath = @"D:\Study\Summer 2024\PRN221\InternManagementSystem\InternManagement\wwwroot\Image\remix-rumble-1080x1080.jpg";
 
             // Đọc dữ liệu nhị phân từ tệp ảnh
-            byte[] pictureData = await File.ReadAllBytesAsync(imagePath);
+          //  byte[] pictureData = await File.ReadAllBytesAsync(imagePath);
             var campains = new List<Campaign>
             {
                 new Campaign
@@ -187,7 +187,7 @@ namespace IMSBussinessObjects.Data
                     StartDate = new DateTime(2024, 7, 1),
                     EndDate = new DateTime(2024, 7, 30),
                     Team = fullstackTeam,
-                    PictureUrl= pictureData
+                   // PictureUrl= pictureData
                 },
                  new Campaign
                 {
@@ -198,7 +198,7 @@ namespace IMSBussinessObjects.Data
                     StartDate = new DateTime(2024, 7, 1),
                     EndDate = new DateTime(2024, 7, 30),
                     Team = FETeam,
-                    PictureUrl= pictureData
+                  //  PictureUrl= pictureData
                 },
                  new Campaign
                 {
@@ -209,7 +209,7 @@ namespace IMSBussinessObjects.Data
                     StartDate = new DateTime(2024, 7, 1),
                     EndDate = new DateTime(2024, 7, 30),
                     Team = BETeam,
-                    PictureUrl= pictureData
+                 //   PictureUrl= pictureData
                 }
             };
             var assignments = new List<Assignment>
