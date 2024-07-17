@@ -33,6 +33,7 @@ namespace InternManagement.Pages.Assignments
 
         [BindProperty]
         public Intern SelectedIntern { get; set; }
+        public Intern newIntern { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -80,12 +81,15 @@ namespace InternManagement.Pages.Assignments
             {
                 return NotFound();
             }
+            int internId = assignmentToUpdate.InternId.Value;
+            newIntern =_internService.GetInternById(internId);
+            Console.WriteLine($"OverallSuccess: {SelectedIntern.OverallSuccess}");
 
             assignments = _assignmentService.GetAssignmentByInternId(assignmentToUpdate.InternId.Value);
 
             CalculateOverallSuccess();
 
-            await _internService.UpdateInternAsync(SelectedIntern.InternId, SelectedIntern);
+            await _internService.UpdateInternAsync(internId, newIntern);
             return RedirectToPage("../Interns/GradeInterns", new { internId = assignmentToUpdate.InternId, handler = "Details" });
         }
 
@@ -105,11 +109,11 @@ namespace InternManagement.Pages.Assignments
 
             if (totalWeight > 0)
             {
-                SelectedIntern.OverallSuccess = (int)(totalWeightedGrade / totalWeight * 100);
+                newIntern.OverallSuccess = (int)(totalWeightedGrade / totalWeight * 100);
             }
             else
             {
-                SelectedIntern.OverallSuccess = 0;
+                newIntern.OverallSuccess = 0;
             }
         }
     }
