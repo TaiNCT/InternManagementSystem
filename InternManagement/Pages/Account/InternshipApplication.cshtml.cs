@@ -76,7 +76,7 @@ namespace InternManagement.Pages.Account
             }
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? teamId)
         {
             try
             {
@@ -101,12 +101,12 @@ namespace InternManagement.Pages.Account
                 }
 
                 Intern.Status = "waiting";
-                Intern.TeamId = SelectedTeamId;
+                Intern.TeamId = teamId.Value;
                 _internService.AddIntern(Intern);
 
                 // Get the supervisor for the selected team
                 Supervisors = _supervisorService.GetAllSupervisors();
-                var supervisor = Supervisors.FirstOrDefault(s => s.TeamId == SelectedTeamId);
+                var supervisor = Supervisors.FirstOrDefault(s => s.TeamId == teamId.Value);
 
                 if (supervisor == null)
                 {
@@ -117,7 +117,7 @@ namespace InternManagement.Pages.Account
 
                 var interview = new Interview
                 {
-                    TeamId = SelectedTeamId,
+                    TeamId = teamId.Value,
                     InternId = Intern.InternId,
                     SupervisorId = supervisor.SupervisorId
                     // Other fields are not set, they will remain null
