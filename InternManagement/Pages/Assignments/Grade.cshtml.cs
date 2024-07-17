@@ -61,7 +61,10 @@ namespace InternManagement.Pages.Assignments
             }
 
             SelectedIntern = await _internService.GetInternByIdAsync(Assignment.InternId.Value);
-            Document = _documentService.GetDocumentById((int)Assignment.DocumentId);
+            if(Assignment.DocumentId != null)
+            {
+                Document = _documentService.GetDocumentById((int)Assignment.DocumentId);
+            }
             return Page();
         }
 
