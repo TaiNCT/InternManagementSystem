@@ -92,7 +92,7 @@ namespace InternManagement.Pages.Interns
             }
             else
             {
-                return RedirectToPage("/Intern/InternProfile", new { id = Intern.InternId });
+                return RedirectToPage("/Interns/InternProfile", new { id = Intern.InternId });
             }
         }
     }
