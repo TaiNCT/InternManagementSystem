@@ -6,7 +6,13 @@
 @using System.Text
 @using IMSBussinessObjects
 
+<div class="container mt-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Intern Profile</h2>
+        <a asp-page="/Interns/Edit" asp-route-id="@Model.SelectedIntern?.InternId" class="btn btn-primary">Edit Profile</a>
+    </div>
 <form method="get">
+        <input type="hidden" id="internId" name="internId" value="@Model.SelectedIntern?.InternId" />
     <div class="row">
         <div class="col-md-6">
             <h4>Personal Information</h4>

@@ -82,13 +82,10 @@ namespace IMSDaos
                 existingIntern.Uni = newIntern.Uni;
                 existingIntern.Major = newIntern.Major;
                 existingIntern.Gpa = newIntern.Gpa;
-                existingIntern.TeamId = newIntern.TeamId;
                 existingIntern.Birthday = newIntern.Birthday;
                 existingIntern.CvUrl = newIntern.CvUrl;
                 existingIntern.PhotoUrl = newIntern.PhotoUrl;
-                existingIntern.OverallSuccess = newIntern.OverallSuccess;
-                existingIntern.InternshipStartingDate = newIntern.InternshipStartingDate;
-                existingIntern.InternshipEndingDate = newIntern.InternshipEndingDate;
+
                 db.Interns.Attach(existingIntern);
                 db.Entry(existingIntern).State = EntityState.Modified;
                 db.SaveChanges();
