@@ -172,17 +172,17 @@ namespace IMSBussinessObjects.Data
 
 
             // Đường dẫn tệp ảnh
-            string imagePath1 = @"D:\Study\Summer 2024\PRN221\InternManagementSystem\InternManagement\wwwroot\Image\FS.png";
+            string imagePath1 = @"D:\PRN221\InternManagementSystem\InternManagementSystem\InternManagement\wwwroot\Image\FS.png";
 
             // Đọc dữ liệu nhị phân từ tệp ảnh
             byte[] pictureData1 = await File.ReadAllBytesAsync(imagePath1);
             // Đường dẫn tệp ảnh
-            string imagePath2 = @"D:\Study\Summer 2024\PRN221\InternManagementSystem\InternManagement\wwwroot\Image\BE.png";
+            string imagePath2 = @"D:\PRN221\InternManagementSystem\InternManagementSystem\InternManagement\wwwroot\Image\BE.png";
 
             // Đọc dữ liệu nhị phân từ tệp ảnh
             byte[] pictureData2 = await File.ReadAllBytesAsync(imagePath2);
             // Đường dẫn tệp ảnh
-            string imagePath3 = @"D:\Study\Summer 2024\PRN221\InternManagementSystem\InternManagement\wwwroot\Image\FE.png";
+            string imagePath3 = @"D:\PRN221\InternManagementSystem\InternManagementSystem\InternManagement\wwwroot\Image\FE.png";
 
             // Đọc dữ liệu nhị phân từ tệp ảnh
             byte[] pictureData3 = await File.ReadAllBytesAsync(imagePath3);
@@ -192,7 +192,7 @@ namespace IMSBussinessObjects.Data
                 new Campaign
                 {
                     Tittle = "Fullstack",
-                    Description  = "dev",
+                    Description  = "A good track record in education. Some experience (6-12 months ideally) in a marketing role, agency or client side. An interest in ideas and brand identity design. Interest in working with global clients and an international mindset. Enthusiasm, energy, and a positive attitude. An ability to work well as part of a team. A good communicator. Keen to learn (new tech, design & presentation skills). An attention to detail. A self-starter who can identify the next steps and requirements of a project",
                     CreatedDate = new DateTime(2024, 7, 1),
                     CreatedBy = "Admin",
                     StartDate = new DateTime(2024, 7, 1),
@@ -203,7 +203,7 @@ namespace IMSBussinessObjects.Data
                  new Campaign
                 {
                     Tittle = "BackEnd",
-                    Description  = "dev",
+                    Description  = "Minimum 18 months experience in a similar role within a creative retail display/production environment. Understanding of 3D visual merchandising for retail. Demonstrated client-facing project management experience. Familiarity with material and fabrication processes for 3D prop making. Experience managing external suppliers and budgets exceeding £250k. Ability to manage multiple projects simultaneously. Experience supervising support staff. Strong decision-making and communication skills. Proficiency in Excel and good numeracy skills.",
                     CreatedDate = new DateTime(2024, 7, 1),
                     CreatedBy = "Admin",
                     StartDate = new DateTime(2024, 7, 1),
@@ -214,7 +214,7 @@ namespace IMSBussinessObjects.Data
                  new Campaign
                 {
                     Tittle = "Fronend",
-                    Description  = "dev",
+                    Description  = "Proven success in leading and executing sales and business development campaigns. An extensive network of AAA international brand clients. Experience in building and managing a small sales team. Ability to oversee marketing functions to ensure Sales Strategy alignment. Talent for identifying and pursuing strategic opportunities. Strong communication skills for conveying complex strategic ideas to potential clients. A relentless drive to achieve success and win. Excellent interpersonal skills.",
                     CreatedDate = new DateTime(2024, 7, 1),
                     CreatedBy = "Admin",
                     StartDate = new DateTime(2024, 7, 1),
@@ -255,8 +255,8 @@ namespace IMSBussinessObjects.Data
             Intern = interns[0], // Associate with the first intern in the list
             Description = "Develop a create feature for the project",
             Deadline = new DateTime(2024, 3, 15),
-            Grade = 75,
-            Weight =0 ,
+            Grade = 0,
+            Weight =20 ,
             Complete = false
         },new Assignment
         {
@@ -288,7 +288,7 @@ namespace IMSBussinessObjects.Data
             Intern = interns[1], // Associate with the first intern in the list
             Description = "Develop a create feature for the project",
             Deadline = new DateTime(2024, 3, 15),
-            Grade = 0,
+            Grade = 10,
             Weight = 20,
             Complete = false
         }
