@@ -135,7 +135,7 @@ namespace InternManagement.Pages.Interviews
             { "InterviewPlace", Interview.Location },
             { "Room", Interview.RoomNumber },
         };
-                List<string> toAddressSuperVisor = new List<string> { SupervisorEmail };
+                List<string> toAddressSuperVisor = new List<string> { Supervisor.User.Email };
                 _mailService.SendAsync(EmailType.Interview_Supervisor, toAddressSuperVisor, new List<string>(), emailParamsSuperVisor);
             }
             else
