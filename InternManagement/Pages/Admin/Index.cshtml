@@ -1,0 +1,79 @@
+﻿@page
+@model InternManagement.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "Campaign Management";
+}
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaigns[0].Tittle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaigns[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaigns[0].CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaigns[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaigns[0].EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaigns[0].CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaigns[0].Team)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaigns[0].PictureUrl)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Campaigns) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tittle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team.TeamName)
+            </td>
+            <td>
+                    @if (item.PictureUrl != null && item.PictureUrl.Length > 0)
+                    {
+                        var base64Photo = Convert.ToBase64String(item.PictureUrl);
+                        var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64Photo);
+                        <img src="@imgSrc" alt="Intern Photo" class="img-thumbnail" style="width: 50%; height:50%"/>
+                    }
+            </td>
+            <td>
+                    <a asp-page="./Delete" asp-route-id="@item.CampaignId" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

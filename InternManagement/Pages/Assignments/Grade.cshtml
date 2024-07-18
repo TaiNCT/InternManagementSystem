@@ -29,6 +29,21 @@
         <input asp-for="Assignment.Submited" class="form-control" />
         <span asp-validation-for="Assignment.Submited" class="text-danger"></span>
     </div>
+    <div class="form-group mb-3">
+        <label class="control-label">Document</label>
+        @if (Model.Assignment.DocumentId != null)
+        {
+            @if (Model.Document.DocumentData != null && Model.Document.DocumentData.Length > 0)
+            {
+                var base64Cv = Convert.ToBase64String(Model.Document.DocumentData);
+                var cvSrc = String.Format("data:application/pdf;base64,{0}", base64Cv);
+                <p><a href="@cvSrc" target="_blank" download="@Model.Document.DocumentName@Model.Document.DocumentType" class="btn btn-success mt-2">Download Answer</a></p>
+            }
+        }else
+        {
+            <h1>N/A</h1>
+        }
+    </div>
     <div class="form-group">
         <label asp-for="Assignment.Grade" class="control-label"></label>
         <input asp-for="Assignment.Grade" class="form-control" />
@@ -45,9 +60,7 @@
     <button type="submit" class="btn btn-primary mt-2">Grade</button>
 </form>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

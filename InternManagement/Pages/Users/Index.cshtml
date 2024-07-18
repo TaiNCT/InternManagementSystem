@@ -103,7 +103,7 @@
                 <div class="form-group">
                     <label for="UserId">Select Supervisor:</label>
                     <select id="UserId" name="UserId" asp-items="Model.SupervisorSelectList" class="form-control mt-1 short-select">
-                        <option value="" class="text-center">--- Select a Team ---</option>
+                        <option value="" class="text-center">--- Select Supervisor ---</option>
                     </select>
 
                 </div>
@@ -136,6 +136,8 @@
                                     @Html.DisplayFor(modelItem => item.TeamName)
                                 </td>
                                 <td>
+                                    <a asp-page="./EditTeam" asp-route-id="@item.TeamId"  class="btn btn-primary">Edit</a>
+
                                     <a asp-page="./DeleteTeam" asp-route-id="@item.TeamId" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>

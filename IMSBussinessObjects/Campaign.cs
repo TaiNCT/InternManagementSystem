@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IMSBussinessObjects
 {
-    [Table("Campaign")]
+    [Table("Campaigns")]
     public class Campaign
     {
         [Key]
@@ -17,16 +12,17 @@ namespace IMSBussinessObjects
         public string Tittle { get; set; }
         [Required]
         public string Description { get; set; }
-        public DateTime createdDate { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
+
         [Required]
-        public DateTime startDate { get; set; }
+        public DateTime StartDate { get; set; }
         [Required]
-        public DateTime endDate { get; set; }
-        public string createdBy { get; set; }
+        public DateTime EndDate { get; set; }
+        public byte[]? PictureUrl { get; set; }
         public int TeamId { get; set; }
         [ForeignKey("TeamId")]
-        public Team Team { get; set; }
-        public string? Progress { get; set; }
-        public byte[]? pictureUrl { get; set; }  
+        public Team? Team { get; set; }
+
     }
 }

@@ -83,12 +83,25 @@ namespace IMSBussinessObjects.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CampaignId"), 1L, 1);
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Progress")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("PictureUrl")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
@@ -97,27 +110,11 @@ namespace IMSBussinessObjects.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("createdBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("createdDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("endDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("pictureUrl")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<DateTime>("startDate")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("CampaignId");
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("Campaign");
+                    b.ToTable("Campaigns");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Document", b =>
@@ -142,12 +139,7 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("InternId")
-                        .HasColumnType("int");
-
                     b.HasKey("DocumentId");
-
-                    b.HasIndex("InternId");
 
                     b.ToTable("Documents");
                 });
@@ -189,7 +181,7 @@ namespace IMSBussinessObjects.Migrations
                         new
                         {
                             Id = 1,
-                            Body = "Chào mừng bạn đến với IMS! Kính gửi [Name], cảm ơn bạn đã tham gia cùng chúng tôi.",
+                            Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship and have fun.",
                             Description = "Email này được gửi để chào đón người dùng mới.",
                             Name = "Welcome_Email",
                             Params = "[Name]",
@@ -199,20 +191,20 @@ namespace IMSBussinessObjects.Migrations
                         new
                         {
                             Id = 2,
-                            Body = "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace].",
+                            Body = "Dear [Name], Please manage your time to have an interview at: [InterviewDate], [InterviewPlace] at room [Room].",
                             Description = "Email này để gửi intern đi phỏng vấn.",
                             Name = "Interview_Intern",
-                            Params = "[Name], [InterviewDate], [InterviewPlace]",
+                            Params = "[Name], [InterviewDate], [InterviewPlace], [Room]",
                             Status = true,
                             Subject = "Interview"
                         },
                         new
                         {
                             Id = 3,
-                            Body = "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace].",
+                            Body = "Dear [SupervisorName], Please manage your time to interview: [InternName], at: [InterviewDate], [InterviewPlace] room [Room].",
                             Description = "Email này để gửi supervisor đi phỏng vấn intern.",
                             Name = "Interview_Supervisor",
-                            Params = "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace]",
+                            Params = "[SupervisorName], [InternName], [InterviewDate], [InterviewPlace], [Room]",
                             Status = true,
                             Subject = "Interview"
                         });
@@ -432,12 +424,14 @@ namespace IMSBussinessObjects.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(255)")
+                        .UseCollation("SQL_Latin1_General_CP1_CS_AS");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .UseCollation("SQL_Latin1_General_CP1_CS_AS");
 
                     b.Property<string>("RefreshToken")
                         .HasMaxLength(800)
@@ -490,17 +484,6 @@ namespace IMSBussinessObjects.Migrations
                         .IsRequired();
 
                     b.Navigation("Team");
-                });
-
-            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
-                {
-                    b.HasOne("IMSBussinessObjects.Intern", "Intern")
-                        .WithMany("Documents")
-                        .HasForeignKey("InternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Intern");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Intern", b =>
@@ -589,8 +572,6 @@ namespace IMSBussinessObjects.Migrations
             modelBuilder.Entity("IMSBussinessObjects.Intern", b =>
                 {
                     b.Navigation("Assignments");
-
-                    b.Navigation("Documents");
 
                     b.Navigation("Interviews");
 

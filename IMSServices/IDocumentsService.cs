@@ -16,6 +16,6 @@ namespace IMSServices
 
         public void DeleteDocument(int documentId);
 
-        public void UploadDocumentAsync(IFormFile file, int internId);
+        public void UploadDocumentAsync(Document document, IFormFile file);
     }
 }

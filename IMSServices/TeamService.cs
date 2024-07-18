@@ -48,5 +48,13 @@ namespace IMSServices
         {
             return await _teamRepository.GetTeamByIdAsync(teamId);
         }
+        public void UpdateTeam(Team team)
+        {
+            _teamRepository.UpdateTeam(team);
+        }
+        public async Task UpdateTeamAsync(Team team)
+        {
+            await _teamRepository.UpdateTeamAsync(team);
+        }
     }
 }

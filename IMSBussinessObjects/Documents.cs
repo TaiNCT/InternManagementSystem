@@ -9,16 +9,11 @@ namespace IMSBussinessObjects
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DocumentId { get; set; }
-
         [MaxLength(100)]
         public string DocumentName { get; set; }
         [MaxLength(100)]
         public string DocumentType { get; set; }
-        public int InternId { get; set; }
         [MaxLength]
         public byte[] DocumentData { get; set; }
-
-        [ForeignKey("InternId")]
-        public Intern Intern { get; set; }
     }
 }

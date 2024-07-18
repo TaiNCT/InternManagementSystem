@@ -44,6 +44,12 @@
                     <div>
                         @(supervisorByTeam != null && supervisorByTeam.TryGetValue(team.TeamName, out var supervisorName) ? supervisorName : "No Supervisor")
                     </div>
+                    <div><strong>Overall Success:</strong></div>
+                    <div class="progress" style="width: 100%; max-width:25vh">
+                        <div class="progress-bar" role="progressbar" style="width: @(Model.OverallSuccessByTeam[team.TeamName])%;" aria-valuenow="@(Model.OverallSuccessByTeam[team.TeamName])" aria-valuemin="0" aria-valuemax="100">
+                            @(Model.OverallSuccessByTeam[team.TeamName])%
+                        </div>
+                    </div>
                 </div>
             </div>
         }

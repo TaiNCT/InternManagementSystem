@@ -31,9 +31,9 @@ namespace IMSServices
             return _documentsRepository.GetDocuments();
         }
 
-        public void UploadDocumentAsync(IFormFile file, int internId)
+        public void UploadDocumentAsync(Document document, IFormFile file)
         {
-            _documentsRepository.UploadDocumentAsync(file, internId);
+            _documentsRepository.UploadDocumentAsync(document, file);
         }
     }
 }

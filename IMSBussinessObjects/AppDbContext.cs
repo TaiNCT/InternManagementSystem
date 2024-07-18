@@ -36,11 +36,6 @@ namespace IMSBussinessObjects
             base.OnModelCreating(modelBuilder);
 
             // Configure entity relationships
-            modelBuilder.Entity<Document>()
-                .HasOne(d => d.Intern)
-                .WithMany(i => i.Documents)
-                .HasForeignKey(d => d.InternId)
-                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Notification>()
                 .HasOne(n => n.User)
@@ -107,6 +102,20 @@ namespace IMSBussinessObjects
                 .WithMany()
                 .HasForeignKey(i => i.SupervisorId)
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
+
+            // Add case sensitive
+            modelBuilder.Entity<User>()
+            .Property(u => u.Email)
+            .HasMaxLength(255)
+            .IsRequired()
+            .UseCollation("SQL_Latin1_General_CP1_CS_AS");
+
+            // Add case sensitive
+            modelBuilder.Entity<User>()
+            .Property(u => u.Password)
+            .HasMaxLength(100)
+            .IsRequired()
+            .UseCollation("SQL_Latin1_General_CP1_CS_AS");
 
             modelBuilder.Seed();
         }

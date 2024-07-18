@@ -15,10 +15,12 @@ namespace InternManagement.Pages.Account
         private readonly IUserService _userService;
         private readonly IInterviewService _interviewService;
         private readonly ISupervisorService _supervisorService;
+        private readonly ICampaignService _campaignService;
 
         public InternshipApplicationModel(IInternService internService, ITeamService teamService,
             IWebHostEnvironment environment, INotificationService notificationService,
-            IUserService userService, IInterviewService interviewServ, ISupervisorService supervisorService)
+            IUserService userService, IInterviewService interviewServ,
+            ISupervisorService supervisorService, ICampaignService campaignService)
         {
             _internService = internService;
             _teamService = teamService;
@@ -27,6 +29,10 @@ namespace InternManagement.Pages.Account
             _userService = userService;
             _interviewService = interviewServ;
             _supervisorService = supervisorService;
+            _campaignService = campaignService;
+
+            Intern = new Intern(); // Initialize Intern
+            Supervisors = new List<Supervisor>();
         }
 
         [BindProperty]
@@ -40,17 +46,37 @@ namespace InternManagement.Pages.Account
 
         [BindProperty]
         public int SelectedTeamId { get; set; }
-
         public SelectList Teams { get; set; }
-
         public List<User> Users { get; set; }
+        public List<Supervisor> Supervisors { get; set; }
+        public List<Campaign> Campaigns { get; set; }
 
-        public void OnGet()
+        public void OnGet(int? teamId, DateTime? startDate, DateTime? endDate)
         {
             Teams = new SelectList(_teamService.GetAllTeams(), "TeamId", "TeamName");
+
+            if (Intern == null)
+            {
+                Intern = new Intern(); // Ensure Intern is not null
+            }
+
+            if (teamId.HasValue)
+            {
+                SelectedTeamId = teamId.Value;
+            }
+
+            if (startDate.HasValue)
+            {
+                Intern.InternshipStartingDate = startDate.Value;
+            }
+
+            if (endDate.HasValue)
+            {
+                Intern.InternshipEndingDate = endDate.Value;
+            }
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? teamId)
         {
             try
             {
@@ -75,11 +101,12 @@ namespace InternManagement.Pages.Account
                 }
 
                 Intern.Status = "waiting";
-                Intern.TeamId = SelectedTeamId;
+                Intern.TeamId = teamId.Value;
                 _internService.AddIntern(Intern);
 
                 // Get the supervisor for the selected team
-                var supervisor = await _supervisorService.GetSupervisorByTeamIdAsync(SelectedTeamId);
+                Supervisors = _supervisorService.GetAllSupervisors();
+                var supervisor = Supervisors.FirstOrDefault(s => s.TeamId == teamId.Value);
 
                 if (supervisor == null)
                 {
@@ -90,7 +117,7 @@ namespace InternManagement.Pages.Account
 
                 var interview = new Interview
                 {
-                    TeamId = SelectedTeamId,
+                    TeamId = teamId.Value,
                     InternId = Intern.InternId,
                     SupervisorId = supervisor.SupervisorId
                     // Other fields are not set, they will remain null

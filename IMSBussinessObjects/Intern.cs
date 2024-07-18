@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,6 +12,7 @@ namespace IMSBussinessObjects
         public int InternId { get; set; }
 
         [MaxLength(50)]
+        [Required]
         public string FullName { get; set; }
 
         [MaxLength(20)]
@@ -20,6 +22,8 @@ namespace IMSBussinessObjects
         public string PhoneNumber { get; set; }
 
         [MaxLength(150)]
+        [Required]
+        [EmailAddress(ErrorMessage = "Invalid Email Address.")]
         public string Email { get; set; }
 
         [MaxLength(150)]
@@ -47,7 +51,6 @@ namespace IMSBussinessObjects
 
         [ForeignKey("TeamId")]
         public Team Team { get; set; }
-        public ICollection<Document> Documents { get; set; }
         public ICollection<Notification> Notifications { get; set; }
         public ICollection<Assignment> Assignments { get; set; }
         public ICollection<Interview> Interviews { get; set; }
@@ -56,7 +59,7 @@ namespace IMSBussinessObjects
         [MaxLength(20)] // Adjust max length as needed
         public string Status { get; set; } // "approved", "waiting", "rejected"
 
-
+        
     }
 
 }

@@ -54,7 +54,7 @@ namespace IMSBussinessObjects.Data
             }
 
             // Create entities
-            var admin = new User
+            User admin = new()
             {
                 Username = "Admin",
                 Email = "admin@gmail.com",
@@ -63,23 +63,23 @@ namespace IMSBussinessObjects.Data
                 Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A"
             };
 
-            var fullstackTeam = new Team
+            Team fullstackTeam = new()
             {
                 TeamName = "FullStack"
             };
 
-            var FETeam = new Team
+            Team FETeam = new()
             {
                 TeamName = "Front End"
             };
 
-            var BETeam = new Team
+            Team BETeam = new()
             {
                 TeamName = "Back End"
             };
 
-            var supervisors = new List<User>
-    {
+            List<User> supervisors = new()
+            {
         new User
         {
             Username = "Vil",
@@ -87,7 +87,7 @@ namespace IMSBussinessObjects.Data
             Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
             RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
             Role = 2,
-            Supervisors = new List<Supervisor> { new Supervisor { Team = fullstackTeam } }
+            Supervisors = new List<Supervisor> { new() { Team = fullstackTeam } }
         },
         new User
         {
@@ -96,7 +96,7 @@ namespace IMSBussinessObjects.Data
             Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
             RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
             Role = 2,
-            Supervisors = new List<Supervisor> { new Supervisor { Team = FETeam } }
+            Supervisors = new List<Supervisor> { new() { Team = FETeam } }
         },
         new User
         {
@@ -105,12 +105,12 @@ namespace IMSBussinessObjects.Data
             Password = "45A146CB3ECF0DA9C085501C3B95670DB80049DC5DABEF725A343C143D549F3A",
             RefreshToken = "FB8B0CD03B9B4D76AFAFEC4BE351626C0E6E8C937F5354CF973BA719183D4214",
             Role = 2,
-            Supervisors = new List<Supervisor> { new Supervisor { Team = BETeam } }
+            Supervisors = new List<Supervisor> { new() { Team = BETeam } }
         }
     };
 
-            var internUsers = new List<User>
-    {
+            List<User> internUsers = new()
+            {
         new User
         {
             Username = "vinh",
@@ -130,8 +130,8 @@ namespace IMSBussinessObjects.Data
         // Add more interns as needed
     };
 
-            var interns = new List<Intern>
-    {
+            List<Intern> interns = new()
+            {
         new Intern
         {
             FullName = "Vinh",
@@ -145,8 +145,9 @@ namespace IMSBussinessObjects.Data
             Birthday = new DateTime(1998, 4, 12),
             InternshipStartingDate = new DateTime(2024, 7, 1),
             InternshipEndingDate = new DateTime(2024, 7, 30),
-            OverallSuccess = 90,
+            OverallSuccess = 0,
             Status = "approved",
+
             User = internUsers[0] // Associate with the first user in the list
         },
         new Intern
@@ -162,15 +163,57 @@ namespace IMSBussinessObjects.Data
             Birthday = new DateTime(1997, 6, 15),
             InternshipStartingDate = new DateTime(2024, 7, 1),
             InternshipEndingDate = new DateTime(2024, 7, 30),
-            OverallSuccess = 85,
+            OverallSuccess = 0,
             Status = "approved",
             User = internUsers[1] // Associate with the second user in the list
         },
         // Add more interns as needed
     };
 
-            var assignments = new List<Assignment>
-    {
+
+            // Đường dẫn tệp ảnh
+            string imagePath = @"D:\PRN221\InternManagementSystem\InternManagementSystem\InternManagement\wwwroot\Image\remix-rumble-1080x1080.jpg";
+
+            // Đọc dữ liệu nhị phân từ tệp ảnh
+            byte[] pictureData = await File.ReadAllBytesAsync(imagePath);
+            List<Campaign> campains = new()
+            {
+                new Campaign
+                {
+                    Tittle = "Fullstack",
+                    Description  = "dev",
+                    CreatedDate = new DateTime(2024, 7, 1),
+                    CreatedBy = "Admin",
+                    StartDate = new DateTime(2024, 7, 1),
+                    EndDate = new DateTime(2024, 7, 30),
+                    Team = fullstackTeam,
+                    PictureUrl= pictureData
+                },
+                 new Campaign
+                {
+                    Tittle = "BackEnd",
+                    Description  = "dev",
+                    CreatedDate = new DateTime(2024, 7, 1),
+                    CreatedBy = "Admin",
+                    StartDate = new DateTime(2024, 7, 1),
+                    EndDate = new DateTime(2024, 7, 30),
+                    Team = FETeam,
+                    PictureUrl= pictureData
+                },
+                 new Campaign
+                {
+                    Tittle = "Fronend",
+                    Description  = "dev",
+                    CreatedDate = new DateTime(2024, 7, 1),
+                    CreatedBy = "Admin",
+                    StartDate = new DateTime(2024, 7, 1),
+                    EndDate = new DateTime(2024, 7, 30),
+                    Team = BETeam,
+                    PictureUrl= pictureData
+                }
+            };
+            List<Assignment> assignments = new()
+            {
         new Assignment
         {
             Team = fullstackTeam,
@@ -248,8 +291,9 @@ namespace IMSBussinessObjects.Data
             await _context.Users.AddRangeAsync(internUsers);
             await _context.Interns.AddRangeAsync(interns);
             await _context.Assignments.AddRangeAsync(assignments);
+            await _context.Campaigns.AddRangeAsync(campains);
 
-            await _context.SaveChangesAsync();
+            _=await _context.SaveChangesAsync();
         }
 
     }

@@ -6,24 +6,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Intern Management System</title>
+    <title>FPT Sofware's Campaign'</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body class="body">
-    <div class="container">
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/HomePage">Job Campaign</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <form class="d-flex">
+                    <input class="form-control me-sm-2" type="search" placeholder="Search" asp-for="SearchString">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+            <a href="/Account/Login" class="btn btn-success">Log in</a>
+        </div>
+    </nav>
+    <div class="container" style="text-align: center">
         <div class="row">
             <div class="col-md-6 mx-auto mt-5 text-center">
-                <h1>Welcome to the Intern Management System</h1>
-                <p>Please log in to access your account.</p>
-                <a href="/Account/Login" class="btn btn-primary">Log in</a>
+                <h1>Welcome to FPT Sofware</h1>
             </div>
         </div>
+        @* Campaign *@
+        <div>
+                @foreach (var campaign in Model.Campaigns.OrderByDescending(c => c.CreatedDate))
+                {
+                    <div style="background-color: aliceblue; padding: 10px; margin-bottom: 20px;">
+                        <div>Creative Project Manager: @campaign.Tittle</div>
+                        <div>Description: @campaign.Description</div>
+                        <div>Start date: @campaign.StartDate.ToString("MM/dd/yyyy")</div>
+                        <div>End date: @campaign.EndDate.ToString("MM/dd/yyyy")</div>
+                        <div>Team: @Model.TeamNames[campaign.TeamId]</div>
+                        <div>
+                            @if (campaign.PictureUrl != null && campaign.PictureUrl.Length > 0)
+                            {
+                                var base64Photo = Convert.ToBase64String(campaign.PictureUrl);
+                                var imgSrc = $"data:image/jpeg;base64,{base64Photo}";
+                                <img src="@imgSrc" alt="Campaign Photo" class="img-thumbnail" style="max-width: 200px;" />
+                            }
+                        </div>
+                        <a href="/Account/InternshipApplication?teamId=@campaign.TeamId&startDate=@campaign.StartDate&endDate=@campaign.EndDate" class="btn btn-primary">
+                            Apply for Internship
+                        </a>
+                    </div>
+                    <hr class="m-4">
+                }
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2024 Intern Management System. All rights reserved.</p>
+        </footer>
     </div>
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
+
 </html>

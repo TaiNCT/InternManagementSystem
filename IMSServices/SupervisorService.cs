@@ -1,10 +1,5 @@
 ﻿using IMSBussinessObjects;
 using IMSRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IMSServices
 {
@@ -33,6 +28,20 @@ namespace IMSServices
         public Supervisor GetSupervisorByUserId(int userId)
         {
             return _supervisorRepository.GetSupervisorByUserId(userId);
+        }
+        public void UpdateSupervisorTeam(int supervisorId, int teamId)
+        {
+            _supervisorRepository.UpdateSupervisorTeam(supervisorId, teamId);
+        }
+        public async Task UpdateSupervisorTeamAsync(int supervisorId, int teamId)
+        {
+            await _supervisorRepository.UpdateSupervisorTeamAsync(supervisorId, teamId);
+        }
+
+
+        public List<Supervisor> GetAllSupervisors()
+        {
+            return _supervisorRepository.GetAllSupervisors();
         }
     }
 }

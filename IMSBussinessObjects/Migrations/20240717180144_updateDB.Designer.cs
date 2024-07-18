@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240716144820_v8")]
-    partial class v8
+    [Migration("20240717180144_updateDB")]
+    partial class updateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,12 +85,25 @@ namespace IMSBussinessObjects.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CampaignId"), 1L, 1);
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Progress")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("PictureUrl")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
@@ -99,27 +112,11 @@ namespace IMSBussinessObjects.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("createdBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("createdDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("endDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("pictureUrl")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<DateTime>("startDate")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("CampaignId");
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("Campaign");
+                    b.ToTable("Campaigns");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Document", b =>
@@ -144,12 +141,7 @@ namespace IMSBussinessObjects.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("InternId")
-                        .HasColumnType("int");
-
                     b.HasKey("DocumentId");
-
-                    b.HasIndex("InternId");
 
                     b.ToTable("Documents");
                 });
@@ -191,10 +183,10 @@ namespace IMSBussinessObjects.Migrations
                         new
                         {
                             Id = 1,
-                            Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship at team [Team].",
+                            Body = "Welcome IMS's Intenrship! Dear [Name], please enjoy your internship and have fun.",
                             Description = "Email này được gửi để chào đón người dùng mới.",
                             Name = "Welcome_Email",
-                            Params = "[Name], [Team]",
+                            Params = "[Name]",
                             Status = true,
                             Subject = "Welcome to IMS!"
                         },
@@ -434,12 +426,14 @@ namespace IMSBussinessObjects.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(255)")
+                        .UseCollation("SQL_Latin1_General_CP1_CS_AS");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .UseCollation("SQL_Latin1_General_CP1_CS_AS");
 
                     b.Property<string>("RefreshToken")
                         .HasMaxLength(800)
@@ -492,17 +486,6 @@ namespace IMSBussinessObjects.Migrations
                         .IsRequired();
 
                     b.Navigation("Team");
-                });
-
-            modelBuilder.Entity("IMSBussinessObjects.Document", b =>
-                {
-                    b.HasOne("IMSBussinessObjects.Intern", "Intern")
-                        .WithMany("Documents")
-                        .HasForeignKey("InternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Intern");
                 });
 
             modelBuilder.Entity("IMSBussinessObjects.Intern", b =>
@@ -591,8 +574,6 @@ namespace IMSBussinessObjects.Migrations
             modelBuilder.Entity("IMSBussinessObjects.Intern", b =>
                 {
                     b.Navigation("Assignments");
-
-                    b.Navigation("Documents");
 
                     b.Navigation("Interviews");
 

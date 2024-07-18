@@ -61,6 +61,7 @@
             <th>Intern</th>
             <th>Team</th>
             <th>Supervisor</th>
+            <th>Interview Date</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -80,6 +81,7 @@
                         <span>N/A</span>
                     }
                 </td>
+                <td>@interview.InterviewDate</td>
                 <td>
                     <a asp-page="./ScheduleInterview" asp-route-interviewId="@interview.InterviewId" class="btn btn-primary">Schedule</a>
                 </td>

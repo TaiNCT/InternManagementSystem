@@ -24,7 +24,9 @@ namespace IMSRepositories
 
         public void RemoveTeam(int teamId);
         Task<Team> GetTeamByIdAsync(int teamId);
-
-
+        void UpdateTeam(Team team);
+        Task UpdateTeamAsync(Team team);
     }
+
 }
+

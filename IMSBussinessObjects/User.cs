@@ -9,18 +9,19 @@ namespace IMSBussinessObjects
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
-
+        [Required]
         [MaxLength(50)]
         public string Username { get; set; }
 
         [MaxLength(800)]
         public string? RefreshToken { get; set; }
-
+        [Required]
         [MaxLength(255)]
-
+        [EmailAddress(ErrorMessage = "Invalid Email Address.")]
         public string Email { get; set; }
 
-        [MaxLength(100)]
+        [Required]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "The password must be at least 3 characters long.")]
         public string Password { get; set; }
 
         public int Role { get; set; } // 1. Admin, 2. Supervisor, 3. Intern

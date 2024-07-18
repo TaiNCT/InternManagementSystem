@@ -69,5 +69,25 @@ namespace IMSDaos
         {
             return await db.Teams.FirstOrDefaultAsync(x => x.TeamId == teamId);
         }
+        public void UpdateTeam(Team team)
+        {
+            var existingTeam = db.Teams.FirstOrDefault(x => x.TeamId == team.TeamId);
+            if (existingTeam != null)
+            {
+                existingTeam.TeamName = team.TeamName;
+                db.Teams.Update(existingTeam);
+                db.SaveChanges();
+            }
+        }
+        public async Task UpdateTeamAsync(Team team)
+        {
+            var existingTeam = db.Teams.FirstOrDefault(x => x.TeamId == team.TeamId);
+            if (existingTeam != null)
+            {
+                existingTeam.TeamName = team.TeamName;
+                db.Teams.Update(existingTeam);
+                db.SaveChanges();
+            }
+        }
     }
 }
