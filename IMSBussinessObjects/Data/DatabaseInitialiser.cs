@@ -172,10 +172,21 @@ namespace IMSBussinessObjects.Data
 
 
             // Đường dẫn tệp ảnh
-            string imagePath = @"D:\PRN221\InternManagementSystem\InternManagementSystem\InternManagement\wwwroot\Image\remix-rumble-1080x1080.jpg";
+            string imagePath1 = @"D:\Study\Summer 2024\PRN221\InternManagementSystem\InternManagement\wwwroot\Image\FS.png";
 
             // Đọc dữ liệu nhị phân từ tệp ảnh
-            byte[] pictureData = await File.ReadAllBytesAsync(imagePath);
+            byte[] pictureData1 = await File.ReadAllBytesAsync(imagePath1);
+            // Đường dẫn tệp ảnh
+            string imagePath2 = @"D:\Study\Summer 2024\PRN221\InternManagementSystem\InternManagement\wwwroot\Image\BE.png";
+
+            // Đọc dữ liệu nhị phân từ tệp ảnh
+            byte[] pictureData2 = await File.ReadAllBytesAsync(imagePath2);
+            // Đường dẫn tệp ảnh
+            string imagePath3 = @"D:\Study\Summer 2024\PRN221\InternManagementSystem\InternManagement\wwwroot\Image\FE.png";
+
+            // Đọc dữ liệu nhị phân từ tệp ảnh
+            byte[] pictureData3 = await File.ReadAllBytesAsync(imagePath3);
+
             List<Campaign> campains = new()
             {
                 new Campaign
@@ -187,7 +198,7 @@ namespace IMSBussinessObjects.Data
                     StartDate = new DateTime(2024, 7, 1),
                     EndDate = new DateTime(2024, 7, 30),
                     Team = fullstackTeam,
-                    PictureUrl= pictureData
+                    PictureUrl= pictureData1
                 },
                  new Campaign
                 {
@@ -198,7 +209,7 @@ namespace IMSBussinessObjects.Data
                     StartDate = new DateTime(2024, 7, 1),
                     EndDate = new DateTime(2024, 7, 30),
                     Team = FETeam,
-                    PictureUrl= pictureData
+                    PictureUrl= pictureData2
                 },
                  new Campaign
                 {
@@ -209,7 +220,7 @@ namespace IMSBussinessObjects.Data
                     StartDate = new DateTime(2024, 7, 1),
                     EndDate = new DateTime(2024, 7, 30),
                     Team = BETeam,
-                    PictureUrl= pictureData
+                    PictureUrl= pictureData3
                 }
             };
             List<Assignment> assignments = new()

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IMSBussinessObjects.Migrations
 {
-    public partial class updateDB : Migration
+    public partial class v9 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

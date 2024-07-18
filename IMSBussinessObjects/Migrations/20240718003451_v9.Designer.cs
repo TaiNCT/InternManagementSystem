@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMSBussinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240717180144_updateDB")]
-    partial class updateDB
+    [Migration("20240718003451_v9")]
+    partial class v9
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
